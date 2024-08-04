@@ -14,9 +14,9 @@ const LoginCheckBox = ({
   return (
     <S.Container>
       {isCheck ? (
-        <CheckBoxDefaultIcon onClick={() => setIsCheck(!isCheck)} />
-      ) : (
         <CheckBoxVariantIcon onClick={() => setIsCheck(!isCheck)} />
+      ) : (
+        <CheckBoxDefaultIcon onClick={() => setIsCheck(!isCheck)} />
       )}
       <S.LabelText>{label}</S.LabelText>
     </S.Container>

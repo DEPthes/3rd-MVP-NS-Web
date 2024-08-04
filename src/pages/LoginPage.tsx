@@ -1,3 +1,4 @@
+import LoginButton from '@/components/login/LoginButton';
 import LoginCheckBox from '@/components/login/LoginCheckBox';
 import LoginInput from '@/components/login/LoginInput';
 import * as S from '@/styles/login/LoginPageStyle';
@@ -8,6 +9,9 @@ const LoginPage = () => {
   const [passwordText, setPasswordText] = useState(''); //비밀번호 글자
   const [isCheckRememberId, setIsCheckRememberId] = useState(false); //자동 로그인 여부
   const [isCheckSaveId, setIsCheckSaveId] = useState(false); //아이디 저장 여부
+
+  //로그인 함수
+  const handleLogin = () => {};
 
   return (
     <S.Container>
@@ -37,6 +41,10 @@ const LoginPage = () => {
             setIsCheck={setIsCheckSaveId}
           />
         </S.CheckBoxWrap>
+        <LoginButton
+          isDisabled={!loginText || !passwordText}
+          onClick={handleLogin}
+        />
       </S.LoginWrap>
     </S.Container>
   );

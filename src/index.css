@@ -28,8 +28,9 @@
   --S1: 700 16px / normal Pretendard-Regular;
   --S1-1: 400 16px/28px Pretendard-Regular;
   --Button: 400 16px / normal Pretendard-Regular;
-  --Input: 400 20px / 22px Pretendard-Regular;
-  --Label: 400 16px / 15px Pretendard-Regular;
+  --Input: 500 20px / 22px Pretendard-Regular;
+  --Label: 500 16px / 15px Pretendard-Regular;
+  --BigButton: 700 20px / normal Pretendard-Regular;
 }
 
 html,
