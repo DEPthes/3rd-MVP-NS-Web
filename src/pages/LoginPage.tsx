@@ -1,10 +1,13 @@
+import LoginCheckBox from '@/components/login/LoginCheckBox';
 import LoginInput from '@/components/login/LoginInput';
 import * as S from '@/styles/login/LoginPageStyle';
 import { useState } from 'react';
 
 const LoginPage = () => {
-  const [loginText, setLoginText] = useState('');
-  const [passwordText, setPasswordText] = useState('');
+  const [loginText, setLoginText] = useState(''); //아이디 글자
+  const [passwordText, setPasswordText] = useState(''); //비밀번호 글자
+  const [isCheckRememberId, setIsCheckRememberId] = useState(false); //자동 로그인 여부
+  const [isCheckSaveId, setIsCheckSaveId] = useState(false); //아이디 저장 여부
 
   return (
     <S.Container>
@@ -22,7 +25,18 @@ const LoginPage = () => {
           setText={setPasswordText}
           placeholder="비밀번호"
         />
-        <S.CheckBoxWrap></S.CheckBoxWrap>
+        <S.CheckBoxWrap>
+          <LoginCheckBox
+            label="자동 로그인"
+            isCheck={isCheckRememberId}
+            setIsCheck={setIsCheckRememberId}
+          />
+          <LoginCheckBox
+            label="아이디 저장"
+            isCheck={isCheckSaveId}
+            setIsCheck={setIsCheckSaveId}
+          />
+        </S.CheckBoxWrap>
       </S.LoginWrap>
     </S.Container>
   );
