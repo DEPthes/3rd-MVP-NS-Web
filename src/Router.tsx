@@ -7,6 +7,7 @@ import ReportPage from './pages/ReportPage';
 import RankingPage from './pages/RankingPage';
 import ProfilePage from '@/pages/ProfilePage';
 import ExPage from './pages/ExPage';
+import SignupPage from './pages/SignupPage';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="/report" element={<ReportPage />} />
           <Route path="/ranking" element={<RankingPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -28,7 +28,10 @@
   --S1: 700 16px / normal Pretendard-Regular;
   --S1-1: 400 16px/28px Pretendard-Regular;
   --Button: 400 16px / normal Pretendard-Regular;
-  --Input: 400 20px / 22px Pretendard-Regular;
+  --Input: 500 20px / 22px Pretendard-Regular;
+  --Label: 500 16px / 15px Pretendard-Regular;
+  --BigButton: 700 20px / normal Pretendard-Regular;
+  --W1: 600 16px / normal Pretendard-Regular;
 }
 
 html,
@@ -162,4 +165,17 @@ button {
 
 button:disabled {
   cursor: auto;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-transition: background-color 9999s ease-out;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
