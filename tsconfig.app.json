@@ -16,6 +16,7 @@
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"]
     },
+    "types": ["vite-plugin-svgr/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
