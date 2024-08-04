@@ -9,7 +9,7 @@ const LoginInput = ({
 }: {
   type: 'text' | 'password';
   text: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
+  setText: (value: string) => void;
   placeholder: string;
 }) => {
   return (

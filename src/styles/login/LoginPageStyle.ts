@@ -26,3 +26,10 @@ export const CheckBoxWrap = styled.div`
   display: flex;
   gap: 30px;
 `;
+
+export const WarningText = styled.p`
+  margin-top: -13px;
+  margin-bottom: -12px;
+  font: var(--W1);
+  color: var(--Red);
+`;
