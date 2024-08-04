@@ -1,33 +1,34 @@
 :root {
-  --NS-White: #ffffff;
-  --NS-Main1: #5e72eb;
-  --NS-Main-Clicked: #3d54e2;
-  --NS-Main2: #749df5;
-  --NS-Main4: #e0f4ff;
-  --NS-Main5: #8eb1fc;
-  --NS-Black: #161616;
-  --NS-Black2: #000000;
-  --Gray1: #a4a4a4;
-  --Gray2: #bbbbbb;
-  --Gray3: #f7f7f7;
-  --Gray4: #d9d9d9;
-  --Red: #ee4b4b;
-  --Logo: 400 44px / normal YeongdeokSnowCrab;
-  --H1: 800 36px / normal Pretendard-Regular;
-  --H2: 700 24px/22px Pretendard-Regular;
-  --H3: 600 28px / normal Pretendard-Regular;
-  --H4: 800 32px / normal Pretendard-Regular;
-  --H4-1: 600 32px / normal Pretendard-Regular;
-  --T1: 700 36px / normal Pretendard-Regular;
-  --T1-1: 600 36px / normal Pretendard-Regular;
-  --T2: 600 20px/28px Pretendard-Regular;
-  --T3: 400 22px / normal Pretendard-Regular;
-  --T3-1: 600 22px/22px Pretendard-Regular;
-  --T4: 400 20px/28px Pretendard-Regular;
-  --T5: 600 10px/15px Pretendard-Regular;
-  --S1: 700 16px / normal Pretendard-Regular;
-  --S1-1: 400 16px/28px Pretendard-Regular;
-  --Button: 400 16px / normal Pretendard-Regular;
+	--NS-White: #ffffff;
+	--NS-Main1: #5e72eb;
+	--NS-Main-Clicked: #3d54e2;
+	--NS-Main2: #749df5;
+	--NS-Main4: #e0f4ff;
+	--NS-Main5: #8eb1fc;
+	--NS-Black: #161616;
+	--NS-Black2: #000000;
+	--Gray1: #a4a4a4;
+	--Gray2: #bbbbbb;
+	--Gray3: #f7f7f7;
+	--Gray4: #d9d9d9;
+	--Red: #ee4b4b;
+	--Logo: 400 44px / normal YeongdeokSnowCrab;
+	--H1: 800 36px / normal Pretendard-Regular;
+	--H2: 700 24px/22px Pretendard-Regular;
+	--H3: 600 28px / normal Pretendard-Regular;
+	--H4: 800 32px / normal Pretendard-Regular;
+	--H4-1: 600 32px / normal Pretendard-Regular;
+	--T1: 700 36px / normal Pretendard-Regular;
+	--T1-1: 600 36px / normal Pretendard-Regular;
+	--T2: 600 20px/28px Pretendard-Regular;
+	--T3: 400 22px / normal Pretendard-Regular;
+	--T3-1: 600 22px/22px Pretendard-Regular;
+	--T4: 400 20px/28px Pretendard-Regular;
+	--T5: 600 10px/15px Pretendard-Regular;
+	--S1: 700 16px / normal Pretendard-Regular;
+	--S1-1: 400 16px/28px Pretendard-Regular;
+	--Button: 400 16px / normal Pretendard-Regular;
+	--Input: 400 20px / 22px Pretendard-Regular;
 }
 
 html,
@@ -111,54 +112,52 @@ time,
 mark,
 audio,
 video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
 }
 
 @font-face {
-  font-family: 'YeongdeokSnowCrab';
-  src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Yd/YeongdeokSnowCrab.woff2')
-    format('woff2');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'YeongdeokSnowCrab';
+	src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Yd/YeongdeokSnowCrab.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
-  font-weight: 400;
-  font-style: normal;
+	font-family: 'Pretendard-Regular';
+	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(180deg, #749df5 0%, #b9e3fc 100%);
-  background-repeat: no-repeat;
-  font-size: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(180deg, #749df5 0%, #b9e3fc 100%);
+	background-repeat: no-repeat;
+	font-size: 100%;
 }
 
 html,
 body {
-  max-width: 100%;
-  overflow-x: hidden;
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
 input {
-  outline: none;
+	outline: none;
 }
 
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 button:disabled {
-  cursor: auto;
+	cursor: auto;
 }
