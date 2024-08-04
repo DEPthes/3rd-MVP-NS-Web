@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from '@/styles/profilepage/ProfilePageStyle';
+import * as S from '@/styles/profile/ProfilePageStyle';
 
 const ProfilePage: React.FC = () => {
   return (
