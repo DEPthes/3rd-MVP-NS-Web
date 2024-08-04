@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  z-index: 10;
   margin: 70px 100px 0;
   justify-content: space-between;
 `;

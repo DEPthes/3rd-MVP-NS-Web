@@ -3,9 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  position: fixed;
   justify-content: center;
-  margin-top: 154px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
 
   > h1 {
     font: var(--H1);
