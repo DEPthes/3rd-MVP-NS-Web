@@ -1,10 +1,13 @@
+import * as S from '@/styles/login/LoginPageStyle';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoginButton from '@/components/login/LoginButton';
 import LoginCheckBox from '@/components/login/LoginCheckBox';
 import LoginInput from '@/components/login/LoginInput';
-import * as S from '@/styles/login/LoginPageStyle';
-import { useState } from 'react';
+import SignupButton from '@/components/login/SignupButton';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [loginText, setLoginText] = useState(''); //아이디 글자
   const [passwordText, setPasswordText] = useState(''); //비밀번호 글자
   const [isCheckRememberId, setIsCheckRememberId] = useState(false); //자동 로그인 여부
@@ -63,6 +66,7 @@ const LoginPage = () => {
           isDisabled={!loginText || !passwordText}
           onClick={handleLogin}
         />
+        <SignupButton onClick={() => navigate('/signup')} />
       </S.LoginWrap>
     </S.Container>
   );

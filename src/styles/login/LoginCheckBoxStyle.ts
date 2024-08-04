@@ -9,4 +9,6 @@ export const Container = styled.div`
 export const LabelText = styled.span`
   color: var(--NS-White);
   font: var(--Label);
+
+  cursor: pointer;
 `;
