@@ -2,6 +2,7 @@ import DarkButton from '@/components/button/DarkButton';
 import LightButton from '@/components/button/LightButton';
 import BackDrop from '@/components/layout/BackDrop';
 import SignupModal from '@/components/modal/SignupModal';
+import ProfileUpload from '@/components/signup/ProfileUpload';
 import SignupInput from '@/components/signup/SignupInput';
 import * as S from '@/styles/signup/SignupPageStyle';
 import { useState } from 'react';
@@ -19,7 +20,8 @@ const SignupPage = () => {
     passwordConfirm: false,
     nickname: false,
   }); //입력 값 유효성
-  const [isModal, setIsModal] = useState(false);
+  const [isModal, setIsModal] = useState(false); //회원가입 성공 모달창
+  const [profileImage, setProfileImage] = useState(''); //프로필 이미지
 
   //유효성 업데이트
   const handleValidityChange = (key: string, isValid: boolean) => {
@@ -143,6 +145,10 @@ const SignupPage = () => {
               }}
             />
           </S.InputWrap>
+          <ProfileUpload
+            profileImage={profileImage}
+            setProfileImage={setProfileImage}
+          />
         </S.SignupWrap>
         <S.ButtonWrap>
           <LightButton text="취소" onClick={() => navigate('/login')} />

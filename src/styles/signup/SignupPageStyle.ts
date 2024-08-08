@@ -17,6 +17,7 @@ export const Container = styled.div`
   > h1 {
     font: var(--H1);
     color: var(--NS-White);
+    margin-top: 55px;
     margin-bottom: 47px;
   }
 `;
