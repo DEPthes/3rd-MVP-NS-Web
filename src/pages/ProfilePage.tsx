@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/profile/ProfilePageStyle';
 
 const ProfilePage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <S.Container>
       <S.Content>
@@ -17,9 +20,15 @@ const ProfilePage: React.FC = () => {
           </S.EditOptions>
         </S.ProfileSection>
         <S.ButtonSection>
-          <S.ActionButton>☞ 내가 쓴 글 ☜</S.ActionButton>
-          <S.ActionButton2>♡ 좋아요 누른 글 ♥</S.ActionButton2>
-          <S.ActionButton>♥ 좋아요 누른 주제 ♡</S.ActionButton>
+          <S.ActionButton onClick={() => navigate('/myposts')}>
+            ☞ 내가 쓴 글 ☜
+          </S.ActionButton>
+          <S.ActionButton2 onClick={() => navigate('/mylikedposts')}>
+            ♡ 좋아요 누른 글 ♥
+          </S.ActionButton2>
+          <S.ActionButton onClick={() => navigate('/likedtopic')}>
+            ♥ 좋아요 누른 주제 ♡
+          </S.ActionButton>
         </S.ButtonSection>
       </S.Content>
     </S.Container>
