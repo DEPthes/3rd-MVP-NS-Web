@@ -13,6 +13,7 @@
   --Gray4: #d9d9d9;
   --Red: #ee4b4b;
   --Logo: 400 44px / normal YeongdeokSnowCrab;
+  --Y1: 400 32px / normal YeongdeokSnowCrab;
   --H1: 800 36px / normal Pretendard-Regular;
   --H2: 700 24px/22px Pretendard-Regular;
   --H3: 600 28px / normal Pretendard-Regular;
@@ -32,6 +33,10 @@
   --Label: 500 16px / 15px Pretendard-Regular;
   --BigButton: 700 20px / normal Pretendard-Regular;
   --W1: 600 16px / normal Pretendard-Regular;
+  --N1: 600 44px / normal Pretendard-Regular;
+  --N2: 700 24px / normal Pretendard-Regular;
+  --N3: 700 28px / normal Pretendard-Regular;
+  --N4: 400 12px / normal Pretendard-Regular;
 }
 
 html,
@@ -165,6 +170,10 @@ button {
 
 button:disabled {
   cursor: auto;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 input:-webkit-autofill,

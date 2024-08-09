@@ -12,7 +12,8 @@ export type TReport = {
 };
 
 export type TReportBest = {
-  id: number;
+  postId: number; //글 id
+  profileId: number; //프로필 id
   image: string; //프로필
   nickname: string; //닉네임
   subject: string; //주제

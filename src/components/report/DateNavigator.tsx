@@ -2,21 +2,23 @@ import { SetStateAction, useEffect, useState } from 'react';
 import * as S from '@/styles/report/DateNavigatorStyle';
 import PrevBtn from '@/assets/icons/PrevBtn.svg?react';
 import { TReport } from '@/types/report';
+import SummaryImage from '@/assets/dummy/SummaryImage.png';
 
 const dummyList = {
   id: 1,
-  title: '하늘에서 깨끗한 5억원이 떨어진다면?',
+  title: '비행기를 탔는데 누군가와 자꾸 눈이 마주친다면?',
   length: 15,
-  image: '',
+  image: SummaryImage,
   word: '두기',
   wordLength: 107,
-  longImage: '',
+  longImage: SummaryImage,
   longNickname: '두기두밥두기두밥',
   longLength: 782,
   best: [
     {
-      id: 1,
-      image: '',
+      postId: 1,
+      profileId: 1,
+      image: SummaryImage,
       nickname: '강두기',
       subject: '비행기를 탔는데 누군가와 자꾸 눈이 마주친다면?',
       date: '2024. 07. 30',
@@ -25,8 +27,9 @@ const dummyList = {
       selectLength: 5,
     },
     {
-      id: 2,
-      image: '',
+      postId: 2,
+      profileId: 2,
+      image: SummaryImage,
       nickname: '정두기',
       subject: '비행기를 탔는데 누군가와 자꾸 눈이 마주친다면?',
       date: '2024. 07. 30',
@@ -35,8 +38,9 @@ const dummyList = {
       selectLength: 10,
     },
     {
-      id: 3,
-      image: '',
+      postId: 3,
+      profileId: 3,
+      image: SummaryImage,
       nickname: '두기두밥두기두밥',
       subject: '비행기를 탔는데 누군가와 자꾸 눈이 마주친다면?',
       date: '2024. 07. 30',

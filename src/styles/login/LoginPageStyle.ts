@@ -24,7 +24,6 @@ export const Container = styled.div`
 export const LoginWrap = styled.div`
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   width: 450px;
   gap: 20px;
 `;
