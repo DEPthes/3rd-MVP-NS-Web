@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import BlueHeart from '@assets/icons/BlueHeart.svg'; // 직접 import
-import BlueHeartFill from '@assets/icons/BlueHeartFill.svg'; // 직접 import
-import { TTopicData } from '@types';
-import LightButton from '@components/button/LightButton'; // 버튼 컴포넌트 import
-import DarkButton from '@components/button/DarkButton'; // 버튼 컴포넌트 import
+import * as S from '@/styles/scenario/SenarioDetailPageStyle';
+import BlueHeart from '@assets/icons/BlueHeart.svg';
+import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
+import LightButton from '@components/button/LightButton';
+import DarkButton from '@components/button/DarkButton';
+//import { TTopicData } from '@/types';
 
 const SenarioDetailPage: React.FC = () => {
 	const [topic, setTopic] = useState<string>('');
@@ -20,10 +20,10 @@ const SenarioDetailPage: React.FC = () => {
 		const fetchTopic = async () => {
 			try {
 				const response = await fetch('/dummyData.json');
-				const data: TTopicData = await response.json();
-				setTopic(data.topic);
+				const data = await response.json();
+				setTopic(data[0].title); // 첫 번째 주제를 설정
 			} catch (error) {
-				console.error('Error fetching topic:', error);
+				console.error('주제 가져오기 에러:', error);
 			}
 		};
 
@@ -39,21 +39,44 @@ const SenarioDetailPage: React.FC = () => {
 		setIsSaveModalVisible(true);
 	};
 
-	const handlePost = () => {
+	const handlePost = async () => {
 		if (title.trim() === '' || text.trim() === '') return;
 		setIsPostModalVisible(true);
 	};
 
 	const handleModalSave = () => {
-		console.log('임시 저장:', { title, text });
 		setIsSaveModalVisible(false);
 		setIsSaveCompleteModalVisible(true);
 	};
 
-	const handleModalPost = () => {
-		console.log('게시:', { title, text });
-		setIsPostModalVisible(false);
-		setIsPostCompleteModalVisible(true);
+	const handleModalPost = async () => {
+		const newTopic = {
+			id: new Date().toISOString(),
+			title,
+			publishDate: new Date().toISOString(),
+			likes: 0,
+			posts: 1,
+			text,
+		};
+
+		try {
+			const response = await fetch('/dummyData.json');
+			const data = await response.json();
+			data.push(newTopic);
+
+			await fetch('/dummyData.json', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			});
+
+			setIsPostModalVisible(false);
+			setIsPostCompleteModalVisible(true);
+		} catch (error) {
+			console.error('새 주제 게시 에러:', error);
+		}
 	};
 
 	const handleModalCancel = () => {
@@ -69,206 +92,86 @@ const SenarioDetailPage: React.FC = () => {
 	const isPostDisabled = title.trim() === '' || text.trim() === '';
 
 	return (
-		<Container>
-			<TopicBox>
-				<div>오늘의 주제</div>
-				<Topic>{topic}</Topic>
-				<LikeContainer onClick={handleLikeClick}>
+		<S.Container>
+			<S.TopicBox>
+				<S.TopicHeader>오늘의 주제</S.TopicHeader>
+				<S.Topic>{topic}</S.Topic>
+				<S.LikeContainer onClick={handleLikeClick}>
 					{isLiked ? <img src={BlueHeartFill} alt="Liked" /> : <img src={BlueHeart} alt="Not Liked" />}
-					<LikeText>이 주제 좋아요</LikeText>
-				</LikeContainer>
-			</TopicBox>
-			<NewTopicBox>
-				<Input
+					<S.LikeText>이 주제 좋아요</S.LikeText>
+				</S.LikeContainer>
+			</S.TopicBox>
+			<S.NewTopicBox>
+				<S.Input
 					type="text"
 					value={title}
 					onChange={(e) => setTitle(e.target.value.slice(0, 20))}
 					placeholder="제목을 입력하세요 (최대 20자)"
 				/>
-				<Separator />
-				<TextArea
+				<S.Separator />
+				<S.TextArea
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 					placeholder="여기에 자유롭게 텍스트를 입력하세요."
 				/>
-			</NewTopicBox>
-			<ButtonContainer>
+			</S.NewTopicBox>
+			<S.ButtonContainer>
 				<LightButton text="임시저장" onClick={handleSave} />
 				<DarkButton text="게시" onClick={handlePost} disabled={isPostDisabled} />
-			</ButtonContainer>
+			</S.ButtonContainer>
 			{isSaveModalVisible && (
-				<ModalOverlay>
-					<ModalContainer>
-						<ModalTitle>상상력 임시저장</ModalTitle>
-						<ModalText>게시글을 임시 저장하시겠습니까?</ModalText>
-						<ModalTextSmall>(임시 저장된 글은 마이페이지-내가 쓴 글에서 확인할 수 있습니다.)</ModalTextSmall>
-						<ButtonContainer>
+				<S.ModalOverlay>
+					<S.ModalContainer>
+						<S.ModalTitle>상상력 임시저장</S.ModalTitle>
+						<S.ModalText>게시글을 임시 저장하시겠습니까?</S.ModalText>
+						<S.ModalTextSmall>
+							(임시 저장된 글은 마이페이지-내가 쓴 글에서 확인할 수 있습니다.)
+						</S.ModalTextSmall>
+						<S.ButtonContainer>
 							<DarkButton text="임시저장" onClick={handleModalSave} />
 							<LightButton text="취소" onClick={handleModalCancel} />
-						</ButtonContainer>
-					</ModalContainer>
-				</ModalOverlay>
+						</S.ButtonContainer>
+					</S.ModalContainer>
+				</S.ModalOverlay>
 			)}
 			{isSaveCompleteModalVisible && (
-				<ModalOverlay>
-					<ModalContainer>
-						<ModalTitle>임시저장 완료!</ModalTitle>
-						<ModalTextSmall>(임시 저장된 글은 마이페이지-내가 쓴 글에서 확인할 수 있습니다.)</ModalTextSmall>
-						<ButtonContainer>
+				<S.ModalOverlay>
+					<S.ModalContainer>
+						<S.ModalTitle>임시저장 완료!</S.ModalTitle>
+						<S.ModalTextSmall>
+							(임시 저장된 글은 마이페이지-내가 쓴 글에서 확인할 수 있습니다.)
+						</S.ModalTextSmall>
+						<S.ButtonContainer>
 							<DarkButton text="확인" onClick={handleModalComplete} />
-						</ButtonContainer>
-					</ModalContainer>
-				</ModalOverlay>
+						</S.ButtonContainer>
+					</S.ModalContainer>
+				</S.ModalOverlay>
 			)}
 			{isPostModalVisible && (
-				<ModalOverlay>
-					<ModalContainer>
-						<ModalTitle>상상력 게시</ModalTitle>
-						<ModalText>상상력을 게시하시겠습니까?</ModalText>
-						<ButtonContainer>
+				<S.ModalOverlay>
+					<S.ModalContainer>
+						<S.ModalTitle>상상력 게시</S.ModalTitle>
+						<S.ModalText>상상력을 게시하시겠습니까?</S.ModalText>
+						<S.ButtonContainer>
 							<DarkButton text="게시" onClick={handleModalPost} />
 							<LightButton text="취소" onClick={handleModalCancel} />
-						</ButtonContainer>
-					</ModalContainer>
-				</ModalOverlay>
+						</S.ButtonContainer>
+					</S.ModalContainer>
+				</S.ModalOverlay>
 			)}
 			{isPostCompleteModalVisible && (
-				<ModalOverlay>
-					<ModalContainer>
-						<ModalTitle>상상력 게시 완료!</ModalTitle>
-						<ModalText>N력 +5 상승!</ModalText>
-						<ButtonContainer>
+				<S.ModalOverlay>
+					<S.ModalContainer>
+						<S.ModalTitle>상상력 게시 완료!</S.ModalTitle>
+						<S.ModalText>N력 +5 상승!</S.ModalText>
+						<S.ButtonContainer>
 							<DarkButton text="확인" onClick={handleModalComplete} />
-						</ButtonContainer>
-					</ModalContainer>
-				</ModalOverlay>
+						</S.ButtonContainer>
+					</S.ModalContainer>
+				</S.ModalOverlay>
 			)}
-		</Container>
+		</S.Container>
 	);
 };
 
 export default SenarioDetailPage;
-
-// 스타일 컴포넌트 정의
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: var(--NS-Background); /* 배경색 변수 사용 */
-`;
-
-const TopicBox = styled.div`
-  background-color: var(--NS-White); /* 흰색 배경 변수 사용 */
-  border-radius: 20px;
-  padding: 40px 60px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const Topic = styled.div`
-  margin-top: 20px;
-  font-size: 24px;
-  color: var(--NS-Text); /* 텍스트 색상 변수 사용 */
-`;
-
-const LikeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  cursor: pointer;
-  margin-left: 110px;
-`;
-
-const LikeText = styled.div`
-  font-size: 16px;
-  color: var(--NS-Text); /* 텍스트 색상 변수 사용 */
-  margin-left: 10px;
-`;
-
-const NewTopicBox = styled.div`
-  background-color: var(--NS-White); /* 흰색 배경 변수 사용 */
-  border-radius: 20px;
-  padding: 40px 60px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  width: 80%;
-  max-width: 800px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid var(--NS-TextArea-Background); /* 테두리를 흰색으로 설정하여 안 보이게 함 */
-  margin-bottom: 20px;
-  font-size: 16px;
-  box-sizing: border-box;
-`;
-
-const Separator = styled.hr`
-  border: none;
-  border-top: 2px solid var(--NS-Separator); /* 구분선 색상 변수 사용 */
-  margin: 20px 0;
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  height: 150px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid var(--NS-White); /* 테두리를 흰색으로 설정하여 안 보이게 함 */
-  margin-bottom: 20px;
-  font-size: 16px;
-  resize: none;
-  box-sizing: border-box;
-  background-color: var(--NS-TextArea-Background); /* 텍스트 영역 배경색 변수 사용 */
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px; /* 버튼과 새 박스 사이의 간격 조정 */
-`;
-
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-`;
-
-const ModalContainer = styled.div`
-  background-color: var(--NS-White);
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 400px;
-`;
-
-const ModalTitle = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: var(--NS-Text);
-`;
-
-const ModalText = styled.p`
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: var(--NS-Text);
-`;
-
-const ModalTextSmall = styled.p`
-  font-size: 12px;
-  margin-bottom: 20px;
-  color: var(--NS-Text);
-`;
