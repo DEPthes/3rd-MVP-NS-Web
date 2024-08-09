@@ -6,17 +6,17 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
-  server: {
-    port: 3000,
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@styles': path.resolve(__dirname, './src/styles'),
-      '@assets': path.resolve(__dirname, './src/assets'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-    },
-  },
+	plugins: [react(), svgr()],
+	server: {
+		port: 3000,
+	},
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src'),
+			'@components': path.resolve(__dirname, './src/components'),
+			'@styles': path.resolve(__dirname, './src/styles'),
+			'@assets': path.resolve(__dirname, './src/assets'),
+			'@pages': path.resolve(__dirname, './src/pages'),
+		},
+	},
 });
