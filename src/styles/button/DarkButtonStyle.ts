@@ -15,4 +15,16 @@ export const Button = styled.button`
   &:hover {
     background-color: var(--NS-Main-Clicked);
   }
+
+  &:disabled {
+    color: var(--Gray2);
+    border: 2px solid var(--Gray2);
+    background-color: var(--NS-White);
+  }
+
+  &:disabled:hover {
+    color: var(--Gray2);
+    border: 2px solid var(--Gray2);
+    background-color: var(--NS-White);
+  }
 `;

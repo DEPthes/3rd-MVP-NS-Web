@@ -9,10 +9,22 @@ export const Button = styled.button`
 
   font: var(--Button);
   color: var(--NS-Main1);
-  border: 1.5px solid var(--NS-Main1);
+  border: 2px solid var(--NS-Main1);
   background-color: var(--NS-White);
 
   &:hover {
     background-color: var(--NS-Main4);
+  }
+
+  &:disabled {
+    color: var(--Gray2);
+    border: 2px solid var(--Gray2);
+    background-color: var(--NS-White);
+  }
+
+  &:disabled:hover {
+    color: var(--Gray2);
+    border: 2px solid var(--Gray2);
+    background-color: var(--NS-White);
   }
 `;
