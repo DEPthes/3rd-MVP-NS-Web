@@ -12,6 +12,7 @@ import SenarioDetailPage from '@/pages/SenarioDetailPage';
 import TopicDetailPage from '@/pages/TopicDetailPage';
 import SelectTitleDetail from '@/pages/SelectTitleDetail';
 import OtherPersonPage from '@/pages/OtherPersonPage';
+import SignupPage from './pages/SignupPage';
 
 const Router = () => {
 	return (
@@ -27,6 +28,7 @@ const Router = () => {
 					<Route path="/report" element={<ReportPage />} />
 					<Route path="/ranking" element={<RankingPage />} />
 					<Route path="/profile" element={<ProfilePage />} />
+					<Route path="/signup" element={<SignupPage />} />
 					<Route path="/senario-detail" element={<SenarioDetailPage />} /> {/* 추가 */}
 					<Route path="/senario-detail/:id" element={<SenarioDetailPage />} /> {/* 동적 경로 */}
 					<Route path="/scenario-title" element={<ScenarioTitlePage />} />
@@ -37,8 +39,8 @@ const Router = () => {
 			</Routes>
 		</BrowserRouter>
 	);
-};
 
+};
 export default Router;
 
 
