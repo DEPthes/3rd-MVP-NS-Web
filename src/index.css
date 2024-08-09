@@ -188,3 +188,15 @@ input:autofill:active {
   -webkit-transition: background-color 9999s ease-out;
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--NS-Main1);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--NS-Main4);
+}
