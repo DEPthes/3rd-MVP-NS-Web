@@ -5,9 +5,10 @@ import { createPortal } from 'react-dom';
 type Props = {
   children: React.ReactNode;
   isOpen: boolean;
+  onBackdropClick?: () => void;
 };
 
-const BackDrop = ({ children, isOpen }: Props) => {
+const BackDrop = ({ children, isOpen, onBackdropClick }: Props) => {
   useEffect(() => {
     if (isOpen) {
       window.document.body.style.overflow = 'hidden';
@@ -20,7 +21,12 @@ const BackDrop = ({ children, isOpen }: Props) => {
     };
   }, [isOpen]);
 
-  return createPortal(<Container>{children ?? null}</Container>, document.body);
+  return isOpen
+    ? createPortal(
+        <Container onClick={onBackdropClick}>{children ?? null}</Container>,
+        document.body,
+      )
+    : null;
 };
 
 export default BackDrop;
