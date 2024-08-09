@@ -8,6 +8,9 @@ import RankingPage from './pages/RankingPage';
 import ProfilePage from '@/pages/ProfilePage';
 import ExPage from './pages/ExPage';
 import SignupPage from './pages/SignupPage';
+import MyPostPage from '@/pages/MyPostPage';
+import MyLikedPostPage from '@/pages/MyLikedPostPage';
+import LikedTopicPage from '@pages/LikedTopicPage';
 
 const Router = () => {
   return (
@@ -24,6 +27,9 @@ const Router = () => {
           <Route path="/ranking" element={<RankingPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/myposts" element={<MyPostPage />} />
+          <Route path="/mylikedposts" element={<MyLikedPostPage />} />
+          <Route path="/likedtopic" element={<LikedTopicPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
