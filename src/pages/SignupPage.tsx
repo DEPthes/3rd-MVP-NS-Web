@@ -1,3 +1,4 @@
+import { getNickname } from '@/apis/auth/getNickname';
 import { getUsername } from '@/apis/auth/getUsername';
 import DarkButton from '@/components/button/DarkButton';
 import LightButton from '@/components/button/LightButton';
@@ -61,9 +62,9 @@ const SignupPage = () => {
 
   //닉네임 중복 체크 함수
   const checkDuplicateNickname = async (value: string) => {
-    //사용 중인 아이디가 '두기'인 경우
-    if (value === '두기') {
-      return true;
+    const response = await getNickname({ nickname: value });
+    if (response) {
+      return !response.information.available;
     }
     return false;
   };
