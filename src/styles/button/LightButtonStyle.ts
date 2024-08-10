@@ -13,6 +13,7 @@ export const Button = styled.button<{ isSmall: boolean }>`
   color: var(--NS-Main1);
   border: 2px solid var(--NS-Main1);
   background-color: var(--NS-White);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: ${({ isSmall }) => (isSmall ? 43 : 62)}px;
