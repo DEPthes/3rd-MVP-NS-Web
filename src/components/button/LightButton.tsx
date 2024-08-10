@@ -5,14 +5,20 @@ const LightButton = ({
   onClick,
   isDisabled,
   isSmall = false,
+  ...props
 }: {
   text: string;
   onClick: () => void;
   isDisabled?: boolean;
   isSmall?: boolean;
-}) => {
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <Button onClick={onClick} disabled={isDisabled} isSmall={isSmall}>
+    <Button
+      {...props}
+      onClick={onClick}
+      disabled={isDisabled}
+      isSmall={isSmall}
+    >
       {text}
     </Button>
   );

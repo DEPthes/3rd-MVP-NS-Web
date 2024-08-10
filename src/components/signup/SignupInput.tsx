@@ -142,6 +142,11 @@ const SignupInput = ({
             onClick={handleDuplicate}
             isDisabled={!isDuplicateOn}
             isSmall={true}
+            style={{
+              backgroundColor:
+                showIcon === 'Check' ? 'var(--NS-Main1)' : undefined,
+              color: showIcon === 'Check' ? 'var(--NS-White)' : undefined,
+            }}
           />
         )}
       </S.ItemWrap>
