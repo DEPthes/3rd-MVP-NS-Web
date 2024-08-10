@@ -3,6 +3,7 @@ import FieldCheckIcon from '@assets/icons/FieldCheck.svg?react';
 import FieldCancelIcon from '@assets/icons/FieldCancel.svg?react';
 import { useEffect, useState } from 'react';
 import LightButton from '../button/LightButton';
+import { isMobileOrTablet } from '@/hooks/Media';
 
 type Props = {
   type: 'text' | 'password';
@@ -119,11 +120,16 @@ const SignupInput = ({
             color={color}
           />
           {showIcon === 'Check' ? (
-            <FieldCheckIcon style={{ cursor: 'pointer' }} color={color} />
+            <FieldCheckIcon
+              style={{ cursor: 'pointer' }}
+              color={color}
+              width={isMobileOrTablet ? 14 : 23}
+            />
           ) : showIcon === 'Cancel' ? (
             <FieldCancelIcon
               style={{ cursor: 'pointer' }}
               color={color}
+              width={isMobileOrTablet ? 11 : 21}
               onClick={() => setText('')}
             />
           ) : (
@@ -135,6 +141,12 @@ const SignupInput = ({
             text="중복확인"
             onClick={handleDuplicate}
             isDisabled={!isDuplicateOn}
+            isSmall={true}
+            style={{
+              backgroundColor:
+                showIcon === 'Check' ? 'var(--NS-Main1)' : undefined,
+              color: showIcon === 'Check' ? 'var(--NS-White)' : undefined,
+            }}
           />
         )}
       </S.ItemWrap>
