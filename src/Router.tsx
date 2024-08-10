@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import LoginPage from '@/pages/LoginPage';
 import MainPage from '@/pages/MainPage';
@@ -10,6 +10,12 @@ import ExPage from './pages/ExPage';
 import SignupPage from './pages/SignupPage';
 
 const Router = () => {
+  const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+    const accessToken = localStorage.getItem('accessToken');
+
+    return accessToken ? element : <Navigate to="/login" replace />;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -21,8 +27,11 @@ const Router = () => {
         <Route element={<Layout type={2} />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/report" element={<ReportPage />} />
-          <Route path="/ranking" element={<RankingPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/ranking" element={<RankingPage />} />{' '}
+          <Route
+            path="/profile"
+            element={<ProtectedRoute element={<ProfilePage />} />}
+          />
           <Route path="/signup" element={<SignupPage />} />
         </Route>
       </Routes>

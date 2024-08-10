@@ -34,6 +34,7 @@ export const CheckBoxWrap = styled.div`
 `;
 
 export const WarningText = styled.p`
+  text-align: left;
   margin-top: -13px;
   margin-bottom: -12px;
   font: var(--W1);
