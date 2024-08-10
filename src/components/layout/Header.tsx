@@ -5,11 +5,14 @@ import { useEffect, useState } from 'react';
 import HamMenuIcon from '@/assets/icons/HamMenu.svg?react';
 import HamMenuMIcon from '@/assets/icons/HamMenuM.svg?react';
 import HamMenuTIcon from '@/assets/icons/HamMenuT.svg?react';
+import { postSignout } from '@/apis/auth/postSignout';
+import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 const Header = () => {
   const { isTablet, isMobile, isDesktop } = useNSMediaQuery();
   const [isViewHamItem, setIsViewHamItem] = useState(false);
   const isAccessToken = !!localStorage.getItem('accessToken');
+  const handleUnauthorized = useHandleUnauthorized();
 
   useEffect(() => {
     if (isDesktop) {
@@ -17,12 +20,25 @@ const Header = () => {
     }
   }, [isDesktop]);
 
+  const handleSignOut = async () => {
+    if (isAccessToken) {
+      const response = await postSignout(handleUnauthorized);
+      if (response.check) {
+        console.log('로그아웃');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+      }
+    }
+  };
+
   return (
     <>
       {isMobile || isTablet ? (
         <>
           <S.Container>
-            <S.NavMain to="/">N력 키우기</S.NavMain>
+            <S.NavMain to="/" onClick={handleSignOut}>
+              N력 키우기
+            </S.NavMain>
             <HamMenuIcon onClick={() => setIsViewHamItem(!isViewHamItem)} />
           </S.Container>
           {isViewHamItem && (
