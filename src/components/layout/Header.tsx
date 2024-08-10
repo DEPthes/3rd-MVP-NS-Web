@@ -9,6 +9,7 @@ import HamMenuTIcon from '@/assets/icons/HamMenuT.svg?react';
 const Header = () => {
   const { isTablet, isMobile, isDesktop } = useNSMediaQuery();
   const [isViewHamItem, setIsViewHamItem] = useState(false);
+  const isAccessToken = !!localStorage.getItem('accessToken');
 
   useEffect(() => {
     if (isDesktop) {
@@ -43,7 +44,14 @@ const Header = () => {
                   <S.HamNavLinks to="/scenario">나였다면</S.HamNavLinks>
                   <S.HamNavLinks to="/report">N 보고서</S.HamNavLinks>
                   <S.HamNavLinks to="/ranking">N력 랭킹</S.HamNavLinks>
-                  <S.HamNavLinks to="/profile">마이페이지</S.HamNavLinks>
+                  <S.HamNavLinks
+                    to={isAccessToken ? '/profile' : '/login'}
+                    onClick={() =>
+                      sessionStorage.setItem('prevPath', '/profile')
+                    }
+                  >
+                    마이페이지
+                  </S.HamNavLinks>
                 </S.HamNav>
               }
               isOpen={isViewHamItem}
@@ -60,7 +68,12 @@ const Header = () => {
             <S.NavLinks to="/scenario">나였다면</S.NavLinks>
             <S.NavLinks to="/report">N 보고서</S.NavLinks>
             <S.NavLinks to="/ranking">N력 랭킹</S.NavLinks>
-            <S.NavLinks to="/profile">마이페이지</S.NavLinks>
+            <S.NavLinks
+              to={isAccessToken ? '/profile' : '/login'}
+              onClick={() => sessionStorage.setItem('prevPath', '/profile')}
+            >
+              마이페이지
+            </S.NavLinks>
           </S.Nav>
         </S.Container>
       )}

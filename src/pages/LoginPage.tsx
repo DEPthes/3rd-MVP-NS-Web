@@ -10,6 +10,7 @@ import { postSignin } from '@/apis/auth/postSignin';
 const LoginPage = () => {
   const navigate = useNavigate();
   const savedUserId = localStorage.getItem('userId') || '';
+  const prevPath = sessionStorage.getItem('prevPath') || '/';
   const [loginText, setLoginText] = useState(savedUserId); //아이디 글자
   const [passwordText, setPasswordText] = useState(''); //비밀번호 글자
   const [isCheckRememberId, setIsCheckRememberId] = useState(false); //자동 로그인 여부
@@ -26,7 +27,9 @@ const LoginPage = () => {
       //로그인 성공 시 토큰 저장 및 로그인 최초 요청 페이지로 이동
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
-      navigate('/'); //요청 페이지 이동 작업 필요
+
+      navigate(prevPath);
+      sessionStorage.removeItem('prevPath');
 
       //아이디 저장
       if (isCheckSaveId) {
