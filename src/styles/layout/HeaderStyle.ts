@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { isMobile, isTablet } from '@/hooks/Media';
+import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ export const Container = styled.div`
   align-items: center;
   transition: all 0.3s ease-in-out;
 
-  ${isMobile}, ${isTablet} {
+  ${isMobileOrTablet} {
     margin: 30px 20px 0;
   }
 
