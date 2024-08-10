@@ -17,26 +17,27 @@ export const Container = styled.div`
   > h1 {
     font: var(--H1);
     color: var(--NS-White);
-    margin-bottom: 64px;
+    margin-top: 55px;
+    margin-bottom: 47px;
   }
 `;
 
-export const LoginWrap = styled.div`
+export const SignupWrap = styled.div`
   display: flex;
   flex-direction: column;
-  width: 450px;
-  gap: 20px;
+  box-sizing: border-box;
+  background-color: var(--NS-White);
+  border-radius: 40px;
+  box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+  padding: 63px 90px 38px;
 `;
 
-export const CheckBoxWrap = styled.div`
+export const InputWrap = styled.div`
+  width: 506px;
+`;
+
+export const ButtonWrap = styled.div`
   display: flex;
-  gap: 30px;
-`;
-
-export const WarningText = styled.p`
-  text-align: left;
-  margin-top: -13px;
-  margin-bottom: -12px;
-  font: var(--W1);
-  color: var(--Red);
+  gap: 20px;
+  margin-top: 20px;
 `;

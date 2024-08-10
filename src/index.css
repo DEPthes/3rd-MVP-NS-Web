@@ -1,3 +1,13 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+@font-face {
+  font-family: 'YeongdeokSnowCrab';
+  src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Yd/YeongdeokSnowCrab.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --NS-White: #ffffff;
   --NS-Main1: #5e72eb;
@@ -13,28 +23,40 @@
   --Gray4: #d9d9d9;
   --Red: #ee4b4b;
   --Logo: 400 44px / normal YeongdeokSnowCrab;
-  --H1: 800 36px / normal Pretendard-Regular;
+  --LogoMini: 400 32px / normal YeongdeokSnowCrab;
+  --Y1: 400 32px / normal YeongdeokSnowCrab;
+  --H1: 800 36px / normal Pretendard;
   --H1-1: 800 36px / normal Pretendard-ExtraBold;
-  --H2: 700 24px/22px Pretendard-Regular;
-  --H3: 600 28px / normal Pretendard-Regular;
-  --H4: 800 32px / normal Pretendard-Regular;
-  --H4-1: 600 32px / normal Pretendard-Regular;
-  --T1: 700 36px / normal Pretendard-Regular;
-  --T1-1: 600 36px / normal Pretendard-Regular;
-  --T2: 600 20px/28px normal Pretendard-Regular;
+  --H2: 700 24px/22px Pretendard;
+  --H3: 600 28px / normal Pretendard;
+  --H4: 800 32px / normal Pretendard;
+  --H4-1: 600 32px / normal Pretendard;
+  --T1: 700 36px / normal Pretendard;
+  --T1-1: 600 36px / normal Pretendard;
+  --T2: 600 20px/28px Pretendard;
   --T2-2: 600 20px normal Pretendard-SemiBold;
-  --T3: 400 22px / normal Pretendard-Regular;
-  --T3-1: 600 22px/22px Pretendard-Regular;
-  --T4: 400 20px/28px Pretendard-Regular;
-  --T5: 600 10px/15px Pretendard-Regular;
+  --T3: 400 22px / normal Pretendard;
+  --T3-1: 600 22px/22px Pretendard;
+  --T4: 400 20px/28px Pretendard;
+  --T5: 600 10px/15px Pretendard;
   --T6: 500 16px Pretendard-SemiBold;
-  --S1: 700 16px / normal Pretendard-Regular;
-  --S1-1: 400 16px/28px Pretendard-Regular;
-  --Button: 400 16px / normal Pretendard-Regular;
-  --Input: 500 20px / 22px Pretendard-Regular;
-  --Label: 500 16px / 15px Pretendard-Regular;
-  --BigButton: 700 20px / normal Pretendard-Regular;
-  --W1: 600 16px / normal Pretendard-Regular;
+  --S1: 700 16px / normal Pretendard;
+  --S1-1: 400 16px/28px Pretendard;
+  --Button: 400 16px / normal Pretendard;
+  --Input: 500 20px / 22px Pretendard;
+  --Label: 500 16px / 15px Pretendard;
+  --BigButton: 700 20px / normal Pretendard;
+  --W1: 600 16px / normal Pretendard;
+  --M1: 700 24px / normal Pretendard;
+  --M1-1: 400 16px/22px Pretendard;
+  --N1: 600 44px / normal Pretendard;
+  --N2: 700 24px / normal Pretendard;
+  --N3: 700 28px / normal Pretendard;
+  --N4: 400 12px / normal Pretendard;
+  --P-S1: 600 12px / normal Pretendard;
+  --P-S2: 600 10px / normal Pretendard;
+  --P-S2-2: 400 8px / normal Pretendard;
+  --P-S3: 600 10px / normal Pretendard;
 }
 
 html,
@@ -124,22 +146,6 @@ video {
   vertical-align: baseline;
 }
 
-@font-face {
-  font-family: 'YeongdeokSnowCrab';
-  src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Yd/YeongdeokSnowCrab.woff2')
-    format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -156,6 +162,7 @@ html,
 body {
   max-width: 100%;
   overflow-x: hidden;
+  font-family: 'Pretendard', sans-serif;
 }
 
 input {
@@ -170,6 +177,10 @@ button:disabled {
   cursor: auto;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -181,4 +192,16 @@ input:autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   -webkit-transition: background-color 9999s ease-out;
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--NS-Main1);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--NS-Main4);
 }
