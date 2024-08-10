@@ -10,6 +10,7 @@ import SignupInput from '@/components/signup/SignupInput';
 import * as S from '@/styles/signup/SignupPageStyle';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Profile from '@assets/images/Profile.png';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const SignupPage = () => {
     nickname: false,
   }); //입력 값 유효성
   const [isModal, setIsModal] = useState(false); //회원가입 성공 모달창
-  const [profileImage, setProfileImage] = useState(''); //프로필 이미지
+  const [profileImage, setProfileImage] = useState(Profile); //프로필 이미지
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null); //프로필 이미지 파일
 
   //유효성 업데이트
