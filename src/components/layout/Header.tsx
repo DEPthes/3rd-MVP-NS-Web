@@ -9,7 +9,7 @@ import { postSignout } from '@/apis/auth/postSignout';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 const Header = () => {
-  const { isTablet, isMobile, isDesktop } = useNSMediaQuery();
+  const { isMobileOrTablet, isTablet, isMobile, isDesktop } = useNSMediaQuery();
   const [isViewHamItem, setIsViewHamItem] = useState(false);
   const isAccessToken = !!localStorage.getItem('accessToken');
   const handleUnauthorized = useHandleUnauthorized();
@@ -33,7 +33,7 @@ const Header = () => {
 
   return (
     <>
-      {isMobile || isTablet ? (
+      {isMobileOrTablet ? (
         <>
           <S.Container>
             <S.NavMain to="/" onClick={handleSignOut}>
