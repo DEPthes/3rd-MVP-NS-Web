@@ -1,3 +1,4 @@
+import { getUsername } from '@/apis/auth/getUsername';
 import DarkButton from '@/components/button/DarkButton';
 import LightButton from '@/components/button/LightButton';
 import BackDrop from '@/components/layout/BackDrop';
@@ -49,16 +50,16 @@ const SignupPage = () => {
   const validatePasswordConfirm = (value: string) => value === passwordText;
   const validateNickname = (value: string) => /^[가-힣]{1,8}$/.test(value);
 
-  //중복 아이디 체크 함수
+  //아이디 중복 체크 함수
   const checkDuplicateId = async (value: string) => {
-    //사용 중인 아이디가 'asdf1234'인 경우
-    if (value === 'asdf1234') {
-      return true;
+    const response = await getUsername({ username: value });
+    if (response) {
+      return !response.information.available;
     }
     return false;
   };
 
-  //중복 닉네임 체크 함수
+  //닉네임 중복 체크 함수
   const checkDuplicateNickname = async (value: string) => {
     //사용 중인 아이디가 '두기'인 경우
     if (value === '두기') {
