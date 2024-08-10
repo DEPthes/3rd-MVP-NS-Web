@@ -1,5 +1,6 @@
 import { getNickname } from '@/apis/auth/getNickname';
 import { getUsername } from '@/apis/auth/getUsername';
+import { postSignup } from '@/apis/auth/postSignup';
 import DarkButton from '@/components/button/DarkButton';
 import LightButton from '@/components/button/LightButton';
 import BackDrop from '@/components/layout/BackDrop';
@@ -15,7 +16,7 @@ const SignupPage = () => {
   const [idText, setIdText] = useState(''); //아이디
   const [passwordText, setPasswordText] = useState(''); //비밀번호
   const [passwordConfirmText, setPasswordConfirmText] = useState(''); //비밀번호 확인
-  const [NicknameText, setNicknameText] = useState(''); //닉네임
+  const [nicknameText, setNicknameText] = useState(''); //닉네임
   const [validity, setValidity] = useState({
     id: false,
     password: false,
@@ -24,6 +25,7 @@ const SignupPage = () => {
   }); //입력 값 유효성
   const [isModal, setIsModal] = useState(false); //회원가입 성공 모달창
   const [profileImage, setProfileImage] = useState(''); //프로필 이미지
+  const [profileImageFile, setProfileImageFile] = useState<File | null>(null); //프로필 이미지 파일
 
   //유효성 업데이트
   const handleValidityChange = (key: string, isValid: boolean) => {
@@ -70,8 +72,17 @@ const SignupPage = () => {
   };
 
   //회원가입 함수
-  const handleSignup = () => {
-    setIsModal(true);
+  const handleSignup = async () => {
+    const response = await postSignup({
+      username: idText,
+      password: passwordText,
+      checkPassword: passwordConfirmText,
+      nickname: nicknameText,
+      image: profileImageFile,
+    });
+    if (response.check) {
+      setIsModal(true);
+    }
   };
 
   return (
@@ -87,7 +98,7 @@ const SignupPage = () => {
               placeholder="아이디"
               validationFn={validateId}
               duplicateCheckFn={checkDuplicateId}
-              onValidityChange={isValid => handleValidityChange('id', isValid)} // 추가
+              onValidityChange={isValid => handleValidityChange('id', isValid)}
               warningMessages={{
                 default:
                   '영어(소문자), 숫자를 조합하여 6~10자 이내로 입력해주세요',
@@ -131,7 +142,7 @@ const SignupPage = () => {
             />
             <SignupInput
               type="text"
-              text={NicknameText}
+              text={nicknameText}
               setText={setNicknameText}
               placeholder="닉네임"
               validationFn={validateNickname}
@@ -150,6 +161,7 @@ const SignupPage = () => {
           <ProfileUpload
             profileImage={profileImage}
             setProfileImage={setProfileImage}
+            setProfileImageFile={setProfileImageFile}
           />
         </S.SignupWrap>
         <S.ButtonWrap>
