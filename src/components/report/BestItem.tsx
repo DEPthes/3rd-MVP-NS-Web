@@ -20,9 +20,8 @@ const BestItem = ({
       </S.ProfileWrap>
       <S.PostWrap onClick={() => onPostClick(item.postId)}>
         <S.PostLeftWrap>
-          <h3>{item.subject}</h3>
+          <h3>{item.title}</h3>
           <p>발행일 : {item.date}</p>
-          <h4>{item.title}</h4>
         </S.PostLeftWrap>
         <S.PostRightWrap>
           <HeartIcon />

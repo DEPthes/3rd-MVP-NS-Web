@@ -42,7 +42,7 @@ export const PostWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1170px;
+  width: 1030px;
   height: 151px;
   background-color: var(--NS-White);
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
@@ -64,14 +64,6 @@ export const PostLeftWrap = styled.div`
   > p {
     font: var(--S1-1);
     color: var(--Gray1);
-  }
-
-  > h4 {
-    font: var(--T2);
-    margin-top: 11px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 `;
 
