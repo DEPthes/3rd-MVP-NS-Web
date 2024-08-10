@@ -11,6 +11,7 @@ export const Button = styled.button`
   color: var(--NS-White);
   border: none;
   background-color: var(--NS-Main1);
+  padding: 0;
 
   &:hover {
     background-color: var(--NS-Main-Clicked);
