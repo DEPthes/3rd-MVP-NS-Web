@@ -47,6 +47,19 @@ const LoginPage = () => {
     }
   };
 
+  //Enter 키 처리 함수
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      if (!loginText) {
+        document.getElementById('login-id-input')?.focus();
+      } else if (!passwordText) {
+        document.getElementById('login-password-input')?.focus();
+      } else {
+        handleLogin();
+      }
+    }
+  };
+
   //input 내용 변경될 때 경고 메시지 숨기는 함수
   const handleTextChange =
     (setText: React.Dispatch<React.SetStateAction<string>>) =>
@@ -56,16 +69,18 @@ const LoginPage = () => {
     };
 
   return (
-    <S.Container>
+    <S.Container onKeyDown={handleKeyDown} tabIndex={-1}>
       <h1>로그인</h1>
       <S.LoginWrap>
         <LoginInput
+          id="login-id-input"
           type="text"
           text={loginText}
           setText={handleTextChange(setLoginText)}
           placeholder="아이디"
         />
         <LoginInput
+          id="login-password-input"
           type="password"
           text={passwordText}
           setText={handleTextChange(setPasswordText)}

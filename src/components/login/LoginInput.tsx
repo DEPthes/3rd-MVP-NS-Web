@@ -3,11 +3,13 @@ import * as S from '@/styles/login/LoginInputStyle';
 import InputCancelIcon from '@assets/icons/InputCancel.svg?react';
 
 const LoginInput = ({
+  id,
   type,
   text,
   setText,
   placeholder,
 }: {
+  id: string;
   type: 'text' | 'password';
   text: string;
   setText: (value: string) => void;
@@ -18,6 +20,7 @@ const LoginInput = ({
   return (
     <S.InputWrap>
       <S.Input
+        id={id}
         type={type}
         placeholder={placeholder}
         minLength={1}
