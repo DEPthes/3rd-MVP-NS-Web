@@ -77,7 +77,9 @@ const Header = () => {
         </>
       ) : (
         <S.Container>
-          <S.NavMain to="/">N력 키우기</S.NavMain>
+          <S.NavMain to="/" onClick={handleSignOut}>
+            N력 키우기
+          </S.NavMain>
           <S.Nav>
             <S.NavLinks to="/">서비스 소개</S.NavLinks>
             <S.NavLinks to="/">이용 방법</S.NavLinks>
