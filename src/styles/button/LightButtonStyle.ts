@@ -6,6 +6,7 @@ export const Button = styled.button`
   justify-content: center;
   width: 88px;
   height: 35px;
+  padding: 0;
 
   font: var(--Button);
   color: var(--NS-Main1);
