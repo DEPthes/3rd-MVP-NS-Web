@@ -24,7 +24,7 @@ const SignupPage = () => {
     passwordConfirm: false,
     nickname: false,
   }); //입력 값 유효성
-  const [isModal, setIsModal] = useState(true); //회원가입 성공 모달창
+  const [isModal, setIsModal] = useState(false); //회원가입 성공 모달창
   const [profileImage, setProfileImage] = useState(Profile); //프로필 이미지
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null); //프로필 이미지 파일
 
