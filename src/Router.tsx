@@ -45,9 +45,18 @@ const Router = () => {
           <Route path="/senario-detail/:id" element={<SenarioDetailPage />} />\
           <Route path="/scenario-title" element={<ScenarioTitlePage />} />
           <Route path="/topic/:id" element={<TopicDetailPage />} />
-          <Route path="/mypost" element={<MyPostPage />} />
-          <Route path="/mylikedpost" element={<MyLikedPostPage />} />
-          <Route path="/likedtopic" element={<LikedTopicPage />} />
+          <Route
+            path="/profile/myposts"
+            element={<ProtectedRoute element={<MyPostPage />} />}
+          />
+          <Route
+            path="/profile/mylikedposts"
+            element={<ProtectedRoute element={<MyLikedPostPage />} />}
+          />
+          <Route
+            path="/profile/likedtopics"
+            element={<ProtectedRoute element={<LikedTopicPage />} />}
+          />
           <Route
             path="/select-title-detail/:id"
             element={<SelectTitleDetail />}
