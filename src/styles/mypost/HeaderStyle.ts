@@ -5,7 +5,9 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 35px;
   margin-right: auto;
+  margin-bottom: 20px;
 `;
 
 export const Title = styled.h2`

@@ -25,7 +25,6 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 1.5rem;
   color: var(--NS-White);
   margin-right: auto;
 `;
@@ -39,8 +38,8 @@ export const CheckboxContainer = styled.div`
 `;
 
 export const CustomCheckbox = styled.input`
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   appearance: none;
   background-image: url(${CheckBoxDefault}); /* 체크 해제 */
   background-size: cover;
@@ -55,7 +54,7 @@ export const CustomCheckbox = styled.input`
 export const FilterLinks = styled.div`
   display: flex;
   align-items: center;
-  font: var(--S1-2);
+  font: var(--S1-);
 
   span {
     margin: 0 0.5rem;
