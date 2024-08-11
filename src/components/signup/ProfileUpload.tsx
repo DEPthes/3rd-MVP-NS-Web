@@ -5,9 +5,11 @@ import LightButton from '../button/LightButton';
 const ProfileUpload = ({
   profileImage,
   setProfileImage,
+  setProfileImageFile,
 }: {
   profileImage: string;
   setProfileImage: React.Dispatch<SetStateAction<string>>;
+  setProfileImageFile: React.Dispatch<SetStateAction<File | null>>;
 }) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -25,6 +27,7 @@ const ProfileUpload = ({
     const file = e.target.files[0];
 
     const imageUrl = URL.createObjectURL(file);
+    setProfileImageFile(file);
     setProfileImage(imageUrl);
   };
 
@@ -32,7 +35,7 @@ const ProfileUpload = ({
     <S.ImageWrap>
       <img src={profileImage} alt="" />
       <div>
-        <LightButton text="업로드" onClick={onAddPicture} />
+        <LightButton text="업로드" onClick={onAddPicture} isSmall={true} />
         <input
           id="fileInput"
           type="file"

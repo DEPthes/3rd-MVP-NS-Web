@@ -7,10 +7,19 @@ export const Container = styled.div`
   z-index: 10;
   margin: 70px 100px 0;
   justify-content: space-between;
+  align-items: center;
   transition: all 0.3s ease-in-out;
 
-  ${isMobile}, ${isTablet} {
-    margin: 30px 20px 0;
+  ${isMobile} {
+    margin: 30px 16px 0;
+  }
+
+  ${isTablet} {
+    margin: 30px 36px 0;
+  }
+
+  @media (min-width: 1210px) and (max-width: 1400px) {
+    margin: 60px 80px 0;
   }
 `;
 
@@ -29,6 +38,10 @@ export const Nav = styled.div`
   display: flex;
   gap: 60px;
   transition: all 0.3s ease-in-out;
+
+  @media (max-width: 1400px) {
+    gap: 40px;
+  }
 `;
 
 export const NavLinks = styled(NavLink)`

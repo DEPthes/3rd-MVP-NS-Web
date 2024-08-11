@@ -17,9 +17,9 @@ export const Container = styled.div`
   }
 
   > h1 {
+    transition: all 0.3s ease-in-out;
     font: var(--M1);
     color: var(--NS-Black);
-    transition: all 0.3s ease-in-out;
 
     ${isMobileOrTablet} {
       font: var(--S1);
@@ -38,4 +38,10 @@ export const Container = styled.div`
       margin: 10px 0px;
     }
   }
+`;
+
+export const ButtonWrap = styled.div`
+  display: flex;
+  gap: 12px;
+  transition: all 0.3s ease-in-out;
 `;

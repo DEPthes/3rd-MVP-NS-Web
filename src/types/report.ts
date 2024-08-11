@@ -16,7 +16,6 @@ export type TReportBest = {
   profileId: number; //프로필 id
   image: string; //프로필
   nickname: string; //닉네임
-  subject: string; //주제
   date: string; //발행일
   title: string; //제목
   heart: number; //좋아요 수

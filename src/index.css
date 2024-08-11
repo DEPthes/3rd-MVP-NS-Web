@@ -24,7 +24,6 @@
 	--Logo: 400 44px / normal YeongdeokSnowCrab;
 	--LogoMini: 400 32px / normal YeongdeokSnowCrab;
 	--Y1: 400 32px / normal YeongdeokSnowCrab;
-	--LogoSmall: 400 24px / normal YeongdeokSnowCrab;
 	--H1: 800 36px / normal Pretendard;
 	--H2: 700 24px/22px Pretendard;
 	--H3: 600 28px / normal Pretendard;
@@ -46,10 +45,20 @@
 	--W1: 600 16px / normal Pretendard;
 	--M1: 700 24px / normal Pretendard;
 	--M1-1: 400 16px/22px Pretendard;
+	--M1-B: 400 10px / 15px Pretendard;
 	--N1: 600 44px / normal Pretendard;
 	--N2: 700 24px / normal Pretendard;
 	--N3: 700 28px / normal Pretendard;
 	--N4: 400 12px / normal Pretendard;
+	--P-S1: 600 12px / normal Pretendard;
+	--P-S2: 600 10px / normal Pretendard;
+	--P-S2-2: 400 8px / normal Pretendard;
+	--P-S3: 600 10px / normal Pretendard;
+	--H1-B: 700 20px / 22px Pretendard;
+	--W1-B: 600 8.63px / normal Pretendard;
+	--Input-B: 500 12px / normal Pretendard;
+	--T5-B: 600 8px / normal Pretendard;
+	--LogoSmall: 400 24px / normal YeongdeokSnowCrab;
 }
 
 html,
@@ -153,9 +162,12 @@ body {
 
 html,
 body {
-	max-width: 100%;
+	<<<<<<< HEAD max-width: 100%;
 	overflow-x: hidden;
 	font-family: 'Pretendard', sans-serif;
+	=======overflow-x: hidden;
+	font-family: 'Pretendard', sans-serif;
+	>>>>>>>4bb75d99e411ef3e0972d448acbfbfc07483a486
 }
 
 input {

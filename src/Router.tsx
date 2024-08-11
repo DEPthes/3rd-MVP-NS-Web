@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import LoginPage from '@/pages/LoginPage';
 import MainPage from '@/pages/MainPage';
@@ -13,6 +13,12 @@ import TopicDetailPage from '@/pages/TopicDetailPage';
 import SelectTitleDetail from '@/pages/SelectTitleDetail';
 import OtherPersonPage from '@/pages/OtherPersonPage';
 import SignupPage from './pages/SignupPage';
+
+/*const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+	const accessToken = localStorage.getItem('accessToken');
+
+	return accessToken ? element : <Navigate to="/login" replace />;
+};*/
 
 const Router = () => {
 	return (
@@ -39,8 +45,8 @@ const Router = () => {
 			</Routes>
 		</BrowserRouter>
 	);
-
 };
+
 export default Router;
 
 
