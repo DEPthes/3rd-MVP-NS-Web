@@ -69,6 +69,10 @@ const DateNavigator = ({
     }월 ${date.getDate()}일`;
   };
 
+  const resetTime = (date: Date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  };
+
   //이전 날짜 버튼 클릭 함수
   const handlePrevDay = () => {
     const prevDay = new Date(selectedDate);
@@ -79,11 +83,13 @@ const DateNavigator = ({
 
   //다음 날짜 버튼 클릭 함수
   const handleNextDay = () => {
-    if (formatDate(selectedDate) < formatDate(today)) {
-      const nextDay = new Date(selectedDate);
-      nextDay.setDate(selectedDate.getDate() + 1);
+    const selectedDateWithoutTime = resetTime(selectedDate);
+    const todayWithoutTime = resetTime(today);
+    if (selectedDateWithoutTime < todayWithoutTime) {
+      const nextDay = new Date(selectedDateWithoutTime);
+      nextDay.setDate(selectedDateWithoutTime.getDate() + 1);
 
-      if (formatDate(nextDay) < formatDate(today)) {
+      if (nextDay < todayWithoutTime) {
         setIsDisabled(false);
       } else {
         setIsDisabled(true);

@@ -24,11 +24,11 @@ const EmptyMessage: React.FC<EmptyMessageProps> = ({
         </S.Image>
         <S.Message>{messageText}</S.Message>
       </S.EmptyMessageContainer>
-      <S.Button onClick={() => navigate(navigateTo)}>{buttonText}</S.Button>
+      <S.ButtonContainer>
+        <S.Button onClick={() => navigate(navigateTo)}>{buttonText}</S.Button>
+      </S.ButtonContainer>
     </S.Container>
   );
 };
 
 export default EmptyMessage;
-
-// 스타일 컴포넌트 정의

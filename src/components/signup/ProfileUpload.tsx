@@ -35,7 +35,7 @@ const ProfileUpload = ({
     <S.ImageWrap>
       <img src={profileImage} alt="" />
       <div>
-        <LightButton text="업로드" onClick={onAddPicture} />
+        <LightButton text="업로드" onClick={onAddPicture} isSmall={true} />
         <input
           id="fileInput"
           type="file"

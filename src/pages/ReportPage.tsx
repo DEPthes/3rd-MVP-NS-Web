@@ -43,7 +43,7 @@ const ReportPage = () => {
           </h4>
         </S.SummaryWrap>
       ) : (
-        <S.SummaryWrap>N 키워드 추출 중</S.SummaryWrap>
+        <S.NoneContainer isLast={false}>N 키워드 추출 중</S.NoneContainer>
       )}
       <hr />
       <S.HeadText>가장 길게 글 쓴 사람</S.HeadText>
@@ -72,7 +72,7 @@ const ReportPage = () => {
           })}
         </S.BestWrap>
       ) : (
-        <div>집계중</div>
+        <S.NoneContainer isLast={true}>집계중</S.NoneContainer>
       )}
     </S.Container>
   );

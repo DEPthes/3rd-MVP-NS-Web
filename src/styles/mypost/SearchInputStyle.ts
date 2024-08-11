@@ -1,35 +1,36 @@
 import styled from 'styled-components';
 
 export const SearchContainer = styled.div`
-  margin: 5rem;
-  width: 28rem;
-  height: 2.5rem;
+  margin-top: 117px;
+  width: 450px;
+  heigth: 60px;
+  padding: 18px 28px;
   display: flex;
-  align-items: center;
   border-radius: 40px;
-  padding: 0.5rem 1rem;
-  background-color: #ffffff;
+  background-color: var(--NS-White);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 14px rgba(63, 80, 184, 0.5);
 `;
 
 export const Input = styled.input`
+  width: 218px;
+  height: 24px;
+  flex: 1;
+  padding: 0;
   border: none;
   outline: none;
-  flex: 1;
-  font-size: 1rem;
-  color: #333;
-  padding: 0.5rem;
+  display: flex;
+  font: var(--T2-2);
+  color: var(--NS-Black);
 
   &::placeholder {
-    font: var(--T3);
+    font: var(--T2-2);
     color: var(--Gray1);
-    font-size: 1.1rem;
-    font-weight: 500;
   }
 `;
 
 export const Icon = styled.img`
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  margin-left: 152px;
 `;

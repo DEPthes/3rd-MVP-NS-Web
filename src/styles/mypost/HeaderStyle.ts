@@ -4,51 +4,31 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
-  width: 100%;
+  width: 1159px;
+  height: 35px;
+  margin: 53px 5px 20px 6px;
 `;
 
 export const Title = styled.h2`
-  font-size: 1.5rem;
+  font: var(--H2);
   color: var(--NS-White);
   margin-right: auto;
-`;
-
-export const CheckboxContainer = styled.div`
-  color: var(--NS-White);
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-`;
-
-export const CustomCheckbox = styled.input`
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url('/src/assets/icons/CheckBoxDefault.svg'); /* 체크 해제 */
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 8px;
-
-  &:checked {
-    background-image: url('/src/assets/icons/CheckBoxVariant.svg'); /* 체크  */
-  }
+  margin-bottom: 13px;
 `;
 
 export const FilterLinks = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 1rem;
-  font: var(--S1-1);
+  margin: 14px 0 2px 0px;
+  font: var(--S1-2);
 
   span {
-    margin: 0 0.5rem;
+    margin: 0 12px;
     color: var(--NS-White);
   }
 `;
 
 export const FilterLink = styled.a<{ isSelected: boolean }>`
-  margin: 0 0.5rem;
   color: ${({ isSelected }) =>
     isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
   text-decoration: none;

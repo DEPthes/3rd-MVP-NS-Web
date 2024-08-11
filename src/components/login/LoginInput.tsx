@@ -1,20 +1,26 @@
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 import * as S from '@/styles/login/LoginInputStyle';
 import InputCancelIcon from '@assets/icons/InputCancel.svg?react';
 
 const LoginInput = ({
+  id,
   type,
   text,
   setText,
   placeholder,
 }: {
+  id: string;
   type: 'text' | 'password';
   text: string;
   setText: (value: string) => void;
   placeholder: string;
 }) => {
+  const { isMobileOrTablet } = useNSMediaQuery();
+
   return (
     <S.InputWrap>
       <S.Input
+        id={id}
         type={type}
         placeholder={placeholder}
         minLength={1}
@@ -24,6 +30,8 @@ const LoginInput = ({
       />
       {text.length > 0 && (
         <InputCancelIcon
+          width={isMobileOrTablet ? 12 : 16}
+          strokeWidth={isMobileOrTablet ? 1 : 2}
           style={{ cursor: 'pointer' }}
           onClick={() => setText('')}
         />
