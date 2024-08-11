@@ -26,7 +26,7 @@ const ProfilePage: React.FC = () => {
           <S.ActionButton2 onClick={() => navigate('/profile/mylikedposts')}>
             ♡ 좋아요 누른 글 ♥
           </S.ActionButton2>
-          <S.ActionButton onClick={() => navigate('/profile/likedtopic')}>
+          <S.ActionButton onClick={() => navigate('/profile/likedtopics')}>
             ♥ 좋아요 누른 주제 ♡
           </S.ActionButton>
         </S.ButtonSection>
