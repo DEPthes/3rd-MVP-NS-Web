@@ -4,10 +4,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 128px;
 `;
 
 export const EmptyMessageContainer = styled.div`
-  margin: 3rem;
   width: 733px;
   height: 206px;
   display: flex;
@@ -16,17 +16,17 @@ export const EmptyMessageContainer = styled.div`
 `;
 
 export const Image = styled.div`
-  width: 206px;
+  width: 212px;
   height: 206px;
   background-color: white;
 `;
 
 export const Message = styled.h2`
-  max-width: 450px;
-  margin: 3rem;
-  font: var(--T2);
+  max-width: 492px;
+  margin-left: 29px;
+  font: var(--H2-2);
   color: var(--NS-White);
-  white-space: pre-line; // 줄바꿈을 유지
+  white-space: pre-line;
 `;
 
 export const Button = styled.button`
@@ -39,7 +39,7 @@ export const Button = styled.button`
   justify-content: center;
   border-radius: 40px;
   border: none;
-  font: var(--T2);
+  font: var(--T2-2);
   color: var(--NS-White);
   background-color: var(--NS-Main1);
   cursor: pointer;

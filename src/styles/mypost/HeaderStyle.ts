@@ -6,6 +6,7 @@ export const Header = styled.div`
   justify-content: space-between;
   margin-bottom: 2rem;
   width: 100%;
+  margin-right: auto;
 `;
 
 export const Title = styled.h2`
@@ -14,41 +15,19 @@ export const Title = styled.h2`
   margin-right: auto;
 `;
 
-export const CheckboxContainer = styled.div`
-  color: var(--NS-White);
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-`;
-
-export const CustomCheckbox = styled.input`
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url('/src/assets/icons/CheckBoxDefault.svg'); /* 체크 해제 */
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 8px;
-
-  &:checked {
-    background-image: url('/src/assets/icons/CheckBoxVariant.svg'); /* 체크  */
-  }
-`;
-
 export const FilterLinks = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 1rem;
-  font: var(--S1-1);
+  margin-left: 34px;
+  font: var(--S1-2);
 
   span {
-    margin: 0 0.5rem;
+    margin: 0 12px;
     color: var(--NS-White);
   }
 `;
 
 export const FilterLink = styled.a<{ isSelected: boolean }>`
-  margin: 0 0.5rem;
   color: ${({ isSelected }) =>
     isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
   text-decoration: none;
