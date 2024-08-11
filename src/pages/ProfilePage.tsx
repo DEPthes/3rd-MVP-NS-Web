@@ -20,13 +20,13 @@ const ProfilePage: React.FC = () => {
           </S.EditOptions>
         </S.ProfileSection>
         <S.ButtonSection>
-          <S.ActionButton onClick={() => navigate('/myposts')}>
+          <S.ActionButton onClick={() => navigate('/profile/myposts')}>
             ☞ 내가 쓴 글 ☜
           </S.ActionButton>
-          <S.ActionButton2 onClick={() => navigate('/mylikedposts')}>
+          <S.ActionButton2 onClick={() => navigate('/profile/mylikedposts')}>
             ♡ 좋아요 누른 글 ♥
           </S.ActionButton2>
-          <S.ActionButton onClick={() => navigate('/likedtopic')}>
+          <S.ActionButton onClick={() => navigate('/profile/likedtopic')}>
             ♥ 좋아요 누른 주제 ♡
           </S.ActionButton>
         </S.ButtonSection>
