@@ -4,13 +4,12 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
   width: 100%;
   margin-right: auto;
 `;
 
 export const Title = styled.h2`
-  font-size: 1.5rem;
+  font: var(--H2);
   color: var(--NS-White);
   margin-right: auto;
 `;

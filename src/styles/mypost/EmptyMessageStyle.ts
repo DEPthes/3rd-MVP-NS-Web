@@ -29,14 +29,18 @@ export const Message = styled.h2`
   white-space: pre-line;
 `;
 
-export const Button = styled.button`
-  margin: 5rem;
-  width: 480px;
-  height: 56px;
-  padding: 8px 16px;
+export const ButtonContainer = styled.div`
+  width: 506px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 62px;
+`;
+
+export const Button = styled.button`
+  width: 450px;
+  height: 60px;
   border-radius: 40px;
   border: none;
   font: var(--T2-2);

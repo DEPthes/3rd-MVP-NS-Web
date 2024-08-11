@@ -24,7 +24,9 @@ const EmptyMessage: React.FC<EmptyMessageProps> = ({
         </S.Image>
         <S.Message>{messageText}</S.Message>
       </S.EmptyMessageContainer>
-      <S.Button onClick={() => navigate(navigateTo)}>{buttonText}</S.Button>
+      <S.ButtonContainer>
+        <S.Button onClick={() => navigate(navigateTo)}>{buttonText}</S.Button>
+      </S.ButtonContainer>
     </S.Container>
   );
 };

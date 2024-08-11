@@ -4,14 +4,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 70px;
 `;
 
 export const Content = styled.div`
-  width: 20rem;
+  width: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
 `;
 
 export const ProfileSection = styled.div`
@@ -29,7 +29,7 @@ export const ProfileSection = styled.div`
 `;
 
 export const MyPage = styled.div`
-  padding: 2rem;
+  margin-bottom: 32px;
   font: var(--H11);
   color: var(--NS-White);
 `;

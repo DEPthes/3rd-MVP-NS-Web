@@ -1,25 +1,26 @@
 import styled from 'styled-components';
 
 export const SearchContainer = styled.div`
-  margin-top: 177px;
+  margin-top: 117px;
   margin-bottom: 53px;
-  width: 450px;
+  width: 430px;
   hegith: 60px;
   display: flex;
   padding: 18px 28px;
-  align-items: center;
   border-radius: 40px;
   background-color: var(--NS-White);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 `;
 
 export const Input = styled.input`
+  width: 218px;
   height: 24px;
+  flex: 1;
   border: none;
   outline: none;
-  flex: 1;
+  display: flex;
   font: var(--T2-2);
-  color: #333;
+  color: var(--NS-Black);
 
   &::placeholder {
     font: var(--T2-2);
@@ -30,4 +31,5 @@ export const Input = styled.input`
 export const Icon = styled.img`
   width: 24px;
   height: 24px;
+  margin-left: 152px;
 `;
