@@ -162,13 +162,11 @@ body {
 
 html,
 body {
-	<<<<<<< HEAD max-width: 100%;
+	max-width: 100%;
 	overflow-x: hidden;
 	font-family: 'Pretendard', sans-serif;
-	=======overflow-x: hidden;
-	font-family: 'Pretendard', sans-serif;
-	>>>>>>>4bb75d99e411ef3e0972d448acbfbfc07483a486
 }
+
 
 input {
 	outline: none;
