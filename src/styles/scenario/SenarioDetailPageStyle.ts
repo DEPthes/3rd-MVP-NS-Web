@@ -1,140 +1,125 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	background-color: var(--NS-Background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TopicBox = styled.div`
-	background-color: var(--NS-White);
-	border-radius: 40px;
-	padding: 40px 60px;
-	text-align: center;
-	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-	width: 1170px;
-	height: 175px;
+  background-color: var(--NS-White);
+  border-radius: 40px;
+  padding: 29px 20px 16px;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+  width: 1170px;
+  min-height: 160px;
 `;
 
 export const TopicHeader = styled.div`
-	color: var(--NS-Main1);
-	font: var(--LogoMini);
+  color: var(--NS-Main1);
+  font: var(--LogoSmall);
 `;
 
 export const Topic = styled.div`
-	font-size: 20px;
-	color: var(--NS-Main1);
-	font: var(--N3);
+  margin-top: 1.8px;
+  color: var(--NS-Main1);
+  font: var(--T1-1);
 `;
 
 export const LikeContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 20px;
-	cursor: pointer;
+  margin-top: 1.8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
 `;
 
 export const LikeText = styled.div`
-	font-size: 16px;
-	color: var(--NS-Main5);
-	margin-left: 10px;
+  font: var(--S1);
+  color: var(--NS-Main5);
 `;
 
 export const NewTopicBox = styled.div`
-	background-color: var(--NS-White);
-	border-radius: 40px;
-	padding: 40px 60px;
-	text-align: center;
-	margin-top: 20px;
-	width: 1170px;
-	height: 443px;
-	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-	background-color: var(—NS-Main1);
+  background-color: var(--NS-White);
+  border-radius: 40px;
+  padding: 45px 0;
+  text-align: center;
+  margin-top: 20px;
+  width: 1170px;
+  height: 443px;
+  box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+  background-color: var(—NS-Black);
 `;
 
 export const Input = styled.input`
-	width: 100%;
-	padding: 10px;
-	border-radius: 10px;
-	border: 1px solid var(--NS-TextArea-Background);
-	margin-bottom: 20px;
-	font-size: 16px;
-	color: var(--NS-Black);
-	text-align: center;
-	box-sizing: border-box;
-	font: var(--H3);
+  width: 100%;
+  border: none;
+  text-align: center;
+  font: var(--H3);
 `;
 
 export const Separator = styled.hr`
-	border: none;
-	border-top: 2px dashed var(--NS-Main2); /* 색상 및 스타일 적용 */
-	width: 90%; /* 전체 너비 적용 */
-	margin: 7px 0; /* 상하 간격 */
-	margin-left: 40px;
+  border: 1.5px dashed var(--NS-Main2);
+  width: 90%;
+  margin-top: 12px;
+  margin-bottom: 17px;
 `;
 
 export const TextArea = styled.textarea`
-	width: 100%;
-	height: 150px;
-	padding: 10px;
-	border-radius: 10px;
-	border: 1px solid var(--NS-White);
-	margin-bottom: 20px;
-	font-size: 14px;
-	font: var(--T3);
-	color: var(--NS-Black);
-	text-align: center;
-	resize: none;
-	box-sizing: border-box;
-	background-color: var(--NS-TextArea-Background);
+  width: 90%;
+  height: 80%;
+  border: 1px solid var(--NS-White);
+  font: var(--T3);
+  text-align: center;
+  resize: none;
+  outline: none;
 `;
 
 export const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-	margin-top: 20px;
-`;
-
-export const ModalOverlay = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 1000;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 `;
 
 export const ModalContainer = styled.div`
-	background-color: var(--NS-White);
-	padding: 20px;
-	border-radius: 10px;
-	text-align: center;
-	width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--NS-White);
+  padding: 40px 0;
+  text-align: center;
+  width: 520px;
 `;
 
 export const ModalTitle = styled.h2`
-	font-size: 24px;
-	margin-bottom: 10px;
-	color: var(--NS-Text);
+  font: var(--M1);
+  color: var(--NS-Black);
 `;
 
-export const ModalText = styled.p`
-	font-size: 16px;
-	margin-bottom: 10px;
-	color: var(--NS-Text);
+export const ModalText2Black = styled.p`
+  font: var(--M1-1);
+  color: var(--NS-Black);
+  margin: 16px 0;
 `;
 
-export const ModalTextSmall = styled.p`
-	font-size: 12px;
-	margin-bottom: 20px;
-	color: var(--NS-Text);
+export const ModalTextBlack = styled.p`
+  font: var(--M1-1);
+  color: var(--NS-Black);
+  margin: 24px 0 30px;
+`;
+
+export const ModalTextBlack2 = styled.p`
+  font: var(--M1-1);
+  color: var(--NS-Black2);
+  margin: 24px 0 30px;
+`;
+
+export const ModalBtn = styled.div`
+  display: flex;
+  gap: 12px;
 `;

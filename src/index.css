@@ -16,7 +16,7 @@
   --NS-Main4: #e0f4ff;
   --NS-Main5: #8eb1fc;
   --NS-Black: #161616;
-  --NS-Black2: #000000;
+  --NS-Black2: #5e5e5e;
   --Gray1: #a4a4a4;
   --Gray2: #bbbbbb;
   --Gray3: #f7f7f7;
@@ -49,6 +49,8 @@
   --M1-B: 400 10px / 15px Pretendard;
   --N1: 600 44px / normal Pretendard;
   --N2: 700 24px / normal Pretendard;
+  --N2-1: 600 24px / normal Pretendard;
+  --N2-2: 400 24px / normal Pretendard;
   --N3: 700 28px / normal Pretendard;
   --N4: 400 12px / normal Pretendard;
   --P-S1: 600 12px / normal Pretendard;
