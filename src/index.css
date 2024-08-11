@@ -1,3 +1,13 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+@font-face {
+  font-family: 'YeongdeokSnowCrab';
+  src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Yd/YeongdeokSnowCrab.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --NS-White: #ffffff;
   --NS-Main1: #5e72eb;
@@ -13,6 +23,7 @@
   --Gray4: #d9d9d9;
   --Red: #ee4b4b;
   --Logo: 400 44px / normal YeongdeokSnowCrab;
+  --LogoMini: 400 32px / normal YeongdeokSnowCrab;
   --Y1: 400 32px / normal YeongdeokSnowCrab;
   --H1: 800 36px / normal Pretendard;
   --H11: 800 36px / normal Pretendard-ExtraBold;
@@ -25,7 +36,6 @@
   --T1: 700 36px / normal Pretendard;
   --T1-1: 600 36px / normal Pretendard;
   --T2: 600 20px/28px Pretendard;
-  --T2-1: 600 20px / normal Pretendard-SemiBold;
   --T2-2: 400 20px / normal Pretendard-Medium;
   --T3: 400 22px / normal Pretendard;
   --T3-1: 600 22px/22px Pretendard;
@@ -42,7 +52,7 @@
   --W1: 600 16px / normal Pretendard;
   --M1: 700 24px / normal Pretendard;
   --M1-1: 400 16px/22px Pretendard;
-  --M1-2: 400 16px / normal Pretendard-Bold;
+  --M1-B: 400 10px / 15px Pretendard;
   --N1: 600 44px / normal Pretendard;
   --N2: 700 24px / normal Pretendard;
   --N3: 700 28px / normal Pretendard;
@@ -54,6 +64,7 @@
   --H1-B: 700 20px / 22px Pretendard;
   --W1-B: 600 8.63px / normal Pretendard;
   --Input-B: 500 12px / normal Pretendard;
+  --T5-B: 600 8px / normal Pretendard;
 }
 
 html,
@@ -143,22 +154,6 @@ video {
   vertical-align: baseline;
 }
 
-@font-face {
-  font-family: 'YeongdeokSnowCrab';
-  src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Yd/YeongdeokSnowCrab.woff2')
-    format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -173,8 +168,8 @@ body {
 
 html,
 body {
-  max-width: 100%;
   overflow-x: hidden;
+  font-family: 'Pretendard', sans-serif;
 }
 
 input {
@@ -189,6 +184,10 @@ button:disabled {
   cursor: auto;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -200,4 +199,16 @@ input:autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   -webkit-transition: background-color 9999s ease-out;
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--NS-Main1);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--NS-Main4);
 }

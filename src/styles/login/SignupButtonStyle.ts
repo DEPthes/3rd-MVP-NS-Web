@@ -1,3 +1,4 @@
+import { isMobileOrTablet } from '@/hooks/Media';
 import styled from 'styled-components';
 
 export const Button = styled.button`
@@ -11,6 +12,13 @@ export const Button = styled.button`
   color: var(--NS-White);
   font: var(--BigButton);
   background-color: var(--NS-Main2);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    font: var(--P-S1);
+    padding: 12px;
+  }
 
   &:hover {
     background-color: var(--NS-Main1);
