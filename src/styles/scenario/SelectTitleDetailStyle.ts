@@ -18,10 +18,10 @@ export const HeaderSection = styled.div`
 export const ProfileCircle = styled.div`
 	width: 120px;
 	height: 120px;
-	background-color: #ddd;
+	background-color: #fff;
 	border-radius: 50%;
 	margin-right: 20px;
-	margin-top: -20px;
+	margin-top: -10px;
 	cursor: pointer;
 `;
 
@@ -35,7 +35,7 @@ export const ProfileInfo = styled.div`
 export const ProfileNickname = styled.div`
 	font-size: 14px;
 	color: var(--NS-Black);
-	font-family: Pretendard;
+	font:var(--W1);
 	position: absolute;
 	top: 100px;
 	left: 36px;
@@ -47,6 +47,7 @@ export const Header = styled.div`
 	font-weight: bold;
 	color: white;
 	margin-bottom: 5px;
+	font: var(--LogoSmall);
 `;
 
 export const TopicTitle = styled.div`
@@ -77,12 +78,12 @@ export const LikeCount = styled.div`
 
 export const PostBox = styled.div`
 	background-color: #f9f9f9;
-	border-radius: 10px;
+	border-radius: 40px;
 	padding: 20px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 	position: relative;
 	width: 1170px;
-	height: 400px;
+	height: 443px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

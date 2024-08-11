@@ -4,13 +4,14 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	padding: 20px;
 `;
 
 export const ProfileCircle = styled.div`
 	width: 150px;
 	height: 150px;
-	background-color: #ddd;
+	background-color: #fff;
 	border-radius: 50%;
 	margin-bottom: 20px;
 `;
@@ -19,18 +20,21 @@ export const ProfileNickname = styled.div`
 	font-size: 24px;
 	color: white;
 	margin-bottom: 20px;
+	font:var(--H4);
 `;
 
 export const PostBox = styled.div`
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 40px;
 	padding: 20px;
-	width: 80%;
+	width: 1170px;
+	height:172px;
 	margin-bottom: 10px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 `;
 
 export const PostInfo = styled.div`
@@ -43,15 +47,15 @@ export const PostInfo = styled.div`
 export const PostTitle = styled.div`
 	font-size: 18px;
 	color: black;
-	margin-bottom: 5px;
-	color: var(--H3);
-	height: 110px;
+	font: var(--H3);
+	
 `;
 
 export const PostContent = styled.div`
 	font-size: 14px;
 	color: black;
-	margin-bottom: 10px;
+	margin-top: 10px;
+	font: var(--T4);
 `;
 
 export const LikeContainer = styled.div`

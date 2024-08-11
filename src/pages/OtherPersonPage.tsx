@@ -10,7 +10,7 @@ const OtherPersonPage: React.FC = () => {
 	const [likedPosts, setLikedPosts] = useState<{ [key: string]: boolean }>({});
 
 	useEffect(() => {
-		// 예시 데이터 로드
+		// 예시 데이터 
 		const fetchData = async () => {
 			try {
 				const response = await fetch('/dummyData.json');

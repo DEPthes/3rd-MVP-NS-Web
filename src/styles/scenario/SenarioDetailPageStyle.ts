@@ -11,23 +11,23 @@ export const Container = styled.div`
 
 export const TopicBox = styled.div`
 	background-color: var(--NS-White);
-	border-radius: 20px;
+	border-radius: 40px;
 	padding: 40px 60px;
 	text-align: center;
-	box-shadow: 0 4px 6px var(--NS-Main1);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 	width: 1170px;
-	height: 120px;
+	height: 175px;
 `;
 
 export const TopicHeader = styled.div`
-	font-size: 24px;
 	color: var(--NS-Main1);
+	font: var(--LogoMini);
 `;
 
 export const Topic = styled.div`
-	margin-top: 10px;
 	font-size: 20px;
 	color: var(--NS-Main1);
+	font: var(--N3);
 `;
 
 export const LikeContainer = styled.div`
@@ -46,14 +46,14 @@ export const LikeText = styled.div`
 
 export const NewTopicBox = styled.div`
 	background-color: var(--NS-White);
-	border-radius: 20px;
+	border-radius: 40px;
 	padding: 40px 60px;
 	text-align: center;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	margin-top: 20px;
 	width: 1170px;
-	height: 380px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	height: 443px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+	background-color: var(—NS-Main1);
 `;
 
 export const Input = styled.input`
@@ -66,12 +66,15 @@ export const Input = styled.input`
 	color: var(--NS-Black);
 	text-align: center;
 	box-sizing: border-box;
+	font: var(--H3);
 `;
 
 export const Separator = styled.hr`
 	border: none;
-	border-top: 2px solid var(--NS-Separator);
-	margin: 20px 0;
+	border-top: 2px dashed var(--NS-Main2); /* 색상 및 스타일 적용 */
+	width: 90%; /* 전체 너비 적용 */
+	margin: 7px 0; /* 상하 간격 */
+	margin-left: 40px;
 `;
 
 export const TextArea = styled.textarea`
@@ -82,6 +85,7 @@ export const TextArea = styled.textarea`
 	border: 1px solid var(--NS-White);
 	margin-bottom: 20px;
 	font-size: 14px;
+	font: var(--T3);
 	color: var(--NS-Black);
 	text-align: center;
 	resize: none;

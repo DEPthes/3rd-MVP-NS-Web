@@ -9,14 +9,14 @@ export const Container = styled.div`
 
 export const TopicBox = styled.div`
 	background-color: #f9f9f9;
-	border-radius: 10px;
+	border-radius: 40px;
 	padding: 20px;
 	text-align: center;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 	width: 1170px;
 	margin-bottom: 20px;
-	height: 195px;
-	margin-left: 43px;
+	height: 251px;
+	margin: 0 auto; /* 이 부분을 추가하여 중앙에 배치 */
 `;
 
 export const Header = styled.div`
@@ -25,6 +25,7 @@ export const Header = styled.div`
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 10px;
+	font: var(--LogoSmall);
 `;
 
 export const TopicHeader = styled.div`
@@ -46,6 +47,7 @@ export const InfoContainer = styled.div`
 
 export const PublishDate = styled.div`
 	color: var(--NS-Main2);
+	font:var(--S1-1);
 `;
 
 export const LikeContainer = styled.div`
@@ -63,13 +65,14 @@ export const WriteButton = styled.button`
 	background-color: var(--NS-Main1);
 	color: white;
 	border: none;
-	border-radius: 10px;
+	border-radius: 40px;
 	padding: 10px 20px;
 	margin-top: 20px;
 	cursor: pointer;
 	width: 450px;
 	height: 60px;
 	transition: background-color 0.3s;
+	font: var(--Input);
 
 	&:hover {
 		background-color: var(--NS-Main1-Clicked);
@@ -81,10 +84,11 @@ export const ListHeader = styled.div`
 	justify-content: space-between;
 	width: 1170px;
 	margin-bottom: 20px;
+	margin-top:45px;
 `;
 
 export const ListTitle = styled.div`
-	font-family: var(--H2);
+	font: var(--H2);
 	color: var(--NS-White);
 	font-size: 18px;
 	font-weight: bold;
@@ -94,6 +98,7 @@ export const SortOptions = styled.div`
 	display: flex;
 	gap: 10px;
 	margin-left: auto;
+	font: var(--S1);
 `;
 
 export const SortOption = styled.div`
@@ -114,15 +119,18 @@ export const PostList = styled.div`
 	flex-direction: column;
 	gap: 10px;
 	width: 1170px;
+	height: 172px;
+	
+	margin: 0 auto; /* 이 부분을 추가하여 중앙에 배치 */
 `;
 
 export const PostBox = styled.div`
 	background-color: #f9f9f9;
-	border-radius: 10px;
+	border-radius: 40px;
 	padding: 20px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 	position: relative;
-	height: 127px;
+	height: 172px;
 	width: 1170px;
 `;
 
@@ -139,7 +147,7 @@ export const PostTitle = styled.div`
 `;
 
 export const PostContent = styled.div`
-	font-family: var(--T4);
+	font: var(--T4);
 	color: var(--NS-Black);
 	font-size: 18px;
 	white-space: pre-wrap;

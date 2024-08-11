@@ -12,6 +12,7 @@ export const SearchBar = styled.div`
 	align-items: center;
 	margin-bottom: 20px;
 	max-width: 450px;
+	height:60px;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
@@ -43,12 +44,14 @@ export const Title = styled.div`
 	font-weight: bold;
 	color: var(--NS-White);
 	margin-right: 800px;
+	font:var(--H2);
 `;
 
 export const SortOptions = styled.div`
 	display: flex;
 	gap: 10px;
 	color: var(--NS-White);
+	font: var(--S1);
 `;
 
 export const SortOption = styled.div`
@@ -65,14 +68,14 @@ export const SortOption = styled.div`
 export const TopicBox = styled.div`
 	padding: 20px;
 	background-color: #f9f9f9;
-	border-radius: 10px;
+	border-radius: 40px;
 	margin-bottom: 20px;
 	width: 1170px;
-	height: 115px;
+	height: 151px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	margin-left: auto; 
 	margin-right: auto;
@@ -87,6 +90,7 @@ export const TopicTitle = styled.div`
 export const TopicDate = styled.div`
 	font-size: 14px;
 	color: #888;
+	margin-top: 8px;
 `;
 
 export const LikeContainer = styled.div`
@@ -104,6 +108,7 @@ export const LikeCount = styled.div`
 
 export const PostCount = styled.div`
 	font-size: 14px;
-	color: #888;
+	color: var(--NS-Black);
 	margin-top: 10px;
+	font:var(--T4);
 `;
