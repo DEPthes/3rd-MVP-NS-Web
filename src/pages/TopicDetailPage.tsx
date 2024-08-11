@@ -5,6 +5,8 @@ import * as S from '@/styles/scenario/TopicDetailPageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
 import { TPost, TTopic } from '@/types';
+import Main5Heart from '@assets/icons/Main5Heart.svg?react';
+import Main5HeartFill from '@assets/icons/Main5HeartFill.svg?react';
 
 const TopicDetailPage: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -74,7 +76,7 @@ const TopicDetailPage: React.FC = () => {
 				<S.InfoContainer>
 					<S.PublishDate>발행일: {new Date(topic.publishDate).toLocaleDateString()} | </S.PublishDate>
 					<S.LikeContainer onClick={handleTopicLikeClick}>
-						<img src={isLiked ? BlueHeartFill : BlueHeart} alt="Like" />
+						{isLiked ? <Main5HeartFill title="Liked" /> : <Main5Heart title="Like" />}
 						<S.LikeCount>{isLiked ? topic.likes + 1 : topic.likes}</S.LikeCount>
 					</S.LikeContainer>
 				</S.InfoContainer>
