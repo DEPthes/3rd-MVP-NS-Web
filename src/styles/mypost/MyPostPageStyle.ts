@@ -13,14 +13,12 @@ export const Content = styled.div`
   flex-direction: column;
   width: 1170px;
   align-items: center;
-  margin-bottom: 10rem;
 `;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
   width: 100%;
 `;
 
@@ -30,10 +28,12 @@ export const Title = styled.h2`
 `;
 
 export const CheckboxContainer = styled.div`
+  height: 24px;
+  margin-top: 11px;
   color: var(--NS-White);
   display: flex;
   align-items: center;
-  margin-left: auto;
+  margin-right: 34px;
   font: var(--S1-3);
 `;
 

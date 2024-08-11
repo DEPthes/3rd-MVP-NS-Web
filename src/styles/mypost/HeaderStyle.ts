@@ -4,22 +4,22 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 1159px;
   height: 35px;
-  margin-right: auto;
-  margin-bottom: 20px;
+  margin: 53px 5px 20px 6px;
 `;
 
 export const Title = styled.h2`
   font: var(--H2);
   color: var(--NS-White);
   margin-right: auto;
+  margin-bottom: 13px;
 `;
 
 export const FilterLinks = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 34px;
+  margin: 14px 0 2px 0px;
   font: var(--S1-2);
 
   span {

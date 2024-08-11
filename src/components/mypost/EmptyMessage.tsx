@@ -32,5 +32,3 @@ const EmptyMessage: React.FC<EmptyMessageProps> = ({
 };
 
 export default EmptyMessage;
-
-// 스타일 컴포넌트 정의

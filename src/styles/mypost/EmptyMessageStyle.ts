@@ -30,7 +30,7 @@ export const Message = styled.h2`
 `;
 
 export const ButtonContainer = styled.div`
-  width: 506px;
+  width: 450px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -39,13 +39,14 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 450px;
-  height: 60px;
+  width: 100%;
+  height: 100%;
+  padding: 0;
   border-radius: 40px;
   border: none;
   font: var(--T2-2);
   color: var(--NS-White);
   background-color: var(--NS-Main1);
   cursor: pointer;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 14px rgba(63, 80, 184, 0.5);
 `;

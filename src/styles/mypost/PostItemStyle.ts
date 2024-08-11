@@ -8,7 +8,7 @@ export const Post = styled.div`
   background-color: var(--NS-White);
   margin-bottom: 20px;
   border-radius: 35px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   width: 1170px;
   height: 151px;
 `;
@@ -19,7 +19,6 @@ export const TextField = styled.div`
   display: flex;
   margin-left: 46px;
   flex-direction: column;
-  align-items: flex;
   justify-content: center;
 `;
 
@@ -29,6 +28,7 @@ export const PostTopic = styled.h3`
 `;
 
 export const PostDate = styled.p<{ isTemporary: boolean }>`
+  margin-top: -5px;
   font: var(--S1-1);
   color: ${({ isTemporary }) => (isTemporary ? '#EE4B4B' : 'var(--Gray1)')};
 `;
@@ -52,7 +52,7 @@ export const LikesContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 46px;
-  margin-right: 46px;
+  margin-right: 50px;
 `;
 
 export const LikeIcon = styled.div<{ liked: boolean }>`
