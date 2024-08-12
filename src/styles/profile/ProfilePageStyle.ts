@@ -23,11 +23,20 @@ export const ProfileSection = styled.div`
   padding-top: 49px;
 `;
 
-export const ProfileImage = styled.img`
+export const ProfileImageContainer = styled.div`
   width: 251px;
-  height: 251px;
+  heigth: 251px;
   margin: 0 99px 17px 100px;
-  border: 1px solid var(--NS-Main2);
+  //border: 1px solid var(--NS-Main2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   display: flex;
   justify-content: center;

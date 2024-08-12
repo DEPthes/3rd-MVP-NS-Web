@@ -51,9 +51,9 @@ const MyLikedPostPage: React.FC = () => {
 
   // 내가 좋아요 누른 글 페이지의 정렬 옵션
   const sortOptions: { label: string; value: SortType }[] = [
-    { label: '최근 관심순', value: 'likedDate' },
-    { label: '게시일 순', value: 'date' },
-    { label: '좋아요 순', value: 'likes' },
+    { label: '좋아요 누른 순', value: 'likedDate' },
+    { label: '좋아요 수', value: 'likes' },
+    { label: '작성일순', value: 'date' },
   ];
 
   return (

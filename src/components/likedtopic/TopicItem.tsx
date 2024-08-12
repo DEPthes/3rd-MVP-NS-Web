@@ -26,8 +26,8 @@ const TopicItem: React.FC<TopicItemProps> = ({
     <S.TopicItemContainer>
       <S.TextField>
         <S.TopicTitle>{topic}</S.TopicTitle>
-        <S.TopicDate>게시일: {publishDate}</S.TopicDate>
-        <S.PostCount>게시글 개수: {postCount}</S.PostCount>
+        <S.TopicDate>발행일: {publishDate}</S.TopicDate>
+        <S.PostCount>게시글 {postCount}개</S.PostCount>
       </S.TextField>
       <S.LikesContainer>
         <S.LikeIcon liked={liked} onClick={handleLikeClick} />

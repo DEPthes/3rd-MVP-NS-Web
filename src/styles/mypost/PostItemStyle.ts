@@ -14,12 +14,9 @@ export const Post = styled.div`
 `;
 
 export const TextField = styled.div`
-  margin-top: 23px;
+  margin-top: 31px;
+  margin-left: 50px;
   margin-bottom: 23px;
-  display: flex;
-  margin-left: 46px;
-  flex-direction: column;
-  justify-content: center;
 `;
 
 export const PostTopic = styled.h3`

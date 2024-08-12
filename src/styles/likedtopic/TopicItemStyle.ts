@@ -15,8 +15,6 @@ export const TextField = styled.div`
   margin-top: 31px;
   margin-left: 50px;
   margin-bottom: 23px;
-  display: flex;
-  flex-direction: column;
 `;
 
 export const TopicTitle = styled.h3`
