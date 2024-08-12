@@ -9,6 +9,7 @@ export const Container = styled.div`
   transition: all 0.3s ease-in-out;
   width: 1170px;
   margin-top: 160px;
+  margin-bottom: 149px;
 
 
 
@@ -157,6 +158,7 @@ export const RankingContainer = styled.div`
   justify-content: center;
   border-radius: 40px;
   padding-top: 60px;
+  padding-bottom: 60px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
 
   ${isMobileOrTablet} {
