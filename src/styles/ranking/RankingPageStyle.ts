@@ -25,12 +25,10 @@ export const Top3Title = styled.h2`
 `;
 
 export const FilterLinks = styled.div`
-  width: 250px;
   heigth: 19px;
   margin-left: auto;
-  z-index: 2;
   color: var(--NS-White);
-  font: var(--T6);
+  font: var(--S1-2);
 `;
 
 export const Top3Container = styled.div`
@@ -72,7 +70,6 @@ export const SearchContainer = styled.div`
 `;
 
 export const FilterLink = styled.a<{ isSelected: boolean }>`
-  margin: 0 10px;
   color: ${({ isSelected }) =>
     isSelected ? 'var(--NS-Main-Clicked)' : 'var(--NS-White)'};
   text-decoration: none;
@@ -83,7 +80,9 @@ export const FilterLink = styled.a<{ isSelected: boolean }>`
   }
 `;
 
-export const Separator = styled.span``;
+export const Separator = styled.span`
+  margin: 12px;
+`;
 
 export const RankingContainer = styled.div`
   width: 100%;
