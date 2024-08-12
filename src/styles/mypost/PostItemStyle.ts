@@ -41,6 +41,8 @@ export const PostTitle = styled.h3`
 
 export const PostLikes = styled.p`
   color: var(--NS-Main1);
+  font: var(--S1);
+  margin-top: 4px;
 `;
 
 export const LikesContainer = styled.div`

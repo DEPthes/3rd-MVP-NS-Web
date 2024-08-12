@@ -52,6 +52,8 @@ export const LikesContainer = styled.div`
 
 export const TopicLikes = styled.p`
   color: var(--NS-Main1);
+  font: var(--S1);
+  margin-top: 4px;
 `;
 
 export const LikeIcon = styled.div<{ liked: boolean }>`
