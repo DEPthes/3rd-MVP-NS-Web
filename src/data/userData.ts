@@ -3,7 +3,7 @@ import { TUser } from '../types/ranking/user';
 export const UserList: TUser[] = [
   {
     userId: 'user123',
-    userNickname: '누적1등',
+    userNickname: '집에가고싶다',
     profileImg: '/src/assets/icons/BlueHeart.svg',
     totalScore: 490,
     dailyScore: 20,

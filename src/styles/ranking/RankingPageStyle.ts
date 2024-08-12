@@ -153,9 +153,10 @@ export const RankingContainer = styled.div`
   width: 100%;
   background-color: var(--NS-White);
   display: flex;
-  align-items: center;
+  flex-deriction: column;
+  justify-content: center;
   border-radius: 40px;
-  padding: 60px 0;
+  padding-top: 60px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
 
   ${isMobileOrTablet} {
@@ -166,24 +167,47 @@ export const RankingContainer = styled.div`
   }
 `;
 
-export const RankingTable = styled.table`
-  width: 100%;
-
-  ${isMobileOrTablet} {
-  }
+export const RankingTable = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
-export const TableHeader = styled.thead`
+export const TableHeader = styled.table`
+  width: 878px;
   font: var(--T2);
   color: var(--NS-Main1);
-  text-align: center;
-`;
-
-export const TableRow = styled.tr``;
-
-export const TableHeaderItem1 = styled.th`
-  width: 25%;
   padding-bottom: 44px;
+`;
+
+export const TableRow = styled.tr`
+  width: 100%;
+`;
+
+export const TableHeaderItem1 = styled.td`
+  width: 35px;
+  text-align: left;
+  padding-right: 343px;
+  padding-left: 20px;
+  ${isMobileOrTablet} {
+    font: var(--T12);
+    padding-bottom: 11px;
+  }
+`;
+
+export const TableHeaderItem2 = styled.td`
+  width: 52px;
+  text-align: center;
+  padding-right: 326px;
+  ${isMobileOrTablet} {
+    font: var(--T12);
+    padding-bottom: 11px;
+  }
+`;
+
+export const TableHeaderItem3 = styled.td`
+  width: 35px;
+  text-align: right;
 
   ${isMobileOrTablet} {
     font: var(--T12);
@@ -191,27 +215,6 @@ export const TableHeaderItem1 = styled.th`
   }
 `;
 
-export const TableHeaderItem2 = styled.th`
-  width: 50%;
-
-  ${isMobileOrTablet} {
-    font: var(--T12);
-    padding-bottom: 11px;
-  }
-`;
-
-export const TableHeaderItem3 = styled.th`
-  width: 25%;
-
-  ${isMobileOrTablet} {
-    font: var(--T12);
-    padding-bottom: 11px;
-  }
-`;
-
-export const TableBody = styled.tbody`
-  width: 33%;
-  ${isMobileOrTablet} {
-    font: var(--T11);
-  }
+export const TableBody = styled.table`
+  width: 919px;
 `;

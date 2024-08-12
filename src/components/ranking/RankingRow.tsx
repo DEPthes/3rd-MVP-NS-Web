@@ -20,9 +20,9 @@ const RankingRow: React.FC<RankingRowProps> = ({ user, rank, sortType }) => {
 
   return (
     <S.TableRow>
-      <S.TableData>{rank}위</S.TableData>
-      <S.TableData>{user.userNickname}</S.TableData>
-      <S.TableData>{score}점</S.TableData>
+      <S.TableData1>{rank}위</S.TableData1>
+      <S.TableData2>{user.userNickname}</S.TableData2>
+      <S.TableData3>{score}점</S.TableData3>
     </S.TableRow>
   );
 };
