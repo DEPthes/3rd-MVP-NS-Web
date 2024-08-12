@@ -20,7 +20,7 @@ export const FilterLinks = styled.div`
   display: flex;
   align-items: center;
   margin: 14px 0 2px 0px;
-  font: var(--S1-2);
+  font: var(--W1);
 
   span {
     margin: 0 12px;
