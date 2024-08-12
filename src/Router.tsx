@@ -13,6 +13,9 @@ import TopicDetailPage from '@/pages/TopicDetailPage';
 import SelectTitleDetail from '@/pages/SelectTitleDetail';
 import OtherPersonPage from '@/pages/OtherPersonPage';
 import SignupPage from './pages/SignupPage';
+import MyPostPage from '@/pages/MyPostPage';
+import MyLikedPostPage from '@/pages/MyLikedPostPage';
+import LikedTopicPage from '@pages/LikedTopicPage';
 
 const Router = () => {
   const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
@@ -42,6 +45,18 @@ const Router = () => {
           <Route path="/senario-detail/:id" element={<SenarioDetailPage />} />\
           <Route path="/scenario-title" element={<ScenarioTitlePage />} />
           <Route path="/topic/:id" element={<TopicDetailPage />} />
+          <Route
+            path="/profile/myposts"
+            element={<ProtectedRoute element={<MyPostPage />} />}
+          />
+          <Route
+            path="/profile/mylikedposts"
+            element={<ProtectedRoute element={<MyLikedPostPage />} />}
+          />
+          <Route
+            path="/profile/likedtopics"
+            element={<ProtectedRoute element={<LikedTopicPage />} />}
+          />
           <Route
             path="/select-title-detail/:id"
             element={<SelectTitleDetail />}

@@ -128,9 +128,8 @@ export const SummaryWrap = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    //수정 예정
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 10px;
     margin-bottom: 20px;
   }
 
@@ -141,8 +140,7 @@ export const SummaryWrap = styled.div`
     transition: all 0.3s ease-in-out;
 
     ${isMobileOrTablet} {
-      //수정 예정
-      height: 150px;
+      height: 196px;
       border-radius: 20px;
     }
   }
@@ -153,7 +151,6 @@ export const SummaryWrap = styled.div`
     transition: all 0.3s ease-in-out;
 
     ${isMobileOrTablet} {
-      //수정 예정
       font: var(--W1);
     }
   }
@@ -222,9 +219,8 @@ export const BestWrap = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    //수정 예정
-    gap: 36px;
-    margin-top: 14px;
+    gap: 10px;
+    margin-top: 20px;
     margin-bottom: 30px;
   }
 `;
