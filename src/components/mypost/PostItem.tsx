@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from '@/styles/mypost/PostItemStyle';
 
 type PostItemProps = {
@@ -18,11 +18,28 @@ const PostItem: React.FC<PostItemProps> = ({
   title,
   likes,
   isTemporary,
-  likedUserId,
+  likedUserId: initialLikedUserId,
   loggedInUserId,
 }) => {
+  // likedUserId와 likes 상태를 useState로 관리
+  const [likedUserId, setLikedUserId] = useState<string[]>(initialLikedUserId);
+  const [likeCount, setLikeCount] = useState<number>(likes);
+
   // 현재 로그인된 사용자가 이 포스트를 좋아요 했는지 여부를 확인
   const liked = likedUserId.includes(loggedInUserId);
+
+  // 좋아요 클릭 핸들러 함수
+  const handleLikeClick = () => {
+    if (liked) {
+      // 이미 좋아요를 눌렀다면 좋아요 취소
+      setLikedUserId(likedUserId.filter(id => id !== loggedInUserId));
+      setLikeCount(likeCount - 1);
+    } else {
+      // 좋아요 추가
+      setLikedUserId([...likedUserId, loggedInUserId]);
+      setLikeCount(likeCount + 1);
+    }
+  };
 
   return (
     <S.Post>
@@ -36,8 +53,8 @@ const PostItem: React.FC<PostItemProps> = ({
       </S.TextField>
       <S.LikesContainer>
         {/* 좋아요 아이콘을 표시. 좋아요 누른 상태면 채워진 하트 */}
-        <S.LikeIcon liked={liked} />
-        <S.PostLikes>{likes}</S.PostLikes>
+        <S.LikeIcon liked={liked} onClick={handleLikeClick} />
+        <S.PostLikes>{likeCount}</S.PostLikes>
       </S.LikesContainer>
     </S.Post>
   );

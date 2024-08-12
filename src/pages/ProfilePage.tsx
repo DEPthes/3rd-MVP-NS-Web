@@ -10,9 +10,8 @@ const ProfilePage: React.FC = () => {
       <S.Content>
         <S.MyPage>마이페이지</S.MyPage>
         <S.ProfileSection>
-          <S.Profile>
-            <S.ProfileImage src="" alt="Profileimage" />
-          </S.Profile>
+          <S.ProfileImage src="" alt="Profileimage" />
+
           <S.Nickname>닉네임</S.Nickname>
           <S.EditOptions>
             <S.EditOption>프로필사진 변경</S.EditOption>

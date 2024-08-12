@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from '@/styles/likedtopic/TopicItemStyle';
 
 type TopicItemProps = {
@@ -14,8 +14,14 @@ const TopicItem: React.FC<TopicItemProps> = ({
   publishDate,
   postCount,
   topicLikes,
-  liked,
+  liked: initialLiked,
 }) => {
+  const [liked, setLiked] = useState(initialLiked);
+
+  const handleLikeClick = () => {
+    setLiked(!liked);
+  };
+
   return (
     <S.TopicItemContainer>
       <S.TextField>
@@ -24,8 +30,8 @@ const TopicItem: React.FC<TopicItemProps> = ({
         <S.PostCount>게시글 개수: {postCount}</S.PostCount>
       </S.TextField>
       <S.LikesContainer>
-        <S.LikeIcon liked={liked} />
-        <S.TopicLikes>{topicLikes}</S.TopicLikes>
+        <S.LikeIcon liked={liked} onClick={handleLikeClick} />
+        <S.TopicLikes>{topicLikes + (liked ? 1 : 0)}</S.TopicLikes>
       </S.LikesContainer>
     </S.TopicItemContainer>
   );

@@ -2,49 +2,32 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 450px;
-  margin-bottom: 62px;
-  align-items: center;
+  margin: 70px 495px 62px 495px;
 `;
 
-export const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+export const MyPage = styled.div`
+  height: 43px;
+  margin: 0 147px 32px 147px;
+  font: var(--H11);
+  color: var(--NS-White);
 `;
+
+export const Content = styled.div``;
 
 export const ProfileSection = styled.div`
-  width: 100%;
   height: 450px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: var(--NS-White);
   border-radius: 40px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   margin-bottom: 32px;
-`;
-
-export const MyPage = styled.div`
-  margin-bottom: 32px;
-  font: var(--H11);
-  color: var(--NS-White);
-  margin-top: 70px;
-`;
-
-export const Profile = styled.div`
-  width: 251px;
-  height: 251px;
-  border: 1px solid var(--NS-Main2);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-top: 49px;
 `;
 
 export const ProfileImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 251px;
+  height: 251px;
+  margin: 0 99px 17px 100px;
+  border: 1px solid var(--NS-Main2);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -53,15 +36,16 @@ export const ProfileImage = styled.img`
 
 export const Nickname = styled.h2`
   font: var(--H4-2);
-  margin: 17px 0 17px 0;
+  margin: 0 184px 17px 183px;
 `;
 
 export const EditOptions = styled.div`
   width: 197px;
   heigth: 29px;
-  gap: 22px;
   font: var(--T10);
+  gap: 22px;
   display: flex;
+  margin: 0 126px 49px 127px;
 `;
 
 export const EditOption = styled.div`
@@ -79,7 +63,6 @@ export const ButtonSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  align-items: center;
   color: var(--NS-White);
 `;
 
