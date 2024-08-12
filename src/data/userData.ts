@@ -28,13 +28,4 @@ export const UserList: TUser[] = [
     weeklyScore: 180,
     monthlyScore: 260,
   },
-  {
-    userId: 'user4',
-    userNickname: 'ㅇㅇ',
-    profileImg: '',
-    totalScore: 200,
-    dailyScore: 10,
-    weeklyScore: 190,
-    monthlyScore: 20,
-  },
 ];

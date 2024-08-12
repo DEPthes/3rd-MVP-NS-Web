@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobileOrTablet } from '@/hooks/Media';
 
 export const SearchContainer = styled.div`
   width: 430px;
@@ -10,6 +11,13 @@ export const SearchContainer = styled.div`
   background-color: #ffffff;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   margin-left: auto;
+
+  ${isMobileOrTablet} {
+    width: 100%;
+    height: 38px;
+    padding: 12.03px;
+    margin-top: 26px;
+  }
 `;
 
 export const SearchInput = styled.input`

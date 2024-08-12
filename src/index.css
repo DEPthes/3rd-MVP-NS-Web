@@ -39,6 +39,7 @@
   --T1-1: 600 36px / normal Pretendard;
   --T2: 600 20px/28px Pretendard;
   --T2-2: 400 20px / normal Pretendard-Medium;
+  --T2-3: 400 20px / normal Pretendard-Bold;
   --T3: 400 22px / normal Pretendard;
   --T3-1: 600 22px/22px Pretendard;
   --T4: 400 20px/28px Pretendard;
@@ -49,6 +50,7 @@
   --S1-2: 400 16px / normal Pretendard-SemiBold;
   --S1-3: 400 16px / normal Pretendard-Bold;
   --S1-4: 400 20px / normal Pretendard-SemiBold;
+  --S1-5: 400 15px / normal Pretendard-SemiBold;
   --Button: 400 16px / normal Pretendard;
   --Input: 500 20px / 22px Pretendard;
   --Label: 500 16px / 15px Pretendard;
@@ -69,6 +71,9 @@
   --W1-B: 600 8.63px / normal Pretendard;
   --Input-B: 500 12px / normal Pretendard;
   --T5-B: 600 8px / normal Pretendard;
+  --T11: 600 13.1px / normal Pretendard;
+  --T12: 600 17.47px / normal Pretendard;
+  --T13: 500 16px / normal Pretendard;
 }
 
 html,
