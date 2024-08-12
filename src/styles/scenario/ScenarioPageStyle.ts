@@ -9,12 +9,12 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  color: white;
+  color: var(--NS-White);
   font: var(--H1);
 `;
 
 export const TitleMini = styled.div`
-  color: white;
+  color: var(--NS-White);
   margin-bottom: 72px;
   font: var(--N2-1);
 `;
@@ -51,7 +51,7 @@ export const ButtonContainer = styled.div`
 
 export const ActionButton = styled.button`
   background-color: var(--NS-Main1);
-  color: white;
+  color: var(--NS-White);
   border: none;
   border-radius: 100px;
   padding: 10px 20px;
@@ -68,7 +68,7 @@ export const ActionButton = styled.button`
 
 export const AnotherButton = styled.button`
   background-color: var(--NS-Main2);
-  color: white;
+  color: var(--NS-White);
   border: none;
   border-radius: 100px;
   padding: 10px 20px;

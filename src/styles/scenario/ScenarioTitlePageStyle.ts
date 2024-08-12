@@ -52,9 +52,10 @@ export const SortOptions = styled.div`
   font: var(--S1);
 `;
 
-export const SortOption = styled.div`
+export const SortOption = styled.div<{ isSelected: boolean }>`
   cursor: pointer;
   font: var(--W1);
+  color: ${({ isSelected }) => (isSelected ? 'var(--NS-Main1)' : 'inherit')};
 
   &:hover {
     color: var(--NS-Main1);

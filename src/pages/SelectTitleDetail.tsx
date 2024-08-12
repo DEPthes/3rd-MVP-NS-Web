@@ -92,9 +92,11 @@ const SelectTitleDetail: React.FC = () => {
 	return (
 		<S.Container>
 			<S.HeaderSection>
-				<S.ProfileCircle onClick={handleProfileClick} />
-				<S.ProfileInfo>
+				<S.ProfileContainer>
+					<S.ProfileCircle onClick={handleProfileClick} />
 					<S.ProfileNickname>{post.author}</S.ProfileNickname>
+				</S.ProfileContainer>
+				<S.ProfileInfo>
 					<S.Header>주제</S.Header>
 					<S.TopicTitle>{topicTitle}</S.TopicTitle>
 					<S.LikeContainer onClick={handleWhiteHeartClick}>
@@ -142,6 +144,7 @@ const SelectTitleDetail: React.FC = () => {
 };
 
 export default SelectTitleDetail;
+
 
 
 

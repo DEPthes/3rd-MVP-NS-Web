@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as S from '@/styles/scenario/TopicDetailPageStyle';
@@ -68,6 +67,7 @@ const TopicDetailPage: React.FC = () => {
 		}
 		return 0;
 	});
+
 	return (
 		<S.Container>
 			<S.TopicBox>
@@ -77,7 +77,7 @@ const TopicDetailPage: React.FC = () => {
 					<S.PublishDate>발행일: {new Date(topic.publishDate).toLocaleDateString()} | </S.PublishDate>
 					<S.LikeContainer onClick={handleTopicLikeClick}>
 						{isLiked ? <Main5HeartFill title="Liked" /> : <Main5Heart title="Like" />}
-						<S.LikeCount>{isLiked ? topic.likes + 1 : topic.likes}</S.LikeCount>
+						<S.TopicLikeCount>{isLiked ? topic.likes + 1 : topic.likes}</S.TopicLikeCount>
 					</S.LikeContainer>
 				</S.InfoContainer>
 				<S.WriteButton onClick={handleWriteClick}>글쓰기</S.WriteButton>
@@ -85,8 +85,12 @@ const TopicDetailPage: React.FC = () => {
 			<S.ListHeader>
 				<S.ListTitle>게시글 목록</S.ListTitle>
 				<S.SortOptions>
-					<S.SortOption onClick={() => handleSort('최신순')}>최신순  |</S.SortOption>
-					<S.SortOption onClick={() => handleSort('좋아요순')}>좋아요순</S.SortOption>
+					<S.SortOption onClick={() => handleSort('최신순')} isSelected={sortType === '최신순'}>
+						최신순  |
+					</S.SortOption>
+					<S.SortOption onClick={() => handleSort('좋아요순')} isSelected={sortType === '좋아요순'}>
+						좋아요순
+					</S.SortOption>
 				</S.SortOptions>
 			</S.ListHeader>
 			<S.PostList>
@@ -96,7 +100,7 @@ const TopicDetailPage: React.FC = () => {
 						<S.PostContent>{post.text}</S.PostContent>
 						<S.LikeButton onClick={() => handleLikeClick(post.id)}>
 							<img src={likedPosts[post.id] ? BlueHeartFill : BlueHeart} alt="Like" />
-							<S.LikeCount>{likedPosts[post.id] ? post.likes + 1 : post.likes}</S.LikeCount>
+							<S.PostLikeCount>{likedPosts[post.id] ? post.likes + 1 : post.likes}</S.PostLikeCount>
 						</S.LikeButton>
 						<S.PostInfo>
 							{post.author} | {new Date(post.date).toLocaleDateString()}
@@ -109,6 +113,8 @@ const TopicDetailPage: React.FC = () => {
 };
 
 export default TopicDetailPage;
+
+
 
 
 

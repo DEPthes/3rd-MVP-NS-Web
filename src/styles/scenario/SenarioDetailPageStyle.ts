@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobile, isMobileOrTablet, isTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
   display: flex;
@@ -15,17 +16,35 @@ export const TopicBox = styled.div`
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   width: 1170px;
   min-height: 160px;
+  ${isMobile}{
+	width:320px;
+	min-height: 92px;
+  }
+  ${isTablet}{
+	width:728px;
+	min-height:200px;
+  }
 `;
 
 export const TopicHeader = styled.div`
   color: var(--NS-Main1);
   font: var(--LogoSmall);
+  ${isMobileOrTablet}{
+	font:var(--Hy1);
+
+  }
+
 `;
 
 export const Topic = styled.div`
   margin-top: 1.8px;
   color: var(--NS-Main1);
   font: var(--T1-1);
+  ${isMobileOrTablet}{
+	margin-top: 4px;
+	font:var(--P-T1);
+
+  }
 `;
 
 export const LikeContainer = styled.div`
@@ -35,11 +54,22 @@ export const LikeContainer = styled.div`
   justify-content: center;
   gap: 5px;
   cursor: pointer;
+  ${isMobile}{
+	margin-top: 6px;
+	align-items: center;
+  justify-content: center;
+  display: flex;
+
+  }
 `;
 
 export const LikeText = styled.div`
   font: var(--S1);
   color: var(--NS-Main5);
+  ${isMobileOrTablet}{
+	font:var(--Hy2);
+
+  }
 `;
 
 export const NewTopicBox = styled.div`
@@ -52,6 +82,14 @@ export const NewTopicBox = styled.div`
   height: 443px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   background-color: var(—NS-Black);
+  ${isMobile}{
+	width:320px;
+	min-height:300px;
+  }
+  ${isTablet}{
+	width:728px;
+	min-height:200px;
+  }
 `;
 
 export const Input = styled.input`
@@ -59,6 +97,10 @@ export const Input = styled.input`
   border: none;
   text-align: center;
   font: var(--H3);
+  ${isMobileOrTablet}{
+	font:var(--P-T1);
+  }
+
 `;
 
 export const Separator = styled.hr`
@@ -76,6 +118,9 @@ export const TextArea = styled.textarea`
   text-align: center;
   resize: none;
   outline: none;
+  ${isMobileOrTablet}{
+	font:var(--P-T2);
+  }
 `;
 
 export const ButtonContainer = styled.div`

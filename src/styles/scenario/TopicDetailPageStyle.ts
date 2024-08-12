@@ -22,7 +22,6 @@ export const TopicBox = styled.div`
 `;
 
 export const Header = styled.div`
-	
 	color: var(--NS-Main1);
 	margin-bottom: 10px;
 	font: var(--LogoSmall);
@@ -56,10 +55,11 @@ export const LikeContainer = styled.div`
 	font:var(--S1-1);
 `;
 
-export const LikeCount = styled.div`
-	margin-left: 5px;
+export const TopicLikeCount = styled.div`
+	margin-left:4px;
+	margin-right: 31px;
 	color: var(--NS-Main2);
-	font: var(--S1);
+	font: var(--S1-1);
 `;
 
 export const WriteButton = styled.button`
@@ -85,14 +85,13 @@ export const ListHeader = styled.div`
 	justify-content: space-between;
 	width: 1170px;
 	margin-bottom: 20px;
-	
 `;
 
 export const ListTitle = styled.div`
 	font: var(--H2);
 	color: var(--NS-White);
-	width:110px;
-	height:22px;
+	width: 110px;
+	height: 22px;
 	margin-top: 59px;
 `;
 
@@ -101,14 +100,14 @@ export const SortOptions = styled.div`
 	gap: 10px;
 	margin-left: auto;
 	font: var(--S1);
-	width:122px;
-	height:19px;
+	width: 122px;
+	height: 19px;
 	margin-top: 59px;
 `;
 
-export const SortOption = styled.div`
+export const SortOption = styled.div<{ isSelected: boolean }>`
 	font: var(--S1);
-	color: var(--NS-White);
+	color: ${({ isSelected }) => (isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)')};
 	cursor: pointer;
 	&:hover {
 		color: var(--NS-Main1);
@@ -129,24 +128,24 @@ export const PostList = styled.div`
 `;
 
 export const PostBox = styled.div`
-	 background-color: var(—NS-White);
-	 background-color: #ffffff;
+	background-color: var(—NS-White);
+	background-color: #ffffff;
 	border-radius: 40px;
 	padding: 20px;
 	box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
 	position: relative;
 	height: 172px;
 	width: 1170px;
-	gap:22px;
+	gap: 22px;
 `;
 
 export const PostTitle = styled.div`
 	font: var(--H3);
-	width:264px;
+	width: 264px;
 	min-height: 33px;
 	margin-bottom: 20px;
-	margin-top: 34px;
-	margin-left:46px;
+	margin-top: 36px;
+	margin-left: 46px;
 	cursor: pointer;
 	&:hover {
 		color: var(--NS-Main1);
@@ -158,9 +157,10 @@ export const PostContent = styled.div`
 	color: var(--NS-Black);
 	white-space: pre-wrap;
 	margin-bottom: 34px;
-	margin-left:46px;
-	width:980px;
-	min-height:56px;
+	margin-top: 13px;
+	margin-left: 46px;
+	width: 980px;
+	min-height: 56px;
 `;
 
 export const LikeButton = styled.div`
@@ -168,14 +168,20 @@ export const LikeButton = styled.div`
 	align-items: center;
 	flex-direction: column;
 	position: absolute;
+	margin-right: 3px;
 	top: 20px;
 	right: 20px;
 	cursor: pointer;
 `;
 
+export const PostLikeCount = styled.div`
+	color: var(--NS-Main1);
+	font: var(--S1);
+`;
+
 export const PostInfo = styled.div`
 	width: 154px;
-	height:28px;
+	height: 28px;
 	color: gray;
 	font : var(--W4);
 	position: absolute;

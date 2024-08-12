@@ -15,38 +15,42 @@ export const HeaderSection = styled.div`
 	position: relative;
 `;
 
+export const ProfileContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center; 
+`;
+
 export const ProfileCircle = styled.div`
-	width: 120px;
-	height: 120px;
-	background-color: #fff;
+	width: 156px;
+	height: 156px;
+	background-color: var(--NS-White);
 	border-radius: 50%;
-	margin-right: 20px;
-	margin-top: -10px;
+	margin-bottom: 10px;
 	cursor: pointer;
 `;
+
 
 export const ProfileInfo = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
 	margin-left: 20px;
 `;
 
 export const ProfileNickname = styled.div`
-	font-size: 14px;
 	color: var(--NS-Black);
-	font:var(--W1);
-	position: absolute;
-	top: 100px;
-	left: 36px;
-	margin-top: 20px;
+	font: var(--W1);
+	width: 100%; /* 너비를 부모 요소에 맞추어 중앙 정렬 유지 */
+	height: 19px;
+	margin-top: 6px;
+	text-align: center; /* 텍스트를 중앙 정렬 */
 `;
 
+
 export const Header = styled.div`
-	font-size: 20px;
-	font-weight: bold;
-	color: white;
-	margin-bottom: 5px;
+	color: var(--NS-White);
+	margin-bottom: 7px;
+	margin-top:48px;
 	font: var(--LogoSmall);
 `;
 
@@ -54,20 +58,27 @@ export const TopicTitle = styled.div`
 	color: var(--NS-White);
 	font: var(--H4-1);
 	margin-top: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 9px;
+	width:608px;
+	min-height:38px;
 `;
 
 export const LikeContainer = styled.div`
 	display: flex;
 	align-items: center;
-	margin-top: 5px;
+	width:126px;
+	height:30px;
 	cursor: pointer;
+	margin-top: 9px;
 `;
 
 export const LikeText = styled.div`
 	font: var(--S1);
 	color: var(--NS-White);
 	margin-left: 5px;
+	margin-top: 14px;
+	width: 126px;
+	height:30px;
 `;
 
 export const LikeCount = styled.div`
@@ -77,31 +88,37 @@ export const LikeCount = styled.div`
 `;
 
 export const PostBox = styled.div`
-	background-color: #f9f9f9;
+	background-color: #ffffff;
 	border-radius: 40px;
 	padding: 20px;
-	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+	background-color: var(--NS-White);
 	position: relative;
 	width: 1170px;
 	height: 443px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: center; /* 수평 중앙 정렬 */
+	text-align: center;
 	margin-top: 20px;
 `;
 
 export const PostTitle = styled.div`
 	font: var(--H3);
-	font-size: 32px;
-	margin-bottom: 20px;
+	width: 264px;
+	min-height: 33px;
+	margin-bottom: 29px;
+	margin-top: 66px;
+	text-align: center;
 `;
 
 export const PostContent = styled.div`
 	font: var(--T4);
 	color: var(--NS-Black);
-	font-size: 18px;
-	white-space: pre-wrap;
-	margin-bottom: 20px;
+	width: 1013px;
+	min-height: 224px;
+	margin-bottom: 91px;
+	text-align: center;
 `;
 
 export const LikeButton = styled.div`
@@ -111,6 +128,9 @@ export const LikeButton = styled.div`
 	bottom: 10px;
 	right: 20px;
 	cursor: pointer;
+	margin-bottom: 19px;
+	height: 30px;
+	margin-right:26px ;
 `;
 
 export const ButtonContainer = styled.div`
@@ -144,5 +164,5 @@ export const DeleteModal = styled.div`
 export const DeleteModalText = styled.p`
 	font-size: 18px;
 	color: black;
-	margin-bottom: 20px;
+	margin-bottom: 20px;/*삭제 모달 창 아직 디자인 구현 안되어서 임시로 만들어 놓았습니다. 추후 수정 예정 */
 `;
