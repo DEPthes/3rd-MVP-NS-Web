@@ -1,11 +1,13 @@
 import BestItem from '@/components/report/BestItem';
 import DateNavigator from '@/components/report/DateNavigator';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 import * as S from '@/styles/report/ReportPageStyle';
 import { TReport } from '@/types/report';
 import { useState } from 'react';
 
 const ReportPage = () => {
   const [reportList, setReportList] = useState<TReport | null>(null);
+  const { isMobileOrTablet } = useNSMediaQuery();
 
   //프로필 클릭 함수
   const onProfileClick = (id: number) => {
@@ -37,7 +39,10 @@ const ReportPage = () => {
       {reportList?.image ? (
         <S.SummaryWrap>
           <img src={reportList.image} alt="" />
-          <h4>사용자가 가장 많이 쓴 단어는 {reportList.word}입니다.</h4>
+          <h4>
+            사용자가 가장 많이 쓴 단어는 <span>{reportList.word}</span>
+            {!isMobileOrTablet && '입니다.'}
+          </h4>
           <h4>
             <span>{reportList.wordLength}</span>번 노출
           </h4>
