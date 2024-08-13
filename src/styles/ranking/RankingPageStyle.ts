@@ -11,20 +11,19 @@ export const Container = styled.div`
   margin-top: 160px;
   margin-bottom: 149px;
 
-
+  ${isMobileOrTablet} {
+    width: 328px;
+    height: 475px;
+  }
 
   ${isMobile} {
     margin-top: 60px;
-    
+    margin-bottom: 190px;
   }
 
   ${isTablet} {
-    margin: 20px 30px;
-    }
-
-  ${isMobileOrTablet} {
-    width: 328px;
-    height; 455px;
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -92,6 +91,7 @@ export const Top1 = styled.div`
     height: 111px;
     margin-top: 0;
     margin-bottom: 34px;
+    max-width: 400px;
   }
 `;
 
@@ -114,7 +114,7 @@ export const Podium = styled.img`
     width: 300%;
     height: 40px;
     margin-top: -16px;
-    margin-bottom: 26px;
+    margin-bottom: 0;
   }
 `;
 
@@ -148,6 +148,7 @@ export const Separator = styled.span`
   margin: 12px;
   ${isMobileOrTablet} {
     margin: 10px;
+  }
 `;
 
 export const RankingContainer = styled.div`
@@ -162,10 +163,11 @@ export const RankingContainer = styled.div`
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
 
   ${isMobileOrTablet} {
-    padding: 28px 29px;
     width: 100%;
     height: 150px;
+    padding: 28px 29px;
     border-radius: 20px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -173,6 +175,11 @@ export const RankingTable = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  ${isMobileOrTablet} {
+    width: 270px;
+    height: 94px;
+  }
 `;
 
 export const TableHeader = styled.table`
@@ -180,6 +187,13 @@ export const TableHeader = styled.table`
   font: var(--T2);
   color: var(--NS-Main1);
   padding-bottom: 44px;
+
+  ${isMobileOrTablet} {
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 11px;
+  }
 `;
 
 export const TableRow = styled.tr`
@@ -192,8 +206,13 @@ export const TableHeaderItem1 = styled.td`
   padding-right: 343px;
   padding-left: 20px;
   ${isMobileOrTablet} {
+    width: 33%;
     font: var(--T12);
-    padding-bottom: 11px;
+
+    height: 19px;
+
+    padding: 0;
+    text-align: left;
   }
 `;
 
@@ -202,8 +221,10 @@ export const TableHeaderItem2 = styled.td`
   text-align: center;
   padding-right: 326px;
   ${isMobileOrTablet} {
+    width: 33%;
     font: var(--T12);
-    padding-bottom: 11px;
+    height: 19px;
+    padding: 0;
   }
 `;
 
@@ -212,11 +233,17 @@ export const TableHeaderItem3 = styled.td`
   text-align: right;
 
   ${isMobileOrTablet} {
+    width: 33%;
     font: var(--T12);
-    padding-bottom: 11px;
+    height: 19px;
+    padding: 0;
   }
 `;
 
 export const TableBody = styled.table`
   width: 919px;
+  ${isMobileOrTablet} {
+    width: 270px;
+    padding-bottom: 18px;
+
 `;

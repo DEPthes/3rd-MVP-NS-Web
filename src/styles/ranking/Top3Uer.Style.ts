@@ -10,6 +10,7 @@ export const Top3UserContainer = styled.div`
   ${isMobileOrTablet} {
     width: 64px;
     height: 111px;
+    max-with: 500px;
   }
 `;
 
@@ -62,5 +63,8 @@ export const UserId = styled.div`
     margin-top: 4px;
     height: 19px;
     font: var(--T13);
+    position: relative;
+    width: auto;
+    white-space: nowrap;
   }
 `;

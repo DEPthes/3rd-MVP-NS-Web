@@ -15,6 +15,8 @@ export const TableData1 = styled.td`
 
   ${isMobileOrTablet} {
     font: var(--T11);
+    padding-bottom: 11px;
+    height: 14px;
   }
 `;
 
@@ -26,6 +28,8 @@ export const TableData2 = styled.td`
 
   ${isMobileOrTablet} {
     font: var(--T11);
+    height: 14px;
+    padding-bottom: 11px;
   }
 `;
 export const TableData3 = styled.td`
@@ -36,5 +40,7 @@ export const TableData3 = styled.td`
 
   ${isMobileOrTablet} {
     font: var(--T11);
+    padding-bottom: 11px;
+    height: 14px;
   }
 `;
