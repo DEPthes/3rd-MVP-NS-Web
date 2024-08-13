@@ -27,10 +27,10 @@ export const SearchInput = styled.input`
   outline: none;
   flex: 1;
   color: var(--NS-Black);
-  font: var(--T2-2);
+  font: var(--P-S1);
 
   &::placeholder {
-    font: var(--T2-2);
+    font: var(--P-S1);
     color: var(--Gray1);
   }
 `;

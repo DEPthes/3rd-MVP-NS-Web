@@ -6,6 +6,7 @@ import { TUser, SortType } from '../types/ranking/user';
 import { UserList } from '../data/userData';
 import SortableUserList from '../components/ranking/SortableUserList';
 import RankingRow from '../components/ranking/RankingRow';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 const RankingPage: React.FC = () => {
   const [filteredUsers, setFilteredUsers] = useState<TUser[]>(UserList);
@@ -15,6 +16,7 @@ const RankingPage: React.FC = () => {
   const handleSearchResults = (results: TUser[]) => {
     setFilteredUsers(results); // 검색 결과를 상태에 저장하는 함수
   };
+  const { isDesktop, isMobileOrTablet } = useNSMediaQuery();
 
   return (
     <S.Container>
@@ -76,7 +78,12 @@ const RankingPage: React.FC = () => {
             />
           </S.Top2>
         </S.Top3UserProfile>
-        <S.Podium src="/src/assets/images/podium.svg" alt="podiumimg" />
+        {isDesktop && (
+          <S.Podium src="/src/assets/images/podium.svg" alt="podiumimg" />
+        )}
+        {isMobileOrTablet && (
+          <S.Podium src="/src/assets/images/smallpodium.svg" />
+        )}
       </S.Top3Container>
       <S.SearchContainer>
         <SearchNicknameInput
