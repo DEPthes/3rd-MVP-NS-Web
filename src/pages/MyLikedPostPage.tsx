@@ -58,35 +58,33 @@ const MyLikedPostPage: React.FC = () => {
 
   return (
     <S.Container>
-      <S.Content>
-        <SearchInput<LikedPostWithDetails>
-          items={likedPosts}
-          onSearchResults={setFilteredLikedPosts}
-          filterFunction={filterFunction}
-        />
-        <Header
-          title="내가 좋아요 누른 글 목록"
-          sortType={sortType}
-          setSortType={setSortType}
-          sortOptions={sortOptions}
-        />
-        <S.EmptyState>
-          {likedPosts.length === 0 ? (
-            <EmptyMessage
-              buttonText="N력 키우러 가기"
-              messageText={`당신처럼 N력이 뛰어난 사람들이 있어요!\n무궁무진한 N들의 글을 열람해보세요!`}
-              navigateTo="/scenario"
-            />
-          ) : filteredLikedPosts.length > 0 ? (
-            <SortablePostList
-              posts={filteredLikedPosts}
-              sortType={sortType}
-              loggedInUserId={loggedInUserId}
-              topics={dataList}
-            />
-          ) : null}
-        </S.EmptyState>
-      </S.Content>
+      <SearchInput<LikedPostWithDetails>
+        items={likedPosts}
+        onSearchResults={setFilteredLikedPosts}
+        filterFunction={filterFunction}
+      />
+      <Header
+        title="내가 좋아요 누른 글 목록"
+        sortType={sortType}
+        setSortType={setSortType}
+        sortOptions={sortOptions}
+      />
+      <S.EmptyState>
+        {likedPosts.length === 0 ? (
+          <EmptyMessage
+            buttonText="N력 키우러 가기"
+            messageText={`당신처럼 N력이 뛰어난 사람들이 있어요!\n무궁무진한 N들의 글을 열람해보세요!`}
+            navigateTo="/scenario"
+          />
+        ) : filteredLikedPosts.length > 0 ? (
+          <SortablePostList
+            posts={filteredLikedPosts}
+            sortType={sortType}
+            loggedInUserId={loggedInUserId}
+            topics={dataList}
+          />
+        ) : null}
+      </S.EmptyState>
     </S.Container>
   );
 };

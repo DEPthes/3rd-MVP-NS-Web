@@ -38,34 +38,32 @@ const LikedTopicPage: React.FC = () => {
 
   return (
     <S.Container>
-      <S.Content>
-        <SearchInput
-          items={topics}
-          onSearchResults={setFilteredTopics}
-          filterFunction={filterFunction}
-        />
-        <Header
-          title="좋아요 누른 주제 목록"
-          sortType={sortType}
-          setSortType={setSortType}
-          sortOptions={sortOptions}
-        />
-        <S.EmptyState>
-          {topics.length === 0 ? (
-            <EmptyMessage
-              buttonText="주제 보러 가기"
-              messageText={`N력을 한껏 키워 줄 주제들이 당신을 기다리고 있어요`}
-              navigateTo="/scenario"
-            />
-          ) : filteredTopics.length > 0 ? (
-            <SortableTopicList
-              topics={filteredTopics}
-              sortType={sortType}
-              loggedInUserId={loggedInUserId}
-            />
-          ) : null}
-        </S.EmptyState>
-      </S.Content>
+      <SearchInput
+        items={topics}
+        onSearchResults={setFilteredTopics}
+        filterFunction={filterFunction}
+      />
+      <Header
+        title="좋아요 누른 주제 목록"
+        sortType={sortType}
+        setSortType={setSortType}
+        sortOptions={sortOptions}
+      />
+      <S.EmptyState>
+        {topics.length === 0 ? (
+          <EmptyMessage
+            buttonText="주제 보러 가기"
+            messageText={`N력을 한껏 키워 줄 주제들이 당신을 기다리고 있어요`}
+            navigateTo="/scenario"
+          />
+        ) : filteredTopics.length > 0 ? (
+          <SortableTopicList
+            topics={filteredTopics}
+            sortType={sortType}
+            loggedInUserId={loggedInUserId}
+          />
+        ) : null}
+      </S.EmptyState>
     </S.Container>
   );
 };

@@ -47,46 +47,44 @@ const MyPostsPage: React.FC = () => {
 
   return (
     <S.Container>
-      <S.Content>
-        <SearchInput<TPost>
-          items={postList}
-          onSearchResults={setFilteredPostList}
-          filterFunction={filterFunction}
-        />
-        <Header
-          title="내가 쓴 글 목록"
-          sortType={sortType}
-          setSortType={setSortType}
-          sortOptions={sortOptions}
-          checkbox={
-            <S.CheckboxContainer>
-              <S.CustomCheckbox
-                type="checkbox"
-                id="excludeTemp"
-                checked={excludeTemporary}
-                onChange={() => setExcludeTemporary(!excludeTemporary)}
-              />
-              <label htmlFor="excludeTemp">임시 저장된 글 제외</label>
-            </S.CheckboxContainer>
-          }
-        />
-        <S.EmptyState>
-          {postList.length === 0 ? (
-            <EmptyMessage
-              buttonText="N력 키우러 가기"
-              messageText={`당신의 N력이 궁금하시지 않나요?\n나였다면으로 N력 키우기를 시작해보세요!`}
-              navigateTo="/scenario"
+      <SearchInput<TPost>
+        items={postList}
+        onSearchResults={setFilteredPostList}
+        filterFunction={filterFunction}
+      />
+      <Header
+        title="내가 쓴 글 목록"
+        sortType={sortType}
+        setSortType={setSortType}
+        sortOptions={sortOptions}
+        checkbox={
+          <S.CheckboxContainer>
+            <S.CustomCheckbox
+              type="checkbox"
+              id="excludeTemp"
+              checked={excludeTemporary}
+              onChange={() => setExcludeTemporary(!excludeTemporary)}
             />
-          ) : filteredPostList.length > 0 ? (
-            <SortablePostList
-              posts={filteredPostList}
-              sortType={sortType}
-              loggedInUserId={loggedInUserId}
-              topics={dataList}
-            />
-          ) : null}
-        </S.EmptyState>
-      </S.Content>
+            <label htmlFor="excludeTemp">임시 저장된 글 제외</label>
+          </S.CheckboxContainer>
+        }
+      />
+      <S.EmptyState>
+        {postList.length === 0 ? (
+          <EmptyMessage
+            buttonText="N력 키우러 가기"
+            messageText={`당신의 N력이 궁금하시지 않나요?\n나였다면으로 N력 키우기를 시작해보세요!`}
+            navigateTo="/scenario"
+          />
+        ) : filteredPostList.length > 0 ? (
+          <SortablePostList
+            posts={filteredPostList}
+            sortType={sortType}
+            loggedInUserId={loggedInUserId}
+            topics={dataList}
+          />
+        ) : null}
+      </S.EmptyState>
     </S.Container>
   );
 };

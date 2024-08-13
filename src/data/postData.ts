@@ -98,7 +98,7 @@ export const dataList: TTopic[] = [
   },
   {
     topicId: 3,
-    topic: '어느 날 10초 이후 일어날 일이 내 머릿속에 보이기 시작했다.',
+    topic: '10초 이후 일어날 일이 내 머릿속에 보이기 시작했다.',
     publishDate: '2024-02-15',
     topicLikes: 1,
     topicLikedUserId: ['user456'],
