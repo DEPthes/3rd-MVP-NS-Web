@@ -51,9 +51,9 @@ export const Header = styled.div`
   align-items: center;
   margin-bottom: 22px;
   ${isMobileOrTablet} {
-    flex-direction: column; /* 모바일/태블릿에서는 수직 정렬 */
-    align-items: flex-start; /* 타이틀을 왼쪽 정렬 */
-    margin-bottom: 0; /* 헤더 자체의 margin-bottom을 없앰 */
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-bottom: 0; 
   }
 `;
 
@@ -72,7 +72,7 @@ export const SortOptions = styled.div`
   color: var(--NS-White);
   font: var(--S1);
   ${isMobileOrTablet} {
-    align-self: flex-end; /* 모바일/태블릿에서 오른쪽 정렬 */
+    align-self: flex-end;/*오른쪽 정렬시켰다*/ 
     margin-bottom: 10px;
   }
 `;
@@ -152,11 +152,11 @@ export const LikeContainer = styled.div`
   cursor: pointer;
 
   svg {
-    width: 35px;  /* 기본 크기 */
+    width: 35px; 
     height: 35px;
 
     ${isMobileOrTablet} {
-      width: 14px;  /* 모바일 및 테블릿에서 크기 줄이기 */
+      width: 14px; 
       height: 14px;
     }
   }
@@ -168,7 +168,7 @@ export const LikeCount = styled.div`
 
   ${isMobileOrTablet} {
     font: var(--T5-B);
-    margin-top: 4px;  /* 하트와의 간격을 조정 */
+    margin-top: 4px; 
   }
 `;
 

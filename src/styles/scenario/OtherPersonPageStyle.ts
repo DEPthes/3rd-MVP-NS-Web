@@ -54,17 +54,17 @@ export const PostBox = styled.div`
 	box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
 	${isMobile}{
 		width: 328px;
-		height: auto; /* 높이를 자동으로 조정하여 텍스트가 잘리지 않도록 설정 */
+		height: auto; 
 		border-radius: 20px;
 		margin-bottom: 12px;
-		padding: 10px; /* 모바일에서의 여백을 줄이기 위해 패딩을 조정 */
+		padding: 10px; 
 	}
 	${isTablet}{
 		width: 728px;
-		height: auto; /* 높이를 자동으로 조정하여 텍스트가 잘리지 않도록 설정 */
+		height: auto;
 		border-radius: 20px;
 		margin-bottom: 12px;
-		padding: 15px; /* 테블릿에서의 여백을 줄이기 위해 패딩을 조정 */
+		padding: 15px; 
 	}
 `;
 
@@ -72,7 +72,7 @@ export const PostInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	width: 100%; /* 부모 박스의 너비에 맞추기 */
+	width: 100%; 
 	overflow: ellipsis;
 	margin-left: 20px;
 	${isMobileOrTablet}{
@@ -106,7 +106,7 @@ export const PostContent = styled.div`
 		color: var(--Gray2);
 		margin-top: 5px;
 		margin-left: 0;
-		overflow-wrap: break-word; /* 긴 단어가 박스를 넘어가지 않도록 줄바꿈 처리 */
+		overflow-wrap: break-word; 
 	}
 `;
 
@@ -116,22 +116,22 @@ export const LikeContainer = styled.div`
 	cursor: pointer;
 	color: var(--NS-Main1);
 	font: var(--S1-1);
-	flex-direction: column; /* 하트와 LikeCount를 수직으로 정렬 */
+	flex-direction: column; 
 	margin-right: 20px;
 	width: 50px;
 	img {
-		width: 35px;  /* 기본 크기 */
+		width: 35px;
 		height: 35px;
 
 		${isMobileOrTablet} {
-			width: 14px;  /* 모바일과 테블릿에서 크기 줄이기 */
+			width: 14px;  
 			height: 14px;
 		}
 	}
 `;
 
 export const LikeCount = styled.div`
-	margin-top: 5px; /* 하트와의 간격을 조정 */
+	margin-top: 5px; 
 	color: var(--NS-Main1);
 	font: var(--S1);
 	${isMobileOrTablet}{

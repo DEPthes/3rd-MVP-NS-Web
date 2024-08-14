@@ -209,8 +209,8 @@ export const PostList = styled.div`
 	margin: 0 auto;
 
 	${isMobileOrTablet} {
-		align-items: center; /* 모바일과 테블릿에서 중앙에 배치 */
-		width: 100%; /* 전체 너비 사용 */
+		align-items: center; 
+		width: 100%; 
 	}
 `;
 
@@ -253,9 +253,9 @@ export const PostTitle = styled.div`
 	${isMobileOrTablet} {
 		font: var(--P-S1);
 		margin-left: 20px;
-		margin-top: -3px; /* 위쪽 마진 줄이기 */
-		margin-bottom: 10px; /* 아래쪽 마진 줄이기 */
-		width: 100%; /* 박스 내부 너비 맞추기 */
+		margin-top: -3px;
+		margin-bottom: 10px; 
+		width: 100%; 
 	}
 `;
 

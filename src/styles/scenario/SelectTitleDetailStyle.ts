@@ -16,9 +16,9 @@ export const HeaderSection = styled.div`
 	position: relative;
 
 	${isMobileOrTablet} {
-		flex-direction: column; /* 모바일 및 테블릿에서 수직 정렬 */
+		flex-direction: column;
 		align-items: center;
-		width: 320px; /* 모바일 및 테블릿에서 너비 조정 */
+		width: 320px;
 	}
 `;
 
@@ -37,7 +37,7 @@ export const ProfileCircle = styled.div`
 	cursor: pointer;
 
 	${isMobileOrTablet} {
-		width: 100px; /* 모바일 및 테블릿에서 크기 줄이기 */
+		width: 100px; 
 		height: 100px;
 	}
 `;
@@ -66,7 +66,7 @@ export const ProfileInfo = styled.div`
 	margin-left: 20px;
 
 	${isMobileOrTablet} {
-		margin-left: 0; /* 모바일 및 테블릿에서 중앙 정렬 */
+		margin-left: 0; 
 		text-align: center;
 		align-items: center;
 
@@ -86,14 +86,14 @@ export const ProfileInfo = styled.div`
 
 export const Header = styled.div`
 	color: var(--NS-White);
-	margin-bottom: 5px;  /* 아래 여백 줄이기 */
-	margin-top: 40px;  /* 위 여백 줄이기 */
+	margin-bottom: 5px; 
+	margin-top: 40px;  
 	font: var(--LogoSmall);
 
 	${isMobileOrTablet} {
 		color: var(--NS-Main1);
-		margin-top: 16px;  /* 모바일에서 위 여백 줄이기 */
-		margin-bottom: 4px;  /* 모바일에서 아래 여백 줄이기 */
+		margin-top: 16px; 
+		margin-bottom: 4px; 
 		font: var(--Hy1);
 		text-align: center;
 		width: 100%;
@@ -127,7 +127,7 @@ export const LikeContainer = styled.div`
 	width: 126px;
 	height: 30px;
 	cursor: pointer;
-	margin-top: 7px;  /* 위 여백 줄이기 */
+	margin-top: 7px;
 
 	svg {
 		width: 30px;
@@ -139,7 +139,7 @@ export const LikeContainer = styled.div`
 		}
 	}
 	${isMobileOrTablet} {
-		margin-top: -20px;  /* 모바일에서 위 여백 줄이기 */
+		margin-top: -20px; 
 	}
 `;
 export const LikeText = styled.div`
@@ -174,7 +174,7 @@ export const PostBox = styled.div`
 	margin-top: 20px;
 
 	${isMobileOrTablet} {
-		width: 320px; /* 모바일 및 테블릿에서 크기 조정 */
+		width: 320px; 
 		height: 148px;
 		padding: 21px;
 		border-radius: 20px;
@@ -191,7 +191,7 @@ export const PostTitle = styled.div`
 	text-align: center;
 
 	${isMobileOrTablet} {
-		width: 100%; /* 모바일 및 테블릿에서 너비 조정 */
+		width: 100%; 
 		margin-top: 10px;
 		margin-bottom: 10px;
 		font:var(--W1);
@@ -217,7 +217,7 @@ export const PostContent = styled.div`
 export const LikeButton = styled.div`
 	display: flex;
 	align-items: center;
-	position: absolute; /* 노트북 버전에서는 절대 위치 유지 */
+	position: absolute; 
 	bottom: 10px;
 	right: 20px;
 	cursor: pointer;
@@ -226,10 +226,10 @@ export const LikeButton = styled.div`
 	margin-right: 26px;
 
 	${isMobileOrTablet} {
-		position: static; /* 모바일과 태블릿에서 절대 위치 제거 */
+		position: static; 
 		margin-bottom: 20;
 		margin-top: -11px; /* 피그처럼 11로하면 박스를 벗어남..? */
-		justify-content: center; /* 가로 중앙 정렬 */
+		justify-content: center; 
 		width: 43px;
 		height: 16px;
 		margin-right: 117.5px;
@@ -237,11 +237,11 @@ export const LikeButton = styled.div`
 	}
 
 	img {
-		width: 30px;  /* 기본 크기 (노트북) */
+		width: 30px;  
 		height: 30px;
 
 		${isMobileOrTablet} {
-			width: 16px;  /* 모바일 및 태블릿에서 크기 줄이기 */
+			width: 16px;  
 			height: 16px;
 		}
 	}
