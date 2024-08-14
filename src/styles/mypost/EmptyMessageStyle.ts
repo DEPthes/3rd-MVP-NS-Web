@@ -43,7 +43,7 @@ export const Image = styled.div`
 `;
 
 export const Message = styled.h2`
-  max-width: 492px;
+  width: auto;
   margin-left: 29px;
   font: var(--T2);
   color: var(--NS-White);

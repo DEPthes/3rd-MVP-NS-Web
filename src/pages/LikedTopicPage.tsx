@@ -12,7 +12,7 @@ const LikedTopicPage: React.FC = () => {
   const [topics, setTopics] = useState<TTopic[]>(dataList); // 주제 목록
   const [filteredTopics, setFilteredTopics] = useState<TTopic[]>(dataList); // 필터링된 주제 목록
   const [sortType, setSortType] = useState<SortType>('likedDate'); // 정렬 타입 상태, 기본이 좋아요 누른 날짜순
-  const loggedInUserId = 'user123';
+  const loggedInUserId = 'user13';
 
   useEffect(() => {
     // 사용자가 좋아요 누른 주제 필터링
@@ -57,7 +57,7 @@ const LikedTopicPage: React.FC = () => {
           <EmptyMessage
             buttonText="주제 보러 가기"
             messageText={`N력을 한껏 키워 줄 주제들이 당신을 기다리고 있어요`}
-            navigateTo="/scenario"
+            navigateTo="/senario-detail"
           />
         ) : filteredTopics.length > 0 ? (
           <SortableTopicList

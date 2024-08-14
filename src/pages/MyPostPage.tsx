@@ -13,7 +13,7 @@ const MyPostsPage: React.FC = () => {
   const [filteredPostList, setFilteredPostList] = useState<TPost[]>([]); // 필터링 된 글 목록 상태 정의
   const [sortType, setSortType] = useState<SortType>('date'); // 정렬 타입 상태 정의, 기본이 최신(작성)순
   const [excludeTemporary, setExcludeTemporary] = useState<boolean>(false); // 임시 저장 글 제외 여부 상태 정의(default는 해제)
-  const loggedInUserId = 'user123'; // 현재 로그인된 아이디
+  const loggedInUserId = 'user13'; // 현재 로그인된 아이디
 
   // 글 목록 데이터 상태 설정
   useEffect(() => {
@@ -46,7 +46,7 @@ const MyPostsPage: React.FC = () => {
     { label: '좋아요순', value: 'likes' },
   ];
 
-  const { isMobileOrTablet } = useNSMediaQuery();
+  const { isMobileOrTablet, isMobile } = useNSMediaQuery();
 
   return (
     <S.Container>
@@ -76,7 +76,11 @@ const MyPostsPage: React.FC = () => {
         {postList.length === 0 ? (
           <EmptyMessage
             buttonText="N력 키우러 가기"
-            messageText={`당신의 N력이 궁금하시지 않나요?\n나였다면으로 N력 키우기를 시작해보세요!`}
+            messageText={
+              isMobile
+                ? `나였다면으로 N력을 키워보세요!`
+                : `당신의 N력이 궁금하시지 않나요?\n나였다면으로 N력 키우기를 시작해보세요!`
+            }
             navigateTo="/scenario"
           />
         ) : filteredPostList.length > 0 ? (

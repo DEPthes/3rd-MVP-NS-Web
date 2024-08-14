@@ -75,9 +75,9 @@ const MyLikedPostPage: React.FC = () => {
       <S.EmptyState>
         {likedPosts.length === 0 ? (
           <EmptyMessage
-            buttonText="N력 키우러 가기"
+            buttonText="주제 보러 가기"
             messageText={`당신처럼 N력이 뛰어난 사람들이 있어요!\n무궁무진한 N들의 글을 열람해보세요!`}
-            navigateTo="/scenario"
+            navigateTo="/scenario-title"
           />
         ) : filteredLikedPosts.length > 0 ? (
           <SortablePostList
