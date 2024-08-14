@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/profile/ProfilePageStyle';
+import { getUser } from '@/apis/user/getUser';
+import { TUserData } from '@/types/profile/TUserData';
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState<TUserData | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const data = await getUser();
+      if (data?.check) {
+        setUserData(data);
+      } else {
+        navigate('/login'); // 인증되지 않은 경우 로그인 페이지로 이동
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <S.Container>
@@ -13,12 +33,11 @@ const ProfilePage: React.FC = () => {
       <S.ProfileSection>
         <S.ProfileImageContainer>
           <S.ProfileImage
-            src="src/assets/images/기본 프로필.svg"
+            src={userData.information.imageUrl}
             alt="Profileimage"
           />
         </S.ProfileImageContainer>
-
-        <S.Nickname>닉네임</S.Nickname>
+        <S.Nickname>{userData.information.nickname}</S.Nickname>
         <S.EditOptions>
           <S.EditOption>프로필사진 변경</S.EditOption>
           <S.EditOption>닉네임 수정</S.EditOption>
