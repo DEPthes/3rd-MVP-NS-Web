@@ -1,71 +1,76 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font: var(--T2);
+  align-items: center;
+  margin-top: 136px;
 `;
 
 export const Content = styled.div`
-  padding-top: 80px; /* Adjust this if there is a fixed header height */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 `;
 
-export const Section = styled.div`
-  margin: 5rem 0 50rem 0;
-`;
-
 export const Service = styled.div`
-  width: 11.3rem;
-  height: 2.3rem;
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: #ffffff;
+  width: 187px;
+  height: 43px;
+  color: var(--NS-White);
   background-color: #5e72eb;
-  padding: 0.1rem 0.5rem;
   display: flex;
-  cursor: pointer;
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.4);
   justify-content: center;
   align-items: center;
+  font: var(--H2-3);
+`;
+
+export const Introduction = styled.div`
+  width: 152px;
+  height: 43px;
+  color: var(--NS-White);
+  font: var(--H2-3);
+  background-color: #5e72eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 107.91px 0 65px;
 `;
 
 export const Usage = styled.div`
-  width: 6rem;
-  height: 2.3rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffffff;
+  width: 202px;
+  height: 43px;
+  font: var(--H2-3);
   background-color: #5e72eb;
-  padding: 0.02rem 0.05rem;
+  color: var(--NS-White);
   display: flex;
-  cursor: pointer;
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.4);
   justify-content: center;
   align-items: center;
+  margin: 134px 0 65px;
+`;
+
+export const Text = styled.p`
+  font: var(--H2);
+  margin: 40px 0 251px;
 `;
 
 export const Footer = styled.div`
-  margin: 10rem 0;
   justify-content: center;
   align-items: center;
   display: flex;
+  width: 592.5px;
+  margin-bottom: 82px;
 `;
 
 export const StyledButton = styled.button`
-  width: 6.37rem;
-  height: 2.75rem;
+  width: 102px;
+  height: 44px;
+  font: var(--T2);
   background-color: #ffffff;
   color: #5e72eb;
   border: 3px solid #5e72eb;
   border-radius: 20px;
-  padding: 10px 20px;
+
   margin: 10px 28px 10px 28px;
-  font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
 `;
