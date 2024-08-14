@@ -6,6 +6,7 @@ import SortablePostList from '../components/mypost/SortablePostList';
 import SearchInput from '../components/mypost/SearchInput';
 import Header from '../components/mypost/Header';
 import * as S from '@styles/mypost/MyPostPageStyle';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 type LikedPostWithDetails = TPost & {
   likedDate: string[];
@@ -20,7 +21,7 @@ const MyLikedPostPage: React.FC = () => {
   >([]);
   // 필터링된 좋아요 누른 글
   const [sortType, setSortType] = useState<SortType>('likedDate'); // 최근 관심순이 기본 정렬
-  const loggedInUserId = 'user123';
+  const loggedInUserId = 'user13';
 
   useEffect(() => {
     const likedPostsWithDetails: LikedPostWithDetails[] = dataList
@@ -56,6 +57,8 @@ const MyLikedPostPage: React.FC = () => {
     { label: '작성일순', value: 'date' },
   ];
 
+  const { isMobileOrTablet } = useNSMediaQuery();
+
   return (
     <S.Container>
       <SearchInput<LikedPostWithDetails>
@@ -64,7 +67,7 @@ const MyLikedPostPage: React.FC = () => {
         filterFunction={filterFunction}
       />
       <Header
-        title="내가 좋아요 누른 글 목록"
+        title={isMobileOrTablet ? '좋아요 누른 글' : '내가 좋아요 누른 글 목록'}
         sortType={sortType}
         setSortType={setSortType}
         sortOptions={sortOptions}

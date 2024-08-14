@@ -11,7 +11,7 @@ export const Container = styled.div`
   }
 
   ${isMobile} {
-    margin: 30px 16ox 168px 16px;
+    margin: 30px 16px 168px 16px;
   }
 
   ${isTablet} {

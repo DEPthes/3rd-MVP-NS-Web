@@ -20,7 +20,10 @@ const EmptyMessage: React.FC<EmptyMessageProps> = ({
     <S.Container>
       <S.EmptyMessageContainer>
         <S.Image>
-          <img src="" alt="character img" />
+          <img
+            src="/src/assets/images/empty_character.svg"
+            alt="character img"
+          />
         </S.Image>
         <S.Message>{messageText}</S.Message>
       </S.EmptyMessageContainer>

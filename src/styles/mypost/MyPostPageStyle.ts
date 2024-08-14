@@ -25,20 +25,17 @@ export const Container = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
 
-  ${isMobile} {
-    width: 100%;
-  }
-
-  ${isTablet} {
+  ${isMobileOrTablet} {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
     width: 100%;
   }
 `;
 
-export const Title = styled.h2`
+export const Title = styled.div`
   color: var(--NS-White);
   margin-right: auto;
 `;
@@ -51,10 +48,12 @@ export const CheckboxContainer = styled.div`
   align-items: center;
   margin-right: 34px;
   font: var(--S1-3);
+  margin-left: 533px;
 
   ${isMobileOrTablet} {
     font: var(--P-S2-2);
-    margin-top: 10px;
+    height: 12px;
+    margin: 10px 0 0;
   }
 `;
 
@@ -98,6 +97,7 @@ export const FilterLink = styled.a<{ isSelected: boolean }>`
     isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
   text-decoration: none;
   cursor: pointer;
+  margin: 0;
 
   &:hover {
     color: var(--NS-Main1);

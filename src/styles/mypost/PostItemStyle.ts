@@ -22,30 +22,53 @@ export const Post = styled.div`
   }
 
   ${isMobileOrTablet} {
-    height: 76px;
     margin-bottom: 0;
     margin-top: 10px;
     border-radius: 20px;
+    height: 72px;
   }
 `;
 
 export const TextField = styled.div`
   margin: 31px 0 23px 50px;
+
   ${isMobileOrTablet} {
-    heigth: 44px;
+    height: auto;
+    margin: 16px auto 16px 20px;
   }
 
   ${isMobile} {
     width: 328px;
-    margin: 16px auto 16px 20px;
   }
 
   ${isTablet} {
     width: 728px;
   }
+`;
+
+export const PostTitle = styled.h3`
+  margin-top: 0;
+  font: var(--T2);
+  color: var(--NS-Black);
 
   ${isMobileOrTablet} {
-    margin: 16px auto 16px 20px;
+    font: var(--P-S3);
+    margin-top: 0px;
+  }
+`;
+
+export const PostDate = styled.p<{
+  isTemporary: boolean;
+}>`
+  margin-top: -5px;
+  margin-bottom: 11px;
+  font: var(--S1-1);
+  color: ${({ isTemporary }) => (isTemporary ? '#EE4B4B' : 'var(--Gray1)')};
+
+  ${isMobileOrTablet} {
+    font: var(--P-S2-2);
+    margin-top: 0;
+    margin-bottom: 8px;
   }
 `;
 
@@ -55,28 +78,6 @@ export const PostTopic = styled.h3`
 
   ${isMobileOrTablet} {
     font: var(--P-S1);
-  }
-`;
-
-export const PostDate = styled.p<{ isTemporary: boolean }>`
-  margin-top: -5px;
-  font: var(--S1-1);
-  color: ${({ isTemporary }) => (isTemporary ? '#EE4B4B' : 'var(--Gray1)')};
-
-  ${isMobileOrTablet} {
-    font: var(--P-S2-2);
-    margin-top: 0;
-  }
-`;
-
-export const PostTitle = styled.h3`
-  margin-top: 11px;
-  font: var(--T2);
-  color: var(--NS-Black);
-
-  ${isMobileOrTablet} {
-    font: var(--P-S3);
-    margin-top: 8px;
   }
 `;
 

@@ -6,6 +6,7 @@ import SearchInput from '../components/mypost/SearchInput';
 import Header from '../components/mypost/Header';
 import SortableTopicList from '../components/likedtopic/SortableTopicList';
 import * as S from '@styles/mypost/MyPostPageStyle';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 const LikedTopicPage: React.FC = () => {
   const [topics, setTopics] = useState<TTopic[]>(dataList); // 주제 목록
@@ -36,6 +37,8 @@ const LikedTopicPage: React.FC = () => {
     { label: '발행일', value: 'topicDate' },
   ];
 
+  const { isMobileOrTablet } = useNSMediaQuery();
+
   return (
     <S.Container>
       <SearchInput
@@ -44,7 +47,7 @@ const LikedTopicPage: React.FC = () => {
         filterFunction={filterFunction}
       />
       <Header
-        title="좋아요 누른 주제 목록"
+        title={isMobileOrTablet ? '좋아요 누른 주제' : '좋아요 누른 주제 목록'}
         sortType={sortType}
         setSortType={setSortType}
         sortOptions={sortOptions}

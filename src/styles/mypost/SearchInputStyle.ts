@@ -12,16 +12,18 @@ export const SearchContainer = styled.div`
   ${isMobile} {
     width: 328px;
     heigth: 38px;
+    margin-bottom: 32px;
   }
 
   ${isTablet} {
     width: 320px;
     heigth: 38px;
+    margin-top: 20px;
+    margin-bottom: 16px;
   }
 
   ${isMobileOrTablet} {
     margin-top: 0px;
-    margin-bottom: 32px;
   }
 `;
 

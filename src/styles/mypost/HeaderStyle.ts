@@ -3,8 +3,6 @@ import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 
 export const Header = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 1159px;
   height: 35px;
   margin: 53px 5px 20px 6px;
@@ -12,15 +10,19 @@ export const Header = styled.div`
   ${isMobile} {
     flex-wrap: wrap;
     width: 328px;
-    height: auto; /* 자동 높이 설정 */
+    height: auto;
     margin: 0;
   }
 
   ${isTablet} {
     flex-wrap: wrap;
     width: 728px;
-    height: auto; /* 자동 높이 설정 */
+    height: auto;
     margin: 0;
+  }
+  ${isMobileOrTablet} {
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 
@@ -30,30 +32,18 @@ export const Title = styled.h2`
   margin-right: auto;
   margin-bottom: 13px;
 
-  ${isMobile} {
-    width: 100%;
-    order: 0; /* 모바일에서 Title을 첫 번째 요소로 배치 */
-    margin-bottom: 10px; /* 아래 요소와 간격 추가 */
-    margin: 0;
-    font: var(--S1);
-  }
-
-  ${isTablet} {
-    width: 100%;
-    order: 0; /* 태블릿에서 Title을 첫 번째 요소로 배치 */
-    margin-bottom: 10px; /* 아래 요소와 간격 추가 */
-    margin: 0;
-  }
-
   ${isMobileOrTablet} {
     font: var(--S1);
+    width: 100%;
+    order: 0;
+    margin-bottom: 10px;
+    margin: 0;
   }
 `;
 
 export const FilterLinks = styled.div`
   display: flex;
-  align-items: center;
-  margin: 14px 0 2px 0px;
+  margin: 14px 0 2px 0;
   font: var(--W1);
 
   span {
@@ -65,7 +55,9 @@ export const FilterLinks = styled.div`
   }
 
   ${isMobileOrTablet} {
-    font: var(--P-S2-2);
+    font: var(--P-S3);
+    margin-left: auto;
+    margin-top: 10px;
   }
 `;
 
@@ -77,11 +69,5 @@ export const FilterLink = styled.a<{ isSelected: boolean }>`
 
   &:hover {
     color: var(--NS-Main1);
-  }
-
-  ${isMobile} {
-  }
-
-  ${isTablet} {
   }
 `;

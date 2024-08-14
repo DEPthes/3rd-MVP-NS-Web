@@ -6,6 +6,7 @@ import SortablePostList from '../components/mypost/SortablePostList';
 import SearchInput from '../components/mypost/SearchInput';
 import Header from '../components/mypost/Header';
 import * as S from '@styles/mypost/MyPostPageStyle';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 const MyPostsPage: React.FC = () => {
   const [postList, setPostList] = useState<TPost[]>([]); // 내가 쓴 글 목록 상태 정의
@@ -45,6 +46,8 @@ const MyPostsPage: React.FC = () => {
     { label: '좋아요순', value: 'likes' },
   ];
 
+  const { isMobileOrTablet } = useNSMediaQuery();
+
   return (
     <S.Container>
       <SearchInput<TPost>
@@ -53,7 +56,7 @@ const MyPostsPage: React.FC = () => {
         filterFunction={filterFunction}
       />
       <Header
-        title="내가 쓴 글 목록"
+        title={isMobileOrTablet ? '내가 쓴 글' : '내가 쓴 글 목록'}
         sortType={sortType}
         setSortType={setSortType}
         sortOptions={sortOptions}
