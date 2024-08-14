@@ -11,12 +11,14 @@ export const TableData1 = styled.td`
 
   font: var(--T2);
   text-align: left;
-  line-height: 40px;
+  line-height: 28px;
+  padding-top: 12px;
 
   ${isMobileOrTablet} {
     font: var(--T11);
     padding-bottom: 11px;
-    height: 14px;
+    line-height: 14px;
+    padding-top: 0;
   }
 `;
 
@@ -24,23 +26,25 @@ export const TableData2 = styled.td`
   width: 60%;
   font: var(--T2);
   text-align: center;
-  line-height: 40px;
+  line-height: 28px;
 
   ${isMobileOrTablet} {
     font: var(--T11);
-    height: 14px;
+    line-height: 14px;
     padding-bottom: 11px;
+    padding-top: 0;
   }
 `;
 export const TableData3 = styled.td`
   width: 20%;
   font: var(--T2);
   text-align: right;
-  line-height: 40px;
+  line-height: 28px;
 
   ${isMobileOrTablet} {
     font: var(--T11);
     padding-bottom: 11px;
-    height: 14px;
+    line-height: 14px;
+    padding-top: 0;
   }
 `;

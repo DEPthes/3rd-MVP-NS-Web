@@ -9,11 +9,11 @@ export const Container = styled.div`
   transition: all 0.3s ease-in-out;
   width: 1170px;
   margin-top: 160px;
-  margin-bottom: 149px;
+  margin-bottom: 85px;
 
   ${isMobileOrTablet} {
     width: 328px;
-    height: 475px;
+    height: auto;
   }
 
   ${isMobile} {
@@ -164,7 +164,7 @@ export const RankingContainer = styled.div`
 
   ${isMobileOrTablet} {
     width: 100%;
-    height: 150px;
+    height: auto;
     padding: 28px 29px;
     border-radius: 20px;
     margin-bottom: 30px;
@@ -178,18 +178,16 @@ export const RankingTable = styled.div`
 
   ${isMobileOrTablet} {
     width: 270px;
-    height: 94px;
   }
 `;
 
 export const TableHeader = styled.table`
-  width: 878px;
+  width: 900px;
   font: var(--T2);
   color: var(--NS-Main1);
-  padding-bottom: 44px;
+  padding-bottom: 16px;
 
   ${isMobileOrTablet} {
-    padding-top: 20px;
     width: 100%;
     height: 100%;
     padding-bottom: 11px;
@@ -198,13 +196,13 @@ export const TableHeader = styled.table`
 
 export const TableRow = styled.tr`
   width: 100%;
+  justify-content: space-between;
 `;
 
 export const TableHeaderItem1 = styled.td`
-  width: 35px;
+  width: 33%;
   text-align: left;
-  padding-right: 343px;
-  padding-left: 20px;
+
   ${isMobileOrTablet} {
     width: 33%;
     font: var(--T12);
@@ -217,9 +215,8 @@ export const TableHeaderItem1 = styled.td`
 `;
 
 export const TableHeaderItem2 = styled.td`
-  width: 52px;
+  width: 33%;
   text-align: center;
-  padding-right: 326px;
   ${isMobileOrTablet} {
     width: 33%;
     font: var(--T12);
@@ -229,9 +226,8 @@ export const TableHeaderItem2 = styled.td`
 `;
 
 export const TableHeaderItem3 = styled.td`
-  width: 35px;
+  width: 33%;
   text-align: right;
-
   ${isMobileOrTablet} {
     width: 33%;
     font: var(--T12);
@@ -244,6 +240,6 @@ export const TableBody = styled.table`
   width: 919px;
   ${isMobileOrTablet} {
     width: 270px;
-    padding-bottom: 18px;
+]
 
 `;

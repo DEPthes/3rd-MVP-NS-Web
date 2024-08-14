@@ -27,11 +27,18 @@ export const SearchInput = styled.input`
   outline: none;
   flex: 1;
   color: var(--NS-Black);
-  font: var(--P-S1);
+  font: var(--T2);
 
   &::placeholder {
-    font: var(--P-S1);
+    font: font: var(--T2);
     color: var(--Gray1);
+     ${isMobileOrTablet} {
+    font: var(--P-S1);
+  }
+  }
+
+  ${isMobileOrTablet} {
+    font: var(--P-S1);
   }
 `;
 
