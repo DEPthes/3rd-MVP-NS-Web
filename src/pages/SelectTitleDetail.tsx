@@ -5,8 +5,11 @@ import WhiteHeart from '@assets/icons/WhiteHeart.svg';
 import WhiteHeartFill from '@assets/icons/WhiteHeartFill.svg';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
+import Main5Heart from '@assets/icons/Main5Heart.svg?react';
+import Main5HeartFill from '@assets/icons/Main5HeartFill.svg?react';
 import LightButton from '@/components/button/LightButton';
 import { TPost } from '@/types';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 const SelectTitleDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -17,6 +20,8 @@ const SelectTitleDetail: React.FC = () => {
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [isNotAuthor, setIsNotAuthor] = useState<boolean>(false);
 	const navigate = useNavigate();
+
+	const { isMobileOrTablet } = useNSMediaQuery(); // 미디어 쿼리 훅 사용
 
 	// 임시: 현재 사용자를 확인하기 위한 변수 (로그인된 사용자 이름)
 	const currentUser = "현재 사용자 닉네임"; // 실제 구현때는 로그인 정보를 가져와야 함
@@ -100,9 +105,14 @@ const SelectTitleDetail: React.FC = () => {
 					<S.Header>주제</S.Header>
 					<S.TopicTitle>{topicTitle}</S.TopicTitle>
 					<S.LikeContainer onClick={handleWhiteHeartClick}>
-						<img src={isLiked ? WhiteHeartFill : WhiteHeart} alt="Like" />
+						{isMobileOrTablet ? (
+							isLiked ? <Main5HeartFill title="Like" /> : <Main5Heart title="Like" />
+						) : (
+							<img src={isLiked ? WhiteHeartFill : WhiteHeart} alt="Like" />
+						)}
 						<S.LikeText>이 주제 좋아요</S.LikeText>
 					</S.LikeContainer>
+
 				</S.ProfileInfo>
 			</S.HeaderSection>
 			<S.PostBox>
@@ -114,7 +124,9 @@ const SelectTitleDetail: React.FC = () => {
 				</S.LikeButton>
 			</S.PostBox>
 			<S.ButtonContainer>
-				<LightButton text="뒤로 가기" onClick={handleBackClick} />
+				{!isMobileOrTablet && (
+					<LightButton text="뒤로 가기" onClick={handleBackClick} />
+				)}
 				<LightButton text="수정하기" onClick={handleEditClick} />
 				<LightButton text="삭제하기" onClick={handleDeleteClick} />
 			</S.ButtonContainer>
@@ -144,6 +156,8 @@ const SelectTitleDetail: React.FC = () => {
 };
 
 export default SelectTitleDetail;
+
+
 
 
 

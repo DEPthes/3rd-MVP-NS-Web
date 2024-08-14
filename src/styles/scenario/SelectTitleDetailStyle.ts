@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
 	display: flex;
@@ -13,12 +14,18 @@ export const HeaderSection = styled.div`
 	width: 1170px;
 	margin-bottom: 20px;
 	position: relative;
+
+	${isMobileOrTablet} {
+		flex-direction: column; /* 모바일 및 테블릿에서 수직 정렬 */
+		align-items: center;
+		width: 320px; /* 모바일 및 테블릿에서 너비 조정 */
+	}
 `;
 
 export const ProfileContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: center; 
+	align-items: center;
 `;
 
 export const ProfileCircle = styled.div`
@@ -28,64 +35,128 @@ export const ProfileCircle = styled.div`
 	border-radius: 50%;
 	margin-bottom: 10px;
 	cursor: pointer;
+
+	${isMobileOrTablet} {
+		width: 100px; /* 모바일 및 테블릿에서 크기 줄이기 */
+		height: 100px;
+	}
 `;
+
+export const ProfileNickname = styled.div`
+	color: var(--NS-Black);
+	font: var(--W1);
+	width: 100%;
+	height: 19px;
+	margin-top: 6px;
+	text-align: center;
+
+	${isMobileOrTablet} {
+		font: var(--W1);
+		margin-top: 8px;
+		margin-bottom: 10px;
+		color: var(--NS-White);
+	}
+`;
+
 
 
 export const ProfileInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-left: 20px;
-`;
 
-export const ProfileNickname = styled.div`
-	color: var(--NS-Black);
-	font: var(--W1);
-	width: 100%; /* 너비를 부모 요소에 맞추어 중앙 정렬 유지 */
-	height: 19px;
-	margin-top: 6px;
-	text-align: center; /* 텍스트를 중앙 정렬 */
-`;
+	${isMobileOrTablet} {
+		margin-left: 0; /* 모바일 및 테블릿에서 중앙 정렬 */
+		text-align: center;
+		align-items: center;
 
+		width: 320px;
+		height: 92px;
+		background-color: var(--NS-White);
+		background-color: #ffff;
+		box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+		border-radius: 20px;
+		flex-direction: column;
+		justify-content: center;
+		padding: 10px;
+		
+		
+	}
+`;
 
 export const Header = styled.div`
 	color: var(--NS-White);
-	margin-bottom: 7px;
-	margin-top:48px;
+	margin-bottom: 5px;  /* 아래 여백 줄이기 */
+	margin-top: 40px;  /* 위 여백 줄이기 */
 	font: var(--LogoSmall);
+
+	${isMobileOrTablet} {
+		color: var(--NS-Main1);
+		margin-top: 16px;  /* 모바일에서 위 여백 줄이기 */
+		margin-bottom: 4px;  /* 모바일에서 아래 여백 줄이기 */
+		font: var(--Hy1);
+		text-align: center;
+		width: 100%;
+		overflow-wrap: break-word;
+	}
 `;
 
 export const TopicTitle = styled.div`
 	color: var(--NS-White);
 	font: var(--H4-1);
-	margin-top: 5px;
-	margin-bottom: 9px;
-	width:608px;
-	min-height:38px;
+	margin-top: 3px; 
+	margin-bottom: 5px;  
+	width: 608px;
+	min-height: 38px;
+
+	${isMobileOrTablet} {
+		font: var(--W1);
+		color: var(--NS-Main1);
+		width: 100%;
+		overflow-wrap: break-word;
+		text-align: center;
+		margin-top: 2px;  /* 모바일에서 위 여백 줄이기 */
+		margin-bottom: 2px;  /* 모바일에서 아래 여백 줄이기 */
+	}
 `;
 
 export const LikeContainer = styled.div`
 	display: flex;
 	align-items: center;
-	width:126px;
-	height:30px;
+	justify-content: center;
+	width: 126px;
+	height: 30px;
 	cursor: pointer;
-	margin-top: 9px;
-`;
+	margin-top: 7px;  /* 위 여백 줄이기 */
 
+	svg {
+		width: 30px;
+		height: 30px;
+
+		${isMobileOrTablet} {
+			width: 16px;
+			height: 16px;
+		}
+	}
+	${isMobileOrTablet} {
+		margin-top: -20px;  /* 모바일에서 위 여백 줄이기 */
+	}
+`;
 export const LikeText = styled.div`
 	font: var(--S1);
 	color: var(--NS-White);
 	margin-left: 5px;
-	margin-top: 14px;
-	width: 126px;
-	height:30px;
+	display: flex;
+	align-items: center;
+	height: 30px;
+
+	${isMobileOrTablet} {
+		font: var(--P-S3);
+		color: var(--NS-Main5);
+		margin-left: 5px;
+	}
 `;
 
-export const LikeCount = styled.div`
-	margin-left: 5px;
-	color: var(--NS-Main1);
-	font: var(--S1);
-`;
 
 export const PostBox = styled.div`
 	background-color: #ffffff;
@@ -98,9 +169,17 @@ export const PostBox = styled.div`
 	height: 443px;
 	display: flex;
 	flex-direction: column;
-	align-items: center; /* 수평 중앙 정렬 */
+	align-items: center;
 	text-align: center;
 	margin-top: 20px;
+
+	${isMobileOrTablet} {
+		width: 320px; /* 모바일 및 테블릿에서 크기 조정 */
+		height: 148px;
+		padding: 21px;
+		border-radius: 20px;
+		margin-top: 10px;
+	}
 `;
 
 export const PostTitle = styled.div`
@@ -110,6 +189,13 @@ export const PostTitle = styled.div`
 	margin-bottom: 29px;
 	margin-top: 66px;
 	text-align: center;
+
+	${isMobileOrTablet} {
+		width: 100%; /* 모바일 및 테블릿에서 너비 조정 */
+		margin-top: 10px;
+		margin-bottom: 10px;
+		font:var(--W1);
+	}
 `;
 
 export const PostContent = styled.div`
@@ -119,18 +205,56 @@ export const PostContent = styled.div`
 	min-height: 224px;
 	margin-bottom: 91px;
 	text-align: center;
+
+	${isMobileOrTablet} {
+		width: 278px;
+		min-height: 51px;
+		margin-bottom: 10px;
+		font: var(--Hy4);
+	}
 `;
 
 export const LikeButton = styled.div`
 	display: flex;
 	align-items: center;
-	position: absolute;
+	position: absolute; /* 노트북 버전에서는 절대 위치 유지 */
 	bottom: 10px;
 	right: 20px;
 	cursor: pointer;
 	margin-bottom: 19px;
 	height: 30px;
-	margin-right:26px ;
+	margin-right: 26px;
+
+	${isMobileOrTablet} {
+		position: static; /* 모바일과 태블릿에서 절대 위치 제거 */
+		margin-bottom: 20;
+		margin-top: -11px; /* 피그처럼 11로하면 박스를 벗어남..? */
+		justify-content: center; /* 가로 중앙 정렬 */
+		width: 43px;
+		height: 16px;
+		margin-right: 117.5px;
+		margin-left: 117.5px;
+	}
+
+	img {
+		width: 30px;  /* 기본 크기 (노트북) */
+		height: 30px;
+
+		${isMobileOrTablet} {
+			width: 16px;  /* 모바일 및 태블릿에서 크기 줄이기 */
+			height: 16px;
+		}
+	}
+`;
+
+export const LikeCount = styled.div`
+	margin-left: 5px;
+	color: var(--NS-Main1);
+	font: var(--S1);
+
+	${isMobileOrTablet} {
+		font: var(--T5-B);
+	}
 `;
 
 export const ButtonContainer = styled.div`
@@ -139,6 +263,15 @@ export const ButtonContainer = styled.div`
 	gap: 10px;
 	width: 1170px;
 	margin-top: 20px;
+
+	${isMobileOrTablet} {
+		flex-direction: row;
+		align-items: center;
+		width: 320px;
+		height: 30px;
+		margin-top: 10px;
+		justify-content: center;
+	}
 `;
 
 export const DeleteModalOverlay = styled.div`
@@ -164,5 +297,5 @@ export const DeleteModal = styled.div`
 export const DeleteModalText = styled.p`
 	font-size: 18px;
 	color: black;
-	margin-bottom: 20px;/*삭제 모달 창 아직 디자인 구현 안되어서 임시로 만들어 놓았습니다. 추후 수정 예정 */
+	margin-bottom: 20px;
 `;

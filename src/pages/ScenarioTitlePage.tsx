@@ -4,14 +4,13 @@ import * as S from '@/styles/scenario/ScenarioTitlePageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg?react';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg?react';
 import SearchIcon from '@assets/icons/Search.svg';
-import { TTopic, TLikeState, TLikeDates } from '@/types';
+import { TTopic, TLikeState } from '@/types';
 
 const ScenarioTitlePage: React.FC = () => {
 	const [topics, setTopics] = useState<TTopic[]>([]);
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [sortType, setSortType] = useState<string>('최신순 |');
 	const [isLikedTopics, setIsLikedTopics] = useState<TLikeState>({});
-	const [likeDates, setLikeDates] = useState<TLikeDates>({});
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -41,10 +40,6 @@ const ScenarioTitlePage: React.FC = () => {
 			...prev,
 			[topic]: !prev[topic],
 		}));
-		setLikeDates(prev => ({
-			...prev,
-			[topic]: new Date(),
-		}));
 	};
 
 	const handleTopicClick = (id: string) => {
@@ -62,13 +57,8 @@ const ScenarioTitlePage: React.FC = () => {
 					);
 				case '좋아요순 |':
 					return b.likes - a.likes;
-				case '게시글순 |':
+				case '게시글순 ':
 					return b.posts.length - a.posts.length;
-				case '최근 관심순 |':
-					return (
-						(likeDates[b.title]?.getTime() || 0) -
-						(likeDates[a.title]?.getTime() || 0)
-					);
 				default:
 					return 0;
 			}
@@ -90,7 +80,7 @@ const ScenarioTitlePage: React.FC = () => {
 			<S.Header>
 				<S.Title>주제 목록</S.Title>
 				<S.SortOptions>
-					{['최신순 |', '좋아요순 |', '게시글순 |', '최근 관심순 '].map(
+					{['최신순 |', '좋아요순 |', '게시글순 '].map(
 						type => (
 							<S.SortOption
 								key={type}
@@ -128,4 +118,5 @@ const ScenarioTitlePage: React.FC = () => {
 };
 
 export default ScenarioTitlePage;
+
 

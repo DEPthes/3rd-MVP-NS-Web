@@ -9,68 +9,99 @@ export const Container = styled.div`
 `;
 
 export const TopicBox = styled.div`
-  background-color: var(--NS-White);
-  border-radius: 40px;
-  padding: 29px 20px 16px;
-  text-align: center;
-  box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
-  width: 1170px;
-  min-height: 160px;
-  ${isMobile}{
-	width:320px;
-	min-height: 92px;
-  }
-  ${isTablet}{
-	width:728px;
-	min-height:200px;
-  }
+background-color: var(--NS-White);
+border-radius: 40px;
+padding: 29px 20px 16px;
+text-align: center;
+box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+width: 1170px;
+min-height: 160px;
+
+${isMobile} {
+  width: 320px;
+  min-height: 92px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+${isTablet} {
+  width: 728px;
+  min-height: 200px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 `;
 
 export const TopicHeader = styled.div`
-  color: var(--NS-Main1);
-  font: var(--LogoSmall);
-  ${isMobileOrTablet}{
-	font:var(--Hy1);
+color: var(--NS-Main1);
+font: var(--LogoSmall);
 
-  }
+${isMobile} {
+  font: var(--Hy1);
+}
 
+${isTablet} {
+  font: var(--Hy1);
+}
 `;
 
 export const Topic = styled.div`
-  margin-top: 1.8px;
-  color: var(--NS-Main1);
-  font: var(--T1-1);
-  ${isMobileOrTablet}{
-	margin-top: 4px;
-	font:var(--P-T1);
+margin-top: 1.8px;
+color: var(--NS-Main1);
+font: var(--T1-1);
 
-  }
+${isMobile} {
+  margin-top: 4px;
+  font: var(--P-T1);
+}
+
+${isTablet} {
+  margin-top: 4px;
+  font: var(--P-T1);
+}
 `;
 
 export const LikeContainer = styled.div`
-  margin-top: 1.8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  cursor: pointer;
-  ${isMobile}{
-	margin-top: 6px;
-	align-items: center;
-  justify-content: center;
-  display: flex;
+margin-top: 1.8px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
 
+svg {
+  width: 30px;  /* 기본 크기 (데스크탑용) */
+  height: 30px;
+
+  ${isMobileOrTablet} {
+	width: 16px;  /* 모바일 및 테블릿에서 크기 줄이기 */
+	height: 16px;
   }
+}
+
+${isMobile} {
+  margin-top: 7px;
+}
+
+${isTablet} {
+  margin-top: 6px;
+}
 `;
 
 export const LikeText = styled.div`
-  font: var(--S1);
-  color: var(--NS-Main5);
-  ${isMobileOrTablet}{
-	font:var(--Hy2);
+font: var(--S1);
+color: var(--NS-Main5);
 
-  }
+${isMobileOrTablet} {
+  font: var(--Hy2);
+}
 `;
+
 
 export const NewTopicBox = styled.div`
   background-color: var(--NS-White);
@@ -85,10 +116,12 @@ export const NewTopicBox = styled.div`
   ${isMobile}{
 	width:320px;
 	min-height:300px;
+	border-radius: 20px;
   }
   ${isTablet}{
 	width:728px;
 	min-height:200px;
+	border-radius: 20px;
   }
 `;
 
