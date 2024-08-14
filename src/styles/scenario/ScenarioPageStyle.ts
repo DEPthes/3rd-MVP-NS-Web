@@ -24,7 +24,7 @@ export const TitleMini = styled.div`
   margin-bottom: 72px;
   font: var(--N2-1);
 
-  @media (max-width: 768px) {//768이하일때 안보이게 하기!
+  ${isMobileOrTablet} {//768이하일때 안보이게 하기!
     display: none;
   }
 `;
@@ -70,7 +70,7 @@ export const ButtonContainer = styled.div`
   gap: 37px;
   
  
-  @media (max-width: 768px) {//미디어쿼리로 하는 게 더 간단하여 768이하일 경우 세로 정렬
+  ${isMobileOrTablet} {
     flex-direction: column;
     gap: 20px;
     align-items: center;
