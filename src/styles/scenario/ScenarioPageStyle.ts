@@ -24,7 +24,7 @@ export const TitleMini = styled.div`
   margin-bottom: 72px;
   font: var(--N2-1);
 
-  ${isMobileOrTablet} {//768이하일때 안보이게 하기!
+  ${isMobileOrTablet} {
     display: none;
   }
 `;
