@@ -5,12 +5,14 @@ type IntroductionContentProps = {
   emoji: string;
   title?: string;
   content: string;
+  usage?: boolean;
 };
 
 const IntroductionContent: React.FC<IntroductionContentProps> = ({
   emoji,
   title,
   content,
+  usage,
 }) => {
   const formattedContent = content.split('\n').map((str, index) => (
     <React.Fragment key={index}>
@@ -20,9 +22,9 @@ const IntroductionContent: React.FC<IntroductionContentProps> = ({
   ));
 
   return (
-    <S.Container>
+    <S.Container usage={usage}>
       <S.Emoji>{emoji}</S.Emoji>
-      {title && <S.Title>{title}</S.Title>}
+      {title && <S.Title usage={usage}>{title}</S.Title>}
       <S.Content>{formattedContent}</S.Content>
     </S.Container>
   );
