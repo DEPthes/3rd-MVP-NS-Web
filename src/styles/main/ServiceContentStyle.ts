@@ -45,7 +45,7 @@ export const HighlightText = styled.span`
 `;
 
 export const RegularText = styled.p`
-  font: var(--T4);
+  font: var(--M-1);
   color: var(--NS-Black);
   margin: 10px 0;
   white-space: pre-line;
@@ -56,5 +56,5 @@ export const RegularText = styled.p`
 `;
 
 export const BoldText = styled.span`
-  font: var(--T4-1);
+  font: var(--M-2);
 `;
