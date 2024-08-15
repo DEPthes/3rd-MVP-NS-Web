@@ -15,3 +15,14 @@ export interface TPostDraftRequest {
 	content: string;
 	themeId: number;
 }
+export interface TThemeListResponse {
+	content: string;
+	date: string;
+	likeCount: number;
+	boardCount: number;
+}
+export type TLikeState = {
+	[key: string]: boolean;
+};
+
+
