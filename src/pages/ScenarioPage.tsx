@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/scenario/ScenarioPageStyle';
-
+import { getToday } from '@/apis/theme/getToday';
+import { TTodayThemeResponse } from '@/types/mytype';  // 타입 임포트
+import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 
 const ScenarioPage: React.FC = () => {
 	const [topic, setTopic] = useState<string>('');
-	const navigate = useNavigate(); /* 글을 작성하는 페이지로 이동 */
+	const navigate = useNavigate();
+
+	const handleUnauthorized = useHandleUnauthorized(); // handleUnauthorized 콜백 생성. getToday오류 방지 위해.
 
 	useEffect(() => {
 		const fetchTopic = async () => {
-			try {
-				const response = await fetch('/dummyData.json');
-				const data = await response.json();
-				const randomIndex = Math.floor(Math.random() * data.length); // 랜덤 주제 선택
-				setTopic(data[randomIndex].title);
-			} catch (error) {
-				console.error('Error fetching topic:', error);
+			const data: TTodayThemeResponse | undefined = await getToday(handleUnauthorized);
+			if (data) {
+				setTopic(data.content);
+			} else {
+				console.error('오늘의 주제를 불러오지 못했습니다.');
 			}
 		};
 
@@ -26,7 +28,6 @@ const ScenarioPage: React.FC = () => {
 	return (
 		<S.Container>
 			<S.Title>나였다면</S.Title>
-
 			<S.TitleMini>N력 키우기의 시작, N 상상력의 첫 질문</S.TitleMini>
 			<S.TopicBox>
 				<S.TopicHeader>오늘의 주제</S.TopicHeader>
