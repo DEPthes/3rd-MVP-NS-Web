@@ -61,9 +61,9 @@ const Header = () => {
                   <S.HamNavLinks to="/report">N 보고서</S.HamNavLinks>
                   <S.HamNavLinks to="/ranking">N력 랭킹</S.HamNavLinks>
                   <S.HamNavLinks
-                    to={isAccessToken ? '/profile' : '/login'}
+                    to={isAccessToken ? '/mypage' : '/login'}
                     onClick={() =>
-                      sessionStorage.setItem('prevPath', '/profile')
+                      sessionStorage.setItem('prevPath', '/mypage')
                     }
                   >
                     마이페이지
@@ -87,8 +87,8 @@ const Header = () => {
             <S.NavLinks to="/report">N 보고서</S.NavLinks>
             <S.NavLinks to="/ranking">N력 랭킹</S.NavLinks>
             <S.NavLinks
-              to={isAccessToken ? '/profile' : '/login'}
-              onClick={() => sessionStorage.setItem('prevPath', '/profile')}
+              to={isAccessToken ? '/mypage' : '/login'}
+              onClick={() => sessionStorage.setItem('prevPath', '/mypage')}
             >
               마이페이지
             </S.NavLinks>
