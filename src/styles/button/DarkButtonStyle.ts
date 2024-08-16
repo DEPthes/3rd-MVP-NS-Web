@@ -1,7 +1,7 @@
 import { isMobileOrTablet } from '@/hooks/Media';
 import styled from 'styled-components';
 
-export const Button = styled.button<{ isSmall: boolean }>`
+export const Button = styled.button<{ $isSmall: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,9 +16,9 @@ export const Button = styled.button<{ isSmall: boolean }>`
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    width: ${({ isSmall }) => (isSmall ? 43 : 62)}px;
-    height: ${({ isSmall }) => (isSmall ? 20 : 30)}px;
-    font: var(${({ isSmall }) => (isSmall ? '--P-S2' : '--P-S1')});
+    width: ${({ $isSmall }) => ($isSmall ? 43 : 62)}px;
+    height: ${({ $isSmall }) => ($isSmall ? 20 : 30)}px;
+    font: var(${({ $isSmall }) => ($isSmall ? '--P-S2' : '--P-S1')});
   }
 
   &:hover {

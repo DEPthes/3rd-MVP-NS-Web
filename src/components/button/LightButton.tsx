@@ -17,7 +17,7 @@ const LightButton = ({
       {...props}
       onClick={onClick}
       disabled={isDisabled}
-      isSmall={isSmall}
+      $isSmall={isSmall}
     >
       {text}
     </Button>
