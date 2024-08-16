@@ -6,6 +6,7 @@ import BlueHeartFill from '@assets/icons/BlueHeartFill.svg?react';
 import SearchIcon from '@assets/icons/Search.svg';
 import { TLikeState, TThemeListResponse } from '@/types/mytype';
 import { getList } from '@/apis/theme/getList';
+import { getSearch } from '@/apis/theme/getSearch';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 const ScenarioTitlePage: React.FC = () => {
@@ -19,7 +20,15 @@ const ScenarioTitlePage: React.FC = () => {
 	useEffect(() => {
 		const fetchTopics = async () => {
 			try {
-				const response = await getList(0, 10, sortType, handleUnauthorized); // API 호출
+				let response;
+				if (searchTerm.trim() === '') {
+					// 검색어가 없을 때는 getList 호출
+					response = await getList(0, 10, sortType, handleUnauthorized);
+				} else {
+					// 검색어가 있을 때는 getSearch 호출
+					response = await getSearch(searchTerm, 0, 10, sortType, handleUnauthorized);
+				}
+
 				if (response) {
 					setTopics(response);
 				} else {
@@ -31,7 +40,7 @@ const ScenarioTitlePage: React.FC = () => {
 		};
 
 		fetchTopics();
-	}, [sortType, handleUnauthorized]);
+	}, [searchTerm, sortType]);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(e.target.value);
@@ -52,21 +61,6 @@ const ScenarioTitlePage: React.FC = () => {
 		navigate(`/topic/${id}`);
 	};
 
-	const filteredTopics = topics
-		.filter(topic => topic.content.includes(searchTerm))
-		.sort((a, b) => {
-			switch (sortType) {
-				case 'date':
-					return new Date(b.date).getTime() - new Date(a.date).getTime();
-				case 'likeCount':
-					return b.likeCount - a.likeCount;
-				case 'boardCount':
-					return b.boardCount - a.boardCount;
-				default:
-					return 0;
-			}
-		});
-
 	return (
 		<S.Container>
 			<S.SearchBar>
@@ -83,20 +77,18 @@ const ScenarioTitlePage: React.FC = () => {
 			<S.Header>
 				<S.Title>주제 목록</S.Title>
 				<S.SortOptions>
-					{['최신순 |', '좋아요순 |', '게시글순 '].map(
-						type => (
-							<S.SortOption
-								key={type}
-								onClick={() => handleSort(type)}
-								isSelected={sortType === (type === '최신순 |' ? 'date' : type === '좋아요순 |' ? 'likeCount' : 'boardCount')}
-							>
-								{type}
-							</S.SortOption>
-						),
-					)}
+					{['최신순 |', '좋아요순 |', '게시글순 '].map(type => (
+						<S.SortOption
+							key={type}
+							onClick={() => handleSort(type)}
+							isSelected={sortType === (type === '최신순 |' ? 'date' : type === '좋아요순 |' ? 'likeCount' : 'boardCount')}
+						>
+							{type}
+						</S.SortOption>
+					))}
 				</S.SortOptions>
 			</S.Header>
-			{filteredTopics.map((topic, index) => (
+			{topics.map((topic, index) => (
 				<S.TopicBox key={index} onClick={() => handleTopicClick(topic.content)}>
 					<div>
 						<S.TopicTitle>{topic.content}</S.TopicTitle>
