@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin-top: 144px;
   transition: all 0.3s ease-in-out;
@@ -225,10 +224,10 @@ export const BestWrap = styled.div`
   }
 `;
 
-export const NoneContainer = styled.div<{ isLast: boolean }>`
+export const NoneContainer = styled.div<{ $isLast: boolean }>`
   font: var(--H3);
   color: var(--NS-Black);
-  margin: ${({ isLast }) => (isLast ? '311px 0 335px' : '221px 0 225px')};
+  margin: ${({ $isLast }) => ($isLast ? '311px 0 335px' : '221px 0 225px')};
 
   ${isMobileOrTablet} {
     font: var(--W1);
@@ -236,10 +235,10 @@ export const NoneContainer = styled.div<{ isLast: boolean }>`
   }
 
   ${isMobile} {
-    margin: ${({ isLast }) => (isLast ? '14px 0 103px' : '14px 0 20px')};
+    margin: ${({ $isLast }) => ($isLast ? '14px 0 103px' : '14px 0 20px')};
   }
 
   ${isTablet} {
-    margin: ${({ isLast }) => (isLast ? '14px 0 30px' : '14px 0 20px')};
+    margin: ${({ $isLast }) => ($isLast ? '14px 0 30px' : '14px 0 20px')};
   }
 `;
