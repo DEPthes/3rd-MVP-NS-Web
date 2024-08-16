@@ -7,7 +7,6 @@ import ScenarioTitlePage from '@/pages/ScenarioTitlePage';
 import ReportPage from './pages/ReportPage';
 import RankingPage from './pages/RankingPage';
 import ProfilePage from '@/pages/ProfilePage';
-import ExPage from './pages/ExPage';
 import SenarioDetailPage from '@/pages/SenarioDetailPage';
 import TopicDetailPage from '@/pages/TopicDetailPage';
 import SelectTitleDetail from '@/pages/SelectTitleDetail';
@@ -28,7 +27,6 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout type={1} />}>
-          <Route path="/ex" element={<ExPage />} />
           {/* 나였다면 */}
           <Route path="/scenario" element={<ScenarioPage />} />
           {/* 로그인 */}
