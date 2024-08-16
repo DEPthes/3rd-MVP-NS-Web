@@ -69,10 +69,13 @@
   --P-S3: 600 10px / normal Pretendard;
   --P-T1: 600 16px / normal Pretendard;
   --P-T2: 500 14px / normal Pretendard;
+  --P-T3: 600 14px / normal Pretendard;
   --H1-B: 700 20px / 22px Pretendard;
   --W1-B: 600 8.63px / normal Pretendard;
   --Input-B: 500 12px / normal Pretendard;
   --T5-B: 600 8px / normal Pretendard;
+  --M2: 600 10px / 15px Pretendard;
+  --M2-2: 600 22px / 22px Pretendard;
 }
 
 html,

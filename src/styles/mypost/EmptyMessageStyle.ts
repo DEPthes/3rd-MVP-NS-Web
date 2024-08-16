@@ -42,7 +42,7 @@ export const Image = styled.div`
   margin: 0;
 `;
 
-export const Message = styled.h2`
+export const Message = styled.h2<{ smallfont: boolean }>`
   width: auto;
   margin-left: 29px;
   font: var(--T2);
@@ -51,8 +51,9 @@ export const Message = styled.h2`
   text-align: center;
 
   ${isMobileOrTablet} {
-    font: var(--P-T1);
+    //font: var(--P-T1);
     margin: 0;
+    font: ${props => (props.smallfont ? 'var(--P-T3)' : 'var(--P-T1)')};
   }
 
   ${isTablet} {

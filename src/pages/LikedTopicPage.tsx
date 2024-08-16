@@ -56,8 +56,9 @@ const LikedTopicPage: React.FC = () => {
         {topics.length === 0 ? (
           <EmptyMessage
             buttonText="주제 보러 가기"
-            messageText={`N력을 한껏 키워 줄 주제들이 당신을 기다리고 있어요`}
+            messageText={`N력을 한껏 키워 줄 주제들이 당신을 기다리고 있어요!`}
             navigateTo="/senario-detail"
+            smallfont={true}
           />
         ) : filteredTopics.length > 0 ? (
           <SortableTopicList

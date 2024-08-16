@@ -54,7 +54,7 @@ export const ProfileSection = styled.div`
 
 export const ProfileImageContainer = styled.div`
   width: 251px;
-  heigth: 251px;
+  height: 251px;
   margin: 0 99px 17px 100px;
   //border: 1px solid var(--NS-Main2);
   border-radius: 50%;
@@ -73,11 +73,15 @@ export const ProfileImage = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
+  //object-fit: cover;
+  ${isMobileOrTablet} {
+  }
 `;
 
 export const Nickname = styled.h2`
   font: var(--H4-2);
   margin: 0 184px 17px 183px;
+  text-align: center;
 
   ${isMobileOrTablet} {
     font: var(--M1-2);
