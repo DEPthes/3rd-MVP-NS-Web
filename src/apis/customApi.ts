@@ -47,13 +47,15 @@ const Interceptors = (
         }
 
         try {
-          //refreshToken을 사용하여 새로운 accessToken 발급 + API 수정 필요
-          const { data } = await axios.post(`${BASE_URL}/refresh-token`, {
-            refreshToken,
+          //refreshToken을 사용하여 새로운 accessToken,refreshToken 발급
+          const { data } = await axios.post(`${BASE_URL}/auth/refresh`, {
+            accessToken: localStorage.getItem('accessToken'),
+            refreshToken: localStorage.getItem('refreshToken'),
           });
 
-          //새로 발급받은 accessToken 저장
+          //새로 발급받은 accessToken, refreshToken 저장
           localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
 
           //원래 요청에 새로운 accessToken 추가
           originalRequest.headers = originalRequest.headers || {};
