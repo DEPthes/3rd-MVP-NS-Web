@@ -42,6 +42,10 @@ export const Content = styled.div`
 export const HighlightText = styled.span`
   font: var(--LogoMini-2);
   color: var(--NS-Main1);
+
+  ${isMobileOrTablet} {
+    font: var(--LogoMini-3);
+  }
 `;
 
 export const RegularText = styled.p`
@@ -51,10 +55,13 @@ export const RegularText = styled.p`
   white-space: pre-line;
 
   ${isMobileOrTablet} {
-    font: var(--P-S1-2);
+    font: var(--M-3);
   }
 `;
 
 export const BoldText = styled.span`
   font: var(--M-2);
+  ${isMobileOrTablet} {
+    font: var(--M-4);
+  }
 `;
