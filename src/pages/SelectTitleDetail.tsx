@@ -83,7 +83,7 @@ const SelectTitleDetail: React.FC = () => {
 	const handleWhiteHeartClick = async () => {
 		try {
 			// 주제에 대한 좋아요 API 호출 코드 추가
-			await toggleThemeLike(id, !isLiked, handleUnauthorized);
+			//await toggleThemeLike(id, !isLiked, handleUnauthorized);
 			setIsLiked(!isLiked);
 		} catch (error) {
 			console.error('좋아요 실패:', error);
@@ -93,7 +93,7 @@ const SelectTitleDetail: React.FC = () => {
 	const handleBlueHeartClick = async () => {
 		try {
 			// 게시글에 대한 좋아요 API 호출 코드 추가
-			await togglePostLike(id, !isBlueHeartLiked, handleUnauthorized);
+			/*await togglePostLike(id, !isBlueHeartLiked, handleUnauthorized);*/
 			setIsBlueHeartLiked(!isBlueHeartLiked);
 		} catch (error) {
 			console.error('좋아요 실패:', error);

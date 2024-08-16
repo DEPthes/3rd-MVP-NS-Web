@@ -1,6 +1,6 @@
 import { authAPI } from '../customApi';
 import { TBoardDetailResponse } from '@/types/mytype';
-import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+//import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 export const getBoard = async (
 	boardId: number,
