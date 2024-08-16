@@ -45,7 +45,7 @@ const ProfilePage: React.FC = () => {
     const isDefault = !file; // 파일이 없으면 기본 이미지 설정
 
     try {
-      const response = await patchProfile(isDefault, file); // API 호출
+      const response = await patchProfile(isDefault, file);
       if (response.check) {
         alert('프로필이 변경되었습니다.'); // 성공 시 메시지 출력
         // 필요한 경우 userData를 업데이트하는 로직 추가 가능
@@ -89,7 +89,6 @@ const ProfilePage: React.FC = () => {
         <S.Nickname>{userData.information.nickname}</S.Nickname>
         <S.EditOptions>
           <S.EditOption onClick={openFilePicker}>프로필사진 변경</S.EditOption>{' '}
-          {/* 클릭 시 파일 선택창 오픈 */}
           <S.EditOption onClick={() => setIsModalOpen(true)}>
             닉네임 수정
           </S.EditOption>
@@ -101,13 +100,13 @@ const ProfilePage: React.FC = () => {
         </S.EditOptions>
       </S.ProfileSection>
       <S.ButtonSection>
-        <S.ActionButton onClick={() => navigate('/profile/myposts')}>
+        <S.ActionButton onClick={() => navigate('/mypage/myposts')}>
           ☞ 내가 쓴 글 ☜
         </S.ActionButton>
-        <S.ActionButton2 onClick={() => navigate('/profile/mylikedposts')}>
+        <S.ActionButton2 onClick={() => navigate('/mypage/mylikedposts')}>
           ♡ 좋아요 누른 글 ♥
         </S.ActionButton2>
-        <S.ActionButton onClick={() => navigate('/profile/likedtopics')}>
+        <S.ActionButton onClick={() => navigate('/mypage/likedtopics')}>
           ♥ 좋아요 누른 주제 ♡
         </S.ActionButton>
       </S.ButtonSection>

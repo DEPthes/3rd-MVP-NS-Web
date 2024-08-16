@@ -30,7 +30,7 @@
   --H1-1: 800 36px / normal Pretendard;
   --H11: 800 36px / normal Pretendard;
   --H2: 700 24px/22px Pretendard;
-  --H2-2: 700 24px / normal Pretendard-Bord;
+  --H2-2: 700 24px / normal Pretendard;
   --H3: 600 28px / normal Pretendard;
   --H4: 800 32px / normal Pretendard;
   --H4-1: 600 32px / normal Pretendard;
@@ -38,12 +38,13 @@
   --T1: 700 36px / normal Pretendard;
   --T1-1: 600 36px / normal Pretendard;
   --T2: 600 20px/28px Pretendard;
-  --T2-2: 400 20px / normal Pretendard-Medium;
+  --T2-4: 600 20px / normal Pretendard;
+  --T2-2: 400 20px / normal Pretendard;
+  --T2-3: 400 20px / normal Pretendard;
   --T3: 400 22px / normal Pretendard;
   --T3-1: 600 22px/22px Pretendard;
   --T4: 400 20px/28px Pretendard;
   --T5: 600 10px/15px Pretendard;
-  --T6: 500 16px Pretendard-SemiBold;
   --T6: 500 16px / normal Pretendard;
   --S1: 700 16px / normal Pretendard;
   --S1-1: 400 16px/28px Pretendard;
@@ -64,8 +65,9 @@
   --N3: 700 28px / normal Pretendard;
   --N4: 400 12px / normal Pretendard;
   --P-S1: 600 12px / normal Pretendard;
+  --P-S1-2: 400 12px / normal Pretendard;
   --P-S2: 600 10px / normal Pretendard;
-  --P-S2-2: 600 8px / normal Pretendard;
+  --P-S2-2: 400 8px / normal Pretendard;
   --P-S3: 600 10px / normal Pretendard;
   --P-T1: 600 16px / normal Pretendard;
   --P-T2: 500 14px / normal Pretendard;
@@ -74,6 +76,9 @@
   --W1-B: 600 8.63px / normal Pretendard;
   --Input-B: 500 12px / normal Pretendard;
   --T5-B: 600 8px / normal Pretendard;
+  --T11: 600 12px / normal Pretendard;
+  --T12: 600 16px / normal Pretendard;
+  --T13: 500 16px / normal Pretendard;
   --M2: 600 10px / 15px Pretendard;
   --M2-2: 600 22px / 22px Pretendard;
 }

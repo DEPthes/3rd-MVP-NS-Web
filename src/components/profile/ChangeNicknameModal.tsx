@@ -82,7 +82,7 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
       const passwordCheck = await postPassword(password);
       if (passwordCheck.check && passwordCheck.information) {
         setIsPasswordVerified(true); // 비밀번호 확인 성공
-        setPasswordValidationColor('var(--NS-Main1)'); // 아이콘 색상 조정
+        setPasswordValidationColor('var(--NS-Main1)');
       } else {
         throw new Error('비밀번호가 일치하지 않습니다.');
       }
@@ -144,7 +144,7 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
                 placeholder="비밀번호 확인"
                 color={passwordValidationColor}
               />
-              {password.length > 0 && (
+              {password.length > 0 && passwordValidationColor !== '#EE4B4B' && (
                 <>
                   {!isPasswordVerified && (
                     <S.Icon

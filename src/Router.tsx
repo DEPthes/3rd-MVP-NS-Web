@@ -29,42 +29,50 @@ const Router = () => {
       <Routes>
         <Route element={<Layout type={1} />}>
           <Route path="/ex" element={<ExPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          {/* 나였다면 */}
           <Route path="/scenario" element={<ScenarioPage />} />
+          {/* 로그인 */}
+          <Route path="/login" element={<LoginPage />} />
         </Route>
         <Route element={<Layout type={2} />}>
+          {/* 메인페이지 */}
           <Route path="/" element={<MainPage />} />
-          <Route path="/report" element={<ReportPage />} />
-          <Route path="/ranking" element={<RankingPage />} />
+          {/* 마이페이지 */}
           <Route
-            path="/profile"
+            path="/mypage"
             element={<ProtectedRoute element={<ProfilePage />} />}
           />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/senario-detail" element={<SenarioDetailPage />} />\
-          <Route path="/senario-detail/:id" element={<SenarioDetailPage />} />\
-          <Route path="/scenario-title" element={<ScenarioTitlePage />} />
-          <Route path="/topic/:id" element={<TopicDetailPage />} />
+          {/* 내가 쓴 글 목록 */}
           <Route
-            path="/profile/myposts"
+            path="/mypage/myposts"
             element={<ProtectedRoute element={<MyPostPage />} />}
           />
+          {/* 좋아요 누른 글 목록 */}
           <Route
-            path="/profile/mylikedposts"
+            path="/mypage/mylikedposts"
             element={<ProtectedRoute element={<MyLikedPostPage />} />}
           />
+          {/* 좋아요 누른 주제 목록 */}
           <Route
-            path="/profile/likedtopics"
+            path="/mypage/likedtopics"
             element={<ProtectedRoute element={<LikedTopicPage />} />}
           />
-          <Route
-            path="/select-title-detail/:id"
-            element={<SelectTitleDetail />}
-          />
-          <Route
-            path="/other-person-page/:nickname"
-            element={<OtherPersonPage />}
-          />
+          {/* 게시글 작성 */}
+          <Route path="/scenario/write" element={<SenarioDetailPage />} />
+          {/* 주제 목록 */}
+          <Route path="/scenario/topic" element={<ScenarioTitlePage />} />
+          {/* 주제에 대한 게시글 목록 */}
+          <Route path="/scenario/topic/:id" element={<TopicDetailPage />} />
+          {/* 게시글 열람 */}
+          <Route path="/scenario/:id" element={<SelectTitleDetail />} />
+          {/* 사용자 프로필 */}
+          <Route path="/profile/:id" element={<OtherPersonPage />} />
+          {/* N보고서 */}
+          <Route path="/report" element={<ReportPage />} />
+          {/* N력 랭킹 */}
+          <Route path="/ranking" element={<RankingPage />} />
+          {/* 회원가입 */}
+          <Route path="/signup" element={<SignupPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

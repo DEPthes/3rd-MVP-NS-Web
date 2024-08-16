@@ -9,7 +9,7 @@ const BestItem = ({
   onPostClick,
 }: {
   item: TReportBest;
-  onProfileClick: (id: number) => void;
+  onProfileClick: (isCurrentUser: boolean, userId: number) => void;
   onPostClick: (id: number) => void;
 }) => {
   const { isMobileOrTablet } = useNSMediaQuery();
@@ -17,20 +17,22 @@ const BestItem = ({
   return (
     <S.Container>
       {!isMobileOrTablet && (
-        <S.ProfileWrap onClick={() => onProfileClick(item.profileId)}>
-          <img src={item.image} alt="" />
+        <S.ProfileWrap
+          onClick={() => onProfileClick(item.isCurrentUser, item.userId)}
+        >
+          <img src={item.imageUrl} alt="" />
           <h3>{item.nickname}</h3>
-          <p>{item.selectLength}회 선정</p>
+          <p>{item.bestSelectionCount}회 선정</p>
         </S.ProfileWrap>
       )}
-      <S.PostWrap onClick={() => onPostClick(item.postId)}>
+      <S.PostWrap onClick={() => onPostClick(item.boardId)}>
         <S.PostLeftWrap>
           <h3>{item.title}</h3>
-          <p>발행일 : {item.date}</p>
+          <p>발행일 : {item.boardCreatedAt}</p>
         </S.PostLeftWrap>
         <S.PostRightWrap>
           <HeartIcon width={isMobileOrTablet ? 14 : 35} />
-          <h5>{item.heart}</h5>
+          <h5>{item.likeCount}</h5>
         </S.PostRightWrap>
       </S.PostWrap>
     </S.Container>
