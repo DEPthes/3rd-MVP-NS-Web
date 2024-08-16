@@ -12,7 +12,7 @@ const RankingPage: React.FC = () => {
   const [top3Users, setTop3Users] = useState<TUser[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<TUser[]>([]);
   const [sortType, setSortType] = useState<TSortType>('total');
-  const { isDesktop, isMobileOrTablet } = useNSMediaQuery();
+  const { isDesktop, isMobile, isTablet } = useNSMediaQuery();
 
   const fetchRankingData = async (type: TSortType) => {
     const rankingData = await getRanking(
@@ -51,7 +51,7 @@ const RankingPage: React.FC = () => {
         {['total', 'daily', 'weekly', 'monthly'].map((option, index) => (
           <React.Fragment key={option}>
             <S.FilterLink
-              isSelected={sortType === option}
+              $isSelected={sortType === option}
               onClick={event => {
                 event.preventDefault();
                 setSortType(option as TSortType);
@@ -107,9 +107,9 @@ const RankingPage: React.FC = () => {
         {isDesktop && (
           <S.Podium src="/src/assets/images/podium.svg" alt="podiumimg" />
         )}
-        {isMobileOrTablet && (
-          <S.Podium src="/src/assets/images/smallpodium.svg" />
-        )}
+        {isMobile && <S.Podium src="/src/assets/images/smallpodium.svg" />}
+
+        {isTablet && <S.Podium src="/src/assets/icons/PodiumTablet.svg" />}
       </S.Top3Container>
 
       {/* 닉네임 검색 */}

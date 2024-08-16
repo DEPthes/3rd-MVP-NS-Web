@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { isMobileOrTablet } from '@/hooks/Media';
+import { isMobileOrTablet, isMobile, isTablet } from '@/hooks/Media';
 
 export const Top3UserContainer = styled.div`
   display: flex;
@@ -7,8 +7,14 @@ export const Top3UserContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  ${isMobileOrTablet} {
+  ${isMobile} {
     width: 64px;
+    height: 111px;
+    max-with: 500px;
+  }
+
+  ${isTablet} {
+    width: 96.1px;
     height: 111px;
     max-with: 500px;
   }
@@ -18,7 +24,13 @@ export const Medal = styled.div`
   font: var(--H4);
   margin-bottom: 5px;
 
-  ${isMobileOrTablet} {
+  ${isMobile} {
+    margin-bottom: 8px;
+    height: 16px;
+    font: var(--S1-2);
+  }
+
+  ${isTablet} {
     margin-bottom: 8px;
     height: 16px;
     font: var(--S1-2);
