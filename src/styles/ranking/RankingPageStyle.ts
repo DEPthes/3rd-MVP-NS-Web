@@ -18,7 +18,7 @@ export const Container = styled.div`
 
   ${isMobile} {
     margin-top: 60px;
-    margin-bottom: 190px;
+    margin-bottom: 60px;
   }
 
   ${isTablet} {
@@ -35,12 +35,12 @@ export const Top3Title = styled.h2`
   ${isMobileOrTablet} {
     height: 22px;
     margin-bottom: 26px;
-    font: var(--T2-3);
+    font: var(--BigButton);
   }
 `;
 
 export const FilterLinks = styled.div`
-  heigth: 19px;
+  height: 19px;
   z-index: 2;
   margin-top: 34px;
   right: 0px;
@@ -125,7 +125,7 @@ export const SearchContainer = styled.div`
   ${isMobileOrTablet} {
     width: 100%;
     margin-top: 26px;
-    margin-bottom: 52px;
+    margin-bottom: 47px;
   }
 `;
 
@@ -134,20 +134,24 @@ export const FilterLink = styled.a<{ isSelected: boolean }>`
     isSelected ? 'var(--NS-Main-Clicked)' : 'var(--NS-White)'};
   text-decoration: none;
   cursor: pointer;
+  font: var(--T12);
 
   &:hover {
     color: var(--NS-Main-Clicked);
   }
 
   ${isMobileOrTablet} {
-    font: var(--S1-5);
+    font: var(--S1-6);
   }
 `;
 
 export const Separator = styled.span`
   margin: 12px;
+  font: var(--T12);
+
   ${isMobileOrTablet} {
     margin: 10px;
+    font: var(--S1-6);
   }
 `;
 
@@ -155,7 +159,6 @@ export const RankingContainer = styled.div`
   width: 100%;
   background-color: var(--NS-White);
   display: flex;
-  flex-deriction: column;
   justify-content: center;
   border-radius: 40px;
   padding-top: 60px;
@@ -175,6 +178,7 @@ export const RankingTable = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 920px;
 
   ${isMobileOrTablet} {
     width: 270px;
@@ -182,13 +186,12 @@ export const RankingTable = styled.div`
 `;
 
 export const TableHeader = styled.table`
-  width: 900px;
+  width: 100%;
   font: var(--T2);
   color: var(--NS-Main1);
   padding-bottom: 16px;
 
   ${isMobileOrTablet} {
-    width: 100%;
     height: 100%;
     padding-bottom: 11px;
   }
@@ -217,6 +220,7 @@ export const TableHeaderItem1 = styled.td`
 export const TableHeaderItem2 = styled.td`
   width: 33%;
   text-align: center;
+
   ${isMobileOrTablet} {
     width: 33%;
     font: var(--T12);
@@ -228,6 +232,7 @@ export const TableHeaderItem2 = styled.td`
 export const TableHeaderItem3 = styled.td`
   width: 33%;
   text-align: right;
+
   ${isMobileOrTablet} {
     width: 33%;
     font: var(--T12);
@@ -238,8 +243,8 @@ export const TableHeaderItem3 = styled.td`
 
 export const TableBody = styled.table`
   width: 919px;
+
   ${isMobileOrTablet} {
     width: 270px;
-]
-
+  }
 `;

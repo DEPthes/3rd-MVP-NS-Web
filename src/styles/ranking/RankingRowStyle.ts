@@ -11,7 +11,6 @@ export const TableData1 = styled.td`
 
   font: var(--T2);
   text-align: left;
-  line-height: 28px;
   padding-top: 12px;
 
   ${isMobileOrTablet} {
@@ -26,7 +25,6 @@ export const TableData2 = styled.td`
   width: 60%;
   font: var(--T2);
   text-align: center;
-  line-height: 28px;
 
   ${isMobileOrTablet} {
     font: var(--T11);
@@ -39,7 +37,6 @@ export const TableData3 = styled.td`
   width: 20%;
   font: var(--T2);
   text-align: right;
-  line-height: 28px;
 
   ${isMobileOrTablet} {
     font: var(--T11);
