@@ -9,99 +9,99 @@ export const Container = styled.div`
 `;
 
 export const TopicBox = styled.div`
-background-color: var(--NS-White);
-border-radius: 40px;
-padding: 29px 20px 16px;
-text-align: center;
-box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
-width: 1170px;
-min-height: 160px;
+  background-color: var(--NS-White);
+  border-radius: 40px;
+  padding: 29px 20px 16px;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+  width: 1170px;
+  min-height: 160px;
 
-${isMobile} {
-  width: 320px;
-  min-height: 92px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  ${isMobile} {
+    width: 320px;
+    min-height: 92px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-${isTablet} {
-  width: 728px;
-  min-height: 200px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  ${isTablet} {
+    width: 728px;
+    min-height: 92px;
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const TopicHeader = styled.div`
-color: var(--NS-Main1);
-font: var(--LogoSmall);
+  color: var(--NS-Main1);
+  font: var(--LogoSmall);
 
-${isMobile} {
-  font: var(--Hy1);
-}
+  ${isMobile} {
+    font: var(--Hy1);
+  }
 
-${isTablet} {
-  font: var(--Hy1);
-}
+  ${isTablet} {
+    font: var(--Hy1);
+  }
 `;
 
 export const Topic = styled.div`
-margin-top: 1.8px;
-color: var(--NS-Main1);
-font: var(--T1-1);
+  margin-top: 1.8px;
+  color: var(--NS-Main1);
+  font: var(--T1-1);
 
-${isMobile} {
-  margin-top: 4px;
-  font: var(--P-T1);
-}
+  ${isMobile} {
+    margin-top: 4px;
+    font: var(--P-T1);
+  }
 
-${isTablet} {
-  margin-top: 4px;
-  font: var(--P-T1);
-}
+  ${isTablet} {
+    margin-top: 4px;
+    font: var(--P-T1);
+  }
 `;
 
 export const LikeContainer = styled.div`
-margin-top: 1.8px;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 5px;
+  margin-top: 1.8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 
-svg {
-  width: 30px;  /* 기본 크기 (데스크탑용) */
-  height: 30px;
+  svg {
+    width: 30px; /* 기본 크기 (데스크탑용) */
+    height: 30px;
 
-  ${isMobileOrTablet} {
-	width: 16px;  /* 모바일 및 테블릿에서 크기 줄이기 */
-	height: 16px;
+    ${isMobileOrTablet} {
+      width: 16px; /* 모바일 및 테블릿에서 크기 줄이기 */
+      height: 16px;
+    }
   }
-}
 
-${isMobile} {
-  margin-top: 7px;
-}
+  ${isMobile} {
+    margin-top: 7px;
+  }
 
-${isTablet} {
-  margin-top: 6px;
-}
+  ${isTablet} {
+    margin-top: 6px;
+  }
 `;
 
 export const LikeText = styled.div`
-font: var(--S1);
-color: var(--NS-Main5);
+  font: var(--S1);
+  color: var(--NS-Main5);
 
-${isMobileOrTablet} {
-  font: var(--Hy2);
-}
+  ${isMobileOrTablet} {
+    font: var(--Hy2);
+  }
 `;
-
 
 export const NewTopicBox = styled.div`
   background-color: var(--NS-White);
@@ -113,15 +113,21 @@ export const NewTopicBox = styled.div`
   height: 443px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   background-color: var(—NS-Black);
-  ${isMobile}{
-	width:320px;
-	min-height:300px;
-	border-radius: 20px;
+
+  ${isMobile} {
+    width: 320px;
+    height: 300px;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 16px 0;
   }
-  ${isTablet}{
-	width:728px;
-	min-height:200px;
-	border-radius: 20px;
+
+  ${isTablet} {
+    width: 728px;
+    height: 200px;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 16px 0;
   }
 `;
 
@@ -130,10 +136,10 @@ export const Input = styled.input`
   border: none;
   text-align: center;
   font: var(--H3);
-  ${isMobileOrTablet}{
-	font:var(--P-T1);
-  }
 
+  ${isMobileOrTablet} {
+    font: var(--P-T1);
+  }
 `;
 
 export const Separator = styled.hr`
@@ -141,6 +147,11 @@ export const Separator = styled.hr`
   width: 90%;
   margin-top: 12px;
   margin-bottom: 17px;
+
+  ${isMobileOrTablet} {
+    margin-top: 11px;
+    margin-bottom: 11px;
+  }
 `;
 
 export const TextArea = styled.textarea`
@@ -151,8 +162,9 @@ export const TextArea = styled.textarea`
   text-align: center;
   resize: none;
   outline: none;
-  ${isMobileOrTablet}{
-	font:var(--P-T2);
+
+  ${isMobileOrTablet} {
+    font: var(--P-T2);
   }
 `;
 
@@ -161,6 +173,11 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+
+  ${isMobileOrTablet} {
+    gap: 14px;
+    margin-top: 10px;
+  }
 `;
 
 export const ModalContainer = styled.div`

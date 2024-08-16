@@ -17,6 +17,7 @@ export const SearchBar = styled.div`
   box-shadow: 0px 0px 14px rgba(63, 80, 184, 0.5);
   background-color: var(--NS-White);
   border-radius: 100px;
+
   ${isMobileOrTablet} {
     width: 320px;
     height: 38px;
@@ -30,6 +31,11 @@ export const SearchInput = styled.input`
   font: var(--Input);
   color: var(--NS-Black);
   background-color: transparent;
+
+  &::placeholder {
+    color: var(--Gray1);
+  }
+
   ${isMobileOrTablet} {
     font: var(--P-S1);
   }
@@ -51,9 +57,9 @@ export const Header = styled.div`
   align-items: center;
   margin-bottom: 22px;
   ${isMobileOrTablet} {
-    flex-direction: column; 
-    align-items: flex-start; 
-    margin-bottom: 0; 
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
   }
 `;
 
@@ -62,7 +68,7 @@ export const Title = styled.div`
   font: var(--H2);
   ${isMobileOrTablet} {
     font: var(--W1);
-    margin-bottom: 32px; 
+    margin-bottom: 32px;
   }
 `;
 
@@ -72,7 +78,7 @@ export const SortOptions = styled.div`
   color: var(--NS-White);
   font: var(--S1);
   ${isMobileOrTablet} {
-    align-self: flex-end;/*오른쪽 정렬시켰다*/ 
+    align-self: flex-end; /*오른쪽 정렬시켰다*/
     margin-bottom: 10px;
   }
 `;
@@ -152,11 +158,11 @@ export const LikeContainer = styled.div`
   cursor: pointer;
 
   svg {
-    width: 35px; 
+    width: 35px;
     height: 35px;
 
     ${isMobileOrTablet} {
-      width: 14px; 
+      width: 14px;
       height: 14px;
     }
   }
@@ -168,7 +174,6 @@ export const LikeCount = styled.div`
 
   ${isMobileOrTablet} {
     font: var(--T5-B);
-    margin-top: 4px; 
+    margin-top: 4px;
   }
 `;
-
