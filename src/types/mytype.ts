@@ -2,7 +2,9 @@ export interface TTodayThemeResponse {
 	content: string;
 	userId: number | null;
 	likedTheme: boolean;
+
 }
+
 
 export interface TPostDraftResponse {
 	check: boolean;

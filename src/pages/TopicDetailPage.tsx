@@ -56,12 +56,10 @@ const TopicDetailPage: React.FC = () => {
 		navigate(`/select-title-detail/${postId}`);
 	};
 
-	const handleTopicLikeClick = () => {//이부분 반영이 안되어서 코드 수정 필요!!
-		// 좋아요 상태 변경
+	const handleTopicLikeClick = () => {
 		setIsLiked((prevIsLiked) => {
 			const newIsLiked = !prevIsLiked;
 
-			// 주제의 좋아요 개수 변경
 			setTopic((prevTopic) => {
 				if (prevTopic) {
 					const updatedLikeCount = newIsLiked

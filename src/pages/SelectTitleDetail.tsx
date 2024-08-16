@@ -68,7 +68,7 @@ const SelectTitleDetail: React.FC = () => {
 			const deleteSuccess = await deleteBoard(parseInt(id), handleUnauthorized);
 			if (deleteSuccess) {
 				alert('게시글이 삭제되었습니다.');
-				navigate(`/topic/${id}`);
+				navigate(`/topic/1`); // 삭제 후 해당 주제로 이동
 			} else {
 				alert('게시글 삭제에 실패했습니다.');
 			}
@@ -83,7 +83,6 @@ const SelectTitleDetail: React.FC = () => {
 	const handleWhiteHeartClick = async () => {
 		try {
 			// 주제에 대한 좋아요 API 호출 코드 추가
-			//await toggleThemeLike(id, !isLiked, handleUnauthorized);
 			setIsLiked(!isLiked);
 		} catch (error) {
 			console.error('좋아요 실패:', error);
@@ -93,7 +92,6 @@ const SelectTitleDetail: React.FC = () => {
 	const handleBlueHeartClick = async () => {
 		try {
 			// 게시글에 대한 좋아요 API 호출 코드 추가
-			/*await togglePostLike(id, !isBlueHeartLiked, handleUnauthorized);*/
 			setIsBlueHeartLiked(!isBlueHeartLiked);
 		} catch (error) {
 			console.error('좋아요 실패:', error);
@@ -143,8 +141,12 @@ const SelectTitleDetail: React.FC = () => {
 				{!isMobileOrTablet && (
 					<LightButton text="뒤로 가기" onClick={handleBackClick} />
 				)}
-				<LightButton text="수정하기" onClick={handleEditClick} />
-				<LightButton text="삭제하기" onClick={handleDeleteClick} />
+				{post?.owner && (
+					<>
+						<LightButton text="수정하기" onClick={handleEditClick} />
+						<LightButton text="삭제하기" onClick={handleDeleteClick} />
+					</>
+				)}
 			</S.ButtonContainer>
 			{isDeleteModalOpen && (
 				<S.DeleteModalOverlay>
@@ -152,7 +154,7 @@ const SelectTitleDetail: React.FC = () => {
 						<S.DeleteModalText>삭제하시겠습니까?</S.DeleteModalText>
 						<S.ButtonContainer>
 							<LightButton text="삭제하기" onClick={handleConfirmDelete} />
-							<LightButton text="취소하기" onClick={handleCancelDelete} />
+							<LightButton text="취소" onClick={handleCancelDelete} />
 						</S.ButtonContainer>
 					</S.DeleteModal>
 				</S.DeleteModalOverlay>
@@ -172,6 +174,8 @@ const SelectTitleDetail: React.FC = () => {
 };
 
 export default SelectTitleDetail;
+
+
 
 
 

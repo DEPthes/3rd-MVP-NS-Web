@@ -9,21 +9,21 @@ import { getToday } from '@/apis/theme/getToday';
 import { TTodayThemeResponse, TPostDraftRequest } from '@/types/mytype';
 import { postDraft } from '@/apis/board/postDraft';
 import { postPublish } from '@/apis/board/postPublish';
+import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 const SenarioDetailPage: React.FC = () => {
 	const [topic, setTopic] = useState<string>('');
+	const [themeId, setThemeId] = useState<number>(0);
 	const [isLiked, setIsLiked] = useState<boolean>(false);
 	const [title, setTitle] = useState<string>('');
 	const [text, setText] = useState<string>('');
 	const [isSaveModalVisible, setIsSaveModalVisible] = useState<boolean>(false);
-	const [isSaveCompleteModalVisible, setIsSaveCompleteModalVisible] =
-		useState<boolean>(false);
+	const [isSaveCompleteModalVisible, setIsSaveCompleteModalVisible] = useState<boolean>(false);
 	const [isPostModalVisible, setIsPostModalVisible] = useState<boolean>(false);
-	const [isPostCompleteModalVisible, setIsPostCompleteModalVisible] =
-		useState<boolean>(false);
+	const [isPostCompleteModalVisible, setIsPostCompleteModalVisible] = useState<boolean>(false);
 
-	const handleUnauthorized = useHandleUnauthorized(); // handleUnauthorized 콜백 생성. getToday오류 방지 위해.
+	const handleUnauthorized = useHandleUnauthorized();
 
 	useEffect(() => {
 		const fetchTopic = async () => {
@@ -31,6 +31,7 @@ const SenarioDetailPage: React.FC = () => {
 			if (data) {
 				setTopic(data.content);
 				setIsLiked(data.likedTheme);
+				setThemeId(1);// 주제 ID 설정
 			} else {
 				console.error('오늘의 주제를 불러오지 못했습니다.');
 			}
@@ -39,8 +40,18 @@ const SenarioDetailPage: React.FC = () => {
 		fetchTopic();
 	}, [handleUnauthorized]);
 
-	const handleLikeClick = () => {
-		setIsLiked(!isLiked);
+	const handleLikeClick = async () => {
+		if (themeId === 0) return;  // themeId가 0이면 처리하지 않음
+		try {
+			const response = await postLike(themeId, handleUnauthorized);
+			if (response) {
+				setIsLiked(response.liked);
+			} else {
+				console.error('좋아요 처리 실패');
+			}
+		} catch (error) {
+			console.error('좋아요 요청 중 오류 발생:', error);
+		}
 	};
 
 	const handleSave = () => {
@@ -49,15 +60,13 @@ const SenarioDetailPage: React.FC = () => {
 	};
 
 	const handleModalSave = async () => {
-		// 임시 저장 API 호출
 		const draftData: TPostDraftRequest = {
 			title,
 			content: text,
-			themeId: 1, // 예시: 현재 주제 ID를 사용해야 함. 실제 ID로 교체 필요.
+			themeId: 1, // 주제 ID 사용
 		};
 
 		const response = await postDraft(draftData, handleUnauthorized);
-		// 임시 저장 완료 모달창
 		if (response?.check) {
 			setIsSaveCompleteModalVisible(true);
 		} else {
@@ -67,18 +76,16 @@ const SenarioDetailPage: React.FC = () => {
 		setIsSaveModalVisible(false);
 	};
 
-	// 게시 모달창 
 	const handlePost = () => {
 		if (title.trim() === '' || text.trim() === '') return;
 		setIsPostModalVisible(true);
 	};
 
 	const handleModalPost = async () => {
-		// 게시 API 호출
 		const postData: TPostDraftRequest = {
 			title,
 			content: text,
-			themeId: 1, // 예시이므로 실제 주제 ID 사용이 필요
+			themeId, // 주제 ID 사용
 		};
 
 		const response = await postPublish(postData, handleUnauthorized);
@@ -200,7 +207,6 @@ const SenarioDetailPage: React.FC = () => {
 };
 
 export default SenarioDetailPage;
-
 
 
 
