@@ -17,7 +17,7 @@ const DarkButton = ({
       {...props}
       onClick={onClick}
       disabled={isDisabled}
-      isSmall={isSmall}
+      $isSmall={isSmall}
     >
       {text}
     </Button>
