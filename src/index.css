@@ -27,28 +27,32 @@
   --Y1: 400 32px / normal YeongdeokSnowCrab;
   --Y2: 400 12px / normal YeongdeokSnowCrab;
   --H1: 800 36px / normal Pretendard;
-  --H1-1: 800 36px / normal Pretendard-ExtraBold;
-  --H11: 800 36px / normal Pretendard-ExtraBold;
+  --H1-1: 800 36px / normal Pretendard;
+  --H11: 800 36px / normal Pretendard;
   --H2: 700 24px/22px Pretendard;
-  --H2-2: 700 24px / normal Pretendard-Bord;
+  --H2-2: 700 24px / normal Pretendard;
   --H3: 600 28px / normal Pretendard;
   --H4: 800 32px / normal Pretendard;
   --H4-1: 600 32px / normal Pretendard;
-  --H4-2: 600 32px / normal Pretendard-ExtraBold;
+  --H4-2: 600 32px / normal Pretendard;
   --T1: 700 36px / normal Pretendard;
   --T1-1: 600 36px / normal Pretendard;
   --T2: 600 20px/28px Pretendard;
-  --T2-2: 400 20px / normal Pretendard-Medium;
+  --T2-4: 600 20px / normal Pretendard;
+  --T2-2: 400 20px / normal Pretendard;
+  --T2-3: 400 20px / normal Pretendard;
   --T3: 400 22px / normal Pretendard;
   --T3-1: 600 22px/22px Pretendard;
   --T4: 400 20px/28px Pretendard;
   --T5: 600 10px/15px Pretendard;
-  --T6: 500 16px Pretendard-SemiBold;
+  --T6: 500 16px Pretendard;
   --S1: 700 16px / normal Pretendard;
   --S1-1: 400 16px/28px Pretendard;
-  --S1-2: 400 16px / normal Pretendard-SemiBold;
-  --S1-3: 400 16px / normal Pretendard-Bold;
-  --S1-4: 400 20px / normal Pretendard-SemiBold;
+  --S1-2: 400 16px / normal Pretendard;
+  --S1-3: 400 16px / normal Pretendard;
+  --S1-4: 400 20px / normal Pretendard;
+  --S1-5: 400 15px / normal Pretendard;
+  --S1-6: 600 15px / normal Pretendard;
   --Button: 400 16px / normal Pretendard;
   --Input: 500 20px / 22px Pretendard;
   --Label: 500 16px / 15px Pretendard;
@@ -69,6 +73,9 @@
   --W1-B: 600 8.63px / normal Pretendard;
   --Input-B: 500 12px / normal Pretendard;
   --T5-B: 600 8px / normal Pretendard;
+  --T11: 600 12px / normal Pretendard;
+  --T12: 600 16px / normal Pretendard;
+  --T13: 500 16px / normal Pretendard;
 }
 
 html,

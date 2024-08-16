@@ -1,28 +1,19 @@
 import React from 'react';
-import { TUser, SortType } from '../../types/ranking/user';
+import { TUser } from '../../types/ranking/user';
 import * as S from '@styles/ranking/RankingRowStyle';
 
 type RankingRowProps = {
   user: TUser;
   rank: number;
-  sortType: SortType;
 };
 
-const RankingRow: React.FC<RankingRowProps> = ({ user, rank, sortType }) => {
-  const score =
-    sortType === 'total'
-      ? user.totalScore
-      : sortType === 'daily'
-      ? user.dailyScore
-      : sortType === 'weekly'
-      ? user.weeklyScore
-      : user.monthlyScore;
-
+const RankingRow: React.FC<RankingRowProps> = ({ user, rank }) => {
+  console.log(user, rank); // 콘솔에 출력하여 데이터 확인
   return (
     <S.TableRow>
-      <S.TableData>{rank}위</S.TableData>
-      <S.TableData>{user.userNickname}</S.TableData>
-      <S.TableData>{score}점</S.TableData>
+      <S.TableData1>{rank}위</S.TableData1>
+      <S.TableData2>{user.nickname}</S.TableData2>
+      <S.TableData3>{user.point}점</S.TableData3>
     </S.TableRow>
   );
 };

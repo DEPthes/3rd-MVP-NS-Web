@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '@/styles/ranking/SearchNicknameInputStyle';
 import SearchIcon from '@/assets/icons/Search.svg';
-import { TUser } from '../../types/ranking/user';
 
 type SearchNicknameInputProps = {
-  users: TUser[];
-  onSearchResults: (results: TUser[]) => void;
+  onSearchResults: (nickname: string) => void;
+  onClearSearch: () => void;
 };
 
 const SearchNicknameInput: React.FC<SearchNicknameInputProps> = ({
-  users,
   onSearchResults,
+  onClearSearch,
 }) => {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    // 검색어가 변경될 때마다 필터링된 결과를 업데이트
-    const filteredUsers = users.filter(user =>
-      user.userNickname.toLowerCase().includes(query.toLowerCase()),
-    );
-    onSearchResults(filteredUsers);
-  }, [query, users, onSearchResults]);
+    const delayDebounceFn = setTimeout(() => {
+      if (query.trim()) {
+        onSearchResults(query); // 닉네임 검색
+      } else {
+        onClearSearch(); // 검색어가 지우면 원래 리스트 복원
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [query, onSearchResults, onClearSearch]);
 
   return (
     <S.SearchContainer>
