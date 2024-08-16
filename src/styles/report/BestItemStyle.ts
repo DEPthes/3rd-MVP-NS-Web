@@ -89,7 +89,7 @@ export const PostLeftWrap = styled.div`
     color: var(--Gray1);
 
     ${isMobileOrTablet} {
-      font: var(--P-S2-2);
+      font: var(--P-S3);
     }
   }
 `;
