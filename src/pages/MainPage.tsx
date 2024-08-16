@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as S from '@/styles/main/MainPageStyle';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ServiceContent from '@/components/main/ServiceContent';
 import IntroductionContainer from '@/components/main/IntroductionContainer';
 import UsageContainer from '@/components/main/UsageContainer';
@@ -8,17 +8,34 @@ import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { isDesktop, isMobileOrTablet } = useNSMediaQuery();
+
+  const introductionRef = useRef<HTMLDivElement>(null);
+  const usageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (location.state?.scrollToIntroduction) {
+      introductionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (location.state?.scrollToUsage) {
+      usageRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location]);
 
   return (
     <S.Container>
       <S.Content>
         <S.Service>N력 키우기란?</S.Service>
         <ServiceContent />
-        <S.Introduction>서비스 소개</S.Introduction>
+        {/* ref와 id 설정 */}
+        <S.Introduction ref={introductionRef} id="service-introduction">
+          서비스 소개
+        </S.Introduction>
         <IntroductionContainer />
-        <S.Usage>N력 키우는 방법</S.Usage>
+        <S.Usage ref={usageRef} id="usage">
+          N력 키우는 방법
+        </S.Usage>
         <UsageContainer />
         <S.Text>
           {isMobileOrTablet
