@@ -168,7 +168,7 @@ export const RankingContainer = styled.div`
   ${isMobileOrTablet} {
     width: 100%;
     height: auto;
-    padding: 28px 29px;
+    padding: 28px 29px 17px;
     border-radius: 20px;
     margin-bottom: 30px;
   }
