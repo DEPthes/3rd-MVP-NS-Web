@@ -100,13 +100,33 @@ const ProfilePage: React.FC = () => {
         </S.EditOptions>
       </S.ProfileSection>
       <S.ButtonSection>
-        <S.ActionButton onClick={() => navigate('/mypage/myposts')}>
+        <S.ActionButton
+          onClick={() => {
+            console.log('Navigating with userId:', userData.information.userId);
+            navigate('/mypage/myposts', {
+              state: { userId: userData.information.userId },
+            });
+          }}
+        >
           ☞ 내가 쓴 글 ☜
         </S.ActionButton>
-        <S.ActionButton2 onClick={() => navigate('/mypage/mylikedposts')}>
+
+        <S.ActionButton2
+          onClick={() =>
+            navigate('/mypage/mylikedposts', {
+              state: { userId: userData.information.userId },
+            })
+          }
+        >
           ♡ 좋아요 누른 글 ♥
         </S.ActionButton2>
-        <S.ActionButton onClick={() => navigate('/mypage/likedtopics')}>
+        <S.ActionButton
+          onClick={() =>
+            navigate('/mypage/likedtopics', {
+              state: { userId: userData.information.userId },
+            })
+          }
+        >
           ♥ 좋아요 누른 주제 ♡
         </S.ActionButton>
       </S.ButtonSection>

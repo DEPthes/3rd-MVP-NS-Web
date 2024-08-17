@@ -58,12 +58,12 @@ export const PostTitle = styled.h3`
 `;
 
 export const PostDate = styled.p<{
-  isTemporary: boolean;
+  $published: boolean;
 }>`
   margin-top: -5px;
   margin-bottom: 11px;
   font: var(--S1-1);
-  color: ${({ isTemporary }) => (isTemporary ? '#EE4B4B' : 'var(--Gray1)')};
+  color: ${({ $published }) => ($published ? 'var(--Gray1)' : '#EE4B4B')};
 
   ${isMobileOrTablet} {
     font: var(--P-S2-2);

@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/mypost/EmptyMessageStyle';
 
-// EmptyMessageProps 타입 정의
 type EmptyMessageProps = {
   buttonText: string; // 버튼 텍스트
   messageText: string; // 메시지 텍스트
