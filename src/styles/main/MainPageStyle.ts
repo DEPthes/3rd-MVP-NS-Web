@@ -55,7 +55,7 @@ export const IntroductionWrap = styled.div`
 
   ${isMobileOrTablet} {
     padding-top: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
   }
 `;
 
@@ -141,6 +141,7 @@ export const ButtonContainer = styled.div`
 export const StyledButton = styled.button`
   width: 102px;
   height: 44px;
+  padding: 0;
   font: var(--T2);
   background-color: #ffffff;
   color: #5e72eb;
@@ -157,7 +158,6 @@ export const StyledButton = styled.button`
     border: 0.8px solid #5e72eb;
     color: #5e72eb;
     font: var(--P-S1);
-    padding: 0;
     margin: 0;
   }
 `;
