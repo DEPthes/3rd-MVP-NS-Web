@@ -38,19 +38,35 @@ const ProfilePage: React.FC = () => {
         information: { ...userData.information, nickname: newNickname },
       });
     }
+    setIsModalOpen(false); // 닉네임 변경 성공 시 모달을 닫습니다.
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     const isDefault = !file; // 파일이 없으면 기본 이미지 설정
 
+    // 파일 형식 검증
+    if (file && !['image/jpeg', 'image/png'].includes(file.type)) {
+      alert('PNG 또는 JPG 형식의 파일만 업로드할 수 있습니다.');
+      return;
+    }
+
     try {
-      const response = await patchProfile(isDefault, file);
+      const response = await patchProfile(isDefault, file, handleUnauthorized);
+
       if (response.check) {
-        alert('프로필이 변경되었습니다.'); // 성공 시 메시지 출력
-        // 필요한 경우 userData를 업데이트하는 로직 추가 가능
+        alert('프로필이 변경되었습니다.');
+
+        // 프로필 업데이트 후, 최신 정보를 다시 가져옵니다.
+        const updatedUserData = await getUser(handleUnauthorized);
+        if (updatedUserData?.check) {
+          setUserData(updatedUserData);
+        } else {
+          console.error('프로필 정보 다시 가져오기 실패');
+        }
       } else {
         alert('프로필 변경에 실패했습니다.');
+        console.error('프로필 변경 실패:', response);
       }
     } catch (error) {
       console.error('프로필 변경 중 오류 발생:', error);
@@ -61,6 +77,7 @@ const ProfilePage: React.FC = () => {
   const openFilePicker = () => {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
+    fileInput.accept = 'image/png, image/jpeg'; // png나 jpg로 제한
 
     fileInput.onchange = event => {
       const e = event as unknown as React.ChangeEvent<HTMLInputElement>;
@@ -103,30 +120,16 @@ const ProfilePage: React.FC = () => {
         <S.ActionButton
           onClick={() => {
             console.log('Navigating with userId:', userData.information.userId);
-            navigate('/mypage/myposts', {
-              state: { userId: userData.information.userId },
-            });
+            navigate('/mypage/myposts');
           }}
         >
           ☞ 내가 쓴 글 ☜
         </S.ActionButton>
 
-        <S.ActionButton2
-          onClick={() =>
-            navigate('/mypage/mylikedposts', {
-              state: { userId: userData.information.userId },
-            })
-          }
-        >
+        <S.ActionButton2 onClick={() => navigate('/mypage/mylikedposts')}>
           ♡ 좋아요 누른 글 ♥
         </S.ActionButton2>
-        <S.ActionButton
-          onClick={() =>
-            navigate('/mypage/likedtopics', {
-              state: { userId: userData.information.userId },
-            })
-          }
-        >
+        <S.ActionButton onClick={() => navigate('/mypage/likedtopics')}>
           ♥ 좋아요 누른 주제 ♡
         </S.ActionButton>
       </S.ButtonSection>

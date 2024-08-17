@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from '@/styles/mypost/PostItemStyle';
 import { TPost } from '@/types/mypost/post';
 
@@ -9,7 +9,12 @@ const PostItem: React.FC<Omit<TPost, 'boardId'>> = ({
   countLike,
   published,
 }) => {
+  const [liked, setLiked] = useState(false); // 좋아요 상태 관리
   const formattedDate = createdDate.split('T')[0].split('-').join('. ');
+
+  const handleLikeClick = () => {
+    setLiked(!liked); // 클릭 시 좋아요 상태를 토글
+  };
 
   return (
     <S.Post>
@@ -23,8 +28,10 @@ const PostItem: React.FC<Omit<TPost, 'boardId'>> = ({
         <S.PostTitle>{title}</S.PostTitle>
       </S.TextField>
       <S.LikesContainer>
-        <S.LikeIcon liked={false} />
-        <S.PostLikes>{countLike}</S.PostLikes>
+        <S.LikeIcon liked={liked} onClick={handleLikeClick} />
+        {/* 클릭 핸들러 추가 */}
+        <S.PostLikes>{countLike + (liked ? 1 : 0)}</S.PostLikes>
+        {/* 좋아요 상태에 따라 좋아요 수 변경 */}
       </S.LikesContainer>
     </S.Post>
   );

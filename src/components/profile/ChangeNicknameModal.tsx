@@ -136,13 +136,13 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
 
         {!isPasswordVerified ? (
           <S.PasswordContainer>
-            <S.PasswordSection color={passwordValidationColor}>
+            <S.PasswordSection $color={passwordValidationColor}>
               <S.Input
                 type="password"
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="비밀번호 확인"
-                color={passwordValidationColor}
+                $color={passwordValidationColor}
               />
               {password.length > 0 && passwordValidationColor !== '#EE4B4B' && (
                 <>
@@ -163,7 +163,7 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
               )}
             </S.PasswordSection>
             {passwordValidationMessage && (
-              <S.ValidationMessage color={passwordValidationColor}>
+              <S.ValidationMessage $color={passwordValidationColor}>
                 {passwordValidationMessage}
               </S.ValidationMessage>
             )}
@@ -180,13 +180,13 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
           <>
             <S.InputContainer>
               <S.ChangeContainer>
-                <S.InputSection color={validationColor}>
+                <S.InputSection $color={validationColor}>
                   <S.Input
                     type="text"
                     value={nickname}
                     onChange={handleNicknameChange}
                     placeholder="변경할 닉네임"
-                    color={validationColor}
+                    $color={validationColor}
                   />
                   {nickname.length > 0 &&
                     validationColor === 'var(--NS-Black)' && (
@@ -214,7 +214,7 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
                   />
                 </S.DButtonContainer>
               </S.ChangeContainer>
-              <S.ValidationMessage color={validationColor}>
+              <S.ValidationMessage $color={validationColor}>
                 {validationMessage}
               </S.ValidationMessage>
             </S.InputContainer>

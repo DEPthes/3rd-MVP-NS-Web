@@ -39,10 +39,10 @@ export const PasswordContainer = styled.div`
   }
 `;
 
-export const PasswordSection = styled.div<{ color: string }>`
+export const PasswordSection = styled.div<{ $color: string }>`
   width: 405px;
   height: 35px;
-  border-bottom: 1.5px solid ${props => props.color};
+  border-bottom: 1.5px solid ${props => props.$color};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,7 +50,7 @@ export const PasswordSection = styled.div<{ color: string }>`
 
 export const PButtonContainer = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 12px;
   justify-content: center;
   margin-top: 16px;
 `;
@@ -63,10 +63,10 @@ export const InputContainer = styled.div`
   height: 35px;
 `;
 
-export const InputSection = styled.div<{ color: string }>`
+export const InputSection = styled.div<{ $color: string }>`
   width: 300px;
   height: 35px;
-  border-bottom: 1.5px solid ${props => props.color};
+  border-bottom: 1.5px solid ${props => props.$color};
   margin-right: 4px;
   margin-top: 0;
   display: flex;
@@ -83,7 +83,7 @@ export const ChangeContainer = styled.div`
   display: flex;
 `;
 
-export const Input = styled.input<{ color: string }>`
+export const Input = styled.input<{ $color: string }>`
   flex-grow: 1;
   font: var(--M2-2);
   border: none;
@@ -94,7 +94,7 @@ export const Input = styled.input<{ color: string }>`
   color: ${props => props.color};
 
   &::placeholder {
-    color: ${props => props.color}; // placeholder 색상도 동일하게 변경
+    color: ${props => props.$color};
     font: var(T3-1);
   }
 `;
@@ -105,10 +105,10 @@ export const Icon = styled.img`
   margin-right: 0;
 `;
 
-export const ValidationMessage = styled.div<{ color: string }>`
+export const ValidationMessage = styled.div<{ $color: string }>`
   font: var(--M2);
   margin: 0 0px 0px;
-  color: ${props => props.color};
+  color: ${props => props.$color};
 `;
 export const ButtonContainer = styled.div`
   display: flex;
