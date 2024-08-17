@@ -26,6 +26,7 @@
   --LogoMini: 400 32px / normal YeongdeokSnowCrab;
   --LogoMini-2: 400 30px / 22px YeongdeokSnowCrab;
   --LogoMini-3: 400 16px / 22px YeongdeokSnowCrab;
+  --LogoSmall: 400 24px / normal YeongdeokSnowCrab;
   --Y1: 400 32px / normal YeongdeokSnowCrab;
   --Y2: 400 12px / normal YeongdeokSnowCrab;
   --H1: 800 36px / normal Pretendard;
@@ -57,7 +58,7 @@
   --S1: 700 16px / normal Pretendard;
   --S1-1: 400 16px/28px Pretendard;
   --S1-2: 600 16px / normal Pretendard;
-  --S1-3: 400 16px / normal Pretendard-Bold;
+  --S1-3: 400 16px / normal Pretendard;
   --S1-4: 600 20px / normal Pretendard;
   --Button: 400 16px / normal Pretendard;
   --Input: 500 20px / 22px Pretendard;
@@ -65,7 +66,7 @@
   --BigButton: 700 20px / normal Pretendard;
   --W1: 600 16px / normal Pretendard;
   --W1-B: 600 8.63px / normal Pretendard;
-  --W4: 400 16px / normal pretendard;
+  --W4: 400 16px / normal Pretendard;
   --M1: 700 24px / normal Pretendard;
   --M1-1: 400 16px / 22px Pretendard;
   --M1-2: 600 22px /22px Pretendard;
@@ -89,15 +90,15 @@
   --Hy1: 400 12px / normal YeongdeokSnowCrab;
   --Hy2: 600 10px / normal Pretendard;
   --Hy3: 700 20px / 22px Pretendard;
-  --Hy4: 400 14px / normal pretendard;
-  --emoji: 600 120px / normal Pretendard;
-  --emoji-2: 600 60px / normal Pretendard;
+  --Hy4: 400 14px / normal Pretendard;
+  --emoji: 600 120px / 130px Pretendard;
+  --emoji-2: 600 60px / 65px Pretendard;
   --P-T1: 600 16px / normal Pretendard;
-  --P-S1-2: 400 12px / normal Prentendard;
-  --M-1: 400 24px / normal Pretnedard;
+  --P-S1-2: 400 12px / normal Pretendard;
+  --M-1: 400 24px / normal Pretendard;
   --M-2: 700 24px / normal Pretendard;
-  --M-3: 400 14px / normal Pretnedard;
-  --M-4: 700 14px / normal Pretnedard;
+  --M-3: 400 14px / normal Pretendard;
+  --M-4: 700 14px / normal Pretendard;
 }
 
 html,

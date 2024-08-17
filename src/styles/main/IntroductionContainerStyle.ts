@@ -1,24 +1,31 @@
 import styled from 'styled-components';
-import { isMobile, isTablet } from '@/hooks/Media';
+import { isMobileOrTablet, isMobile, isTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
   display: flex;
-  width: 1230px;
+  justify-content: center;
+  align-items: center;
   gap: 90px;
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+`;
+
+export const TabletWrap = styled.div`
+  display: flex;
+  gap: 90px;
+  transition: all 0.3s ease-in-out;
 
   ${isTablet} {
-    width: 728px;
-    height: 292.8px;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 10px;
-    row-gap: 0;
   }
 
   ${isMobile} {
-    display: flex;
     flex-direction: column;
-    width: 320px;
     gap: 10px;
   }
 `;

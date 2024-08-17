@@ -16,7 +16,7 @@ const Layout = ({ type }: { type: number }) => {
     <>
       <S.Container>
         <Header />
-        <S.Main type={type}>
+        <S.Main $type={type}>
           <Outlet />
         </S.Main>
       </S.Container>

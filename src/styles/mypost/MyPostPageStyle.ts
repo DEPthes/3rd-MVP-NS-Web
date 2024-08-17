@@ -47,7 +47,7 @@ export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 34px;
-  font: var(--S1-3);
+  font: var(--S1);
   margin-left: 533px;
 
   ${isMobileOrTablet} {

@@ -22,9 +22,9 @@ const IntroductionContent: React.FC<IntroductionContentProps> = ({
   ));
 
   return (
-    <S.Container usage={usage}>
+    <S.Container>
       <S.Emoji>{emoji}</S.Emoji>
-      {title && <S.Title usage={usage}>{title}</S.Title>}
+      {title && <S.Title $usage={usage}>{title}</S.Title>}
       <S.Content>{formattedContent}</S.Content>
     </S.Container>
   );
