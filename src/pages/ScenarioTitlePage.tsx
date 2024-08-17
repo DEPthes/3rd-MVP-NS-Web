@@ -4,17 +4,21 @@ import * as S from '@/styles/scenario/ScenarioTitlePageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg?react';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg?react';
 import SearchIcon from '@assets/icons/Search.svg';
-import { TLikeState, TTheme } from '@/types/mytype';
+import { TLikeState, TTheme, TThemeListResponse } from '@/types/mytype';
 import { getList } from '@/apis/theme/getList';
 import { getSearch } from '@/apis/theme/getSearch';
 import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import Pagination from '@/components/pagination/Pagination';
 
 const ScenarioTitlePage: React.FC = () => {
 	const [topics, setTopics] = useState<TTheme[]>([]);
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [sortType, setSortType] = useState<'date' | 'likeCount' | 'boardCount'>('date');
 	const [isLikedTopics, setIsLikedTopics] = useState<TLikeState>({});
+	const [pageInfo, setPageInfo] = useState<TThemeListResponse['information']['pageInfo'] | null>(null);
+	const [pageNum, setPageNum] = useState(0); // 기본 값 0
+
 	const navigate = useNavigate();
 	const handleUnauthorized = useHandleUnauthorized();
 
@@ -23,13 +27,14 @@ const ScenarioTitlePage: React.FC = () => {
 			try {
 				let response;
 				if (searchTerm.trim() === '') {
-					response = await getList(1, 10, sortType, handleUnauthorized);
+					response = await getList(pageNum + 1, 3, sortType, handleUnauthorized); // 페이지 사이즈를 3으로 설정
 				} else {
-					response = await getSearch(searchTerm, 1, 10, sortType, handleUnauthorized);
+					response = await getSearch(searchTerm, pageNum + 1, 3, sortType, handleUnauthorized);
 				}
 
 				if (response && response.information && response.information.themeList) {
 					setTopics(response.information.themeList); // themeList를 사용
+					setPageInfo(response.information.pageInfo); // pageInfo 설정
 				} else {
 					console.error('주제 목록을 불러오지 못했습니다.', response);
 				}
@@ -39,7 +44,7 @@ const ScenarioTitlePage: React.FC = () => {
 		};
 
 		fetchTopics();
-	}, [searchTerm, sortType, handleUnauthorized]);
+	}, [searchTerm, sortType, pageNum, handleUnauthorized]);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(e.target.value);
@@ -129,11 +134,21 @@ const ScenarioTitlePage: React.FC = () => {
 			) : (
 				<div>주제를 불러올 수 없습니다.</div>
 			)}
+			{/* 페이지네이션 컴포넌트 추가 */}
+			{pageInfo && (
+				<Pagination
+					pageInfo={pageInfo}
+					pageNum={pageNum}
+					setPageNum={setPageNum}
+				/>
+			)}
 		</S.Container>
 	);
 };
 
 export default ScenarioTitlePage;
+
+
 
 
 
