@@ -86,7 +86,7 @@ const MyPostsPage: React.FC = () => {
         onSearchResults={handleSearchQueryChange}
         searchQuery={searchQuery} // 현재 검색어를 전달
       />
-      <Header
+      <Header<TMyPostSortType>
         title={isMobileOrTablet ? '내가 쓴 글' : '내가 쓴 글 목록'}
         sortType={sortType}
         setSortType={setSortType}
