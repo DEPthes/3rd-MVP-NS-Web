@@ -26,6 +26,7 @@
   --LogoMini: 400 32px / normal YeongdeokSnowCrab;
   --LogoMini-2: 400 30px / 22px YeongdeokSnowCrab;
   --LogoMini-3: 400 16px / 22px YeongdeokSnowCrab;
+  --LogoSmall: 400 24px / normal YeongdeokSnowCrab;
   --Y1: 400 32px / normal YeongdeokSnowCrab;
   --Y2: 400 12px / normal YeongdeokSnowCrab;
   --H1: 800 36px / normal Pretendard;
@@ -57,7 +58,7 @@
   --S1: 700 16px / normal Pretendard;
   --S1-1: 400 16px/28px Pretendard;
   --S1-2: 600 16px / normal Pretendard;
-  --S1-3: 400 16px / normal Pretendard-Bold;
+  --S1-3: 400 16px / normal Pretendard;
   --S1-4: 600 20px / normal Pretendard;
   --Button: 400 16px / normal Pretendard;
   --Input: 500 20px / 22px Pretendard;
