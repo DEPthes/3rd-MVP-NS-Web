@@ -1,28 +1,11 @@
 export type TPost = {
-  postId: number;
-  title: string;
-  date: string;
-  postUserId: string;
-  isTemporary: boolean;
-  likes: number;
-  postLikedUserId: string[];
-  postLikedDate: string[];
+  boardId: number; // 게시글 ID (API에서 사용)
+  title: string; // 게시글 제목
+  createdDate: string; // 발행일자
+  theme: string; // 주제명
+  published: boolean; // 발행 여부
+  countLike: number; // 좋아요 수
 };
 
-export type TTopic = {
-  topicId: number;
-  topic: string;
-  publishDate: string;
-  topicLikes: number;
-  topicLikedUserId: string[];
-  topicLikedDate: string[];
-  posts: TPost[];
-};
-
-export type SortType =
-  | 'likedDate'
-  | 'date'
-  | 'likes'
-  | 'topicLikes'
-  | 'topicDate'
-  | 'postCount';
+// 정렬 타입 정의
+export type TMyPostSortType = 'date' | 'likes';

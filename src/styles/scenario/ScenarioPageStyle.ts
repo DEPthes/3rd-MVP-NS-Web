@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
   display: flex;
@@ -6,24 +7,35 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 60px;
+  transition: all 0.3s ease-in-out;
 `;
 
 export const Title = styled.div`
-  color: white;
+  color: var(--NS-White);
   font: var(--H1);
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    margin-bottom: 24px;
+    font: var(--Hy3);
+  }
 `;
 
 export const TitleMini = styled.div`
-  color: white;
+  color: var(--NS-White);
   margin-bottom: 72px;
   font: var(--N2-1);
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    display: none;
+  }
 `;
 
 export const TopicBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
   gap: 17px;
   background-color: #ffffff;
   border-radius: 40px;
@@ -34,24 +46,54 @@ export const TopicBox = styled.div`
   width: 1170px;
   min-height: 186px;
   color: var(--NS-Main1);
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    gap: 8px;
+    padding: 40px;
+    margin-bottom: 20px;
+    width: 328px;
+    min-height: 122px;
+    border-radius: 20px;
+  }
 `;
 
 export const TopicHeader = styled.div`
   font: var(--LogoSmall);
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    font: var(--Y2);
+  }
 `;
 
 export const Topic = styled.div`
   font: var(--T1-1);
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    font: var(--P-T1);
+  }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 37px;
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 328px;
+    height: 38px;
+    font: var(--P-S1);
+  }
 `;
 
 export const ActionButton = styled.button`
   background-color: var(--NS-Main1);
-  color: white;
+  color: var(--NS-White);
   border: none;
   border-radius: 100px;
   padding: 10px 20px;
@@ -64,11 +106,17 @@ export const ActionButton = styled.button`
   &:hover {
     background-color: var(--NS-Main-Clicked);
   }
+
+  ${isMobileOrTablet} {
+    width: 328px;
+    height: 38px;
+    font: var(--P-S1);
+  }
 `;
 
 export const AnotherButton = styled.button`
   background-color: var(--NS-Main2);
-  color: white;
+  color: var(--NS-White);
   border: none;
   border-radius: 100px;
   padding: 10px 20px;
@@ -80,5 +128,11 @@ export const AnotherButton = styled.button`
 
   &:hover {
     background-color: var(--NS-Main1);
+  }
+
+  ${isMobileOrTablet} {
+    width: 328px;
+    height: 38px;
+    font: var(--P-S1);
   }
 `;

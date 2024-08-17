@@ -8,7 +8,7 @@ type RankingRowProps = {
 };
 
 const RankingRow: React.FC<RankingRowProps> = ({ user, rank }) => {
-  console.log(user, rank); // 콘솔에 출력하여 데이터 확인
+  console.log(user, rank);
   return (
     <S.TableRow>
       <S.TableData1>{rank}위</S.TableData1>

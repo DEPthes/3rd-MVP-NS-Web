@@ -4,123 +4,158 @@ import * as S from '@/styles/scenario/ScenarioTitlePageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg?react';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg?react';
 import SearchIcon from '@assets/icons/Search.svg';
-import { TTopic, TLikeState, TLikeDates } from '@/types';
+import { TLikeState, TTheme, TThemeListResponse } from '@/types/mytype';
+import { getList } from '@/apis/theme/getList';
+import { getSearch } from '@/apis/theme/getSearch';
+import { postLike } from '@/apis/theme/postLike';
+import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import Pagination from '@/components/pagination/Pagination';
 
 const ScenarioTitlePage: React.FC = () => {
-  const [topics, setTopics] = useState<TTopic[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [sortType, setSortType] = useState<string>('최신순');
-  const [isLikedTopics, setIsLikedTopics] = useState<TLikeState>({});
-  const [likeDates, setLikeDates] = useState<TLikeDates>({});
-  const navigate = useNavigate();
+	const [topics, setTopics] = useState<TTheme[]>([]);
+	const [searchTerm, setSearchTerm] = useState<string>('');
+	const [sortType, setSortType] = useState<'date' | 'likeCount' | 'boardCount'>('date');
+	const [isLikedTopics, setIsLikedTopics] = useState<TLikeState>({});
+	const [pageInfo, setPageInfo] = useState<TThemeListResponse['information']['pageInfo'] | null>(null);
+	const [pageNum, setPageNum] = useState(0); // 기본 값 0
 
-  useEffect(() => {
-    const fetchTopics = async () => {
-      try {
-        const response = await fetch('/dummyData.json');
-        const data = await response.json();
-        setTopics(data);
-      } catch (error) {
-        console.error('주제 가져오기 에러:', error);
-      }
-    };
+	const navigate = useNavigate();
+	const handleUnauthorized = useHandleUnauthorized();
 
-    fetchTopics();
-  }, []);
+	useEffect(() => {
+		const fetchTopics = async () => {
+			try {
+				let response;
+				if (searchTerm.trim() === '') {
+					response = await getList(pageNum + 1, 3, sortType, handleUnauthorized); // 페이지 사이즈를 3으로 설정
+				} else {
+					response = await getSearch(searchTerm, pageNum + 1, 3, sortType, handleUnauthorized);
+				}
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
+				if (response && response.information && response.information.themeList) {
+					setTopics(response.information.themeList); // themeList를 사용
+					setPageInfo(response.information.pageInfo); // pageInfo 설정
+				} else {
+					console.error('주제 목록을 불러오지 못했습니다.', response);
+				}
+			} catch (error) {
+				console.error('API 호출 중 에러:', error);
+			}
+		};
 
-  const handleSort = (type: string) => {
-    setSortType(type);
-  };
+		fetchTopics();
+	}, [searchTerm, sortType, pageNum, handleUnauthorized]);
 
-  const handleLike = (topic: string) => {
-    setIsLikedTopics(prev => ({
-      ...prev,
-      [topic]: !prev[topic],
-    }));
-    setLikeDates(prev => ({
-      ...prev,
-      [topic]: new Date(),
-    }));
-  };
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchTerm(e.target.value);
+	};
 
-  const handleTopicClick = (id: string) => {
-    navigate(`/topic/${id}`);
-  };
+	const handleSort = (type: string) => {
+		setSortType(type === '최신순' ? 'date' : type === '좋아요순' ? 'likeCount' : 'boardCount');
+	};
 
-  const filteredTopics = topics
-    .filter(topic => topic.title.includes(searchTerm))
-    .sort((a, b) => {
-      switch (sortType) {
-        case '최신순 |':
-          return (
-            new Date(b.publishDate).getTime() -
-            new Date(a.publishDate).getTime()
-          );
-        case '좋아요순 |':
-          return b.likes - a.likes;
-        case '게시글순 |':
-          return b.posts.length - a.posts.length;
-        case '최근 관심순 |':
-          return (
-            (likeDates[b.title]?.getTime() || 0) -
-            (likeDates[a.title]?.getTime() || 0)
-          );
-        default:
-          return 0;
-      }
-    });
+	const handleLike = async (themeId: number, content: string) => {
+		try {
+			const response = await postLike(themeId, handleUnauthorized);
+			if (response) {
+				setIsLikedTopics(prev => ({
+					...prev,
+					[content]: response.liked,
+				}));
 
-  return (
-    <S.Container>
-      <S.SearchBar>
-        <S.SearchInput
-          type="text"
-          placeholder="검색할 키워드를 입력하세요"
-          value={searchTerm}
-          onChange={handleSearch}
-        />
-        <S.SearchIconWrapper>
-          <img src={SearchIcon} alt="Search" />
-        </S.SearchIconWrapper>
-      </S.SearchBar>
-      <S.Header>
-        <S.Title>주제 목록</S.Title>
-        <S.SortOptions>
-          {['최신순 |', '좋아요순 |', '게시글순 |', '최근 관심순 '].map(
-            type => (
-              <S.SortOption key={type} onClick={() => handleSort(type)}>
-                {type}
-              </S.SortOption>
-            ),
-          )}
-        </S.SortOptions>
-      </S.Header>
-      {filteredTopics.map(topic => (
-        <S.TopicBox key={topic.id} onClick={() => handleTopicClick(topic.id)}>
-          <div>
-            <S.TopicTitle>{topic.title}</S.TopicTitle>
-            <S.TopicDate>
-              발행일: {new Date(topic.publishDate).toLocaleDateString()}
-            </S.TopicDate>
-            <S.PostCount>게시글 {topic.posts.length}개</S.PostCount>
-          </div>
-          <S.LikeContainer
-            onClick={e => {
-              e.stopPropagation();
-              handleLike(topic.title);
-            }}
-          >
-            {isLikedTopics[topic.title] ? <BlueHeartFill /> : <BlueHeart />}
-            <S.LikeCount>{topic.likes}</S.LikeCount>
-          </S.LikeContainer>
-        </S.TopicBox>
-      ))}
-    </S.Container>
-  );
+				// 좋아요 숫자를 업데이트
+				setTopics(prevTopics =>
+					prevTopics.map(topic =>
+						topic.themeId === themeId
+							? { ...topic, likeCount: response.liked ? topic.likeCount + 1 : topic.likeCount - 1 }
+							: topic
+					)
+				);
+			} else {
+				console.error('좋아요 처리 실패');
+			}
+		} catch (error) {
+			console.error('좋아요 요청 중 오류 발생:', error);
+		}
+	};
+
+	const handleTopicClick = (id: number) => {
+		navigate(`/scenario/topic/${id}`);
+	};
+
+	return (
+		<S.Container>
+			<S.SearchBar>
+				<S.SearchInput
+					type="text"
+					placeholder="검색할 키워드를 입력하세요"
+					value={searchTerm}
+					onChange={handleSearch}
+				/>
+				<S.SearchIconWrapper>
+					<img src={SearchIcon} alt="Search" />
+				</S.SearchIconWrapper>
+			</S.SearchBar>
+			<S.Header>
+				<S.Title>주제 목록</S.Title>
+				<S.SortOptions>
+					{['최신순', '좋아요순', '게시글순'].map((type, index) => (
+						<React.Fragment key={type}>
+							<S.SortOption
+								onClick={() => handleSort(type)}
+								$isSelected={sortType === (type === '최신순' ? 'date' : type === '좋아요순' ? 'likeCount' : 'boardCount')}
+							>
+								{type}
+							</S.SortOption>
+							{index < 2 && <S.Divider>|</S.Divider>} {/* '|' 기호는 색상이 변하지 않도록 처리 */}
+						</React.Fragment>
+					))}
+				</S.SortOptions>
+			</S.Header>
+			{topics && topics.length > 0 ? (
+				topics.map((topic) => (
+					<S.TopicBox key={topic.themeId} onClick={() => handleTopicClick(topic.themeId)}>
+						<div>
+							<S.TopicTitle>{topic.content}</S.TopicTitle>
+							<S.TopicDate>발행일: {topic.date}</S.TopicDate>
+							<S.PostCount>게시글 {topic.boardCount}개</S.PostCount>
+						</div>
+						<S.LikeContainer
+							onClick={e => {
+								e.stopPropagation();
+								handleLike(topic.themeId, topic.content);
+							}}
+						>
+							{isLikedTopics[topic.content] ? <BlueHeartFill /> : <BlueHeart />}
+							<S.LikeCount>{topic.likeCount}</S.LikeCount>
+						</S.LikeContainer>
+					</S.TopicBox>
+				))
+			) : (
+				<div>주제를 불러올 수 없습니다.</div>
+			)}
+			{/* 페이지네이션 컴포넌트 추가 */}
+			{pageInfo && (
+				<Pagination
+					pageInfo={pageInfo}
+					pageNum={pageNum}
+					setPageNum={setPageNum}
+				/>
+			)}
+		</S.Container>
+	);
 };
 
 export default ScenarioTitlePage;
+
+
+
+
+
+
+
+
+
+
+
+

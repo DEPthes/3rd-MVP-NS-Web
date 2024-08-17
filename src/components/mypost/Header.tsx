@@ -1,27 +1,27 @@
 import React from 'react';
 import * as S from '@styles/mypost/HeaderStyle';
-import { SortType } from '../../types/mypost/post';
 
-type SortOption = {
+// 제네릭 SortType을 사용하여 컴포넌트 정의
+type SortOption<T> = {
   label: string;
-  value: SortType;
+  value: T;
 };
 
-interface HeaderProps {
+interface HeaderProps<T> {
   title: string;
-  sortType: SortType;
-  setSortType: (sortType: SortType) => void;
-  sortOptions: SortOption[];
+  sortType: T;
+  setSortType: (sortType: T) => void;
+  sortOptions: SortOption<T>[];
   checkbox?: React.ReactNode;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header = <T extends string>({
   title,
   sortType,
   setSortType,
   sortOptions,
   checkbox,
-}) => {
+}: HeaderProps<T>) => {
   return (
     <S.Header>
       <S.Title>{title}</S.Title>
