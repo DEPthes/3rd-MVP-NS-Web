@@ -5,85 +5,103 @@ import WhiteHeart from '@assets/icons/WhiteHeart.svg';
 import WhiteHeartFill from '@assets/icons/WhiteHeartFill.svg';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
+import Main5Heart from '@assets/icons/Main5Heart.svg?react';
+import Main5HeartFill from '@assets/icons/Main5HeartFill.svg?react';
 import LightButton from '@/components/button/LightButton';
-import { TPost } from '@/types';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
+import { getBoard } from '@/apis/board/getBoard';
+import { deleteBoard } from '@/apis/board/deleteBoard';
+import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import { TBoardDetailResponse } from '@/types/mytype';
 
 const SelectTitleDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
-	const [post, setPost] = useState<TPost | null>(null);
+	const [post, setPost] = useState<TBoardDetailResponse | null>(null);
 	const [isLiked, setIsLiked] = useState<boolean>(false);
 	const [isBlueHeartLiked, setIsBlueHeartLiked] = useState<boolean>(false);
-	const [topicTitle, setTopicTitle] = useState<string>('');
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [isNotAuthor, setIsNotAuthor] = useState<boolean>(false);
 	const navigate = useNavigate();
 
-	// 임시: 현재 사용자를 확인하기 위한 변수 (로그인된 사용자 이름)
-	const currentUser = "현재 사용자 닉네임"; // 실제 구현때는 로그인 정보를 가져와야 함
+	const { isMobileOrTablet } = useNSMediaQuery();
+	const handleUnauthorized = useHandleUnauthorized();
 
 	useEffect(() => {
 		const fetchPost = async () => {
-			try {
-				const response = await fetch('/dummyData.json');
-				const data = await response.json();
-				data.forEach((topic: any) => {
-					const foundPost = topic.posts.find((p: TPost) => p.id === id);
-					if (foundPost) {
-						setPost(foundPost);
-						setTopicTitle(topic.title); // 상위 주제의 제목 설정
-					}
-				});
-			} catch (error) {
-				console.error('게시글 가져오기 에러:', error);
+			if (id) {
+				const response = await getBoard(parseInt(id), handleUnauthorized);
+				if (response) {
+					setPost(response); // API에서 받은 데이터를 설정
+					setIsLiked(response.likedTheme); // 주제 좋아요 상태 설정
+					setIsBlueHeartLiked(response.likedBoard); // 게시글 좋아요 상태 설정
+				} else {
+					console.error('게시글을 불러오지 못했습니다.');
+				}
 			}
 		};
 
 		fetchPost();
-	}, [id]);
+	}, [id, handleUnauthorized]);
 
 	const handleBackClick = () => {
 		navigate(-1);
 	};
 
 	const handleEditClick = () => {
-		if (post?.author === currentUser) {
-			// 본인이 작성한 글인 경우 수정 페이지로 이동 (수정 페이지가 있다고 가정)
-			navigate(`/edit-post/${post.id}`);
+		if (post?.owner) {
+			navigate(`/edit-post/${id}`);
 		} else {
-			// 본인이 작성한 글이 아닌 경우 시나리오 디테일 페이지로 이동
-			navigate(`/scenario-detail/${post?.id}`);
+			navigate(`/scenario-detail/${id}`);
 		}
 	};
 
 	const handleDeleteClick = () => {
-		if (post?.author === currentUser) {
+		if (post?.owner) {
 			setIsDeleteModalOpen(true);
 		} else {
 			setIsNotAuthor(true);
 		}
 	};
 
-	const handleConfirmDelete = () => {
-		// 삭제 로직 추가 아직 안됨
-		// 삭제가 완료된 후 TopicDetailPage로 이동하기
-		navigate(`/topic/${id}`);
+	const handleConfirmDelete = async () => {
+		if (id) {
+			const deleteSuccess = await deleteBoard(parseInt(id), handleUnauthorized);
+			if (deleteSuccess) {
+				alert('게시글이 삭제되었습니다.');
+				navigate(`/topic/${post?.themeId}`); // 삭제 후 해당 주제로 이동
+			} else {
+				alert('게시글 삭제에 실패했습니다.');
+			}
+		}
+		setIsDeleteModalOpen(false);
 	};
 
 	const handleCancelDelete = () => {
 		setIsDeleteModalOpen(false);
 	};
 
-	const handleWhiteHeartClick = () => {
-		setIsLiked(!isLiked);
+	const handleWhiteHeartClick = async () => {
+		try {
+			// 주제에 대한 좋아요 API 호출 코드 추가
+			setIsLiked(!isLiked);
+		} catch (error) {
+			console.error('좋아요 실패:', error);
+		}
 	};
 
-	const handleBlueHeartClick = () => {
-		setIsBlueHeartLiked(!isBlueHeartLiked);
+	const handleBlueHeartClick = async () => {
+		try {
+			// 게시글에 대한 좋아요 API 호출 코드 추가
+			setIsBlueHeartLiked(!isBlueHeartLiked);
+		} catch (error) {
+			console.error('좋아요 실패:', error);
+		}
 	};
 
 	const handleProfileClick = () => {
-		navigate(`/other-person-page/${post?.author}`); // 타인의 프로필 페이지로 이동하기
-	}
+		navigate(`/profile/${post?.nickname}`); // 타인의 프로필 페이지로 이동하기
+	};
+
 
 	if (!post) {
 		return <div>로딩 중...</div>;
@@ -92,29 +110,44 @@ const SelectTitleDetail: React.FC = () => {
 	return (
 		<S.Container>
 			<S.HeaderSection>
-				<S.ProfileCircle onClick={handleProfileClick} />
+				<S.ProfileContainer>
+					<S.ProfileCircle
+						onClick={handleProfileClick}
+						style={{ backgroundImage: `url(${post.imageUrl})` }} // 프로필 이미지 설정
+					/>
+					<S.ProfileNickname>{post.nickname}</S.ProfileNickname> {/* 작성자 닉네임 */}
+				</S.ProfileContainer>
 				<S.ProfileInfo>
-					<S.ProfileNickname>{post.author}</S.ProfileNickname>
 					<S.Header>주제</S.Header>
-					<S.TopicTitle>{topicTitle}</S.TopicTitle>
+					<S.TopicTitle>{post.themeContent}</S.TopicTitle> {/* 주제 제목 */}
 					<S.LikeContainer onClick={handleWhiteHeartClick}>
-						<img src={isLiked ? WhiteHeartFill : WhiteHeart} alt="Like" />
+						{isMobileOrTablet ? (
+							isLiked ? <Main5HeartFill title="Like" /> : <Main5Heart title="Like" />
+						) : (
+							<img src={isLiked ? WhiteHeartFill : WhiteHeart} alt="Like" />
+						)}
 						<S.LikeText>이 주제 좋아요</S.LikeText>
 					</S.LikeContainer>
 				</S.ProfileInfo>
 			</S.HeaderSection>
 			<S.PostBox>
-				<S.PostTitle>{post.title}</S.PostTitle>
-				<S.PostContent>{post.text}</S.PostContent>
+				<S.PostTitle>{post.boardTitle}</S.PostTitle> {/* 게시글 제목 */}
+				<S.PostContent>{post.boardContent}</S.PostContent> {/* 게시글 내용 */}
 				<S.LikeButton onClick={handleBlueHeartClick}>
 					<img src={isBlueHeartLiked ? BlueHeartFill : BlueHeart} alt="Like" />
 					<S.LikeCount>좋아요</S.LikeCount>
 				</S.LikeButton>
 			</S.PostBox>
 			<S.ButtonContainer>
-				<LightButton text="뒤로 가기" onClick={handleBackClick} />
-				<LightButton text="수정하기" onClick={handleEditClick} />
-				<LightButton text="삭제하기" onClick={handleDeleteClick} />
+				{!isMobileOrTablet && (
+					<LightButton text="뒤로 가기" onClick={handleBackClick} />
+				)}
+				{post?.owner && (
+					<>
+						<LightButton text="수정하기" onClick={handleEditClick} />
+						<LightButton text="삭제하기" onClick={handleDeleteClick} />
+					</>
+				)}
 			</S.ButtonContainer>
 			{isDeleteModalOpen && (
 				<S.DeleteModalOverlay>
@@ -122,7 +155,7 @@ const SelectTitleDetail: React.FC = () => {
 						<S.DeleteModalText>삭제하시겠습니까?</S.DeleteModalText>
 						<S.ButtonContainer>
 							<LightButton text="삭제하기" onClick={handleConfirmDelete} />
-							<LightButton text="취소하기" onClick={handleCancelDelete} />
+							<LightButton text="취소" onClick={handleCancelDelete} />
 						</S.ButtonContainer>
 					</S.DeleteModal>
 				</S.DeleteModalOverlay>
@@ -142,6 +175,11 @@ const SelectTitleDetail: React.FC = () => {
 };
 
 export default SelectTitleDetail;
+
+
+
+
+
 
 
 

@@ -1,43 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 훅을 임포트
 import * as S from '@/styles/mypost/PostItemStyle';
+import { TPost } from '@/types/mypost/post';
 
-type PostItemProps = {
-  topic: string; // 주제
-  date: string; // 작성일
-  title: string; // 제목
-  likes: number; // 좋아요 수
-  isTemporary: boolean; // 임시 저장된 상태인지 여부
-  likedUserId: string[]; // 좋아요 한 사용자들의 ID 배열
-  loggedInUserId: string; // 현재 로그인된 사용자의 ID
-};
-
-// PostItem 컴포넌트 정의
-const PostItem: React.FC<PostItemProps> = ({
-  topic,
-  date,
+const PostItem: React.FC<TPost> = ({
+  boardId, // boardId 추가
+  theme,
+  createdDate,
   title,
-  likes,
-  isTemporary,
-  likedUserId,
-  loggedInUserId,
+  countLike,
+  published,
 }) => {
-  // 현재 로그인된 사용자가 이 포스트를 좋아요 했는지 여부를 확인
-  const liked = likedUserId.includes(loggedInUserId);
+  const [liked, setLiked] = useState(false); // 좋아요 상태 관리
+  const formattedDate = createdDate.split('T')[0].split('-').join('. ');
+  const navigate = useNavigate();
+
+  const handleLikeClick = () => {
+    setLiked(!liked); // 클릭 시 좋아요 상태를 토글
+  };
+
+  const handlePostClick = () => {
+    navigate(`/scenario/:${boardId}`); // post 클릭 시 상세 페이지로 이동
+  };
 
   return (
-    <S.Post>
+    <S.Post onClick={handlePostClick}>
       <S.TextField>
-        <S.PostTopic>{topic}</S.PostTopic>
-        {/* 포스트의 날짜를 표시. isTemporary가 true이면 임시저장일 표시 */}
-        <S.PostDate isTemporary={isTemporary}>
-          {isTemporary ? `임시저장일: ${date}` : `발행일: ${date}`}
+        <S.PostTopic>{theme}</S.PostTopic>
+        <S.PostDate $published={published}>
+          {!published
+            ? `임시저장일: ${formattedDate}`
+            : `발행일: ${formattedDate}`}
         </S.PostDate>
         <S.PostTitle>{title}</S.PostTitle>
       </S.TextField>
       <S.LikesContainer>
-        {/* 좋아요 아이콘을 표시. 좋아요 누른 상태면 채워진 하트 */}
-        <S.LikeIcon liked={liked} />
-        <S.PostLikes>{likes}</S.PostLikes>
+        <S.LikeIcon liked={liked} onClick={handleLikeClick} />
+        <S.PostLikes>{countLike + (liked ? 1 : 0)}</S.PostLikes>
       </S.LikesContainer>
     </S.Post>
   );
