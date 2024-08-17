@@ -12,7 +12,7 @@ const Pagination = ({
 	pageNum: number;
 	setPageNum: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-	const [groupPageNum, setGroupPageNum] = useState(0);
+	const [groupPageNum, setGroupPageNum] = useState(1);
 
 	return (
 		<S.Container>
@@ -20,10 +20,10 @@ const Pagination = ({
 				style={{
 					cursor: 'pointer',
 					visibility:
-						pageInfo.totalPages > 5 && groupPageNum > 0 ? 'visible' : 'hidden',
+						pageInfo.totalPages > 5 && groupPageNum > 1 ? 'visible' : 'hidden',
 				}}
 				onClick={() => {
-					if (groupPageNum > 0) {
+					if (groupPageNum > 1) {
 						setGroupPageNum((prev: number) => Math.max(0, prev - 5));
 						setPageNum(groupPageNum - 1);
 					}
