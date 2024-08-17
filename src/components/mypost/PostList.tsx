@@ -12,6 +12,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
       {posts.map(post => (
         <PostItem
           key={post.boardId} // 고유한 ID로 key 설정
+          boardId={post.boardId} // boardId를 PostItem에 전달
           theme={post.theme}
           createdDate={post.createdDate} // createdDate를 사용
           title={post.title}

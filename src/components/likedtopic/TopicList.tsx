@@ -11,7 +11,8 @@ const TopicList: React.FC<TopicListProps> = ({ topics }) => {
     <div>
       {topics.map(topic => (
         <TopicItem
-          key={topic.themeId} // 고유한 ID로 key 설정
+          key={topic.themeId}
+          themeId={topic.themeId}
           theme={topic.theme}
           date={topic.date} // 주제 발행일
           countBoard={topic.countBoard} // 게시글 수

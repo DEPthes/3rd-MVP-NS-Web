@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 훅을 임포트
 import * as S from '@/styles/mypost/PostItemStyle';
 import { TPost } from '@/types/mypost/post';
 
-const PostItem: React.FC<Omit<TPost, 'boardId'>> = ({
+const PostItem: React.FC<TPost> = ({
+  boardId, // boardId 추가
   theme,
   createdDate,
   title,
@@ -11,13 +13,18 @@ const PostItem: React.FC<Omit<TPost, 'boardId'>> = ({
 }) => {
   const [liked, setLiked] = useState(false); // 좋아요 상태 관리
   const formattedDate = createdDate.split('T')[0].split('-').join('. ');
+  const navigate = useNavigate();
 
   const handleLikeClick = () => {
     setLiked(!liked); // 클릭 시 좋아요 상태를 토글
   };
 
+  const handlePostClick = () => {
+    navigate(`/scenario/:${boardId}`); // post 클릭 시 상세 페이지로 이동
+  };
+
   return (
-    <S.Post>
+    <S.Post onClick={handlePostClick}>
       <S.TextField>
         <S.PostTopic>{theme}</S.PostTopic>
         <S.PostDate $published={published}>
@@ -29,9 +36,7 @@ const PostItem: React.FC<Omit<TPost, 'boardId'>> = ({
       </S.TextField>
       <S.LikesContainer>
         <S.LikeIcon liked={liked} onClick={handleLikeClick} />
-        {/* 클릭 핸들러 추가 */}
         <S.PostLikes>{countLike + (liked ? 1 : 0)}</S.PostLikes>
-        {/* 좋아요 상태에 따라 좋아요 수 변경 */}
       </S.LikesContainer>
     </S.Post>
   );
