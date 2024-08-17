@@ -101,7 +101,10 @@ const ReportPage = () => {
             <S.LongWrap>
               <div
                 onClick={() =>
-                  onProfileClick(false, reportList.longestWriter.userId)
+                  onProfileClick(
+                    reportList.longestWriter.isCurrentUser,
+                    reportList.longestWriter.userId,
+                  )
                 }
               >
                 <img src={reportList?.longestWriter.imageUrl} alt="" />
@@ -113,9 +116,7 @@ const ReportPage = () => {
               </h3>
             </S.LongWrap>
           ) : (
-            <S.NoneContainer $isLast={false}>
-              글을 작성한 사람이 없습니다
-            </S.NoneContainer>
+            <S.NoneContainer $isLast={false}>집계중</S.NoneContainer>
           )}
           <hr />
           <S.HeadText>베스트 게시글</S.HeadText>
