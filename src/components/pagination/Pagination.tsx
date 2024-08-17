@@ -25,7 +25,7 @@ const Pagination = ({
         onClick={() => {
           if (groupPageNum > 0) {
             setGroupPageNum((prev: number) => Math.max(0, prev - 5));
-            setPageNum(groupPageNum - 1);
+            setPageNum(groupPageNum);
           }
         }}
       />
@@ -33,17 +33,17 @@ const Pagination = ({
         {Array.from(
           { length: Math.min(5, pageInfo.totalPages - groupPageNum) },
           (_, index) => {
-            const pageNumber = groupPageNum + index;
+            const pageNumber = groupPageNum + index + 1; //
             return (
               <S.PageNumText
                 key={pageNumber}
-                $isOn={pageNum == pageNumber}
+                $isOn={pageNum === pageNumber}
                 onClick={() => {
                   setPageNum(pageNumber);
                   window.scroll({ top: 0, behavior: 'smooth' });
                 }}
               >
-                {pageNumber + 1}
+                {pageNumber}
               </S.PageNumText>
             );
           },
@@ -61,7 +61,7 @@ const Pagination = ({
         onClick={() => {
           if (groupPageNum + 5 < pageInfo.totalPages) {
             setGroupPageNum(prev => prev + 5);
-            setPageNum(groupPageNum + 5);
+            setPageNum(groupPageNum + 6); //
           }
         }}
       />
