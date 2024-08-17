@@ -81,7 +81,7 @@ export const LikeContainer = styled.div`
 	font: var(--S1-1);
 
 	${isMobileOrTablet} {
-		font: var(--P-S2-2);
+		font: var (--P-S2-2);
 	}
 
 	svg {
@@ -144,10 +144,10 @@ export const ListHeader = styled.div`
 	margin-bottom: 20px;
 
 	${isMobileOrTablet} {
-		flex-direction: column; /* 세로로 나열 */
-		align-items: flex-start; /* 왼쪽 정렬 */
-		width: 100%; /* 가로 전체 사용 */
-		margin-bottom: 10px; /* 모바일/테블릿에서 아래 간격 조정 */
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+		margin-bottom: 10px;
 	}
 `;
 
@@ -159,19 +159,18 @@ export const ListTitle = styled.div`
 	margin-top: 59px;
 
 	${isMobileOrTablet} {
-		margin-top: 24px; /* 모바일/테블릿에서 위 간격 제거 */
-		margin-bottom: 8px; /* 제목과 정렬 옵션 사이에 간격 추가 */
+		margin-top: 24px;
+		margin-bottom: 8px;
 		font: var(--W1);
 	}
 `;
 
 export const SortOptions = styled.div`
 	display: flex;
-	gap: 10px;
-	margin-left: auto;
+	align-items: center;  
+	gap: 5px; 
 	font: var(--S1);
-	width: 122px;
-	height: 19px;
+	margin-left: auto;
 	margin-top: 59px;
 
 	${isMobileOrTablet} {
@@ -179,7 +178,7 @@ export const SortOptions = styled.div`
 		height: auto;
 		margin-left: 0;
 		margin-top: 0;
-		align-self: flex-end; /* 오른쪽 정렬 */
+		align-self: flex-end;
 	}
 `;
 
@@ -187,6 +186,8 @@ export const SortOption = styled.div<{ isSelected: boolean }>`
 	font: var(--S1);
 	color: ${({ isSelected }) => (isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)')};
 	cursor: pointer;
+	white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+	
 	&:hover {
 		color: var(--NS-Main1);
 	}
@@ -199,7 +200,11 @@ export const SortOption = styled.div<{ isSelected: boolean }>`
 	}
 `;
 
-
+export const Divider = styled.span`
+	color: var(--NS-White); 
+	margin: 0 5px; 
+	white-space: nowrap; 
+`;
 export const PostList = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -323,4 +328,5 @@ export const PostLikeCount = styled.div`
 		font: var(--T5-B);
 	}
 `;
+
 

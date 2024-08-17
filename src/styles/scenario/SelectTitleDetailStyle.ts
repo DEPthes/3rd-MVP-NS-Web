@@ -201,10 +201,11 @@ export const PostTitle = styled.div`
 export const PostContent = styled.div`
 	font: var(--T4);
 	color: var(--NS-Black);
-	width: 1013px;
+	max-width: 1013px;
 	min-height: 224px;
 	margin-bottom: 91px;
 	text-align: center;
+	
 
 	${isMobileOrTablet} {
 		width: 278px;

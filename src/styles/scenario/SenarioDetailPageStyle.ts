@@ -76,11 +76,11 @@ export const LikeContainer = styled.div`
   gap: 5px;
 
   svg {
-    width: 30px; /* 기본 크기 (데스크탑용) */
+    width: 30px;
     height: 30px;
 
     ${isMobileOrTablet} {
-      width: 16px; /* 모바일 및 테블릿에서 크기 줄이기 */
+      width: 16px;
       height: 16px;
     }
   }
@@ -218,3 +218,4 @@ export const ModalBtn = styled.div`
   display: flex;
   gap: 12px;
 `;
+

@@ -31,7 +31,7 @@ const SenarioDetailPage: React.FC = () => {
 			if (data) {
 				setTopic(data.content);
 				setIsLiked(data.likedTheme);
-				setThemeId(1);// 주제 ID 설정
+				setThemeId(1); // 주제 ID 설정
 			} else {
 				console.error('오늘의 주제를 불러오지 못했습니다.');
 			}
@@ -43,8 +43,10 @@ const SenarioDetailPage: React.FC = () => {
 	const handleLikeClick = async () => {
 		if (themeId === 0) return;  // themeId가 0이면 처리하지 않음
 		try {
+			// postLike 함수가 실제로 API를 호출하여 서버에 좋아요 상태를 반영한다
 			const response = await postLike(themeId, handleUnauthorized);
 			if (response) {
+				// 서버에서 반환된 응답 데이터에 따라 좋아요 상태를 업데이트한다
 				setIsLiked(response.liked);
 			} else {
 				console.error('좋아요 처리 실패');
@@ -63,7 +65,7 @@ const SenarioDetailPage: React.FC = () => {
 		const draftData: TPostDraftRequest = {
 			title,
 			content: text,
-			themeId: 1, // 주제 ID 사용
+			themeId, // 주제 ID 사용
 		};
 
 		const response = await postDraft(draftData, handleUnauthorized);
@@ -207,6 +209,7 @@ const SenarioDetailPage: React.FC = () => {
 };
 
 export default SenarioDetailPage;
+
 
 
 

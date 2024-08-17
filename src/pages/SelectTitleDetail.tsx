@@ -68,7 +68,7 @@ const SelectTitleDetail: React.FC = () => {
 			const deleteSuccess = await deleteBoard(parseInt(id), handleUnauthorized);
 			if (deleteSuccess) {
 				alert('게시글이 삭제되었습니다.');
-				navigate(`/topic/1`); // 삭제 후 해당 주제로 이동
+				navigate(`/topic/${post?.themeId}`); // 삭제 후 해당 주제로 이동
 			} else {
 				alert('게시글 삭제에 실패했습니다.');
 			}
@@ -99,8 +99,9 @@ const SelectTitleDetail: React.FC = () => {
 	};
 
 	const handleProfileClick = () => {
-		navigate(`/other-person-page/${post?.nickname}`); // 타인의 프로필 페이지로 이동하기
+		navigate(`/profile/${post?.nickname}`); // 타인의 프로필 페이지로 이동하기
 	};
+
 
 	if (!post) {
 		return <div>로딩 중...</div>;

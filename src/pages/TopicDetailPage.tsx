@@ -3,16 +3,17 @@ import { useParams, useNavigate } from 'react-router-dom';
 import * as S from '@/styles/scenario/TopicDetailPageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
-import { TThemeDetailResponse } from '@/types/mytype';
 import Main5Heart from '@assets/icons/Main5Heart.svg?react';
 import Main5HeartFill from '@assets/icons/Main5HeartFill.svg?react';
+import { TThemeDetailResponse } from '@/types/mytype';
 import { getTheme } from '@/apis/theme/getTheme';
+import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 const TopicDetailPage: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const [topic, setTopic] = useState<TThemeDetailResponse | null>(null);
-	const [likedPosts, setLikedPosts] = useState<{ [key: string]: boolean }>({});
+	const [likedPosts, setLikedPosts] = useState<{ [key: number]: boolean }>({});
 	const [sortType, setSortType] = useState<'date' | 'likeCount'>('date');
 	const [isLiked, setIsLiked] = useState<boolean>(false);
 	const navigate = useNavigate();
@@ -22,7 +23,7 @@ const TopicDetailPage: React.FC = () => {
 		const fetchTopic = async () => {
 			if (id) {
 				const response = await getTheme(
-					{ themeId: parseInt(id), page: 0, size: 10, sortBy: sortType },
+					{ themeId: parseInt(id), page: 1, size: 10, sortBy: sortType },
 					handleUnauthorized
 				);
 				if (response) {
@@ -37,15 +38,39 @@ const TopicDetailPage: React.FC = () => {
 		fetchTopic();
 	}, [id, sortType, handleUnauthorized]);
 
-	const handleWriteClick = () => {
-		navigate('/senario-detail');
+	const handleTopicLikeClick = async () => {
+		if (!topic) return;
+
+		try {
+			const response = await postLike(topic.themeId, handleUnauthorized);
+			if (response) {
+				const newIsLiked = response.liked;
+
+				setIsLiked(newIsLiked);
+
+				setTopic((prevTopic) => {
+					if (prevTopic) {
+						const updatedLikeCount = newIsLiked
+							? prevTopic.likeCount + 1
+							: prevTopic.likeCount - 1;
+
+						return {
+							...prevTopic,
+							likeCount: updatedLikeCount,
+						};
+					}
+					return prevTopic;
+				});
+			} else {
+				console.error('좋아요 처리 실패');
+			}
+		} catch (error) {
+			console.error('좋아요 요청 중 오류 발생:', error);
+		}
 	};
 
-	const handleLikeClick = (postId: number) => {
-		setLikedPosts((prev) => ({
-			...prev,
-			[postId]: !prev[postId],
-		}));
+	const handleWriteClick = () => {
+		navigate('/senario-detail');
 	};
 
 	const handleSort = (type: 'date' | 'likeCount') => {
@@ -53,29 +78,14 @@ const TopicDetailPage: React.FC = () => {
 	};
 
 	const handleTitleClick = (postId: number) => {
-		navigate(`/select-title-detail/${postId}`);
+		navigate(`/scenario/${postId}`);
 	};
 
-	const handleTopicLikeClick = () => {
-		setIsLiked((prevIsLiked) => {
-			const newIsLiked = !prevIsLiked;
-
-			setTopic((prevTopic) => {
-				if (prevTopic) {
-					const updatedLikeCount = newIsLiked
-						? prevTopic.likeCount + 1
-						: prevTopic.likeCount - 1;
-
-					return {
-						...prevTopic,
-						likeCount: updatedLikeCount,
-					};
-				}
-				return prevTopic;
-			});
-
-			return newIsLiked;
-		});
+	const handleLikeClick = (postId: number) => {
+		setLikedPosts((prev) => ({
+			...prev,
+			[postId]: !prev[postId],
+		}));
 	};
 
 	if (!topic) {
@@ -91,6 +101,19 @@ const TopicDetailPage: React.FC = () => {
 		return 0;
 	});
 
+	const truncateContent = (content: string) => {
+		const maxLength = 70;
+		if (content.length > maxLength) {
+			return (
+				<>
+					{content.slice(0, maxLength)}
+					<span style={{ color: 'var(--Gray1)' }}>...더보기</span>
+				</>
+			);
+		}
+		return content;
+	};
+
 	return (
 		<S.Container>
 			<S.TopicBox>
@@ -100,7 +123,7 @@ const TopicDetailPage: React.FC = () => {
 					<S.PublishDate>발행일: {new Date(topic.date).toLocaleDateString()} | </S.PublishDate>
 					<S.LikeContainer onClick={handleTopicLikeClick}>
 						{isLiked ? <Main5HeartFill title="Liked" /> : <Main5Heart title="Like" />}
-						<S.TopicLikeCount>{isLiked ? topic.likeCount + 1 : topic.likeCount}</S.TopicLikeCount>
+						<S.TopicLikeCount>{topic.likeCount}</S.TopicLikeCount>
 					</S.LikeContainer>
 				</S.InfoContainer>
 				<S.WriteButton onClick={handleWriteClick}>글쓰기</S.WriteButton>
@@ -109,8 +132,9 @@ const TopicDetailPage: React.FC = () => {
 				<S.ListTitle>게시글 목록</S.ListTitle>
 				<S.SortOptions>
 					<S.SortOption onClick={() => handleSort('date')} isSelected={sortType === 'date'}>
-						최신순  |
+						최신순
 					</S.SortOption>
+					<S.Divider>|</S.Divider> {/* Separate divider for | */}
 					<S.SortOption onClick={() => handleSort('likeCount')} isSelected={sortType === 'likeCount'}>
 						좋아요순
 					</S.SortOption>
@@ -120,7 +144,7 @@ const TopicDetailPage: React.FC = () => {
 				{sortedPosts.map((post) => (
 					<S.PostBox key={post.boardId}>
 						<S.PostTitle onClick={() => handleTitleClick(post.boardId)}>{post.title}</S.PostTitle>
-						<S.PostContent>{post.content}</S.PostContent>
+						<S.PostContent>{truncateContent(post.content)}</S.PostContent>
 						<S.LikeButton onClick={() => handleLikeClick(post.boardId)}>
 							<img src={likedPosts[post.boardId] ? BlueHeartFill : BlueHeart} alt="Like" />
 							<S.PostLikeCount>{likedPosts[post.boardId] ? post.likeCount + 1 : post.likeCount}</S.PostLikeCount>
@@ -136,6 +160,11 @@ const TopicDetailPage: React.FC = () => {
 };
 
 export default TopicDetailPage;
+
+
+
+
+
 
 
 

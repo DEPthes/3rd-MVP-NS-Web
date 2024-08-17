@@ -78,15 +78,15 @@ export const SortOptions = styled.div`
   color: var(--NS-White);
   font: var(--S1);
   ${isMobileOrTablet} {
-    align-self: flex-end; /*오른쪽 정렬시켰다*/
+    align-self: flex-end;
     margin-bottom: 10px;
   }
 `;
 
-export const SortOption = styled.div<{ isSelected: boolean }>`
+export const SortOption = styled.div<{ $isSelected: boolean }>`
   cursor: pointer;
   font: var(--W1);
-  color: ${({ isSelected }) => (isSelected ? 'var(--NS-Main1)' : 'inherit')};
+  color: ${({ $isSelected }) => ($isSelected ? 'var(--NS-Main1)' : 'inherit')};
 
   &:hover {
     color: var(--NS-Main1);
@@ -97,6 +97,11 @@ export const SortOption = styled.div<{ isSelected: boolean }>`
   ${isMobileOrTablet} {
     font: var(--Hy2);
   }
+`;
+
+export const Divider = styled.span`
+  color: var(--NS-White);
+  font: var(--W1);
 `;
 
 export const TopicBox = styled.div`
@@ -177,3 +182,5 @@ export const LikeCount = styled.div`
     margin-top: 4px;
   }
 `;
+
+
