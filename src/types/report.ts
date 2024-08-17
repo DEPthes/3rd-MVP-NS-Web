@@ -18,6 +18,7 @@ export type TReportToday = {
 
 export type TLongestWriter = {
   userId: number; //가장 길게 쓴 사람 아이디
+  isCurrentUser: boolean; //가장 길게 쓴 사람 본인 여부
   nickname: string; //가장 길게 쓴 사람 닉네임
   imageUrl: string; //가장 길게 쓴 사람 프로필 사진
   length: number; //가장 길게 쓴 사람이 쓴 글자수
