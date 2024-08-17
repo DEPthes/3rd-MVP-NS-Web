@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 import * as S from '@/styles/layout/HeaderStyle';
 import BackDrop from './BackDrop';
@@ -13,6 +14,21 @@ const Header = () => {
   const [isViewHamItem, setIsViewHamItem] = useState(false);
   const isAccessToken = !!localStorage.getItem('accessToken');
   const handleUnauthorized = useHandleUnauthorized();
+  const navigate = useNavigate();
+
+  const handleServiceIntroductionClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+    navigate('/', { state: { scrollToIntroduction: true } });
+  };
+
+  const handleUsageClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+    navigate('/', { state: { scrollToUsage: true } });
+  };
 
   useEffect(() => {
     if (isDesktop) {
@@ -55,8 +71,15 @@ const Header = () => {
                       onClick={() => setIsViewHamItem(!isViewHamItem)}
                     />
                   )}
-                  <S.HamNavLinks to="/">서비스 소개</S.HamNavLinks>
-                  <S.HamNavLinks to="/">이용 방법</S.HamNavLinks>
+                  <S.HamNavLinks
+                    to="/"
+                    onClick={handleServiceIntroductionClick}
+                  >
+                    서비스 소개
+                  </S.HamNavLinks>
+                  <S.HamNavLinks to="/" onClick={handleUsageClick}>
+                    이용 방법
+                  </S.HamNavLinks>
                   <S.HamNavLinks to="/scenario">나였다면</S.HamNavLinks>
                   <S.HamNavLinks to="/report">N 보고서</S.HamNavLinks>
                   <S.HamNavLinks to="/ranking">N력 랭킹</S.HamNavLinks>
@@ -81,8 +104,20 @@ const Header = () => {
             N력 키우기
           </S.NavMain>
           <S.Nav>
-            <S.NavLinks to="/">서비스 소개</S.NavLinks>
-            <S.NavLinks to="/">이용 방법</S.NavLinks>
+            {/* "서비스 소개" 클릭 시 항상 메인 페이지로 이동 후 스크롤 */}
+            <S.NavLinks
+              to="/" // 메인 페이지 경로 설정
+              onClick={handleServiceIntroductionClick} // 클릭 시 스크롤 동작 제어
+            >
+              서비스 소개
+            </S.NavLinks>
+            {/* "이용 방법" 클릭 시 항상 메인 페이지로 이동 후 스크롤 */}
+            <S.NavLinks
+              to="/" // 메인 페이지 경로 설정
+              onClick={handleUsageClick} // 클릭 시 스크롤 동작 제어
+            >
+              이용 방법
+            </S.NavLinks>
             <S.NavLinks to="/scenario">나였다면</S.NavLinks>
             <S.NavLinks to="/report">N 보고서</S.NavLinks>
             <S.NavLinks to="/ranking">N력 랭킹</S.NavLinks>
