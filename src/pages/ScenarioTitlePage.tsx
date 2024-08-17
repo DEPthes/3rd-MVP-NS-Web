@@ -29,7 +29,7 @@ const ScenarioTitlePage: React.FC = () => {
 				}
 
 				if (response && response.information && response.information.themeList) {
-					setTopics(response.information.themeList);
+					setTopics(response.information.themeList); // themeList를 사용
 				} else {
 					console.error('주제 목록을 불러오지 못했습니다.', response);
 				}
@@ -134,6 +134,7 @@ const ScenarioTitlePage: React.FC = () => {
 };
 
 export default ScenarioTitlePage;
+
 
 
 

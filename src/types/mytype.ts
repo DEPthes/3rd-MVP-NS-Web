@@ -37,10 +37,10 @@ export interface TThemeListResponse {
 			totalElements: number;
 			totalPages: number;
 		};
-		resList: TTheme[];
+		themeList: TTheme[]; // resList를 themeList로 수정합니다.
+		userId: number;
 	};
 }
-
 
 // 좋아요 상태 관리 타입 정의
 export type TLikeState = {
@@ -88,8 +88,6 @@ export interface TThemeDetailResponse {
 		likeCount: number;
 	}>;
 }
-
-
 
 // 게시글 상세 조회 응답 타입 정의
 export interface TBoardDetailResponse {
