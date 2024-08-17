@@ -12,6 +12,7 @@ export const Post = styled.div`
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   width: 1170px;
   height: 151px;
+  cursor: pointer;
 
   ${isMobile} {
     width: 328px;

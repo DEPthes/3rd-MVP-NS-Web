@@ -89,13 +89,15 @@ export const Input = styled.input<{ $color: string }>`
   border: none;
   outline: none;
   margin-top: 0;
-  padding-bottom: 5px;
+  padding: 0;
+  height: 22px;
+  box-sizing: border-box;
 
-  color: ${props => props.color};
+  color: ${props => props.$color};
 
   &::placeholder {
     color: ${props => props.$color};
-    font: var(T3-1);
+    font: var(--M2-2);
   }
 `;
 
