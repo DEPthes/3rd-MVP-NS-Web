@@ -18,7 +18,8 @@ const ServiceContent: React.FC = () => {
           럭키비키한 상상을 하기도,{isMobileOrTablet && <br />} 별의별 걱정을
           사서 하기도 합니다.
           <br />
-          그래서 종종 ‘대가리꽃밭’ 이라는 별명으로 불리기도 합니다.
+          그래서 종종 ‘대가리꽃밭’ 이라는 별명으로 {isMobileOrTablet && <br />}
+          불리기도 합니다.
           <br />
           <br />
           하지만 이러한 성향이 나쁜 것은 아닙니다.
