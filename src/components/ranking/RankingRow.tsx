@@ -4,7 +4,7 @@ import * as S from '@styles/ranking/RankingRowStyle';
 
 type RankingRowProps = {
   user: TUser;
-  rank: number;
+  rank: string;
 };
 
 const RankingRow: React.FC<RankingRowProps> = ({ user, rank }) => {

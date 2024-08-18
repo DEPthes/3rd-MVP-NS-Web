@@ -12,6 +12,7 @@ export const TableData1 = styled.td`
   font: var(--T2);
   text-align: left;
   padding-top: 12px;
+  white-space: pre-wrap;
 
   ${isMobileOrTablet} {
     font: var(--T11);

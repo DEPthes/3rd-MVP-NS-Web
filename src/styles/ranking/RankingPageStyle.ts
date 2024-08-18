@@ -2,14 +2,21 @@ import styled from 'styled-components';
 import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease-in-out;
   width: 1170px;
-  margin-top: 160px;
-  margin-bottom: 85px;
+  margin-top: 50px;
+
+  z-index: 1;
 
   ${isMobile} {
     width: 328px;
@@ -26,6 +33,12 @@ export const Container = styled.div`
   }
 `;
 
+export const Content = styled.div`
+  width: 100%;
+  position: relative;
+  z-index: 1;
+`;
+
 export const Top3Title = styled.h2`
   height: 43px;
   font: var(--H1-1);
@@ -40,7 +53,7 @@ export const Top3Title = styled.h2`
 
 export const FilterLinks = styled.div`
   height: 19px;
-  z-index: 2;
+  z-index: 999; /* 최대한 높은 z-index 설정 */
   margin-top: 34px;
   right: 0px;
   color: var(--NS-White);
@@ -53,22 +66,22 @@ export const FilterLinks = styled.div`
 `;
 
 export const Top3Container = styled.div`
-  z-index: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0;
 
   ${isMobile} {
     width: 319.66px;
-    height: 161px;
-    margin-bottom: 26px;
+    height: 209px;
   }
 
   ${isTablet} {
     width: 480px;
-    height: 161px;
-    margin-bottom: 26px;
+    height: 209px;
+
+    margin-left: 124px;
   }
 `;
 
@@ -156,13 +169,13 @@ export const SearchContainer = styled.div`
 
   ${isMobile} {
     width: 100%;
-    margin-top: 26px;
-    margin-bottom: 32px;
+    margin-top: 0;
+    margin-bottom: 52px;
   }
 
   ${isTablet} {
     width: 319.66px;
-    margin: 26px 0 32px;
+    margin: 0px 204.17px 52px;
     align-items: center;
   }
 `;
