@@ -81,3 +81,11 @@ export const UserId = styled.div`
     white-space: nowrap;
   }
 `;
+
+export const Point = styled.div`
+  margin-top: 6px;
+  font: var(--T3-3);
+  color: var(--NS-White);
+  text-align: center;
+  height: 28px;
+`;

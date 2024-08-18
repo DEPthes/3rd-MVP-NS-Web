@@ -6,12 +6,14 @@ type Top3UserProps = {
   medalEmoji: string;
   userId: string;
   userProfileImage: string;
+  point: number;
 };
 
 const Top3User: React.FC<Top3UserProps> = ({
   medalEmoji,
   userId,
   userProfileImage,
+  point,
 }) => {
   const navigate = useNavigate();
 
@@ -30,6 +32,7 @@ const Top3User: React.FC<Top3UserProps> = ({
         />
       </S.TopCircle>
       <S.UserId>{userId}</S.UserId>
+      <S.Point>{point}</S.Point>
     </S.Top3UserContainer>
   );
 };

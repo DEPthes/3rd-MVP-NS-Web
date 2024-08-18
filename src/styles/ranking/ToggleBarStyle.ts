@@ -7,6 +7,7 @@ export const ToggleBarContainer = styled.div<{ $isOpen: boolean }>`
   border: 1px solid var(--NS-Gray); /* 테두리 색상 */
   margin-bottom: 10px;
   cursor: pointer;
+  transition: height 0.3s ease-in-out;
 
   height: ${({ $isOpen }) => ($isOpen ? '764px;' : '40px')};
 `;

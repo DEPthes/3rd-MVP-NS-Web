@@ -97,6 +97,7 @@ const RankingPage: React.FC = () => {
                     medalEmoji="🥈"
                     userId={top3Users[1]?.nickname}
                     userProfileImage={top3Users[1]?.imageUrl}
+                    point={top3Users[1]?.point}
                   />
                 </S.Top2>
               )}
@@ -106,6 +107,7 @@ const RankingPage: React.FC = () => {
                     medalEmoji="🥇"
                     userId={top3Users[0]?.nickname}
                     userProfileImage={top3Users[0]?.imageUrl}
+                    point={top3Users[0]?.point}
                   />
                 </S.Top1>
               )}
@@ -115,6 +117,7 @@ const RankingPage: React.FC = () => {
                     medalEmoji="🥉"
                     userId={top3Users[2]?.nickname}
                     userProfileImage={top3Users[2]?.imageUrl}
+                    point={top3Users[2]?.point}
                   />
                 </S.Top2>
               )}
@@ -160,7 +163,14 @@ const RankingPage: React.FC = () => {
                   <RankingRow
                     key={currentUser.userId}
                     user={currentUser}
-                    rank={`마이랭킹\n ${currentUser.ranking}`}
+                    isCurrentUser={true}
+                    rank={
+                      <>
+                        <span style={{ fontSize: '14px' }}>마이랭킹</span>
+                        <br />
+                        {currentUser.ranking}
+                      </>
+                    }
                   />
                 )}
                 {filteredUsers.map(user => (
@@ -168,6 +178,7 @@ const RankingPage: React.FC = () => {
                     key={user.userId}
                     user={user}
                     rank={`${user.ranking}`}
+                    isCurrentUser={false}
                   />
                 ))}
               </S.TableBody>
