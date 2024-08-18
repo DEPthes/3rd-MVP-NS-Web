@@ -100,7 +100,7 @@ export const InputSection = styled.div<{ $color: string }>`
   margin-top: 0;
   display: flex;
   justify-content: space-between;
- 
+
    ${isMobileOrTablet} {
     width: 182.5px;
     height: 30px;
