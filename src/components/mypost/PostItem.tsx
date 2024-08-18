@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/mypost/PostItemStyle';
 import { TPost } from '@/types/mypost/post';
-import { postBoardLike } from '@/apis/board/postBoardLIke';
+import { postBoardLike } from '@/apis/board/postBoardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 const PostItem: React.FC<TPost> = ({
