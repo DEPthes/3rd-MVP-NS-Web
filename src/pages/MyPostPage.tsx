@@ -27,16 +27,12 @@ const MyPostsPage: React.FC = () => {
   const fetchPosts = async () => {
     setIsDataLoaded(false);
     try {
-      console.log('Current sortType:', sortType); // sortType이 올바르게 설정되었는지 확인
       const { posts, pageInfo } = await getBoard(
         excludeTemporary,
         sortType,
         pageNum,
         handleUnauthorized,
       );
-
-      console.log('Fetched Posts:', posts); // 포스트 목록 확인
-      console.log('Page Info:', pageInfo); // 페이지 정보 확인
 
       setPostList(posts);
       setFilteredPostList(posts);
@@ -68,7 +64,6 @@ const MyPostsPage: React.FC = () => {
     }
   };
   useEffect(() => {
-    console.log('현재 페이지 번호:', pageNum); // 페이지 번호 로그 출력
     if (searchQuery) {
       fetchSearchResults(searchQuery); // 검색어가 있으면 getSearch 호출
     } else {

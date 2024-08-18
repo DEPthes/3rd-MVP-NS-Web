@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, [handleUnauthorized, navigate]);
 
   const handleNicknameChangeSuccess = (newNickname: string) => {
     if (userData) {

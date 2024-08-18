@@ -11,8 +11,6 @@ export const getBoard = async (
   try {
     const sortBy = sortType === 'likes' ? 'like' : sortType;
 
-    console.log('API 요청 파라미터:', { sortBy, pageNum }); // 여기에 로그 추가
-
     const response = await authAPI(handleUnauthorized).get(
       `/api/v1/user/board`,
       {
@@ -40,8 +38,6 @@ export const getBoard = async (
         totalElements: response.data.information.pageInfo.totalElements,
         totalPages: response.data.information.pageInfo.totalPages,
       };
-
-      console.log('페이지 정보:', pageInfo); // 페이지 정보 로그 추가
 
       return { posts, pageInfo };
     } else {

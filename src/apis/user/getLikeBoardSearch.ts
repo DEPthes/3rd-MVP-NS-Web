@@ -37,8 +37,6 @@ export const getLikeBoardSearch = async (
 
       // 페이지 정보 추출
       const pageInfo = response.data.information.pageInfo;
-      console.log('Mapped Posts:', posts); // 매핑된 게시글 로그
-      console.log('Page Info:', pageInfo); // 페이지 정보 로그
 
       return { posts, pageInfo };
     } else {

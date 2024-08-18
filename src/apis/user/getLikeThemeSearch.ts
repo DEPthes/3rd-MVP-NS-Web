@@ -34,8 +34,6 @@ export const getLikeThemeSearch = async (
       }));
 
       const pageInfo = response.data.information.pageInfo;
-      console.log('Mapped Topics:', topics); // 매핑된 주제 로그
-      console.log('Page Info:', pageInfo); // 페이지 정보 로그
 
       return { topics, pageInfo };
     } else {
