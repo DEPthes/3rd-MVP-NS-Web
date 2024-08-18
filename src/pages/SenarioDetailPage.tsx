@@ -160,7 +160,11 @@ const SenarioDetailPage: React.FC = () => {
         />
       </S.NewTopicBox>
       <S.ButtonContainer>
-        <LightButton text="임시저장" onClick={handleSave} />
+        <LightButton
+          text="임시저장"
+          onClick={handleSave}
+          isDisabled={title.trim() === '' || text.trim() === ''}
+        />
         <DarkButton
           text="게시"
           onClick={handlePost}
