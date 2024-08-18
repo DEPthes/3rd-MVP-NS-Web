@@ -76,11 +76,11 @@ export const LikeContainer = styled.div`
   gap: 5px;
 
   svg {
-    width: 30px;
+    width: 30px; /* 기본 크기 (데스크탑용) */
     height: 30px;
 
     ${isMobileOrTablet} {
-      width: 16px;
+      width: 16px; /* 모바일 및 테블릿에서 크기 줄이기 */
       height: 16px;
     }
   }
@@ -189,17 +189,30 @@ export const ModalContainer = styled.div`
   padding: 40px 0;
   text-align: center;
   width: 520px;
+  ${isMobileOrTablet} {
+	width: 320px;
+	height: 164px;
+  }
 `;
 
 export const ModalTitle = styled.h2`
   font: var(--M1);
   color: var(--NS-Black);
+  ${isMobileOrTablet}{
+	font:var(--P-T1);
+  }
 `;
 
 export const ModalText2Black = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black);
   margin: 16px 0;
+  ${isMobileOrTablet}{
+	font:var(--P-T2);
+	color: var(--Gray1);
+	width: 264px;
+	height:51px;
+  }
 `;
 
 export const ModalTextBlack = styled.p`
@@ -212,10 +225,16 @@ export const ModalTextBlack2 = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black2);
   margin: 24px 0 30px;
+  ${isMobileOrTablet}{
+	font:var(--P-T2);
+	color: var(--Gray1);
+	width: 264px;
+	height:51px;
+  }
 `;
 
 export const ModalBtn = styled.div`
   display: flex;
   gap: 12px;
+  
 `;
-

@@ -11,6 +11,8 @@ import LightButton from '@/components/button/LightButton';
 import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 import { getBoard } from '@/apis/board/getBoard';
 import { deleteBoard } from '@/apis/board/deleteBoard';
+import { postLike } from '@/apis/theme/postLike';
+import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { TBoardDetailResponse } from '@/types/mytype';
 
@@ -30,10 +32,11 @@ const SelectTitleDetail: React.FC = () => {
 		const fetchPost = async () => {
 			if (id) {
 				const response = await getBoard(parseInt(id), handleUnauthorized);
+				console.log('API Response:', response); // 데이터 구조 확인
 				if (response) {
-					setPost(response); // API에서 받은 데이터를 설정
-					setIsLiked(response.likedTheme); // 주제 좋아요 상태 설정
-					setIsBlueHeartLiked(response.likedBoard); // 게시글 좋아요 상태 설정
+					setPost(response);
+					setIsLiked(response.likedTheme);
+					setIsBlueHeartLiked(response.likedBoard);
 				} else {
 					console.error('게시글을 불러오지 못했습니다.');
 				}
@@ -81,27 +84,42 @@ const SelectTitleDetail: React.FC = () => {
 	};
 
 	const handleWhiteHeartClick = async () => {
+		if (!post || !post.themeId) {
+			console.error('Invalid themeId:', post ? post.themeId : 'Post is null');
+			return;
+		}
+
 		try {
-			// 주제에 대한 좋아요 API 호출 코드 추가
-			setIsLiked(!isLiked);
+			const response = await postLike(post.themeId, handleUnauthorized);
+			if (response) {
+				setIsLiked(response.liked); // API 응답에 따라 좋아요 상태 업데이트
+			} else {
+				console.error('주제 좋아요 실패');
+			}
 		} catch (error) {
-			console.error('좋아요 실패:', error);
+			console.error('주제 좋아요 요청 중 오류 발생:', error);
 		}
 	};
 
+
 	const handleBlueHeartClick = async () => {
+		if (!post) return;
+
 		try {
-			// 게시글에 대한 좋아요 API 호출 코드 추가
-			setIsBlueHeartLiked(!isBlueHeartLiked);
+			const response = await boardLike(post.boardId, handleUnauthorized);
+			if (response) {
+				setIsBlueHeartLiked(response.liked); // API 응답에 따라 좋아요 상태 업데이트
+			} else {
+				console.error('게시글 좋아요 실패');
+			}
 		} catch (error) {
-			console.error('좋아요 실패:', error);
+			console.error('게시글 좋아요 요청 중 오류 발생:', error);
 		}
 	};
 
 	const handleProfileClick = () => {
 		navigate(`/profile/${post?.nickname}`); // 타인의 프로필 페이지로 이동하기
 	};
-
 
 	if (!post) {
 		return <div>로딩 중...</div>;
@@ -175,6 +193,7 @@ const SelectTitleDetail: React.FC = () => {
 };
 
 export default SelectTitleDetail;
+
 
 
 

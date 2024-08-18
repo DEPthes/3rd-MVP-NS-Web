@@ -79,6 +79,7 @@ export const LikeContainer = styled.div`
 	cursor: pointer;
 	color: var(--NS-Main2);
 	font: var(--S1-1);
+	
 
 	${isMobileOrTablet} {
 		font: var (--P-S2-2);
@@ -248,7 +249,7 @@ export const PostTitle = styled.div`
 	width: 264px;
 	min-height: 33px;
 	margin-bottom: 20px;
-	margin-top: 36px;
+	margin-top: 25px;
 	margin-left: 46px;
 	cursor: pointer;
 	&:hover {
@@ -269,16 +270,26 @@ export const PostContent = styled.div`
 	color: var(--NS-Black);
 	white-space: pre-wrap;
 	margin-bottom: 34px;
-	margin-top: 13px;
+	margin-top: 10px;
 	margin-left: 46px;
 	width: 980px;
 	min-height: 56px;
 
-	${isMobileOrTablet} {
+	${isTablet} {
 		font: var(--P-S2-2);
 		margin-left: 20px;
 		margin-right: 72px;
 		margin-top: -20px; 
+		margin-bottom: 1px; 
+		//width: 228px; 
+		min-height: 20px;
+	}
+	
+	${isMobile} {
+		font: var(--P-S2-2);
+		margin-left: 20px;
+		margin-right: 72px;
+		margin-top: -25px; 
 		margin-bottom: 1px; 
 		width: 228px; 
 		min-height: 20px;
