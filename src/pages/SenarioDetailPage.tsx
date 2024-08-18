@@ -11,7 +11,7 @@ import { postDraft } from '@/apis/board/postDraft';
 import { postPublish } from '@/apis/board/postPublish';
 import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const SenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,6 +24,7 @@ const SenarioDetailPage: React.FC = () => {
   const [isPostModalVisible, setIsPostModalVisible] = useState<boolean>(false);
   const [isPostCompleteModalVisible, setIsPostCompleteModalVisible] =
     useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -124,9 +125,11 @@ const SenarioDetailPage: React.FC = () => {
   const handleModalComplete = () => {
     setIsSaveCompleteModalVisible(false);
     setIsPostCompleteModalVisible(false);
+    navigate(-1);
   };
 
-  const isPostDisabled = title.trim() === '' || text.trim() === '';
+  const isPostDisabled =
+    title.trim() === '' || text.trim() === '' || text.length < 100;
 
   return (
     <S.Container>
@@ -161,7 +164,7 @@ const SenarioDetailPage: React.FC = () => {
         <DarkButton
           text="게시"
           onClick={handlePost}
-          disabled={isPostDisabled}
+          isDisabled={isPostDisabled}
         />
       </S.ButtonContainer>
       {isSaveModalVisible && (

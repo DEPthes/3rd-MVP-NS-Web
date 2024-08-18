@@ -108,19 +108,17 @@ const MyLikedPostPage: React.FC = () => {
               smallfont={false}
             />
           ) : filteredLikedPosts.length > 0 ? (
-            <>
-              <PostList posts={filteredLikedPosts} />
-              {pageInfo && (
-                <Pagination
-                  pageInfo={pageInfo}
-                  pageNum={pageNum}
-                  setPageNum={setPageNum}
-                />
-              )}
-            </>
+            <PostList posts={filteredLikedPosts} />
           ) : null}
         </S.EmptyState>
       ) : null}
+      {pageInfo && (
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
+      )}
     </S.Container>
   );
 };

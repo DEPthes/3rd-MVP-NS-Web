@@ -64,6 +64,14 @@ const ReportPage = () => {
     window.scroll({ top: 0, behavior: 'smooth' });
   };
 
+  //글자 자르기
+  const truncateText = (text: string) => {
+    if (text.length > 10) {
+      return text.slice(0, 10) + '...';
+    }
+    return text;
+  };
+
   return (
     <S.Container>
       <DateNavigator
@@ -87,7 +95,8 @@ const ReportPage = () => {
             <S.SummaryWrap>
               <img src={reportList.wordCloud} alt="" />
               <h4>
-                사용자가 가장 많이 쓴 단어는 <span>{reportList.topWord}</span>
+                사용자가 가장 많이 쓴 단어는
+                <span>{truncateText(reportList.topWord)}</span>
                 {!isMobileOrTablet && '입니다.'}
               </h4>
               <h4>

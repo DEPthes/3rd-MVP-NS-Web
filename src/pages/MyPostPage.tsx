@@ -112,16 +112,7 @@ const MyPostsPage: React.FC = () => {
       {isDataLoaded ? (
         <S.EmptyState>
           {filteredPostList.length > 0 ? (
-            <>
-              <PostList posts={filteredPostList} />
-              {pageInfo && (
-                <Pagination
-                  pageInfo={pageInfo}
-                  pageNum={pageNum}
-                  setPageNum={setPageNum}
-                />
-              )}
-            </>
+            <PostList posts={filteredPostList} />
           ) : postList.length === 0 ? (
             <EmptyMessage
               buttonText="N력 키우러 가기"
@@ -132,6 +123,13 @@ const MyPostsPage: React.FC = () => {
           ) : null}
         </S.EmptyState>
       ) : null}
+      {pageInfo && (
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
+      )}
     </S.Container>
   );
 };
