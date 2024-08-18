@@ -5,7 +5,18 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-top: 117px;
+  margin-bottom: 112px;
+
+  ${isMobile} {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  ${isTablet} {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const TopicBox = styled.div`
@@ -21,6 +32,7 @@ export const TopicBox = styled.div`
     width: 320px;
     min-height: 92px;
     border-radius: 20px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,23 +65,23 @@ export const TopicHeader = styled.div`
 `;
 
 export const Topic = styled.div`
-  margin-top: 1.8px;
+  margin-top: 3px;
   color: var(--NS-Main1);
   font: var(--T1-1);
 
   ${isMobile} {
-    margin-top: 4px;
+    margin-top: 5px;
     font: var(--P-T1);
   }
 
   ${isTablet} {
-    margin-top: 4px;
+    margin-top: 5px;
     font: var(--P-T1);
   }
 `;
 
 export const LikeContainer = styled.div`
-  margin-top: 1.8px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -218,4 +230,3 @@ export const ModalBtn = styled.div`
   display: flex;
   gap: 12px;
 `;
-
