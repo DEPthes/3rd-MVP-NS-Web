@@ -20,7 +20,6 @@ export const ModalContent = styled.div`
   height: 220px;
   display: flex;
   flex-direction: column;
-  position: relative;
 
   ${isMobileOrTablet} {
     width: 328px;
@@ -35,6 +34,7 @@ export const Title = styled.h2`
   color: var(--NS-Black);
   margin-bottom: 16px;
   ${isMobileOrTablet} {
+    height: 19px;
     font: var(--S1);
     margin-top: 24px;
     margin-bottom: 14px;
@@ -73,7 +73,11 @@ export const PButtonContainer = styled.div`
   display: flex;
   gap: 12px;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 24px;
+
+  ${isMobileOrTablet} {
+    margin-top: 14px;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -96,7 +100,7 @@ export const InputSection = styled.div<{ $color: string }>`
   margin-top: 0;
   display: flex;
   justify-content: space-between;
-  //align-items: center;
+ 
    ${isMobileOrTablet} {
     width: 182.5px;
     height: 30px;
