@@ -117,17 +117,6 @@ const SenarioDetailPage: React.FC = () => {
     setIsPostModalVisible(false);
   };
 
-  const handleModalCancel = () => {
-    setIsSaveModalVisible(false);
-    setIsPostModalVisible(false);
-  };
-
-  const handleModalComplete = () => {
-    setIsSaveCompleteModalVisible(false);
-    setIsPostCompleteModalVisible(false);
-    navigate(`/scenario/topic/${id}`);
-  };
-
   const isPostDisabled =
     title.trim() === '' || text.trim() === '' || text.length < 100;
 
@@ -185,7 +174,10 @@ const SenarioDetailPage: React.FC = () => {
               </S.ModalText2Black>
               <S.ModalBtn>
                 <DarkButton text="임시저장" onClick={handleModalSave} />
-                <LightButton text="취소" onClick={handleModalCancel} />
+                <LightButton
+                  text="취소"
+                  onClick={() => () => setIsSaveModalVisible(false)}
+                />
               </S.ModalBtn>
             </S.ModalContainer>
           }
@@ -200,7 +192,10 @@ const SenarioDetailPage: React.FC = () => {
               <S.ModalTextBlack2>
                 (임시 저장된 글은 마이페이지-내가 쓴 글에서 확인할 수 있습니다.)
               </S.ModalTextBlack2>
-              <DarkButton text="확인" onClick={handleModalComplete} />
+              <DarkButton
+                text="확인"
+                onClick={() => setIsPostCompleteModalVisible(false)}
+              />
             </S.ModalContainer>
           }
           isOpen={isSaveCompleteModalVisible}
@@ -214,7 +209,10 @@ const SenarioDetailPage: React.FC = () => {
               <S.ModalTextBlack>상상력을 게시하시겠습니까?</S.ModalTextBlack>
               <S.ModalBtn>
                 <DarkButton text="게시" onClick={handleModalPost} />
-                <LightButton text="취소" onClick={handleModalCancel} />
+                <LightButton
+                  text="취소"
+                  onClick={() => setIsPostModalVisible(false)}
+                />
               </S.ModalBtn>
             </S.ModalContainer>
           }
@@ -227,7 +225,14 @@ const SenarioDetailPage: React.FC = () => {
             <S.ModalContainer>
               <S.ModalTitle>상상력 게시 완료!</S.ModalTitle>
               <S.ModalTextBlack>N력 +5 상승!</S.ModalTextBlack>
-              <DarkButton text="확인" onClick={handleModalComplete} />
+              <DarkButton
+                text="확인"
+                onClick={() => {
+                  setIsPostCompleteModalVisible(false);
+                  navigate(`/scenario/topic/${id}`);
+                  window.scroll({ top: 0, behavior: 'smooth' });
+                }}
+              />
             </S.ModalContainer>
           }
           isOpen={isPostCompleteModalVisible}
