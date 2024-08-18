@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/profile/ProfilePageStyle';
 import { getUser } from '@/apis/user/getUser';
@@ -12,6 +12,7 @@ const ProfilePage: React.FC = () => {
   const [userData, setUserData] = useState<TUserData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleUnauthorized = useHandleUnauthorized();
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -42,28 +43,33 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    const isDefault = !file; // 파일이 없으면 기본 이미지 설정
+    if (!e.target.files || e.target.files.length === 0) {
+      console.log('파일이 선택되지 않았습니다.');
+      return;
+    }
+
+    const file = e.target.files[0];
 
     // 파일 형식 검증
-    if (file && !['image/jpeg', 'image/png'].includes(file.type)) {
+    if (!['image/jpeg', 'image/png'].includes(file.type)) {
       alert('PNG 또는 JPG 형식의 파일만 업로드할 수 있습니다.');
       return;
     }
 
+    // 선택한 이미지가 바로 반영되도록 URL 생성
+    const imageUrl = URL.createObjectURL(file);
+    if (userData) {
+      setUserData({
+        ...userData,
+        information: { ...userData.information, imageUrl },
+      });
+    }
+
+    // API 호출
     try {
-      const response = await patchProfile(isDefault, file, handleUnauthorized);
-
+      const response = await patchProfile(false, file, handleUnauthorized);
       if (response.check) {
-        alert('프로필이 변경되었습니다.');
-
-        // 프로필 업데이트 후, 최신 정보를 다시 가져옵니다.
-        const updatedUserData = await getUser(handleUnauthorized);
-        if (updatedUserData?.check) {
-          setUserData(updatedUserData);
-        } else {
-          console.error('프로필 정보 다시 가져오기 실패');
-        }
+        console.log('프로필이 변경되었습니다.');
       } else {
         alert('프로필 변경에 실패했습니다.');
         console.error('프로필 변경 실패:', response);
@@ -75,20 +81,11 @@ const ProfilePage: React.FC = () => {
   };
 
   const openFilePicker = () => {
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/png, image/jpeg'; // png나 jpg로 제한
-
-    fileInput.onchange = event => {
-      const e = event as unknown as React.ChangeEvent<HTMLInputElement>;
-      handleImageChange(e);
-    };
-
-    fileInput.click();
+    inputFileRef.current?.click();
   };
 
   if (!userData) {
-    return <div>로딩중...</div>;
+    return null;
   }
 
   return (
@@ -105,7 +102,14 @@ const ProfilePage: React.FC = () => {
         </S.ProfileImageContainer>
         <S.Nickname>{userData.information.nickname}</S.Nickname>
         <S.EditOptions>
-          <S.EditOption onClick={openFilePicker}>프로필사진 변경</S.EditOption>{' '}
+          <S.EditOption onClick={openFilePicker}>프로필사진 변경</S.EditOption>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            style={{ display: 'none' }}
+            ref={inputFileRef}
+            onChange={handleImageChange}
+          />
           <S.EditOption onClick={() => setIsModalOpen(true)}>
             닉네임 수정
           </S.EditOption>

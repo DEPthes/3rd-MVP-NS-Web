@@ -4,29 +4,27 @@ import { TPagination } from '@/types/pagination';
 
 export const getBoard = async (
   excludeTemporary: boolean,
-  sortType: string,
-  pageNum: number, // 페이지 번호 추가
+  sortType: string, // 정렬 기준 ('date', 'likes' 등)
+  pageNum: number, // 페이지 번호
   handleUnauthorized: () => void,
 ): Promise<{ posts: TPost[]; pageInfo: TPagination }> => {
   try {
-    console.log('파라미터:', {
-      filterDrafts: excludeTemporary,
-      sort: sortType,
-      pageNum, // 페이지 번호 포함
-    });
+    const sortBy = sortType === 'likes' ? 'like' : sortType;
+
+    console.log('API 요청 파라미터:', { sortBy, pageNum }); // 여기에 로그 추가
 
     const response = await authAPI(handleUnauthorized).get(
       `/api/v1/user/board`,
       {
         params: {
           filterDrafts: excludeTemporary,
-          sort: sortType,
-          page: pageNum, // 페이지 번호를 API에 전달
+          sortBy,
+          page: pageNum, // 페이지 번호 전달
         },
       },
     );
 
-    console.log('API response:', response.data);
+    console.log('API 응답 데이터:', response.data); // 응답 데이터 로그 추가
 
     if (response.data?.check) {
       const posts = response.data.information.resList.map((post: TPost) => ({
@@ -38,11 +36,18 @@ export const getBoard = async (
         countLike: post.countLike,
       }));
 
-      const pageInfo = response.data.information.pageInfo;
+      const pageInfo: TPagination = {
+        pageNumber: response.data.information.pageInfo.pageNumber,
+        pageSize: response.data.information.pageInfo.pageSize,
+        totalElements: response.data.information.pageInfo.totalElements,
+        totalPages: response.data.information.pageInfo.totalPages,
+      };
+
+      console.log('페이지 정보:', pageInfo); // 페이지 정보 로그 추가
 
       return { posts, pageInfo };
     } else {
-      console.error('Failed to fetch user board data');
+      console.error('게시판 데이터 불러오기 실패');
       return {
         posts: [],
         pageInfo: {
@@ -54,7 +59,7 @@ export const getBoard = async (
       };
     }
   } catch (error) {
-    console.error('Failed to fetch user board data:', error);
+    console.error('게시판 데이터 불러오기 중 오류 발생:', error);
     return {
       posts: [],
       pageInfo: {

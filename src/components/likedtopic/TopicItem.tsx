@@ -13,7 +13,9 @@ const TopicItem: React.FC<TTopic> = ({
   const [liked, setLiked] = useState(false);
   const formattedDate = date.split('T')[0].split('-').join('. ');
   const navigate = useNavigate();
-  const handleLikeClick = () => {
+
+  const handleLikeClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // 클릭 시 페이지 이동을 막음
     setLiked(!liked); // 클릭 시 좋아요 상태를 토글
   };
 
@@ -23,8 +25,6 @@ const TopicItem: React.FC<TTopic> = ({
 
   return (
     <S.TopicItemContainer onClick={handleTopicClick}>
-      {' '}
-      {/* 전체 항목에 클릭 이벤트 추가 */}
       <S.TextField>
         <S.TopicTitle>{theme}</S.TopicTitle>
         <S.TopicDate>발행일: {formattedDate}</S.TopicDate>

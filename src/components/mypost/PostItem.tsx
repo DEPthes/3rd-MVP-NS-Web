@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 훅을 임포트
+import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/mypost/PostItemStyle';
 import { TPost } from '@/types/mypost/post';
 
 const PostItem: React.FC<TPost> = ({
-  boardId, // boardId 추가
+  boardId,
   theme,
   createdDate,
   title,
   countLike,
   published,
 }) => {
+  console.log('Rendering PostItem:', {
+    boardId,
+    theme,
+    createdDate,
+    title,
+    countLike,
+    published,
+  });
   const [liked, setLiked] = useState(false); // 좋아요 상태 관리
   const formattedDate = createdDate.split('T')[0].split('-').join('. ');
   const navigate = useNavigate();
 
-  const handleLikeClick = () => {
+  const handleLikeClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // 클릭 시 페이지 이동을 막음
     setLiked(!liked); // 클릭 시 좋아요 상태를 토글
   };
 
@@ -28,14 +37,14 @@ const PostItem: React.FC<TPost> = ({
       <S.TextField>
         <S.PostTopic>{theme}</S.PostTopic>
         <S.PostDate $published={published}>
-          {!published
-            ? `임시저장일: ${formattedDate}`
-            : `발행일: ${formattedDate}`}
+          {published
+            ? `발행일: ${formattedDate}`
+            : `임시저장일: ${formattedDate}`}
         </S.PostDate>
         <S.PostTitle>{title}</S.PostTitle>
       </S.TextField>
       <S.LikesContainer>
-        <S.LikeIcon liked={liked} onClick={handleLikeClick} />
+        <S.LikeIcon $liked={liked} onClick={handleLikeClick} />
         <S.PostLikes>{countLike + (liked ? 1 : 0)}</S.PostLikes>
       </S.LikesContainer>
     </S.Post>

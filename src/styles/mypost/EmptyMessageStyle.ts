@@ -24,10 +24,11 @@ export const EmptyMessageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
 
   ${isMobile} {
     width: 328px;
-    heigth: 206px;
+    height: 206px;
   }
 
   ${isTablet} {
@@ -36,24 +37,28 @@ export const EmptyMessageContainer = styled.div`
   }
 `;
 
-export const Image = styled.div`
+export const Image = styled.img`
   width: 200px;
   height: 200px;
   margin: 0;
+
+  ${isMobileOrTablet} {
+    width: 160px;
+    height: 160px;
+  }
 `;
 
-export const Message = styled.h2<{ smallfont: boolean }>`
+export const Message = styled.h2<{ $smallfont: boolean }>`
   width: auto;
-  margin-left: 29px;
   font: var(--T2);
   color: var(--NS-White);
   white-space: pre-line;
   text-align: center;
+  margin-bottom: 0;
 
   ${isMobileOrTablet} {
-    //font: var(--P-T1);
     margin: 0;
-    font: ${props => (props.smallfont ? 'var(--P-T3)' : 'var(--P-T1)')};
+    font: ${props => (props.$smallfont ? 'var(--P-T3)' : 'var(--P-T1)')};
   }
 
   ${isTablet} {
@@ -73,7 +78,7 @@ export const ButtonContainer = styled.div`
   }
 
   ${isTablet} {
-    margin-top: 56px;
+    margin-top: 16px;
     margin-bottom: 0;
   }
 

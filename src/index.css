@@ -70,6 +70,7 @@
   --M1: 700 24px / normal Pretendard;
   --M1-1: 400 16px / 22px Pretendard;
   --M1-2: 600 22px /22px Pretendard;
+  --M1-3: 600 10px /15px Pretendard;
   --M1-B: 400 10px / 15px Pretendard;
   --N1: 600 44px / normal Pretendard;
   --N2: 700 24px / normal Pretendard;
@@ -99,6 +100,7 @@
   --M-2: 700 24px / normal Pretendard;
   --M-3: 400 14px / normal Pretendard;
   --M-4: 700 14px / normal Pretendard;
+  --V1: 600 7px / normal Pretendard;
 }
 
 html,

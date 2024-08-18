@@ -14,26 +14,30 @@ export const getLikeThemeSearch = async (
       {
         params: {
           keyword, // 검색어
-          sort: sortBy, // 정렬 기준
+          sortBy, // 정렬 기준
           page, // 페이지 번호를 API에 전달
         },
       },
     );
 
-    console.log('Search API response:', response.data);
+    console.log('Search API response:', response.data); // API 응답 로그
 
     if (response.data?.check) {
-      const boardLikeResList =
-        response.data.information?.boardLikeResList ?? [];
-      const topics = boardLikeResList.map((topic: TTopic) => ({
+      // 응답 데이터에서 주제 리스트 추출
+      const resList = response.data.information?.resList ?? []; // 올바른 필드 이름 사용
+
+      // 주제 리스트 매핑
+      const topics = resList.map((topic: TTopic) => ({
         themeId: topic.themeId,
         theme: topic.theme,
         date: topic.date,
         countLike: topic.countLike,
-        countBoard: topic.countBoard, // 게시글 수 필드 수정
+        countBoard: topic.countBoard, // 게시글 수 필드
       }));
 
       const pageInfo = response.data.information.pageInfo;
+      console.log('Mapped Topics:', topics); // 매핑된 주제 로그
+      console.log('Page Info:', pageInfo); // 페이지 정보 로그
 
       return { topics, pageInfo };
     } else {

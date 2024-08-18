@@ -7,6 +7,7 @@ type PostListProps = {
 };
 
 const PostList: React.FC<PostListProps> = ({ posts }) => {
+  console.log('Rendering PostList with posts:', posts); // 여기에 로그 추가
   return (
     <div>
       {posts.map(post => (
@@ -17,7 +18,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
           createdDate={post.createdDate} // createdDate를 사용
           title={post.title}
           countLike={post.countLike} // countLike를 사용
-          published={post.published}
+          published={post.published !== undefined ? post.published : true}
         />
       ))}
     </div>
