@@ -9,7 +9,7 @@ export const postBoardLike = async (
       `/api/v1/board/${boardId}/like`,
     );
     if (response.data.check) {
-      return response.data.information.liked; // 서버에서 반환된 liked 상태
+      return response.data.information.liked;
     } else {
       console.error('좋아요 처리 실패:', response.data);
       return undefined;

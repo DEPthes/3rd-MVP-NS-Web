@@ -39,7 +39,7 @@ const ProfilePage: React.FC = () => {
         information: { ...userData.information, nickname: newNickname },
       });
     }
-    setIsModalOpen(false); // 닉네임 변경 성공 시 모달을 닫습니다.
+    setIsModalOpen(false);
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
