@@ -11,16 +11,13 @@ import { postLike } from '@/apis/theme/postLike';
 import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
+import { TPagination } from '@/types/pagination';
 
 const TopicDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [topic, setTopic] = useState<TThemeDetailResponse | null>(null);
-  const [likedPosts, setLikedPosts] = useState<{ [key: number]: boolean }>({});
   const [sortType, setSortType] = useState<'date' | 'likeCount'>('date');
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [pageInfo, setPageInfo] = useState<
-    TThemeDetailResponse['pageInfo'] | null
-  >(null);
+  const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
   const [pageNum, setPageNum] = useState(1); // 기본 값 1
   const navigate = useNavigate();
   const handleUnauthorized = useHandleUnauthorized();
@@ -32,7 +29,7 @@ const TopicDetailPage: React.FC = () => {
           {
             themeId: parseInt(id),
             page: pageNum,
-            size: 2,
+            size: 5,
             sortBy: sortType,
           },
           handleUnauthorized,
@@ -40,7 +37,6 @@ const TopicDetailPage: React.FC = () => {
         if (response) {
           setTopic(response);
           setPageInfo(response.pageInfo);
-          setIsLiked(response.likedTheme);
         } else {
           console.error('주제 가져오기 에러');
         }
@@ -53,24 +49,20 @@ const TopicDetailPage: React.FC = () => {
   const handleTopicLikeClick = async (e: React.MouseEvent) => {
     e.stopPropagation(); // 이벤트 전파를 막음
 
-    if (!topic || !topic.themeId) return;
+    if (!topic) return;
+    //API 수정되면 추후 수정 (themeId)
 
     try {
       const response = await postLike(topic.themeId, handleUnauthorized);
       if (response) {
-        const newIsLiked = response.liked;
-
-        setIsLiked(newIsLiked);
-
         setTopic(prevTopic => {
           if (prevTopic) {
-            const updatedLikeCount = newIsLiked
-              ? prevTopic.likeCount + 1
-              : prevTopic.likeCount - 1;
-
             return {
               ...prevTopic,
-              likeCount: updatedLikeCount,
+              likeCount: topic.likedTheme
+                ? topic.likeCount - 1
+                : topic.likeCount + 1,
+              likedTheme: !topic.likedTheme,
             };
           }
           return prevTopic;
@@ -101,15 +93,10 @@ const TopicDetailPage: React.FC = () => {
     try {
       // 좋아요 API 호출
       const response = await boardLike(postId, handleUnauthorized);
+      console.log(response);
 
       if (response) {
         // API 응답에 따라 상태 업데이트
-        setLikedPosts(prev => ({
-          ...prev,
-          [postId]: !prev[postId], // 좋아요 상태 토글
-        }));
-
-        // 서버 응답에 따라 likeCount 업데이트
         setTopic(prevTopic => {
           if (prevTopic) {
             return {
@@ -118,9 +105,10 @@ const TopicDetailPage: React.FC = () => {
                 board.boardId === postId
                   ? {
                       ...board,
-                      likeCount: likedPosts[postId]
+                      likeCount: board.likedBoard
                         ? board.likeCount - 1
                         : board.likeCount + 1,
+                      likedBoard: !board.likedBoard,
                     }
                   : board,
               ),
@@ -171,7 +159,7 @@ const TopicDetailPage: React.FC = () => {
           </S.PublishDate>
           <S.PublishDate>|</S.PublishDate>
           <S.LikeContainer onClick={handleTopicLikeClick}>
-            {isLiked ? (
+            {topic.likedTheme ? (
               <Main5HeartFill title="Liked" />
             ) : (
               <Main5Heart title="Like" />
@@ -212,14 +200,10 @@ const TopicDetailPage: React.FC = () => {
             <S.RightWrap>
               <S.LikeButton onClick={e => handleLikeClick(post.boardId, e)}>
                 <img
-                  src={likedPosts[post.boardId] ? BlueHeartFill : BlueHeart}
+                  src={post.likedBoard ? BlueHeartFill : BlueHeart}
                   alt="Like"
                 />
-                <S.PostLikeCount>
-                  {likedPosts[post.boardId]
-                    ? post.likeCount + 1
-                    : post.likeCount}
-                </S.PostLikeCount>
+                <S.PostLikeCount>{post.likeCount}</S.PostLikeCount>
               </S.LikeButton>
               <S.PostInfo>
                 {post.nickname} | {new Date(post.date).toLocaleDateString()}
@@ -228,7 +212,6 @@ const TopicDetailPage: React.FC = () => {
           </S.PostBox>
         ))}
       </S.PostList>
-      {/* 페이징 컴포넌트 */}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

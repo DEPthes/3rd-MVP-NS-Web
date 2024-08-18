@@ -4,12 +4,12 @@ import * as S from '@/styles/scenario/ScenarioTitlePageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg?react';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg?react';
 import SearchIcon from '@assets/icons/Search.svg';
-import { TLikeState, TTheme, TThemeListResponse } from '@/types/mytype';
+import { TTheme, TThemeListResponse } from '@/types/mytype';
 import { getList } from '@/apis/theme/getList';
 import { getSearch } from '@/apis/theme/getSearch';
-import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
+import { postLike } from '@/apis/theme/postLike';
 
 const ScenarioTitlePage: React.FC = () => {
   const [topics, setTopics] = useState<TTheme[]>([]);
@@ -17,11 +17,10 @@ const ScenarioTitlePage: React.FC = () => {
   const [sortType, setSortType] = useState<'date' | 'likeCount' | 'boardCount'>(
     'date',
   );
-  const [isLikedTopics, setIsLikedTopics] = useState<TLikeState>({});
   const [pageInfo, setPageInfo] = useState<
     TThemeListResponse['information']['pageInfo'] | null
   >(null);
-  const [pageNum, setPageNum] = useState(0); // 기본 값 0
+  const [pageNum, setPageNum] = useState(1); // 기본 값 1
 
   const navigate = useNavigate();
   const handleUnauthorized = useHandleUnauthorized();
@@ -31,17 +30,12 @@ const ScenarioTitlePage: React.FC = () => {
       try {
         let response;
         if (searchTerm.trim() === '') {
-          response = await getList(
-            pageNum + 1,
-            3,
-            sortType,
-            handleUnauthorized,
-          ); // 페이지 사이즈를 3으로 설정
+          response = await getList(pageNum, 5, sortType, handleUnauthorized);
         } else {
           response = await getSearch(
             searchTerm,
-            pageNum + 1,
-            3,
+            pageNum,
+            5,
             sortType,
             handleUnauthorized,
           );
@@ -79,25 +73,21 @@ const ScenarioTitlePage: React.FC = () => {
     );
   };
 
-  const handleLike = async (themeId: number, content: string) => {
+  const handleLike = async (themeId: number) => {
     try {
       // 좋아요 API 호출
-      const response = await boardLike(themeId, handleUnauthorized);
+      const response = await postLike(themeId, handleUnauthorized);
       if (response) {
-        setIsLikedTopics(prev => ({
-          ...prev,
-          [content]: !prev[content],
-        }));
-
         // 좋아요 숫자를 업데이트
         setTopics(prevTopics =>
           prevTopics.map(topic =>
             topic.themeId === themeId
               ? {
                   ...topic,
-                  likeCount: isLikedTopics[content]
+                  likeCount: topic.likedTheme
                     ? topic.likeCount - 1
                     : topic.likeCount + 1,
+                  likedTheme: !topic.likedTheme,
                 }
               : topic,
           ),
@@ -167,14 +157,10 @@ const ScenarioTitlePage: React.FC = () => {
                 <S.LikeContainer
                   onClick={e => {
                     e.stopPropagation();
-                    handleLike(topic.themeId, topic.content);
+                    handleLike(topic.themeId);
                   }}
                 >
-                  {isLikedTopics[topic.content] ? (
-                    <BlueHeartFill />
-                  ) : (
-                    <BlueHeart />
-                  )}
+                  {topic.likedTheme ? <BlueHeartFill /> : <BlueHeart />}
                   <S.LikeCount>{topic.likeCount}</S.LikeCount>
                 </S.LikeContainer>
               </S.RightWrap>
