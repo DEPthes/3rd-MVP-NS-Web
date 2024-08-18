@@ -91,12 +91,12 @@ const ReportPage = () => {
           </S.TodayText>
           <hr />
           <S.HeadText>단어 요약</S.HeadText>
-          {isTReport(reportList) && reportList?.wordCloud ? (
+          {isTReport(reportList) && reportList?.topWord ? (
             <S.SummaryWrap>
-              <img src={reportList.wordCloud} alt="" />
+              <img src={reportList.wordCloud ?? ''} alt="" />
               <h4>
                 사용자가 가장 많이 쓴 단어는
-                <span>{truncateText(reportList.topWord)}</span>
+                <span> {truncateText(reportList.topWord ?? '')}</span>
                 {!isMobileOrTablet && '입니다.'}
               </h4>
               <h4>
@@ -113,12 +113,12 @@ const ReportPage = () => {
               <div
                 onClick={() =>
                   onProfileClick(
-                    reportList.longestWriter.isCurrentUser,
-                    reportList.longestWriter.userId,
+                    reportList.longestWriter?.isCurrentUser ?? false,
+                    reportList.longestWriter?.userId ?? 0,
                   )
                 }
               >
-                <img src={reportList?.longestWriter.imageUrl} alt="" />
+                <img src={reportList.longestWriter.imageUrl ?? ''} alt="" />
                 <p>{reportList?.longestWriter.nickname}</p>
               </div>
               <h3>
