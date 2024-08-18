@@ -166,7 +166,7 @@ export const PostBox = styled.div`
 	background-color: var(--NS-White);
 	position: relative;
 	width: 1170px;
-	height: 443px;
+	min-height: 443px; /* 최소 높이만 지정 */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -175,7 +175,7 @@ export const PostBox = styled.div`
 
 	${isMobileOrTablet} {
 		width: 320px; 
-		height: 148px;
+		min-height: 148px; /* 최소 높이만 지정 */
 		padding: 21px;
 		border-radius: 20px;
 		margin-top: 10px;
@@ -204,16 +204,23 @@ export const PostContent = styled.div`
 	max-width: 1013px;
 	min-height: 224px;
 	margin-bottom: 91px;
+	margin-right: 87px;
+	margin-left: 70px;
 	text-align: center;
-	
 
 	${isMobileOrTablet} {
-		width: 278px;
+		width: 100%; 
+		padding: 0 20px; /* 좌우 여백을 동일하게 설정 */
 		min-height: 51px;
 		margin-bottom: 10px;
 		font: var(--Hy4);
+		white-space: normal; 
+		text-align: center; 
+		box-sizing: border-box; 
 	}
 `;
+
+
 
 export const LikeButton = styled.div`
 	display: flex;
@@ -228,8 +235,8 @@ export const LikeButton = styled.div`
 
 	${isMobileOrTablet} {
 		position: static; 
-		margin-bottom: 20;
-		margin-top: -11px; /* 피그처럼 11로하면 박스를 벗어남..? */
+		margin-bottom: 10px;
+		margin-top: 11px; /* 피그처럼 11로하면 박스를 벗어남..? */
 		justify-content: center; 
 		width: 43px;
 		height: 16px;

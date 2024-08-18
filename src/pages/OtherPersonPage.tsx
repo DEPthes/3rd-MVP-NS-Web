@@ -4,30 +4,20 @@ import * as S from '@/styles/scenario/OtherPersonPageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
 import { getProfile } from '@/apis/user/getProfile';
+import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { UserProfileResponse } from '@/types/mytype';
-import { useHandleUnauthorized } from '@/utils/handleUnauthorized';  // handleUnauthorized 가져오기
 
 const OtherPersonPage: React.FC = () => {
 	const { nickname } = useParams<{ nickname: string }>();
 	const [profile, setProfile] = useState<UserProfileResponse['information'] | null>(null);
-	const [posts, setPosts] = useState<{ id: string; title: string; text: string; likes: number; }[]>([]);
 	const [likedPosts, setLikedPosts] = useState<{ [key: string]: boolean }>({});
-	const handleUnauthorized = useHandleUnauthorized();  // handleUnauthorized 정의
+	const handleUnauthorized = useHandleUnauthorized();
 
 	useEffect(() => {
 		const fetchProfile = async () => {
-			const profileData = await getProfile(handleUnauthorized);  // handleUnauthorized 전달
-			if (profileData && profileData.information.nickname === nickname) {
+			const profileData = await getProfile(handleUnauthorized);
+			if (profileData) {
 				setProfile(profileData.information);
-
-				// 여기에 게시물 데이터를 받아오는 API 호출을 추가할 수 있습니다.
-				// 예를 들어, getPostsByNickname(nickname) 같은 함수를 호출해서 데이터를 받아오는 코드가 추가될 수 있습니다.
-				const postsData = [
-					{ id: '1', title: 'Post 1', text: 'This is the first post', likes: 5 },
-					{ id: '2', title: 'Post 2', text: 'This is the second post', likes: 3 },
-					// 추가적인 게시물 데이터를 여기에 추가하세요.
-				];
-				setPosts(postsData); // posts 상태 업데이트
 			}
 		};
 
@@ -45,9 +35,21 @@ const OtherPersonPage: React.FC = () => {
 
 	return (
 		<S.Container>
-			<S.ProfileCircle style={{ backgroundImage: `url(${profile?.imageUrl})` }} />
-			<S.ProfileNickname>{nickname}</S.ProfileNickname>
-			{posts.map((post) => (
+			{profile && (
+				<>
+					<S.ProfileCircle style={{ backgroundImage: `url(${profile.imageUrl})` }} />
+					<S.ProfileNickname>{profile.nickname}</S.ProfileNickname>
+				</>
+			)}
+			{/* 
+        여기서 게시글 데이터를 API로 가져올 수 있습니다.
+        현재 게시글 데이터를 가져오는 API가 없으므로 관련된 코드를 추가해야 합니다.
+        예시로 아래는 임시 게시글 데이터를 사용한 UI입니다.
+      */}
+			{[
+				{ id: '1', title: 'Sample Post 1', text: 'This is a sample post.', likes: 10 },
+				{ id: '2', title: 'Sample Post 2', text: 'Another sample post.', likes: 5 },
+			].map((post) => (
 				<S.PostBox key={post.id}>
 					<S.PostInfo>
 						<S.PostTitle>{post.title}</S.PostTitle>
@@ -64,4 +66,3 @@ const OtherPersonPage: React.FC = () => {
 };
 
 export default OtherPersonPage;
-

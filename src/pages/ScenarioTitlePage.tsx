@@ -7,7 +7,7 @@ import SearchIcon from '@assets/icons/Search.svg';
 import { TLikeState, TTheme, TThemeListResponse } from '@/types/mytype';
 import { getList } from '@/apis/theme/getList';
 import { getSearch } from '@/apis/theme/getSearch';
-import { postLike } from '@/apis/theme/postLike';
+import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
 
@@ -56,18 +56,19 @@ const ScenarioTitlePage: React.FC = () => {
 
 	const handleLike = async (themeId: number, content: string) => {
 		try {
-			const response = await postLike(themeId, handleUnauthorized);
+			// 좋아요 API 호출
+			const response = await boardLike(themeId, handleUnauthorized);
 			if (response) {
 				setIsLikedTopics(prev => ({
 					...prev,
-					[content]: response.liked,
+					[content]: !prev[content],
 				}));
 
 				// 좋아요 숫자를 업데이트
 				setTopics(prevTopics =>
 					prevTopics.map(topic =>
 						topic.themeId === themeId
-							? { ...topic, likeCount: response.liked ? topic.likeCount + 1 : topic.likeCount - 1 }
+							? { ...topic, likeCount: isLikedTopics[content] ? topic.likeCount - 1 : topic.likeCount + 1 }
 							: topic
 					)
 				);
@@ -147,7 +148,6 @@ const ScenarioTitlePage: React.FC = () => {
 };
 
 export default ScenarioTitlePage;
-
 
 
 

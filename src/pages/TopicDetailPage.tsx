@@ -8,7 +8,9 @@ import Main5HeartFill from '@assets/icons/Main5HeartFill.svg?react';
 import { TThemeDetailResponse } from '@/types/mytype';
 import { getTheme } from '@/apis/theme/getTheme';
 import { postLike } from '@/apis/theme/postLike';
+import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import Pagination from '@/components/pagination/Pagination';
 
 const TopicDetailPage: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -16,6 +18,8 @@ const TopicDetailPage: React.FC = () => {
 	const [likedPosts, setLikedPosts] = useState<{ [key: number]: boolean }>({});
 	const [sortType, setSortType] = useState<'date' | 'likeCount'>('date');
 	const [isLiked, setIsLiked] = useState<boolean>(false);
+	const [pageInfo, setPageInfo] = useState<TThemeDetailResponse['pageInfo'] | null>(null);
+	const [pageNum, setPageNum] = useState(0); // 기본 값 0
 	const navigate = useNavigate();
 	const handleUnauthorized = useHandleUnauthorized();
 
@@ -23,11 +27,12 @@ const TopicDetailPage: React.FC = () => {
 		const fetchTopic = async () => {
 			if (id) {
 				const response = await getTheme(
-					{ themeId: parseInt(id), page: 1, size: 10, sortBy: sortType },
+					{ themeId: parseInt(id), page: pageNum + 1, size: 2, sortBy: sortType },
 					handleUnauthorized
 				);
 				if (response) {
 					setTopic(response);
+					setPageInfo(response.pageInfo);
 					setIsLiked(response.likedTheme);
 				} else {
 					console.error('주제 가져오기 에러');
@@ -36,10 +41,12 @@ const TopicDetailPage: React.FC = () => {
 		};
 
 		fetchTopic();
-	}, [id, sortType, handleUnauthorized]);
+	}, [id, sortType, pageNum, handleUnauthorized]);
 
-	const handleTopicLikeClick = async () => {
-		if (!topic) return;
+	const handleTopicLikeClick = async (e: React.MouseEvent) => {
+		e.stopPropagation(); // 이벤트 전파를 막음
+
+		if (!topic || !topic.themeId) return;
 
 		try {
 			const response = await postLike(topic.themeId, handleUnauthorized);
@@ -70,7 +77,7 @@ const TopicDetailPage: React.FC = () => {
 	};
 
 	const handleWriteClick = () => {
-		navigate('/senario-detail');
+		navigate('/scenario/write');
 	};
 
 	const handleSort = (type: 'date' | 'likeCount') => {
@@ -81,11 +88,43 @@ const TopicDetailPage: React.FC = () => {
 		navigate(`/scenario/${postId}`);
 	};
 
-	const handleLikeClick = (postId: number) => {
-		setLikedPosts((prev) => ({
-			...prev,
-			[postId]: !prev[postId],
-		}));
+	const handleLikeClick = async (postId: number, e: React.MouseEvent) => {
+		e.stopPropagation();
+
+		try {
+			// 좋아요 API 호출
+			const response = await boardLike(postId, handleUnauthorized);
+
+			if (response) {
+				// API 응답에 따라 상태 업데이트
+				setLikedPosts((prev) => ({
+					...prev,
+					[postId]: !prev[postId], // 좋아요 상태 토글
+				}));
+
+				// 서버 응답에 따라 likeCount 업데이트
+				setTopic((prevTopic) => {
+					if (prevTopic) {
+						return {
+							...prevTopic,
+							boards: prevTopic.boards.map((board) =>
+								board.boardId === postId
+									? {
+										...board,
+										likeCount: likedPosts[postId]
+											? board.likeCount - 1
+											: board.likeCount + 1,
+									}
+									: board
+							),
+						};
+					}
+					return prevTopic;
+				});
+			}
+		} catch (error) {
+			console.error('좋아요 요청 중 오류 발생:', error);
+		}
 	};
 
 	if (!topic) {
@@ -102,7 +141,7 @@ const TopicDetailPage: React.FC = () => {
 	});
 
 	const truncateContent = (content: string) => {
-		const maxLength = 70;
+		const maxLength = 50;
 		if (content.length > maxLength) {
 			return (
 				<>
@@ -121,7 +160,7 @@ const TopicDetailPage: React.FC = () => {
 				<S.TopicHeader>{topic.content}</S.TopicHeader>
 				<S.InfoContainer>
 					<S.PublishDate>발행일: {new Date(topic.date).toLocaleDateString()} | </S.PublishDate>
-					<S.LikeContainer onClick={handleTopicLikeClick}>
+					<S.LikeContainer onClick={handleTopicLikeClick} >
 						{isLiked ? <Main5HeartFill title="Liked" /> : <Main5Heart title="Like" />}
 						<S.TopicLikeCount>{topic.likeCount}</S.TopicLikeCount>
 					</S.LikeContainer>
@@ -142,10 +181,10 @@ const TopicDetailPage: React.FC = () => {
 			</S.ListHeader>
 			<S.PostList>
 				{sortedPosts.map((post) => (
-					<S.PostBox key={post.boardId}>
-						<S.PostTitle onClick={() => handleTitleClick(post.boardId)}>{post.title}</S.PostTitle>
+					<S.PostBox key={post.boardId} onClick={() => handleTitleClick(post.boardId)}>
+						<S.PostTitle>{post.title}</S.PostTitle>
 						<S.PostContent>{truncateContent(post.content)}</S.PostContent>
-						<S.LikeButton onClick={() => handleLikeClick(post.boardId)}>
+						<S.LikeButton onClick={(e) => handleLikeClick(post.boardId, e)}>
 							<img src={likedPosts[post.boardId] ? BlueHeartFill : BlueHeart} alt="Like" />
 							<S.PostLikeCount>{likedPosts[post.boardId] ? post.likeCount + 1 : post.likeCount}</S.PostLikeCount>
 						</S.LikeButton>
@@ -155,23 +194,19 @@ const TopicDetailPage: React.FC = () => {
 					</S.PostBox>
 				))}
 			</S.PostList>
+			{/* 페이징 컴포넌트 */}
+			{pageInfo && (
+				<Pagination
+					pageInfo={pageInfo}
+					pageNum={pageNum}
+					setPageNum={setPageNum}
+				/>
+			)}
 		</S.Container>
 	);
 };
 
 export default TopicDetailPage;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
