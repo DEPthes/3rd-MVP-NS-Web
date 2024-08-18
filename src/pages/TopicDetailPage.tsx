@@ -93,7 +93,6 @@ const TopicDetailPage: React.FC = () => {
     try {
       // 좋아요 API 호출
       const response = await boardLike(postId, handleUnauthorized);
-      console.log(response);
 
       if (response) {
         // API 응답에 따라 상태 업데이트

@@ -18,8 +18,6 @@ export const getLikeTheme = async (
       },
     );
 
-    console.log('API response:', response.data);
-
     if (response.data?.check) {
       const boardLikeResList =
         response.data.information?.boardLikeResList ?? [];

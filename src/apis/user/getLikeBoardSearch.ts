@@ -20,8 +20,6 @@ export const getLikeBoardSearch = async (
       },
     );
 
-    console.log('Search API response:', response.data);
-
     if (response.data?.check) {
       const boardLikeResList =
         response.data.information?.boardLikeResList ?? []; // nullish 병합 연산자를 사용하여 undefined 방지

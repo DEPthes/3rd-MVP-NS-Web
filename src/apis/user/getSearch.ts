@@ -22,8 +22,6 @@ export const getSearch = async (
       },
     );
 
-    console.log('Search API response:', response.data);
-
     if (response.data?.check) {
       const posts = response.data.information.resList.map((post: TPost) => ({
         boardId: post.boardId,

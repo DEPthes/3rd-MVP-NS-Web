@@ -119,7 +119,6 @@ const ProfilePage: React.FC = () => {
       <S.ButtonSection>
         <S.ActionButton
           onClick={() => {
-            console.log('Navigating with userId:', userData.information.userId);
             navigate('/mypage/myposts');
           }}
         >

@@ -57,7 +57,6 @@ const ReportPage = () => {
 
   //게시글 클릭 함수
   const onPostClick = (boardId: number) => {
-    console.log(boardId);
     //게시글 조회 페이지로 이동
     navigate(`/scenario/${boardId}`);
   };

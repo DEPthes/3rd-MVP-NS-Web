@@ -30,7 +30,6 @@ const SelectTitleDetail: React.FC = () => {
     const fetchPost = async () => {
       if (id) {
         const response = await getBoard(parseInt(id), handleUnauthorized);
-        console.log('API Response:', response); // 데이터 구조 확인
         if (response) {
           setPost(response);
         } else {

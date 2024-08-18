@@ -9,12 +9,6 @@ export const getBoard = async (
   handleUnauthorized: () => void,
 ): Promise<{ posts: TPost[]; pageInfo: TPagination }> => {
   try {
-    console.log('파라미터:', {
-      filterDrafts: excludeTemporary,
-      sort: sortType,
-      pageNum, // 페이지 번호 포함
-    });
-
     const response = await authAPI(handleUnauthorized).get(
       `/api/v1/user/board`,
       {
@@ -25,8 +19,6 @@ export const getBoard = async (
         },
       },
     );
-
-    console.log('API response:', response.data);
 
     if (response.data?.check) {
       const posts = response.data.information.resList.map((post: TPost) => ({
