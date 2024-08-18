@@ -6,7 +6,7 @@ import { TTodayThemeResponse } from '@/types/mytype'; // 타입 임포트
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
 const ScenarioPage: React.FC = () => {
-  const [topic, setTopic] = useState<string>('');
+  const [topic, setTopic] = useState<TTodayThemeResponse | null>(null);
   const navigate = useNavigate();
 
   const handleUnauthorized = useHandleUnauthorized(); // handleUnauthorized 콜백 생성. getToday오류 방지 위해.
@@ -17,14 +17,14 @@ const ScenarioPage: React.FC = () => {
         handleUnauthorized,
       );
       if (data) {
-        setTopic(data.content);
+        setTopic(data);
       } else {
         console.error('오늘의 주제를 불러오지 못했습니다.');
       }
     };
 
     fetchTopic();
-  }, []);
+  }, [handleUnauthorized]);
 
   return (
     <S.Container>
@@ -32,11 +32,13 @@ const ScenarioPage: React.FC = () => {
       <S.TitleMini>N력 키우기의 시작, N 상상력의 첫 질문</S.TitleMini>
       <S.TopicBox>
         <S.TopicHeader>오늘의 주제</S.TopicHeader>
-        <S.Topic>{topic}</S.Topic>
+        <S.Topic>{topic?.content}</S.Topic>
       </S.TopicBox>
       <S.ButtonContainer>
         <S.ActionButton
-          onClick={() => navigate('/scenario/write', { state: { topic } })}
+          onClick={() =>
+            navigate(`/scenario/write/${topic?.themeId}`, { state: { topic } })
+          }
         >
           오늘의 주제 쓰러가기
         </S.ActionButton>

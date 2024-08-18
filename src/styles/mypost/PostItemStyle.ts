@@ -115,8 +115,8 @@ export const LikeIcon = styled.div<{ $liked: boolean }>`
   cursor: pointer;
   width: 35px;
   height: 35px;
-  background-image: url(${({ $liked }) =>
-    $liked ? BlueHeartFill : BlueHeart});
+  background-image: ${({ $liked }) =>
+    `url(${$liked ? BlueHeartFill : BlueHeart})`};
   background-size: cover;
 
   ${isMobileOrTablet} {

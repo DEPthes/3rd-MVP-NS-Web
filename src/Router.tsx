@@ -54,7 +54,7 @@ const Router = () => {
             element={<ProtectedRoute element={<LikedTopicPage />} />}
           />
           {/* 게시글 작성 */}
-          <Route path="/scenario/write" element={<SenarioDetailPage />} />
+          <Route path="/scenario/write/:id" element={<SenarioDetailPage />} />
           {/* 주제 목록 */}
           <Route path="/scenario/topic" element={<ScenarioTitlePage />} />
           {/* 주제에 대한 게시글 목록 */}

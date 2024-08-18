@@ -34,6 +34,7 @@ const PostItem: React.FC<TPost> = ({
 
   const handlePostClick = () => {
     navigate(`/scenario/${boardId}`); // post 클릭 시 상세 페이지로 이동
+    window.scroll({ top: 0, behavior: 'smooth' });
   };
 
   return (

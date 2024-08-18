@@ -34,6 +34,7 @@ const TopicItem: React.FC<TTopic> = ({
 
   const handleTopicClick = () => {
     navigate(`/scenario/topic/${themeId}`); // 클릭 시 해당 주제의 상세 페이지로 이동
+    window.scroll({ top: 0, behavior: 'smooth' });
   };
 
   return (

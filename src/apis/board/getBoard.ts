@@ -17,7 +17,7 @@ export const getBoard = async (
       return undefined;
     }
   } catch (e) {
-    console.log('API 호출 중 오류 발생:', e);
+    console.log(e);
     return undefined;
   }
 };

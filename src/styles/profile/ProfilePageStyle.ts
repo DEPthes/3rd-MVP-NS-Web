@@ -73,7 +73,8 @@ export const ProfileImage = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  //object-fit: cover;
+  object-fit: cover;
+
   ${isMobileOrTablet} {
   }
 `;

@@ -11,202 +11,233 @@ import { postLike } from '@/apis/theme/postLike';
 import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
+import { TPagination } from '@/types/pagination';
 
 const TopicDetailPage: React.FC = () => {
-	const { id } = useParams<{ id: string }>();
-	const [topic, setTopic] = useState<TThemeDetailResponse | null>(null);
-	const [likedPosts, setLikedPosts] = useState<{ [key: number]: boolean }>({});
-	const [sortType, setSortType] = useState<'date' | 'likeCount'>('date');
-	const [isLiked, setIsLiked] = useState<boolean>(false);
-	const [pageInfo, setPageInfo] = useState<TThemeDetailResponse['pageInfo'] | null>(null);
-	const [pageNum, setPageNum] = useState(0); // 기본 값 0
-	const navigate = useNavigate();
-	const handleUnauthorized = useHandleUnauthorized();
+  const { id } = useParams<{ id: string }>();
+  const [topic, setTopic] = useState<TThemeDetailResponse | null>(null);
+  const [sortType, setSortType] = useState<'date' | 'likeCount'>('date');
+  const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
+  const [pageNum, setPageNum] = useState(1); // 기본 값 1
+  const navigate = useNavigate();
+  const handleUnauthorized = useHandleUnauthorized();
+  const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		const fetchTopic = async () => {
-			if (id) {
-				const response = await getTheme(
-					{ themeId: parseInt(id), page: pageNum + 1, size: 2, sortBy: sortType },
-					handleUnauthorized
-				);
-				if (response) {
-					setTopic(response);
-					setPageInfo(response.pageInfo);
-					setIsLiked(response.likedTheme);
-				} else {
-					console.error('주제 가져오기 에러');
-				}
-			}
-		};
+  useEffect(() => {
+    const fetchTopic = async () => {
+      setLoading(true);
+      try {
+        if (id) {
+          const response = await getTheme(
+            {
+              themeId: parseInt(id),
+              page: pageNum,
+              size: 5,
+              sortBy: sortType,
+            },
+            handleUnauthorized,
+          );
+          if (response) {
+            setTopic(response);
+            setPageInfo(response.pageInfo);
+          } else {
+            console.error('주제 가져오기 에러');
+          }
+        }
+      } catch (error) {
+        console.error('API 호출 중 에러:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-		fetchTopic();
-	}, [id, sortType, pageNum, handleUnauthorized]);
+    fetchTopic();
+  }, [id, sortType, pageNum, handleUnauthorized]);
 
-	const handleTopicLikeClick = async (e: React.MouseEvent) => {
-		e.stopPropagation(); // 이벤트 전파를 막음
+  const handleTopicLikeClick = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // 이벤트 전파를 막음
 
-		if (!topic || !topic.themeId) return;
+    if (!topic) return;
 
-		try {
-			const response = await postLike(topic.themeId, handleUnauthorized);
-			if (response) {
-				const newIsLiked = response.liked;
+    try {
+      const response = await postLike(topic.themeId, handleUnauthorized);
+      if (response) {
+        setTopic(prevTopic => {
+          if (prevTopic) {
+            return {
+              ...prevTopic,
+              likeCount: topic.likedTheme
+                ? topic.likeCount - 1
+                : topic.likeCount + 1,
+              likedTheme: !topic.likedTheme,
+            };
+          }
+          return prevTopic;
+        });
+      } else {
+        console.error('좋아요 처리 실패');
+      }
+    } catch (error) {
+      console.error('좋아요 요청 중 오류 발생:', error);
+    }
+  };
 
-				setIsLiked(newIsLiked);
+  const handleWriteClick = () => {
+    navigate(`/scenario/write/${id}`);
+  };
 
-				setTopic((prevTopic) => {
-					if (prevTopic) {
-						const updatedLikeCount = newIsLiked
-							? prevTopic.likeCount + 1
-							: prevTopic.likeCount - 1;
+  const handleSort = (type: 'date' | 'likeCount') => {
+    setSortType(type);
+  };
 
-						return {
-							...prevTopic,
-							likeCount: updatedLikeCount,
-						};
-					}
-					return prevTopic;
-				});
-			} else {
-				console.error('좋아요 처리 실패');
-			}
-		} catch (error) {
-			console.error('좋아요 요청 중 오류 발생:', error);
-		}
-	};
+  const handleTitleClick = (postId: number) => {
+    navigate(`/scenario/${postId}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
+  };
 
-	const handleWriteClick = () => {
-		navigate('/scenario/write');
-	};
+  const handleLikeClick = async (postId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
 
-	const handleSort = (type: 'date' | 'likeCount') => {
-		setSortType(type);
-	};
+    try {
+      // 좋아요 API 호출
+      const response = await boardLike(postId, handleUnauthorized);
 
-	const handleTitleClick = (postId: number) => {
-		navigate(`/scenario/${postId}`);
-	};
+      if (response) {
+        // API 응답에 따라 상태 업데이트
+        setTopic(prevTopic => {
+          if (prevTopic) {
+            return {
+              ...prevTopic,
+              boards: prevTopic.boards.map(board =>
+                board.boardId === postId
+                  ? {
+                      ...board,
+                      likeCount: board.likedBoard
+                        ? board.likeCount - 1
+                        : board.likeCount + 1,
+                      likedBoard: !board.likedBoard,
+                    }
+                  : board,
+              ),
+            };
+          }
+          return prevTopic;
+        });
+      }
+    } catch (error) {
+      console.error('좋아요 요청 중 오류 발생:', error);
+    }
+  };
 
-	const handleLikeClick = async (postId: number, e: React.MouseEvent) => {
-		e.stopPropagation();
+  const sortedPosts =
+    topic &&
+    [...topic.boards].sort((a, b) => {
+      if (sortType === 'date') {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else if (sortType === 'likeCount') {
+        return b.likeCount - a.likeCount;
+      }
+      return 0;
+    });
 
-		try {
-			// 좋아요 API 호출
-			const response = await boardLike(postId, handleUnauthorized);
+  const truncateContent = (content: string) => {
+    const maxLength = 50;
+    if (content.length > maxLength) {
+      return (
+        <>
+          {content.slice(0, maxLength)}
+          <span style={{ color: 'var(--Gray1)' }}>...더보기</span>
+        </>
+      );
+    }
+    return content;
+  };
 
-			if (response) {
-				// API 응답에 따라 상태 업데이트
-				setLikedPosts((prev) => ({
-					...prev,
-					[postId]: !prev[postId], // 좋아요 상태 토글
-				}));
-
-				// 서버 응답에 따라 likeCount 업데이트
-				setTopic((prevTopic) => {
-					if (prevTopic) {
-						return {
-							...prevTopic,
-							boards: prevTopic.boards.map((board) =>
-								board.boardId === postId
-									? {
-										...board,
-										likeCount: likedPosts[postId]
-											? board.likeCount - 1
-											: board.likeCount + 1,
-									}
-									: board
-							),
-						};
-					}
-					return prevTopic;
-				});
-			}
-		} catch (error) {
-			console.error('좋아요 요청 중 오류 발생:', error);
-		}
-	};
-
-	if (!topic) {
-		return <div>로딩 중...</div>;
-	}
-
-	const sortedPosts = [...topic.boards].sort((a, b) => {
-		if (sortType === 'date') {
-			return new Date(b.date).getTime() - new Date(a.date).getTime();
-		} else if (sortType === 'likeCount') {
-			return b.likeCount - a.likeCount;
-		}
-		return 0;
-	});
-
-	const truncateContent = (content: string) => {
-		const maxLength = 50;
-		if (content.length > maxLength) {
-			return (
-				<>
-					{content.slice(0, maxLength)}
-					<span style={{ color: 'var(--Gray1)' }}>...더보기</span>
-				</>
-			);
-		}
-		return content;
-	};
-
-	return (
-		<S.Container>
-			<S.TopicBox>
-				<S.Header>주제</S.Header>
-				<S.TopicHeader>{topic.content}</S.TopicHeader>
-				<S.InfoContainer>
-					<S.PublishDate>발행일: {new Date(topic.date).toLocaleDateString()} | </S.PublishDate>
-					<S.LikeContainer onClick={handleTopicLikeClick} >
-						{isLiked ? <Main5HeartFill title="Liked" /> : <Main5Heart title="Like" />}
-						<S.TopicLikeCount>{topic.likeCount}</S.TopicLikeCount>
-					</S.LikeContainer>
-				</S.InfoContainer>
-				<S.WriteButton onClick={handleWriteClick}>글쓰기</S.WriteButton>
-			</S.TopicBox>
-			<S.ListHeader>
-				<S.ListTitle>게시글 목록</S.ListTitle>
-				<S.SortOptions>
-					<S.SortOption onClick={() => handleSort('date')} isSelected={sortType === 'date'}>
-						최신순
-					</S.SortOption>
-					<S.Divider>|</S.Divider> {/* Separate divider for | */}
-					<S.SortOption onClick={() => handleSort('likeCount')} isSelected={sortType === 'likeCount'}>
-						좋아요순
-					</S.SortOption>
-				</S.SortOptions>
-			</S.ListHeader>
-			<S.PostList>
-				{sortedPosts.map((post) => (
-					<S.PostBox key={post.boardId} onClick={() => handleTitleClick(post.boardId)}>
-						<S.PostTitle>{post.title}</S.PostTitle>
-						<S.PostContent>{truncateContent(post.content)}</S.PostContent>
-						<S.LikeButton onClick={(e) => handleLikeClick(post.boardId, e)}>
-							<img src={likedPosts[post.boardId] ? BlueHeartFill : BlueHeart} alt="Like" />
-							<S.PostLikeCount>{likedPosts[post.boardId] ? post.likeCount + 1 : post.likeCount}</S.PostLikeCount>
-						</S.LikeButton>
-						<S.PostInfo>
-							{post.nickname} | {new Date(post.date).toLocaleDateString()}
-						</S.PostInfo>
-					</S.PostBox>
-				))}
-			</S.PostList>
-			{/* 페이징 컴포넌트 */}
-			{pageInfo && (
-				<Pagination
-					pageInfo={pageInfo}
-					pageNum={pageNum}
-					setPageNum={setPageNum}
-				/>
-			)}
-		</S.Container>
-	);
+  return (
+    <S.Container>
+      <S.TopicBox>
+        <S.Header>주제</S.Header>
+        <S.TopicHeader>{topic?.content}</S.TopicHeader>
+        <S.InfoContainer>
+          <S.PublishDate>
+            발행일 : {topic && new Date(topic.date).toLocaleDateString()}
+          </S.PublishDate>
+          <S.PublishDate>|</S.PublishDate>
+          <S.LikeContainer onClick={handleTopicLikeClick}>
+            {topic?.likedTheme ? (
+              <Main5HeartFill title="Liked" />
+            ) : (
+              <Main5Heart title="Like" />
+            )}
+            <S.TopicLikeCount>{topic?.likeCount}</S.TopicLikeCount>
+          </S.LikeContainer>
+        </S.InfoContainer>
+        <S.WriteButton onClick={handleWriteClick}>글쓰기</S.WriteButton>
+      </S.TopicBox>
+      <S.ListHeader>
+        <S.ListTitle>게시글 목록</S.ListTitle>
+        <S.SortOptions>
+          <S.SortOption
+            onClick={() => handleSort('date')}
+            $isSelected={sortType === 'date'}
+          >
+            최신순
+          </S.SortOption>
+          <S.Divider>|</S.Divider>
+          <S.SortOption
+            onClick={() => handleSort('likeCount')}
+            $isSelected={sortType === 'likeCount'}
+          >
+            좋아요순
+          </S.SortOption>
+        </S.SortOptions>
+      </S.ListHeader>
+      {loading ? (
+        <></>
+      ) : !topic || sortedPosts?.length === 0 ? (
+        <S.NoneList>
+          <img
+            src="/src/assets/images/empty_character.svg"
+            alt="character img"
+          />
+          <p>주제에 대한 글이 없어요</p>
+        </S.NoneList>
+      ) : (
+        <S.PostList>
+          {sortedPosts?.map(post => (
+            <S.PostBox
+              key={post.boardId}
+              onClick={() => handleTitleClick(post.boardId)}
+            >
+              <S.LeftWrap>
+                <S.PostTitle>{post.title}</S.PostTitle>
+                <S.PostContent>{truncateContent(post.content)}</S.PostContent>
+              </S.LeftWrap>
+              <S.RightWrap>
+                <S.LikeButton onClick={e => handleLikeClick(post.boardId, e)}>
+                  <img
+                    src={post.likedBoard ? BlueHeartFill : BlueHeart}
+                    alt="Like"
+                  />
+                  <S.PostLikeCount>{post.likeCount}</S.PostLikeCount>
+                </S.LikeButton>
+                <S.PostInfo>
+                  {post.nickname} | {new Date(post.date).toLocaleDateString()}
+                </S.PostInfo>
+              </S.RightWrap>
+            </S.PostBox>
+          ))}
+        </S.PostList>
+      )}
+      {pageInfo && (
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
+      )}
+    </S.Container>
+  );
 };
 
 export default TopicDetailPage;
-
-
-

@@ -12,9 +12,6 @@ export const getSearch = async (
   try {
     const sortType = sortBy === 'likes' ? 'like' : sortBy;
 
-    console.log('Requesting search with sortBy:', sortType); // 요청 전 sortBy 로그
-    console.log('Requesting search with page:', page); // 요청 전 page 로그
-
     const response = await authAPI(handleUnauthorized).get(
       `/api/v1/user/board/search`,
       {
@@ -26,8 +23,6 @@ export const getSearch = async (
         },
       },
     );
-
-    console.log('Search API response:', response.data);
 
     if (response.data?.check) {
       const posts = response.data.information.resList.map((post: TPost) => ({

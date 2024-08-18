@@ -21,8 +21,6 @@ export const getLikeBoardSearch = async (
       },
     );
 
-    console.log('Search API response:', response.data); // 응답 데이터 로그
-
     if (response.data?.check) {
       // 응답 데이터에서 게시글 리스트 추출
       const resList = response.data.information?.resList ?? []; // 수정된 부분
@@ -39,8 +37,6 @@ export const getLikeBoardSearch = async (
 
       // 페이지 정보 추출
       const pageInfo = response.data.information.pageInfo;
-      console.log('Mapped Posts:', posts); // 매핑된 게시글 로그
-      console.log('Page Info:', pageInfo); // 페이지 정보 로그
 
       return { posts, pageInfo };
     } else {

@@ -20,7 +20,6 @@ export const getLikeBoard = async (
 
     if (response.data?.check) {
       const resList = response.data.information?.resList ?? []; // 응답 데이터에서 게시글 리스트 추출
-      console.log('resList:', resList); // 디버깅용 로그
 
       const posts = resList.map((post: TPost) => ({
         boardId: post.boardId,
@@ -32,8 +31,6 @@ export const getLikeBoard = async (
       }));
 
       const pageInfo = response.data.information.pageInfo;
-      console.log('Mapped Posts:', posts); // 디버깅용 로그
-      console.log('Page Info:', pageInfo); // 디버깅용 로그
 
       return { posts, pageInfo };
     } else {

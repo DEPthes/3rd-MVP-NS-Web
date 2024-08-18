@@ -51,7 +51,7 @@ const RankingPage: React.FC = () => {
         {['total', 'daily', 'weekly', 'monthly'].map((option, index) => (
           <React.Fragment key={option}>
             <S.FilterLink
-              isSelected={sortType === option}
+              $isSelected={sortType === option}
               onClick={event => {
                 event.preventDefault();
                 setSortType(option as TSortType);

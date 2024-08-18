@@ -7,7 +7,6 @@ type PostListProps = {
 };
 
 const PostList: React.FC<PostListProps> = ({ posts }) => {
-  console.log('Rendering PostList with posts:', posts); // 여기에 로그 추가
   return (
     <div>
       {posts.map(post => (

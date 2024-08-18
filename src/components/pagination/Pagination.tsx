@@ -2,7 +2,6 @@ import * as S from '@/styles/pagination/PaginationStyle';
 import PrevBtnMini from '@/assets/icons/PrevBtnMini.svg?react';
 import { TPagination } from '@/types/pagination';
 import { useState } from 'react';
-import { useEffect } from 'react';
 
 const Pagination = ({
   pageInfo,
@@ -14,11 +13,6 @@ const Pagination = ({
   setPageNum: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [groupPageNum, setGroupPageNum] = useState(1);
-
-  useEffect(() => {
-    console.log('Pagination에 전달된 pageInfo:', pageInfo);
-    console.log('Pagination에 전달된 pageNum:', pageNum);
-  }, [pageInfo, pageNum]);
 
   return (
     <S.Container>
@@ -37,7 +31,7 @@ const Pagination = ({
       />
       <S.PageNumWrap>
         {Array.from(
-          { length: Math.min(5, pageInfo.totalPages - groupPageNum) }, //+1?
+          { length: Math.min(5, pageInfo.totalPages - groupPageNum + 1) },
           (_, index) => {
             const pageNumber = groupPageNum + index;
             return (

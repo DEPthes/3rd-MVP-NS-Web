@@ -92,10 +92,14 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
       } else {
         throw new Error('비밀번호가 일치하지 않습니다.');
       }
-    } catch (error: any) {
-      setPasswordValidationMessage(
-        error.message || '비밀번호가 일치하지 않습니다.',
-      );
+    } catch (error) {
+      if (error instanceof Error) {
+        setPasswordValidationMessage(
+          error.message || '비밀번호가 일치하지 않습니다.',
+        );
+      } else {
+        setPasswordValidationMessage('알 수 없는 오류가 발생했습니다.');
+      }
       setPasswordValidationColor('#EE4B4B'); // 비밀번호 불일치 시
       setIsPasswordVerified(false);
     }
@@ -116,9 +120,14 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
           setValidationColor('#EE4B4B');
           setIsSaveEnabled(false);
         }
-      } catch (error: any) {
-        console.error('Error during nickname check:', error);
-        setValidationMessage('닉네임 중복 확인에 실패했습니다.');
+      } catch (error) {
+        if (error instanceof Error) {
+          setValidationMessage(
+            error.message || '닉네임 중복 확인에 실패했습니다.',
+          );
+        } else {
+          setValidationMessage('알 수 없는 오류가 발생했습니다.');
+        }
         setValidationColor('#EE4B4B');
         setIsSaveEnabled(false);
       }
@@ -131,8 +140,12 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
         await patchNickname(nickname); // 닉네임 변경 API 호출
         onSuccess(nickname); // 성공적으로 닉네임 변경 시 콜백 호출
         handleModalClose(); // 닉네임이 성공적으로 변경되면 모달 닫기
-      } catch (error: any) {
-        setValidationMessage(error.message || '닉네임 변경에 실패했습니다.');
+      } catch (error) {
+        if (error instanceof Error) {
+          setValidationMessage(error.message || '닉네임 변경에 실패했습니다.');
+        } else {
+          setValidationMessage('알 수 없는 오류가 발생했습니다.');
+        }
         setValidationColor('#EE4B4B'); // 오류 발생 시
       }
     }

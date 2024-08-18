@@ -49,17 +49,27 @@ const ReportPage = () => {
     if (isCurrentUser) {
       //내 글이면 마이페이지로 이동
       navigate('/mypage');
+      window.scroll({ top: 0, behavior: 'smooth' });
     } else {
       //아니면 사용자 프로필 페이지로 이동
       navigate(`/profile/${userId}`);
+      window.scroll({ top: 0, behavior: 'smooth' });
     }
   };
 
   //게시글 클릭 함수
   const onPostClick = (boardId: number) => {
-    console.log(boardId);
     //게시글 조회 페이지로 이동
     navigate(`/scenario/${boardId}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
+  };
+
+  //글자 자르기
+  const truncateText = (text: string) => {
+    if (text.length > 10) {
+      return text.slice(0, 10) + '...';
+    }
+    return text;
   };
 
   return (
@@ -85,7 +95,8 @@ const ReportPage = () => {
             <S.SummaryWrap>
               <img src={reportList.wordCloud} alt="" />
               <h4>
-                사용자가 가장 많이 쓴 단어는 <span>{reportList.topWord}</span>
+                사용자가 가장 많이 쓴 단어는
+                <span>{truncateText(reportList.topWord)}</span>
                 {!isMobileOrTablet && '입니다.'}
               </h4>
               <h4>

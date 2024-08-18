@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, [handleUnauthorized, navigate]);
 
   const handleNicknameChangeSuccess = (newNickname: string) => {
     if (userData) {
@@ -71,12 +71,10 @@ const ProfilePage: React.FC = () => {
       if (response.check) {
         console.log('프로필이 변경되었습니다.');
       } else {
-        alert('프로필 변경에 실패했습니다.');
         console.error('프로필 변경 실패:', response);
       }
     } catch (error) {
       console.error('프로필 변경 중 오류 발생:', error);
-      alert('프로필 변경에 실패했습니다.');
     }
   };
 
@@ -96,11 +94,11 @@ const ProfilePage: React.FC = () => {
       <S.ProfileSection>
         <S.ProfileImageContainer>
           <S.ProfileImage
-            src={userData.information.imageUrl}
+            src={userData?.information.imageUrl}
             alt="Profileimage"
           />
         </S.ProfileImageContainer>
-        <S.Nickname>{userData.information.nickname}</S.Nickname>
+        <S.Nickname>{userData?.information.nickname}</S.Nickname>
         <S.EditOptions>
           <S.EditOption onClick={openFilePicker}>프로필사진 변경</S.EditOption>
           <input
@@ -123,7 +121,6 @@ const ProfilePage: React.FC = () => {
       <S.ButtonSection>
         <S.ActionButton
           onClick={() => {
-            console.log('Navigating with userId:', userData.information.userId);
             navigate('/mypage/myposts');
           }}
         >

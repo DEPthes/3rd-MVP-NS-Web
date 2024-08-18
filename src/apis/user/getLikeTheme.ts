@@ -19,8 +19,6 @@ export const getLikeTheme = async (
       },
     );
 
-    console.log('API response:', response.data); // 응답 데이터 로그
-
     if (response.data?.check) {
       // 응답 데이터에서 주제 리스트 추출
       const resList = response.data.information?.resList ?? []; // 수정된 부분
@@ -35,8 +33,6 @@ export const getLikeTheme = async (
       }));
 
       const pageInfo = response.data.information.pageInfo;
-      console.log('Mapped Topics:', topics); // 매핑된 주제 로그
-      console.log('Page Info:', pageInfo); // 페이지 정보 로그
 
       return { topics, pageInfo };
     } else {

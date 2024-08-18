@@ -107,19 +107,17 @@ const LikedTopicPage: React.FC = () => {
               smallfont={true}
             />
           ) : filteredTopics.length > 0 ? (
-            <>
-              <TopicList topics={filteredTopics} />
-              {pageInfo && (
-                <Pagination
-                  pageInfo={pageInfo}
-                  pageNum={pageNum}
-                  setPageNum={setPageNum}
-                />
-              )}
-            </>
+            <TopicList topics={filteredTopics} />
           ) : null}
         </S.EmptyState>
-      ) : null}{' '}
+      ) : null}
+      {pageInfo && (
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
+      )}
       {/* 데이터 로딩 중에는 아무것도 렌더링하지 않음 */}
     </S.Container>
   );

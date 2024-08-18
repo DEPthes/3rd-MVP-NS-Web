@@ -33,8 +33,6 @@ const MyLikedPostPage: React.FC = () => {
         pageNum,
         handleUnauthorized,
       );
-      console.log('Fetched Page Info:', pageInfo); // 여기에 로그 추가
-      console.log('Fetched Posts:', posts); // 여기서 데이터를 확인합니다.
       setLikedPosts(posts);
       setFilteredLikedPosts(posts);
       setPageInfo(pageInfo);
@@ -108,19 +106,17 @@ const MyLikedPostPage: React.FC = () => {
               smallfont={false}
             />
           ) : filteredLikedPosts.length > 0 ? (
-            <>
-              <PostList posts={filteredLikedPosts} />
-              {pageInfo && (
-                <Pagination
-                  pageInfo={pageInfo}
-                  pageNum={pageNum}
-                  setPageNum={setPageNum}
-                />
-              )}
-            </>
+            <PostList posts={filteredLikedPosts} />
           ) : null}
         </S.EmptyState>
       ) : null}
+      {pageInfo && (
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
+      )}
     </S.Container>
   );
 };
