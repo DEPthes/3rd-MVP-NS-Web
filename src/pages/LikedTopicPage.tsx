@@ -80,7 +80,7 @@ const LikedTopicPage: React.FC = () => {
   // 좋아요 누른 주제 페이지의 정렬 옵션
   const sortOptions: { label: string; value: TToicSortType }[] = [
     { label: '좋아요 누른 순', value: 'currentLike' },
-    { label: '좋아요 많은 순', value: 'like' },
+    { label: '주제 좋아요 수', value: 'like' },
     { label: '게시글 많은 순', value: 'board' },
     { label: '최신 순', value: 'date' },
   ];
