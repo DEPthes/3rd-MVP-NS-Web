@@ -137,6 +137,31 @@ export const Divider = styled.span`
   }
 `;
 
+export const NoneList = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 58px;
+  gap: 15px;
+  transition: all 0.3s ease-in-out;
+
+  > img {
+    width: 200px;
+    height: 200px;
+
+    ${isMobileOrTablet} {
+      width: 160px;
+      height: 160px;
+    }
+  }
+
+  > p {
+    font: var(--T2);
+    color: var(--NS-White);
+  }
+`;
+
 export const TopicBoxs = styled.div`
   display: flex;
   flex-direction: column;

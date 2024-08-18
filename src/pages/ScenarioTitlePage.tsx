@@ -20,12 +20,14 @@ const ScenarioTitlePage: React.FC = () => {
   );
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
   const [pageNum, setPageNum] = useState(1); // 기본 값 1
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const handleUnauthorized = useHandleUnauthorized();
 
   useEffect(() => {
     const fetchTopics = async () => {
+      setLoading(true);
       try {
         let response;
         if (searchTerm.trim() === '') {
@@ -52,6 +54,8 @@ const ScenarioTitlePage: React.FC = () => {
         }
       } catch (error) {
         console.error('API 호출 중 에러:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -141,9 +145,19 @@ const ScenarioTitlePage: React.FC = () => {
           ))}
         </S.SortOptions>
       </S.Header>
-      <S.TopicBoxs>
-        {topics && topics.length > 0 ? (
-          topics.map(topic => (
+      {loading ? (
+        <></>
+      ) : topics.length === 0 ? (
+        <S.NoneList>
+          <img
+            src="/src/assets/images/empty_character.svg"
+            alt="character img"
+          />
+          <p>검색 결과가 없어요</p>
+        </S.NoneList>
+      ) : (
+        <S.TopicBoxs>
+          {topics.map(topic => (
             <S.TopicBox
               key={topic.themeId}
               onClick={() => handleTopicClick(topic.themeId)}
@@ -165,11 +179,9 @@ const ScenarioTitlePage: React.FC = () => {
                 </S.LikeContainer>
               </S.RightWrap>
             </S.TopicBox>
-          ))
-        ) : (
-          <></>
-        )}
-      </S.TopicBoxs>
+          ))}
+        </S.TopicBoxs>
+      )}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

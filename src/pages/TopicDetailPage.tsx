@@ -21,25 +21,33 @@ const TopicDetailPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1); // 기본 값 1
   const navigate = useNavigate();
   const handleUnauthorized = useHandleUnauthorized();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTopic = async () => {
-      if (id) {
-        const response = await getTheme(
-          {
-            themeId: parseInt(id),
-            page: pageNum,
-            size: 5,
-            sortBy: sortType,
-          },
-          handleUnauthorized,
-        );
-        if (response) {
-          setTopic(response);
-          setPageInfo(response.pageInfo);
-        } else {
-          console.error('주제 가져오기 에러');
+      setLoading(true);
+      try {
+        if (id) {
+          const response = await getTheme(
+            {
+              themeId: parseInt(id),
+              page: pageNum,
+              size: 5,
+              sortBy: sortType,
+            },
+            handleUnauthorized,
+          );
+          if (response) {
+            setTopic(response);
+            setPageInfo(response.pageInfo);
+          } else {
+            console.error('주제 가져오기 에러');
+          }
         }
+      } catch (error) {
+        console.error('API 호출 중 에러:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -50,7 +58,6 @@ const TopicDetailPage: React.FC = () => {
     e.stopPropagation(); // 이벤트 전파를 막음
 
     if (!topic) return;
-    //API 수정되면 추후 수정 (themeId)
 
     try {
       const response = await postLike(topic.themeId, handleUnauthorized);
@@ -76,7 +83,7 @@ const TopicDetailPage: React.FC = () => {
   };
 
   const handleWriteClick = () => {
-    navigate('/scenario/write');
+    navigate(`/scenario/write/${id}`);
   };
 
   const handleSort = (type: 'date' | 'likeCount') => {
@@ -185,31 +192,43 @@ const TopicDetailPage: React.FC = () => {
           </S.SortOption>
         </S.SortOptions>
       </S.ListHeader>
-      <S.PostList>
-        {sortedPosts?.map(post => (
-          <S.PostBox
-            key={post.boardId}
-            onClick={() => handleTitleClick(post.boardId)}
-          >
-            <S.LeftWrap>
-              <S.PostTitle>{post.title}</S.PostTitle>
-              <S.PostContent>{truncateContent(post.content)}</S.PostContent>
-            </S.LeftWrap>
-            <S.RightWrap>
-              <S.LikeButton onClick={e => handleLikeClick(post.boardId, e)}>
-                <img
-                  src={post.likedBoard ? BlueHeartFill : BlueHeart}
-                  alt="Like"
-                />
-                <S.PostLikeCount>{post.likeCount}</S.PostLikeCount>
-              </S.LikeButton>
-              <S.PostInfo>
-                {post.nickname} | {new Date(post.date).toLocaleDateString()}
-              </S.PostInfo>
-            </S.RightWrap>
-          </S.PostBox>
-        ))}
-      </S.PostList>
+      {loading ? (
+        <></>
+      ) : !topic || sortedPosts?.length === 0 ? (
+        <S.NoneList>
+          <img
+            src="/src/assets/images/empty_character.svg"
+            alt="character img"
+          />
+          <p>주제에 대한 글이 없어요</p>
+        </S.NoneList>
+      ) : (
+        <S.PostList>
+          {sortedPosts?.map(post => (
+            <S.PostBox
+              key={post.boardId}
+              onClick={() => handleTitleClick(post.boardId)}
+            >
+              <S.LeftWrap>
+                <S.PostTitle>{post.title}</S.PostTitle>
+                <S.PostContent>{truncateContent(post.content)}</S.PostContent>
+              </S.LeftWrap>
+              <S.RightWrap>
+                <S.LikeButton onClick={e => handleLikeClick(post.boardId, e)}>
+                  <img
+                    src={post.likedBoard ? BlueHeartFill : BlueHeart}
+                    alt="Like"
+                  />
+                  <S.PostLikeCount>{post.likeCount}</S.PostLikeCount>
+                </S.LikeButton>
+                <S.PostInfo>
+                  {post.nickname} | {new Date(post.date).toLocaleDateString()}
+                </S.PostInfo>
+              </S.RightWrap>
+            </S.PostBox>
+          ))}
+        </S.PostList>
+      )}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

@@ -11,8 +11,10 @@ import { postDraft } from '@/apis/board/postDraft';
 import { postPublish } from '@/apis/board/postPublish';
 import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import { useParams } from 'react-router-dom';
 
 const SenarioDetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [topic, setTopic] = useState<TTodayThemeResponse | null>(null);
   const [title, setTitle] = useState<string>('');
   const [text, setText] = useState<string>('');
@@ -95,12 +97,12 @@ const SenarioDetailPage: React.FC = () => {
   };
 
   const handleModalPost = async () => {
-    if (!topic) return;
+    if (!topic || !id) return;
 
     const postData: TPostDraftRequest = {
       title,
       content: text,
-      themeId: topic.themeId,
+      themeId: parseInt(id),
     };
 
     const response = await postPublish(postData, handleUnauthorized);
