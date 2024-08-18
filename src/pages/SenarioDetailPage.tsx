@@ -125,7 +125,7 @@ const SenarioDetailPage: React.FC = () => {
   const handleModalComplete = () => {
     setIsSaveCompleteModalVisible(false);
     setIsPostCompleteModalVisible(false);
-    navigate(-1);
+    navigate(`/scenario/topic/${id}`);
   };
 
   const isPostDisabled =
