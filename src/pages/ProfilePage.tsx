@@ -71,12 +71,10 @@ const ProfilePage: React.FC = () => {
       if (response.check) {
         console.log('프로필이 변경되었습니다.');
       } else {
-        alert('프로필 변경에 실패했습니다.');
         console.error('프로필 변경 실패:', response);
       }
     } catch (error) {
       console.error('프로필 변경 중 오류 발생:', error);
-      alert('프로필 변경에 실패했습니다.');
     }
   };
 
