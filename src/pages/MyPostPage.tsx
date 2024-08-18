@@ -3,7 +3,6 @@ import * as S from '@styles/mypost/MyPostPageStyle';
 import { getBoard } from '@/apis/user/getBoard';
 import { getSearch } from '@/apis/user/getSearch';
 import { TPost, TMyPostSortType } from '../types/mypost/post';
-import EmptyMessage from '../components/mypost/EmptyMessage';
 import PostList from '../components/mypost/PostList';
 import SearchInput from '../components/mypost/SearchInput';
 import Header from '../components/mypost/Header';
@@ -11,6 +10,7 @@ import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 import { TPagination } from '@/types/pagination';
 import Pagination from '@/components/pagination/Pagination';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import EmptyMessage from '@/components/mypost/EmptyMessage';
 
 const MyPostsPage: React.FC = () => {
   const [postList, setPostList] = useState<TPost[]>([]);
@@ -19,20 +19,25 @@ const MyPostsPage: React.FC = () => {
   const [excludeTemporary, setExcludeTemporary] = useState<boolean>(false);
   const [pageNum, setPageNum] = useState(1);
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>(''); // 검색어 상태
-  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false); // 데이터 로딩 상태
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
   const handleUnauthorized = useHandleUnauthorized();
 
   // 게시글 데이터를 가져오는 함수
   const fetchPosts = async () => {
     setIsDataLoaded(false);
     try {
+      console.log('Current sortType:', sortType); // sortType이 올바르게 설정되었는지 확인
       const { posts, pageInfo } = await getBoard(
         excludeTemporary,
         sortType,
         pageNum,
         handleUnauthorized,
       );
+
+      console.log('Fetched Posts:', posts); // 포스트 목록 확인
+      console.log('Page Info:', pageInfo); // 페이지 정보 확인
+
       setPostList(posts);
       setFilteredPostList(posts);
       setPageInfo(pageInfo);
@@ -62,9 +67,8 @@ const MyPostsPage: React.FC = () => {
       setIsDataLoaded(true);
     }
   };
-
-  // 페이지 번호, 정렬 순서, 임시 저장 제외 여부가 변경될 때 데이터를 새로 가져옴
   useEffect(() => {
+    console.log('현재 페이지 번호:', pageNum); // 페이지 번호 로그 출력
     if (searchQuery) {
       fetchSearchResults(searchQuery); // 검색어가 있으면 getSearch 호출
     } else {
@@ -72,19 +76,18 @@ const MyPostsPage: React.FC = () => {
     }
   }, [excludeTemporary, sortType, pageNum, searchQuery]);
 
-  // 검색어가 변경될 때 호출되는 함수
   const handleSearchQueryChange = (query: string) => {
     setSearchQuery(query);
     setPageNum(1); // 검색 시 페이지를 1로 설정
   };
 
-  const { isMobileOrTablet, isMobile } = useNSMediaQuery();
+  const { isMobileOrTablet } = useNSMediaQuery();
 
   return (
     <S.Container>
       <SearchInput
         onSearchResults={handleSearchQueryChange}
-        searchQuery={searchQuery} // 현재 검색어를 전달
+        searchQuery={searchQuery}
       />
       <Header<TMyPostSortType>
         title={isMobileOrTablet ? '내가 쓴 글' : '내가 쓴 글 목록'}
@@ -108,7 +111,7 @@ const MyPostsPage: React.FC = () => {
       />
       {isDataLoaded ? (
         <S.EmptyState>
-          {filteredPostList.length > 0 ? ( // 검색 결과가 있을 때만 리스트와 페이징 렌더링
+          {filteredPostList.length > 0 ? (
             <>
               <PostList posts={filteredPostList} />
               {pageInfo && (
@@ -119,20 +122,16 @@ const MyPostsPage: React.FC = () => {
                 />
               )}
             </>
-          ) : postList.length === 0 ? ( // 작성한 포스트가 없을 때
+          ) : postList.length === 0 ? (
             <EmptyMessage
               buttonText="N력 키우러 가기"
-              messageText={
-                isMobile
-                  ? '나였다면으로 N력을 키워보세요!'
-                  : '당신의 N력이 궁금하시지 않나요?\n나였다면으로 N력 키우기를 시작해보세요!'
-              }
+              messageText="나였다면으로 N력을 키워보세요!"
               navigateTo="/scenario"
               smallfont={false}
             />
           ) : null}
         </S.EmptyState>
-      ) : null}{' '}
+      ) : null}
     </S.Container>
   );
 };

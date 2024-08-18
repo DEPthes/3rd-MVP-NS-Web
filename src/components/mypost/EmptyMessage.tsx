@@ -20,13 +20,11 @@ const EmptyMessage: React.FC<EmptyMessageProps> = ({
   return (
     <S.Container>
       <S.EmptyMessageContainer>
-        <S.Image>
-          <img
-            src="/src/assets/images/empty_character.svg"
-            alt="character img"
-          />
-        </S.Image>
-        <S.Message smallfont={smallfont}>{messageText}</S.Message>
+        <S.Image
+          src="/src/assets/images/empty_character.svg"
+          alt="character img"
+        />
+        <S.Message $smallfont={smallfont}>{messageText}</S.Message>
       </S.EmptyMessageContainer>
       <S.ButtonContainer>
         <S.Button onClick={() => navigate(navigateTo)}>{buttonText}</S.Button>

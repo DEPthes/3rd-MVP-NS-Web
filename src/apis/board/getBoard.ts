@@ -11,7 +11,7 @@ export const getBoard = async (
       `/api/v1/board/${boardId}`,
     );
     if (response.data.check) {
-      return response.data.information; // information 안의 데이터를 반환한다.
+      return response.data.information;
     } else {
       console.error('API 응답이 올바르지 않습니다.');
       return undefined;
