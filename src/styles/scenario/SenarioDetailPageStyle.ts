@@ -201,17 +201,19 @@ export const ModalContainer = styled.div`
   padding: 40px 0;
   text-align: center;
   width: 520px;
+
   ${isMobileOrTablet} {
-	width: 320px;
-	height: 164px;
+    width: 320px;
+    padding: 20px 0;
   }
 `;
 
 export const ModalTitle = styled.h2`
   font: var(--M1);
   color: var(--NS-Black);
-  ${isMobileOrTablet}{
-	font:var(--P-T1);
+
+  ${isMobileOrTablet} {
+    font: var(--P-T1);
   }
 `;
 
@@ -219,11 +221,14 @@ export const ModalText2Black = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black);
   margin: 16px 0;
-  ${isMobileOrTablet}{
-	font:var(--P-T2);
-	color: var(--Gray1);
-	width: 264px;
-	height:51px;
+
+  ${isMobileOrTablet} {
+    font: var(--P-T2);
+    width: 260px;
+
+    > span {
+      color: var(--Gray1);
+    }
   }
 `;
 
@@ -231,22 +236,27 @@ export const ModalTextBlack = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black);
   margin: 24px 0 30px;
+
+  ${isMobileOrTablet} {
+    margin: 16px 0;
+    font: var(--P-T2);
+  }
 `;
 
 export const ModalTextBlack2 = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black2);
   margin: 24px 0 30px;
-  ${isMobileOrTablet}{
-	font:var(--P-T2);
-	color: var(--Gray1);
-	width: 264px;
-	height:51px;
+
+  ${isMobileOrTablet} {
+    font: var(--P-T2);
+    color: var(--Gray1);
+    width: 260px;
+    margin: 16px 0;
   }
 `;
 
 export const ModalBtn = styled.div`
   display: flex;
   gap: 12px;
-  
 `;

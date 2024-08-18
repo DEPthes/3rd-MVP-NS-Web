@@ -15,6 +15,8 @@ import { postLike } from '@/apis/theme/postLike';
 import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { TBoardDetailResponse } from '@/types/mytype';
+import BackDrop from '@/components/layout/BackDrop';
+import DarkButton from '@/components/button/DarkButton';
 
 const SelectTitleDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -68,7 +70,7 @@ const SelectTitleDetail: React.FC = () => {
         alert('게시글이 삭제되었습니다.');
         navigate(`/topic/${post?.themeId}`); // 삭제 후 해당 주제로 이동
       } else {
-        alert('게시글 삭제에 실패했습니다.');
+        setIsNotAuthor(true);
       }
     }
     setIsDeleteModalOpen(false);
@@ -186,27 +188,43 @@ const SelectTitleDetail: React.FC = () => {
         )}
       </S.ButtonContainer>
       {isDeleteModalOpen && (
-        <S.DeleteModalOverlay>
-          <S.DeleteModal>
-            <S.DeleteModalText>삭제하시겠습니까?</S.DeleteModalText>
-            <S.ButtonContainer>
-              <LightButton text="삭제하기" onClick={handleConfirmDelete} />
-              <LightButton text="취소" onClick={handleCancelDelete} />
-            </S.ButtonContainer>
-          </S.DeleteModal>
-        </S.DeleteModalOverlay>
+        <BackDrop
+          children={
+            <S.DeleteModal>
+              <h1>게시글 삭제</h1>
+              <p>삭제하시겠습니까?</p>
+              <S.ButtonWrap>
+                <DarkButton
+                  text="삭제"
+                  onClick={handleConfirmDelete}
+                  isSmall={true}
+                />
+                <LightButton
+                  text="취소"
+                  onClick={handleCancelDelete}
+                  isSmall={true}
+                />
+              </S.ButtonWrap>
+            </S.DeleteModal>
+          }
+          isOpen={isDeleteModalOpen}
+        />
       )}
       {isNotAuthor && (
-        <S.DeleteModalOverlay>
-          <S.DeleteModal>
-            <S.DeleteModalText>
-              이 게시글을 삭제할 권한이 없습니다.
-            </S.DeleteModalText>
-            <S.ButtonContainer>
-              <LightButton text="확인" onClick={() => setIsNotAuthor(false)} />
-            </S.ButtonContainer>
-          </S.DeleteModal>
-        </S.DeleteModalOverlay>
+        <BackDrop
+          children={
+            <S.DeleteModal>
+              <h1>삭제 실패</h1>
+              <p>게시글 삭제에 실패했습니다.</p>
+              <LightButton
+                text="확인"
+                onClick={() => setIsNotAuthor(false)}
+                isSmall={true}
+              />
+            </S.DeleteModal>
+          }
+          isOpen={isNotAuthor}
+        />
       )}
     </S.Container>
   );

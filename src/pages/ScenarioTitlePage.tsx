@@ -4,12 +4,13 @@ import * as S from '@/styles/scenario/ScenarioTitlePageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg?react';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg?react';
 import SearchIcon from '@assets/icons/Search.svg';
-import { TTheme, TThemeListResponse } from '@/types/mytype';
+import { TTheme } from '@/types/mytype';
 import { getList } from '@/apis/theme/getList';
 import { getSearch } from '@/apis/theme/getSearch';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
 import { postLike } from '@/apis/theme/postLike';
+import { TPagination } from '@/types/pagination';
 
 const ScenarioTitlePage: React.FC = () => {
   const [topics, setTopics] = useState<TTheme[]>([]);
@@ -17,9 +18,7 @@ const ScenarioTitlePage: React.FC = () => {
   const [sortType, setSortType] = useState<'date' | 'likeCount' | 'boardCount'>(
     'date',
   );
-  const [pageInfo, setPageInfo] = useState<
-    TThemeListResponse['information']['pageInfo'] | null
-  >(null);
+  const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
   const [pageNum, setPageNum] = useState(1); // 기본 값 1
 
   const navigate = useNavigate();

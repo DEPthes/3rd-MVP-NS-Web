@@ -242,11 +242,8 @@ export const LikeButton = styled.div`
     position: static;
     margin-bottom: 10px;
     margin-top: 11px;
-    justify-content: center;
-    width: 43px;
-    height: 16px;
-    margin-right: 117.5px;
-    margin-left: 117.5px;
+    height: 0;
+    margin-right: 0;
   }
 
   img {
@@ -287,28 +284,47 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const DeleteModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-`;
-
 export const DeleteModal = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--NS-White);
+  width: 520px;
+  padding: 40px 0;
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    width: 328px;
+    padding: 30px 0;
+  }
+
+  > h1 {
+    transition: all 0.3s ease-in-out;
+    font: var(--M1);
+    color: var(--NS-Black);
+
+    ${isMobileOrTablet} {
+      font: var(--S1);
+    }
+  }
+
+  > p {
+    transition: all 0.3s ease-in-out;
+    font: var(--M1-1);
+    color: var(--NS-Black);
+    margin-top: 24px;
+    margin-bottom: 30px;
+
+    ${isMobileOrTablet} {
+      font: var(--M1-B);
+      margin: 10px 0px;
+    }
+  }
 `;
 
-export const DeleteModalText = styled.p`
-  font-size: 18px;
-  color: black;
-  margin-bottom: 20px;
+export const ButtonWrap = styled.div`
+  display: flex;
+  gap: 12px;
+  transition: all 0.3s ease-in-out;
 `;
