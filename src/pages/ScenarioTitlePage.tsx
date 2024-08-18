@@ -101,6 +101,7 @@ const ScenarioTitlePage: React.FC = () => {
 
   const handleTopicClick = (id: number) => {
     navigate(`/scenario/topic/${id}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -166,7 +167,7 @@ const ScenarioTitlePage: React.FC = () => {
             </S.TopicBox>
           ))
         ) : (
-          <div>주제를 불러올 수 없습니다.</div>
+          <></>
         )}
       </S.TopicBoxs>
       {pageInfo && (

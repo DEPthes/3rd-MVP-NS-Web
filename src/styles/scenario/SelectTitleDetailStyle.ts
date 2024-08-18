@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   margin-top: 91px;
   margin-bottom: 103px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     margin-top: 50px;
@@ -25,6 +26,7 @@ export const HeaderSection = styled.div`
   width: 1170px;
   margin-bottom: 20px;
   position: relative;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     flex-direction: column;
@@ -38,6 +40,7 @@ export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.3s ease-in-out;
 `;
 
 export const ProfileCircle = styled.div`
@@ -46,6 +49,7 @@ export const ProfileCircle = styled.div`
   background-color: var(--NS-White);
   border-radius: 100px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: 100px;
@@ -60,6 +64,7 @@ export const ProfileNickname = styled.div`
   height: 19px;
   margin-top: 6px;
   text-align: center;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--W1);
@@ -75,6 +80,7 @@ export const ProfileInfo = styled.div`
   margin-left: 41px;
 
   ${isMobileOrTablet} {
+    transition: all 0.3s ease-in-out;
     margin-left: 0;
     text-align: center;
     align-items: center;
@@ -100,6 +106,7 @@ export const Header = styled.div`
   color: var(--NS-White);
   margin-top: 40px;
   font: var(--LogoSmall);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     color: var(--NS-Main1);
@@ -115,6 +122,7 @@ export const TopicTitle = styled.div`
   font: var(--H4-1);
   margin-top: 3px;
   width: 608px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--W1);
@@ -133,6 +141,7 @@ export const LikeContainer = styled.div`
   width: 126px;
   cursor: pointer;
   margin-top: 7px;
+  transition: all 0.3s ease-in-out;
 
   svg {
     width: 30px;
@@ -155,6 +164,7 @@ export const LikeText = styled.div`
   margin-left: 5px;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-S3);
@@ -176,6 +186,7 @@ export const PostBox = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     width: 320px;
@@ -197,6 +208,7 @@ export const PostTitle = styled.div`
   text-align: center;
   font: var(--H3);
   margin-bottom: 29px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     margin-bottom: 11px;
@@ -214,16 +226,16 @@ export const PostContent = styled.div`
   margin-left: 70px;
   text-align: center;
   overflow-wrap: break-word;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: 100%;
-    padding: 0 20px; /* 좌우 여백을 동일하게 설정 */
+    padding: 0 20px;
     min-height: 51px;
     margin-bottom: 10px;
+    margin-right: 0;
+    margin-left: 0;
     font: var(--Hy4);
-    white-space: normal;
-    text-align: center;
-    box-sizing: border-box;
   }
 `;
 
@@ -237,6 +249,7 @@ export const LikeButton = styled.div`
   margin-bottom: 19px;
   height: 30px;
   margin-right: 26px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     position: static;
@@ -261,6 +274,7 @@ export const LikeCount = styled.div`
   margin-left: 5px;
   color: var(--NS-Main1);
   font: var(--S1);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--T5-B);
@@ -273,6 +287,7 @@ export const ButtonContainer = styled.div`
   gap: 10px;
   width: 1170px;
   margin-top: 20px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     flex-direction: row;

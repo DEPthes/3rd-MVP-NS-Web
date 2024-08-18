@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   margin-top: 117px;
   margin-bottom: 112px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     margin-top: 30px;
@@ -27,6 +28,7 @@ export const TopicBox = styled.div`
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   width: 1170px;
   min-height: 160px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     width: 320px;
@@ -54,6 +56,7 @@ export const TopicBox = styled.div`
 export const TopicHeader = styled.div`
   color: var(--NS-Main1);
   font: var(--LogoSmall);
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     font: var(--Hy1);
@@ -68,6 +71,7 @@ export const Topic = styled.div`
   margin-top: 3px;
   color: var(--NS-Main1);
   font: var(--T1-1);
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     margin-top: 5px;
@@ -86,6 +90,7 @@ export const LikeContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 5px;
+  transition: all 0.3s ease-in-out;
 
   svg {
     width: 30px; /* 기본 크기 (데스크탑용) */
@@ -109,6 +114,7 @@ export const LikeContainer = styled.div`
 export const LikeText = styled.div`
   font: var(--S1);
   color: var(--NS-Main5);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--Hy2);
@@ -125,6 +131,7 @@ export const NewTopicBox = styled.div`
   height: 443px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   background-color: var(—NS-Black);
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     width: 320px;
@@ -148,6 +155,7 @@ export const Input = styled.input`
   border: none;
   text-align: center;
   font: var(--H3);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-T1);
@@ -159,6 +167,7 @@ export const Separator = styled.hr`
   width: 90%;
   margin-top: 12px;
   margin-bottom: 17px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     margin-top: 11px;
@@ -174,6 +183,7 @@ export const TextArea = styled.textarea`
   text-align: center;
   resize: none;
   outline: none;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-T2);
@@ -185,6 +195,7 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     gap: 14px;
@@ -201,6 +212,7 @@ export const ModalContainer = styled.div`
   padding: 40px 0;
   text-align: center;
   width: 520px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: 320px;
@@ -211,6 +223,7 @@ export const ModalContainer = styled.div`
 export const ModalTitle = styled.h2`
   font: var(--M1);
   color: var(--NS-Black);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-T1);
@@ -221,6 +234,7 @@ export const ModalText2Black = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black);
   margin: 16px 0;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-T2);
@@ -236,6 +250,7 @@ export const ModalTextBlack = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black);
   margin: 24px 0 30px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     margin: 16px 0;
@@ -247,6 +262,7 @@ export const ModalTextBlack2 = styled.p`
   font: var(--M1-1);
   color: var(--NS-Black2);
   margin: 24px 0 30px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-T2);
@@ -259,4 +275,5 @@ export const ModalTextBlack2 = styled.p`
 export const ModalBtn = styled.div`
   display: flex;
   gap: 12px;
+  transition: all 0.3s ease-in-out;
 `;

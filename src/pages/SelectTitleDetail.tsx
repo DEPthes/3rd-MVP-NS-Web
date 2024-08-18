@@ -48,11 +48,8 @@ const SelectTitleDetail: React.FC = () => {
   };
 
   const handleEditClick = () => {
-    if (post?.owner) {
-      navigate(`/edit-post/${id}`);
-    } else {
-      navigate(`/scenario-detail/${id}`);
-    }
+    navigate(`/scenario/write/${id}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
   };
 
   const handleDeleteClick = () => {
@@ -67,8 +64,8 @@ const SelectTitleDetail: React.FC = () => {
     if (id) {
       const deleteSuccess = await deleteBoard(parseInt(id), handleUnauthorized);
       if (deleteSuccess) {
-        alert('게시글이 삭제되었습니다.');
         navigate(`/topic/${post?.themeId}`); // 삭제 후 해당 주제로 이동
+        window.scroll({ top: 0, behavior: 'smooth' });
       } else {
         setIsNotAuthor(true);
       }
@@ -131,11 +128,8 @@ const SelectTitleDetail: React.FC = () => {
 
   const handleProfileClick = () => {
     navigate(`/profile/${post?.nickname}`); // 타인의 프로필 페이지로 이동하기
+    window.scroll({ top: 0, behavior: 'smooth' });
   };
-
-  if (!post) {
-    return <div>로딩 중...</div>;
-  }
 
   return (
     <S.Container>
@@ -143,24 +137,24 @@ const SelectTitleDetail: React.FC = () => {
         <S.ProfileContainer>
           <S.ProfileCircle
             onClick={handleProfileClick}
-            style={{ backgroundImage: `url(${post.imageUrl})` }} // 프로필 이미지 설정
+            style={{ backgroundImage: `url(${post?.imageUrl})` }} // 프로필 이미지 설정
           />
-          <S.ProfileNickname>{post.nickname}</S.ProfileNickname>{' '}
+          <S.ProfileNickname>{post?.nickname}</S.ProfileNickname>
           {/* 작성자 닉네임 */}
         </S.ProfileContainer>
         <S.ProfileInfo>
           <S.Header>주제</S.Header>
-          <S.TopicTitle>{post.themeContent}</S.TopicTitle> {/* 주제 제목 */}
+          <S.TopicTitle>{post?.themeContent}</S.TopicTitle> {/* 주제 제목 */}
           <S.LikeContainer onClick={handleWhiteHeartClick}>
             {isMobileOrTablet ? (
-              post.likedTheme ? (
+              post?.likedTheme ? (
                 <Main5HeartFill title="Like" />
               ) : (
                 <Main5Heart title="Like" />
               )
             ) : (
               <img
-                src={post.likedTheme ? WhiteHeartFill : WhiteHeart}
+                src={post?.likedTheme ? WhiteHeartFill : WhiteHeart}
                 alt="Like"
               />
             )}
@@ -169,10 +163,10 @@ const SelectTitleDetail: React.FC = () => {
         </S.ProfileInfo>
       </S.HeaderSection>
       <S.PostBox>
-        <S.PostTitle>{post.boardTitle}</S.PostTitle> {/* 게시글 제목 */}
-        <S.PostContent>{post.boardContent}</S.PostContent> {/* 게시글 내용 */}
+        <S.PostTitle>{post?.boardTitle}</S.PostTitle> {/* 게시글 제목 */}
+        <S.PostContent>{post?.boardContent}</S.PostContent> {/* 게시글 내용 */}
         <S.LikeButton onClick={handleBlueHeartClick}>
-          <img src={post.likedBoard ? BlueHeartFill : BlueHeart} alt="Like" />
+          <img src={post?.likedBoard ? BlueHeartFill : BlueHeart} alt="Like" />
           <S.LikeCount>좋아요</S.LikeCount>
         </S.LikeButton>
       </S.PostBox>

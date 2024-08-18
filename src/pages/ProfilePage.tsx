@@ -87,10 +87,6 @@ const ProfilePage: React.FC = () => {
     fileInput.click();
   };
 
-  if (!userData) {
-    return <div>로딩중...</div>;
-  }
-
   return (
     <S.Container>
       <S.Content>
@@ -99,11 +95,11 @@ const ProfilePage: React.FC = () => {
       <S.ProfileSection>
         <S.ProfileImageContainer>
           <S.ProfileImage
-            src={userData.information.imageUrl}
+            src={userData?.information.imageUrl}
             alt="Profileimage"
           />
         </S.ProfileImageContainer>
-        <S.Nickname>{userData.information.nickname}</S.Nickname>
+        <S.Nickname>{userData?.information.nickname}</S.Nickname>
         <S.EditOptions>
           <S.EditOption onClick={openFilePicker}>프로필사진 변경</S.EditOption>{' '}
           <S.EditOption onClick={() => setIsModalOpen(true)}>

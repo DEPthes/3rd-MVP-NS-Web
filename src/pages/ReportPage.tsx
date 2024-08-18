@@ -49,9 +49,11 @@ const ReportPage = () => {
     if (isCurrentUser) {
       //내 글이면 마이페이지로 이동
       navigate('/mypage');
+      window.scroll({ top: 0, behavior: 'smooth' });
     } else {
       //아니면 사용자 프로필 페이지로 이동
       navigate(`/profile/${userId}`);
+      window.scroll({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -59,6 +61,7 @@ const ReportPage = () => {
   const onPostClick = (boardId: number) => {
     //게시글 조회 페이지로 이동
     navigate(`/scenario/${boardId}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
   };
 
   return (

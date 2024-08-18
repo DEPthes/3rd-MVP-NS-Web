@@ -85,6 +85,7 @@ const TopicDetailPage: React.FC = () => {
 
   const handleTitleClick = (postId: number) => {
     navigate(`/scenario/${postId}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
   };
 
   const handleLikeClick = async (postId: number, e: React.MouseEvent) => {
@@ -121,18 +122,16 @@ const TopicDetailPage: React.FC = () => {
     }
   };
 
-  if (!topic) {
-    return <div>로딩 중...</div>;
-  }
-
-  const sortedPosts = [...topic.boards].sort((a, b) => {
-    if (sortType === 'date') {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    } else if (sortType === 'likeCount') {
-      return b.likeCount - a.likeCount;
-    }
-    return 0;
-  });
+  const sortedPosts =
+    topic &&
+    [...topic.boards].sort((a, b) => {
+      if (sortType === 'date') {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else if (sortType === 'likeCount') {
+        return b.likeCount - a.likeCount;
+      }
+      return 0;
+    });
 
   const truncateContent = (content: string) => {
     const maxLength = 50;
@@ -151,19 +150,19 @@ const TopicDetailPage: React.FC = () => {
     <S.Container>
       <S.TopicBox>
         <S.Header>주제</S.Header>
-        <S.TopicHeader>{topic.content}</S.TopicHeader>
+        <S.TopicHeader>{topic?.content}</S.TopicHeader>
         <S.InfoContainer>
           <S.PublishDate>
-            발행일 : {new Date(topic.date).toLocaleDateString()}
+            발행일 : {topic && new Date(topic.date).toLocaleDateString()}
           </S.PublishDate>
           <S.PublishDate>|</S.PublishDate>
           <S.LikeContainer onClick={handleTopicLikeClick}>
-            {topic.likedTheme ? (
+            {topic?.likedTheme ? (
               <Main5HeartFill title="Liked" />
             ) : (
               <Main5Heart title="Like" />
             )}
-            <S.TopicLikeCount>{topic.likeCount}</S.TopicLikeCount>
+            <S.TopicLikeCount>{topic?.likeCount}</S.TopicLikeCount>
           </S.LikeContainer>
         </S.InfoContainer>
         <S.WriteButton onClick={handleWriteClick}>글쓰기</S.WriteButton>
@@ -187,7 +186,7 @@ const TopicDetailPage: React.FC = () => {
         </S.SortOptions>
       </S.ListHeader>
       <S.PostList>
-        {sortedPosts.map(post => (
+        {sortedPosts?.map(post => (
           <S.PostBox
             key={post.boardId}
             onClick={() => handleTitleClick(post.boardId)}
