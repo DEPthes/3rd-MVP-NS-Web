@@ -31,7 +31,7 @@ const Header = <T extends string>({
           <React.Fragment key={option.value}>
             <S.FilterLink
               href="#"
-              isSelected={sortType === option.value}
+              $isSelected={sortType === option.value}
               onClick={() => setSortType(option.value)}
             >
               {option.label}

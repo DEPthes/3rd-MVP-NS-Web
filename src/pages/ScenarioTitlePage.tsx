@@ -145,45 +145,51 @@ const ScenarioTitlePage: React.FC = () => {
               >
                 {type}
               </S.SortOption>
-              {index < 2 && <S.Divider>|</S.Divider>}{' '}
+              {index < 2 && <S.Divider>|</S.Divider>}
               {/* '|' 기호는 색상이 변하지 않도록 처리 */}
             </React.Fragment>
           ))}
         </S.SortOptions>
       </S.Header>
-      {topics && topics.length > 0 ? (
-        topics.map(topic => (
-          <S.TopicBox
-            key={topic.themeId}
-            onClick={() => handleTopicClick(topic.themeId)}
-          >
-            <div>
-              <S.TopicTitle>{topic.content}</S.TopicTitle>
-              <S.TopicDate>발행일: {topic.date}</S.TopicDate>
-              <S.PostCount>게시글 {topic.boardCount}개</S.PostCount>
-            </div>
-            <S.LikeContainer
-              onClick={e => {
-                e.stopPropagation();
-                handleLike(topic.themeId, topic.content);
-              }}
+      <S.TopicBoxs>
+        {topics && topics.length > 0 ? (
+          topics.map(topic => (
+            <S.TopicBox
+              key={topic.themeId}
+              onClick={() => handleTopicClick(topic.themeId)}
             >
-              {isLikedTopics[topic.content] ? <BlueHeartFill /> : <BlueHeart />}
-              <S.LikeCount>{topic.likeCount}</S.LikeCount>
-            </S.LikeContainer>
-          </S.TopicBox>
-        ))
-      ) : (
-        <div>주제를 불러올 수 없습니다.</div>
-      )}
+              <S.LeftWrap>
+                <S.TopicTitle>{topic.content}</S.TopicTitle>
+                <S.TopicDate>발행일 : {topic.date}</S.TopicDate>
+                <S.PostCount>게시글 {topic.boardCount}개</S.PostCount>
+              </S.LeftWrap>
+              <S.RightWrap>
+                <S.LikeContainer
+                  onClick={e => {
+                    e.stopPropagation();
+                    handleLike(topic.themeId, topic.content);
+                  }}
+                >
+                  {isLikedTopics[topic.content] ? (
+                    <BlueHeartFill />
+                  ) : (
+                    <BlueHeart />
+                  )}
+                  <S.LikeCount>{topic.likeCount}</S.LikeCount>
+                </S.LikeContainer>
+              </S.RightWrap>
+            </S.TopicBox>
+          ))
+        ) : (
+          <div>주제를 불러올 수 없습니다.</div>
+        )}
+      </S.TopicBoxs>
       {pageInfo && (
-        <div>
-          <Pagination
-            pageInfo={pageInfo}
-            pageNum={pageNum}
-            setPageNum={setPageNum}
-          />
-        </div>
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
       )}
     </S.Container>
   );

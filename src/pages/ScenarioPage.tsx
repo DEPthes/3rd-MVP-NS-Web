@@ -24,7 +24,7 @@ const ScenarioPage: React.FC = () => {
     };
 
     fetchTopic();
-  }, []);
+  }, [handleUnauthorized]);
 
   return (
     <S.Container>

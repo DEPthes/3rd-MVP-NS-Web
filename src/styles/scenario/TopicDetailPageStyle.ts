@@ -187,10 +187,10 @@ export const SortOptions = styled.div`
   }
 `;
 
-export const SortOption = styled.div<{ isSelected: boolean }>`
+export const SortOption = styled.div<{ $isSelected: boolean }>`
   font: var(--S1);
-  color: ${({ isSelected }) =>
-    isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
+  color: ${({ $isSelected }) =>
+    $isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
   cursor: pointer;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 

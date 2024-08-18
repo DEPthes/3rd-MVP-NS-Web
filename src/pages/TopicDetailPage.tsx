@@ -186,14 +186,14 @@ const TopicDetailPage: React.FC = () => {
         <S.SortOptions>
           <S.SortOption
             onClick={() => handleSort('date')}
-            isSelected={sortType === 'date'}
+            $isSelected={sortType === 'date'}
           >
             최신순
           </S.SortOption>
           <S.Divider>|</S.Divider>
           <S.SortOption
             onClick={() => handleSort('likeCount')}
-            isSelected={sortType === 'likeCount'}
+            $isSelected={sortType === 'likeCount'}
           >
             좋아요순
           </S.SortOption>

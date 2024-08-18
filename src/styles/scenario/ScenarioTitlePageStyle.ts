@@ -21,6 +21,7 @@ export const SearchBar = styled.div`
   ${isMobileOrTablet} {
     width: 320px;
     height: 38px;
+    margin-bottom: 32px;
   }
 `;
 
@@ -38,37 +39,53 @@ export const SearchInput = styled.input`
 
   ${isMobileOrTablet} {
     font: var(--P-S1);
+    padding: 12px 20px;
   }
 `;
 
 export const SearchIconWrapper = styled.div`
   position: absolute;
   right: 28px;
+
   ${isMobileOrTablet} {
-    margin-top: 6px;
-    justify-content: center;
+    right: 19px;
+
+    img {
+      width: 14px;
+      height: 14px;
+    }
   }
 `;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 1157px;
   align-items: center;
   margin-bottom: 22px;
+
   ${isMobileOrTablet} {
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 0;
+    margin-bottom: 10px;
+  }
+
+  ${isMobile} {
+    width: 320px;
+  }
+
+  ${isTablet} {
+    width: 728px;
   }
 `;
 
 export const Title = styled.div`
   color: var(--NS-White);
   font: var(--H2);
+
   ${isMobileOrTablet} {
     font: var(--W1);
-    margin-bottom: 32px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -77,9 +94,10 @@ export const SortOptions = styled.div`
   gap: 12px;
   color: var(--NS-White);
   font: var(--S1);
+
   ${isMobileOrTablet} {
     align-self: flex-end;
-    margin-bottom: 10px;
+    gap: 5px;
   }
 `;
 
@@ -91,9 +109,11 @@ export const SortOption = styled.div<{ $isSelected: boolean }>`
   &:hover {
     color: var(--NS-Main1);
   }
+
   &:active {
     color: var(--NS-Main1);
   }
+
   ${isMobileOrTablet} {
     font: var(--Hy2);
   }
@@ -101,38 +121,62 @@ export const SortOption = styled.div<{ $isSelected: boolean }>`
 
 export const Divider = styled.span`
   color: var(--NS-White);
-  font: var(--W1);
+  font: var(--S1);
+
+  ${isMobileOrTablet} {
+    font: var(--Hy2);
+  }
+`;
+
+export const TopicBoxs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  ${isMobileOrTablet} {
+    gap: 10px;
+  }
 `;
 
 export const TopicBox = styled.div`
-  padding: 31px 50px 23px 46px;
   background-color: var(--NS-White);
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   border-radius: 40px;
-  margin-bottom: 20px;
   width: 1170px;
   height: 151px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+
   ${isMobile} {
     width: 320px;
     height: 76px;
-    margin-bottom: 10px;
     border-radius: 20px;
   }
+
   ${isTablet} {
     width: 728px;
     height: 76px;
-    margin-bottom: 10px;
     border-radius: 20px;
+  }
+`;
+
+export const LeftWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 46px;
+
+  ${isMobileOrTablet} {
+    padding-left: 20px;
   }
 `;
 
 export const TopicTitle = styled.div`
   font: var(--H3);
   color: var(--NS-Black);
+
   ${isMobileOrTablet} {
     font: var(--P-S1);
   }
@@ -141,6 +185,7 @@ export const TopicTitle = styled.div`
 export const TopicDate = styled.div`
   font: var(--S1-1);
   color: var(--Gray1);
+
   ${isMobileOrTablet} {
     font: var(--P-S2-2);
   }
@@ -150,9 +195,21 @@ export const PostCount = styled.div`
   margin-top: 11px;
   font: var(--T4);
   color: var(--NS-Black);
+
   ${isMobileOrTablet} {
     margin-top: 8px;
     font: var(--P-S2);
+  }
+`;
+
+export const RightWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 50px;
+
+  ${isMobileOrTablet} {
+    padding-right: 18px;
   }
 `;
 
@@ -179,8 +236,5 @@ export const LikeCount = styled.div`
 
   ${isMobileOrTablet} {
     font: var(--T5-B);
-    margin-top: 4px;
   }
 `;
-
-
