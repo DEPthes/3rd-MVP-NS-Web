@@ -1,22 +1,25 @@
 import { authAPI } from '../customApi';
-//import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
-import { UserProfileResponse } from '@/types/mytype';
 
-export const getProfile = async (
-	handleUnauthorized: () => void
-): Promise<UserProfileResponse | undefined> => {
+export const getprofile = async (
+	nickname: string,
+	handleUnauthorized: () => void,
+): Promise<number | undefined> => {
 	try {
-		const response = await authAPI(handleUnauthorized).get('/api/v1/user/profile');
+		const response = await authAPI(handleUnauthorized).get(
+			`/api/v1/user/id?nickname=${nickname}`,
+		);
 		if (response.data.check) {
-			return response.data;
+			return response.data.userId;
 		} else {
-			console.error('API 응답이 올바르지 않습니다.');
+			console.error('유저 아이디를 가져오는 데 실패했습니다.');
 			return undefined;
 		}
 	} catch (error) {
-		console.error('프로필 정보를 가져오는 중 오류가 발생했습니다:', error);
-		handleUnauthorized();
+		console.error('API 호출 중 오류 발생:', error);
 		return undefined;
 	}
 };
+
+
+
 
