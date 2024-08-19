@@ -43,13 +43,14 @@ export const ProfileContainer = styled.div`
   transition: all 0.3s ease-in-out;
 `;
 
-export const ProfileCircle = styled.div`
+export const ProfileCircle = styled.img`
   width: 156px;
   height: 156px;
   background-color: var(--NS-White);
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  object-fit: cover;
 
   ${isMobileOrTablet} {
     width: 100px;

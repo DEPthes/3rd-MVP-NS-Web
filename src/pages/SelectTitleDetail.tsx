@@ -136,8 +136,9 @@ const SelectTitleDetail: React.FC = () => {
       <S.HeaderSection>
         <S.ProfileContainer>
           <S.ProfileCircle
+            src={post?.imageUrl}
+            alt=""
             onClick={handleProfileClick}
-            style={{ backgroundImage: `url(${post?.imageUrl})` }} // 프로필 이미지 설정
           />
           <S.ProfileNickname>{post?.nickname}</S.ProfileNickname>
           {/* 작성자 닉네임 */}

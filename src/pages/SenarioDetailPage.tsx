@@ -12,6 +12,7 @@ import { postPublish } from '@/apis/board/postPublish';
 import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getThemePast } from '@/apis/theme/getThemePast';
 
 const SenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -30,18 +31,30 @@ const SenarioDetailPage: React.FC = () => {
 
   useEffect(() => {
     const fetchTopic = async () => {
-      const data: TTodayThemeResponse | undefined = await getToday(
-        handleUnauthorized,
-      );
-      if (data) {
-        setTopic(data);
+      if (id) {
+        const data: TTodayThemeResponse | undefined = await getThemePast(
+          parseInt(id),
+          handleUnauthorized,
+        );
+        if (data) {
+          setTopic(data);
+        } else {
+          console.error('오늘의 주제를 불러오지 못했습니다.');
+        }
       } else {
-        console.error('오늘의 주제를 불러오지 못했습니다.');
+        const data: TTodayThemeResponse | undefined = await getToday(
+          handleUnauthorized,
+        );
+        if (data) {
+          setTopic(data);
+        } else {
+          console.error('오늘의 주제를 불러오지 못했습니다.');
+        }
       }
     };
 
     fetchTopic();
-  }, [handleUnauthorized]);
+  }, [handleUnauthorized, id]);
 
   const handleLikeClick = async () => {
     if (!topic) return;

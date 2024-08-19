@@ -9,6 +9,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease-in-out;
+  user-select: none;
 
   ${isMobile} {
     margin: 30px 16px 0;
