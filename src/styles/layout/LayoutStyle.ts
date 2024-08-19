@@ -1,5 +1,6 @@
 import backgroundImage from '@/assets/images/Background.svg';
 import background2Image from '@/assets/images/Background2.svg';
+import background3Image from '@/assets/images/Background3.svg';
 import BackgroundMobile from '@/assets/images/BackgroundMobile.svg';
 import BackgroundTablet from '@/assets/images/BackgroundTablet.svg';
 import { isMobile } from '@/hooks/Media';
@@ -11,9 +12,13 @@ export const Container = styled.div`
   min-height: 100dvh;
 `;
 
-export const Main = styled.main<{ type: number }>`
-  background-image: ${({ type }) =>
-    type === 1 ? `url(${backgroundImage})` : `url(${background2Image})`};
+export const Main = styled.main<{ $type: number }>`
+  background-image: ${({ $type }) =>
+    $type === 1
+      ? `url(${backgroundImage})`
+      : $type === 2
+      ? `url(${background2Image})`
+      : `url(${background3Image})`};
   background-position: top;
   background-repeat: no-repeat;
   flex-grow: 1;

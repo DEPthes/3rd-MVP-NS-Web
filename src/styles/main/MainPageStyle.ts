@@ -6,16 +6,14 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 136px;
+  transition: all 0.3s ease-in-out;
 
   ${isTablet} {
-    width: 728px;
-    height: 1297.8px;
-    margn: 20px 36px 30px;
+    margin-top: 20px;
   }
 
   ${isMobile} {
-    width: 320px;
-    heigth: 1618px;
+    margin-top: 30px;
   }
 `;
 
@@ -24,17 +22,20 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  transition: all 0.3s ease-in-out;
 `;
 
 export const Service = styled.div`
   width: 187px;
   height: 43px;
+  padding: 0;
   color: var(--NS-White);
   background-color: #5e72eb;
   display: flex;
   justify-content: center;
   align-items: center;
   font: var(--H2-3);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: 109px;
@@ -43,52 +44,85 @@ export const Service = styled.div`
   }
 `;
 
+export const IntroductionWrap = styled.div`
+  padding-top: 57.91px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+`;
+
 export const Introduction = styled.div`
   width: 152px;
   height: 43px;
+  padding: 0;
   color: var(--NS-White);
   font: var(--H2-3);
   background-color: #5e72eb;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 107.91px 0 65px;
+  margin-bottom: 65px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: 89px;
     height: 27px;
     font: var(--W1);
-    margin: 40px 0 16px;
+    margin-bottom: 16px;
+  }
+`;
+
+export const UsageWrap = styled.div`
+  padding-top: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+
+  ${isMobileOrTablet} {
+    padding-top: 20px;
   }
 `;
 
 export const Usage = styled.div`
   width: 202px;
   height: 43px;
+  padding: 0;
   font: var(--H2-3);
   background-color: #5e72eb;
   color: var(--NS-White);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 134px 0 65px;
+  margin-bottom: 65px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: 118px;
     height: 27px;
     font: var(--W1);
-    margin: 40px 0 16px;
+    margin-bottom: 16px;
   }
 `;
 
 export const Text = styled.p`
   font: var(--H2);
   margin: 40px 0 251px;
+  white-space: pre-line;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-T1);
     margin: 16px 0 40px;
-    white-space: pre-line;
   }
 `;
 
@@ -96,16 +130,18 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  width: 592.5px;
-  margin-bottom: 82px;
+  padding-bottom: 82px;
+  transition: all 0.3s ease-in-out;
+
   ${isMobileOrTablet} {
-    margin: 30px;
+    padding-bottom: 30px;
   }
 `;
 
 export const StyledButton = styled.button`
   width: 102px;
   height: 44px;
+  padding: 0;
   font: var(--T2);
   background-color: #ffffff;
   color: #5e72eb;
@@ -113,6 +149,7 @@ export const StyledButton = styled.button`
   border-radius: 20px;
   margin: 10px 28px 10px 28px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     width: 62px;
@@ -121,7 +158,6 @@ export const StyledButton = styled.button`
     border: 0.8px solid #5e72eb;
     color: #5e72eb;
     font: var(--P-S1);
-    padding: 0;
     margin: 0;
   }
 `;

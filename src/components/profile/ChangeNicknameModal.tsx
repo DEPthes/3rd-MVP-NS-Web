@@ -7,6 +7,7 @@ import FieldCancelIcon from '@/assets/icons/FieldCancel.svg';
 import { patchNickname } from '@/apis/user/patchNickname';
 import { postPassword } from '@/apis/user/postPassword';
 import DarkButton from '../button/DarkButton';
+import { getNickname } from '@/apis/auth/getNickname';
 
 type ChangeNicknameModalProps = {
   isOpen: boolean;
@@ -25,7 +26,9 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
     useState('');
   const [passwordValidationColor, setPasswordValidationColor] =
     useState('var(--NS-Main1)');
-  const [validationMessage, setValidationMessage] = useState('');
+  const [validationMessage, setValidationMessage] = useState(
+    '*한글 1글자~10글자 이내로 입력해주세요',
+  ); // 초기 메시지 설정
   const [validationColor, setValidationColor] = useState('var(--NS-Main1)');
   const [isNicknameValid, setIsNicknameValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
@@ -38,8 +41,11 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
     if (nickname.length === 0) {
       setValidationMessage('*한글 1글자~10글자 이내로 입력해주세요');
       setValidationColor('var(--NS-Main1)'); // 기본 색상
-    } else {
+    } else if (!isValid) {
+      setValidationMessage('한글 1글자~10글자 이내로 입력해주세요');
       setValidationColor('var(--NS-Black)'); // 입력이 시작되면 검정색으로 변경
+    } else {
+      setValidationMessage(''); // 유효한 입력이면 메시지를 숨깁니다.
     }
   };
 
@@ -86,10 +92,14 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
       } else {
         throw new Error('비밀번호가 일치하지 않습니다.');
       }
-    } catch (error: any) {
-      setPasswordValidationMessage(
-        error.message || '비밀번호가 일치하지 않습니다.',
-      );
+    } catch (error) {
+      if (error instanceof Error) {
+        setPasswordValidationMessage(
+          error.message || '비밀번호가 일치하지 않습니다.',
+        );
+      } else {
+        setPasswordValidationMessage('알 수 없는 오류가 발생했습니다.');
+      }
       setPasswordValidationColor('#EE4B4B'); // 비밀번호 불일치 시
       setIsPasswordVerified(false);
     }
@@ -98,13 +108,27 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
   const handleDuplicateCheck = async () => {
     if (isNicknameValid) {
       try {
-        const message = await patchNickname(nickname);
-        setValidationMessage(message);
-        setValidationColor('var(--NS-Main1)');
-        setIsSaveEnabled(true); // 수정 버튼 활성화
-      } catch (error: any) {
-        setValidationMessage(error.message || '중복된 닉네임입니다.');
-        setValidationColor('#EE4B4B'); // 중복된 닉네임일 경우 빨간색
+        const response = await getNickname({ nickname });
+        console.log('Nickname Check Response:', response); // 반환된 결과를 콘솔에 출력
+
+        if (response?.information?.available) {
+          setValidationMessage('사용 가능한 닉네임입니다.');
+          setValidationColor('var(--NS-Main1)');
+          setIsSaveEnabled(true); // 중복 확인이 성공하면 수정 버튼 활성화
+        } else {
+          setValidationMessage('이미 사용 중인 닉네임입니다.');
+          setValidationColor('#EE4B4B');
+          setIsSaveEnabled(false);
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          setValidationMessage(
+            error.message || '닉네임 중복 확인에 실패했습니다.',
+          );
+        } else {
+          setValidationMessage('알 수 없는 오류가 발생했습니다.');
+        }
+        setValidationColor('#EE4B4B');
         setIsSaveEnabled(false);
       }
     }
@@ -113,10 +137,15 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
   const handleSave = async () => {
     if (isSaveEnabled) {
       try {
-        onSuccess(nickname);
+        await patchNickname(nickname); // 닉네임 변경 API 호출
+        onSuccess(nickname); // 성공적으로 닉네임 변경 시 콜백 호출
         handleModalClose(); // 닉네임이 성공적으로 변경되면 모달 닫기
-      } catch (error: any) {
-        setValidationMessage(error.message || '닉네임 변경에 실패했습니다.');
+      } catch (error) {
+        if (error instanceof Error) {
+          setValidationMessage(error.message || '닉네임 변경에 실패했습니다.');
+        } else {
+          setValidationMessage('알 수 없는 오류가 발생했습니다.');
+        }
         setValidationColor('#EE4B4B'); // 오류 발생 시
       }
     }
@@ -141,7 +170,7 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
                 type="password"
                 value={password}
                 onChange={handlePasswordChange}
-                placeholder="비밀번호 확인"
+                placeholder="비밀번호"
                 $color={passwordValidationColor}
               />
               {password.length > 0 && passwordValidationColor !== '#EE4B4B' && (
@@ -163,17 +192,17 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
               )}
             </S.PasswordSection>
             {passwordValidationMessage && (
-              <S.ValidationMessage $color={passwordValidationColor}>
+              <S.PasswordValidationMessage $color={passwordValidationColor}>
                 {passwordValidationMessage}
-              </S.ValidationMessage>
+              </S.PasswordValidationMessage>
             )}
             <S.PButtonContainer>
+              <LightButton text="취소" onClick={handleModalClose} />
               <DarkButton
                 text="확인"
                 onClick={handlePasswordVerification}
                 isDisabled={!password} // 비밀번호가 입력되었을 때만 활성화
               />
-              <LightButton text="취소" onClick={handleModalClose} />
             </S.PButtonContainer>
           </S.PasswordContainer>
         ) : (
@@ -220,12 +249,12 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
             </S.InputContainer>
 
             <S.ButtonContainer>
+              <LightButton text="취소" onClick={handleModalClose} />
               <DarkButton
-                text="수정"
+                text="확인"
                 onClick={handleSave}
                 isDisabled={!isSaveEnabled}
               />
-              <LightButton text="취소" onClick={handleModalClose} />
             </S.ButtonContainer>
           </>
         )}

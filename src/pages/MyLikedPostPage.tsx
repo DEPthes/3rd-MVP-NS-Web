@@ -5,7 +5,7 @@ import EmptyMessage from '../components/mypost/EmptyMessage';
 import PostList from '../components/mypost/PostList';
 import SearchInput from '../components/mypost/SearchInput';
 import Header from '../components/mypost/Header';
-import Pagination from '../components/pagination/Pagination'; // 페이지네이션 컴포넌트 임포트
+import Pagination from '../components/pagination/Pagination';
 import * as S from '@styles/mypost/MyPostPageStyle';
 import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 import { getLikeBoard } from '@/apis/user/getLikeBoard';
@@ -74,7 +74,7 @@ const MyLikedPostPage: React.FC = () => {
   // 검색어가 변경될 때 호출
   const handleSearchQueryChange = (query: string) => {
     setSearchQuery(query);
-    setPageNum(1);
+    setPageNum(1); // 검색 시 페이지를 1로 설정
   };
 
   // 정렬 옵션
@@ -106,19 +106,17 @@ const MyLikedPostPage: React.FC = () => {
               smallfont={false}
             />
           ) : filteredLikedPosts.length > 0 ? (
-            <>
-              <PostList posts={filteredLikedPosts} />
-              {pageInfo && (
-                <Pagination
-                  pageInfo={pageInfo}
-                  pageNum={pageNum}
-                  setPageNum={setPageNum}
-                />
-              )}
-            </>
+            <PostList posts={filteredLikedPosts} />
           ) : null}
         </S.EmptyState>
       ) : null}
+      {pageInfo && (
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
+      )}
     </S.Container>
   );
 };

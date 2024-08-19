@@ -9,6 +9,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease-in-out;
+  user-select: none;
 
   ${isMobile} {
     margin: 30px 16px 0;
@@ -57,6 +58,16 @@ export const NavLinks = styled(NavLink)`
   }
 `;
 
+export const NavLinksMain = styled.div<{ $isActive: boolean }>`
+  font: var(--T2);
+  color: var(--NS-White);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-decoration: ${({ $isActive }) =>
+    $isActive ? 'underline var(--NS-White) 2px' : 'none'};
+  text-underline-offset: ${({ $isActive }) => ($isActive ? '4px' : 'none')};
+`;
+
 export const HamNav = styled.div`
   height: 100%;
   position: fixed;
@@ -99,6 +110,20 @@ export const HamNavLinks = styled(NavLink)`
   &.active {
     color: var(--NS-Black);
   }
+
+  ${isMobile} {
+    font: var(--W1);
+  }
+
+  ${isTablet} {
+    font: var(--T3-1);
+  }
+`;
+
+export const HamNavLinksMain = styled.div<{ $isActive: boolean }>`
+  color: ${({ $isActive }) => ($isActive ? 'var(--NS-Black)' : 'var(--Gray1)')};
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     font: var(--W1);

@@ -3,37 +3,39 @@ import { TPost } from '@/types/mypost/post';
 import { TPagination } from '@/types/pagination';
 
 export const getLikeBoardSearch = async (
-  keyword: string,
-  sortBy: string, // 정렬 기준 (currentLike, date, like)
+  keyword: string, // 검색 키워드
+  sortBy: string, // 정렬 기준 (date, like 등)
   page: number, // 페이지 번호
   handleUnauthorized: () => void,
 ): Promise<{ posts: TPost[]; pageInfo: TPagination }> => {
   try {
+    // API 호출
     const response = await authAPI(handleUnauthorized).get(
       `/api/v1/user/like/board/search`,
       {
         params: {
-          keyword,
-          sort: sortBy,
-          page, // 페이지 번호를 API에 전달
+          keyword, // 검색 키워드
+          sort: sortBy, // 정렬 기준
+          page, // 페이지 번호
         },
       },
     );
 
-    console.log('Search API response:', response.data);
-
     if (response.data?.check) {
-      const boardLikeResList =
-        response.data.information?.boardLikeResList ?? []; // nullish 병합 연산자를 사용하여 undefined 방지
-      const posts = boardLikeResList.map((post: TPost) => ({
+      // 응답 데이터에서 게시글 리스트 추출
+      const resList = response.data.information?.resList ?? []; // 수정된 부분
+
+      // 게시글 리스트 매핑
+      const posts = resList.map((post: TPost) => ({
         boardId: post.boardId,
         title: post.title,
         createdDate: post.createdDate,
         theme: post.theme,
-        published: post.published,
+        published: post.published, // published 필드가 없는 경우는 기본값 처리 필요
         countLike: post.countLike,
       }));
 
+      // 페이지 정보 추출
       const pageInfo = response.data.information.pageInfo;
 
       return { posts, pageInfo };

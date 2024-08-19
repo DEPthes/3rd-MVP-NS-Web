@@ -60,6 +60,7 @@ const RankingPage: React.FC = () => {
 
   return (
     <S.Container>
+<<<<<<< HEAD
       <ToggleBar />
       <S.Wrapper>
         <S.Content>
@@ -83,6 +84,99 @@ const RankingPage: React.FC = () => {
                 </S.FilterLink>
                 {index < 3 && <S.Separator>|</S.Separator>}
               </React.Fragment>
+=======
+      <S.FilterLinks>
+        {['total', 'daily', 'weekly', 'monthly'].map((option, index) => (
+          <React.Fragment key={option}>
+            <S.FilterLink
+              $isSelected={sortType === option}
+              onClick={event => {
+                event.preventDefault();
+                setSortType(option as TSortType);
+              }}
+            >
+              {option === 'total'
+                ? '누적'
+                : option === 'daily'
+                ? '일간'
+                : option === 'weekly'
+                ? '주간'
+                : '월간'}
+            </S.FilterLink>
+            {index < 3 && <S.Separator>|</S.Separator>}
+          </React.Fragment>
+        ))}
+      </S.FilterLinks>
+
+      {/* Top 3 유저 프로필 */}
+      <S.Top3Container>
+        <S.Top3Title>Top 3</S.Top3Title>
+
+        <S.Top3UserProfile>
+          {top3Users.length > 1 && (
+            <S.Top2>
+              <Top3User
+                medalEmoji="🥈"
+                userId={top3Users[1]?.nickname}
+                userProfileImage={top3Users[1]?.imageUrl}
+              />
+            </S.Top2>
+          )}
+          {top3Users.length > 0 && (
+            <S.Top1>
+              <Top3User
+                medalEmoji="🥇"
+                userId={top3Users[0]?.nickname}
+                userProfileImage={top3Users[0]?.imageUrl}
+              />
+            </S.Top1>
+          )}
+          {top3Users.length > 2 && (
+            <S.Top2>
+              <Top3User
+                medalEmoji="🥉"
+                userId={top3Users[2]?.nickname}
+                userProfileImage={top3Users[2]?.imageUrl}
+              />
+            </S.Top2>
+          )}
+        </S.Top3UserProfile>
+
+        {isDesktop && (
+          <S.Podium src="/src/assets/images/podium.svg" alt="podiumimg" />
+        )}
+        {isMobileOrTablet && (
+          <S.Podium src="/src/assets/images/smallpodium.svg" />
+        )}
+      </S.Top3Container>
+
+      {/* 닉네임 검색 */}
+      <S.SearchContainer>
+        <SearchNicknameInput
+          onSearchResults={nickname => {
+            const results = allUsers.filter(user =>
+              user.nickname.toLowerCase().includes(nickname.toLowerCase()),
+            );
+            setFilteredUsers(results);
+          }}
+          onClearSearch={() => setFilteredUsers(allUsers)} // 검색어가 비워지면 전체 리스트를 복원
+        />
+      </S.SearchContainer>
+
+      {/* 전체 랭킹 테이블 */}
+      <S.RankingContainer>
+        <S.RankingTable>
+          <S.TableHeader>
+            <S.TableRow>
+              <S.TableHeaderItem1>순위</S.TableHeaderItem1>
+              <S.TableHeaderItem2>닉네임</S.TableHeaderItem2>
+              <S.TableHeaderItem3>점수</S.TableHeaderItem3>
+            </S.TableRow>
+          </S.TableHeader>
+          <S.TableBody>
+            {filteredUsers.map(user => (
+              <RankingRow key={user.userId} user={user} rank={user.ranking} />
+>>>>>>> f3113584f9ce26382e400174d36fd382530ccb49
             ))}
           </S.FilterLinks>
 

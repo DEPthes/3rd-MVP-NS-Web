@@ -4,29 +4,23 @@ import { TPagination } from '@/types/pagination';
 
 export const getBoard = async (
   excludeTemporary: boolean,
-  sortType: string,
-  pageNum: number, // 페이지 번호 추가
+  sortType: string, // 정렬 기준 ('date', 'likes' 등)
+  pageNum: number, // 페이지 번호
   handleUnauthorized: () => void,
 ): Promise<{ posts: TPost[]; pageInfo: TPagination }> => {
   try {
-    console.log('파라미터:', {
-      filterDrafts: excludeTemporary,
-      sort: sortType,
-      pageNum, // 페이지 번호 포함
-    });
+    const sortBy = sortType === 'likes' ? 'like' : sortType;
 
     const response = await authAPI(handleUnauthorized).get(
       `/api/v1/user/board`,
       {
         params: {
           filterDrafts: excludeTemporary,
-          sort: sortType,
-          page: pageNum, // 페이지 번호를 API에 전달
+          sortBy,
+          page: pageNum, // 페이지 번호 전달
         },
       },
     );
-
-    console.log('API response:', response.data);
 
     if (response.data?.check) {
       const posts = response.data.information.resList.map((post: TPost) => ({
@@ -38,11 +32,16 @@ export const getBoard = async (
         countLike: post.countLike,
       }));
 
-      const pageInfo = response.data.information.pageInfo;
+      const pageInfo: TPagination = {
+        pageNumber: response.data.information.pageInfo.pageNumber,
+        pageSize: response.data.information.pageInfo.pageSize,
+        totalElements: response.data.information.pageInfo.totalElements,
+        totalPages: response.data.information.pageInfo.totalPages,
+      };
 
       return { posts, pageInfo };
     } else {
-      console.error('Failed to fetch user board data');
+      console.error('게시판 데이터 불러오기 실패');
       return {
         posts: [],
         pageInfo: {
@@ -54,7 +53,7 @@ export const getBoard = async (
       };
     }
   } catch (error) {
-    console.error('Failed to fetch user board data:', error);
+    console.error('게시판 데이터 불러오기 중 오류 발생:', error);
     return {
       posts: [],
       pageInfo: {

@@ -5,16 +5,18 @@ import * as S from '@/styles/main/IntroductionContainerStyle';
 const IntroductionContainer: React.FC = () => {
   return (
     <S.Container>
-      <IntroductionContent
-        emoji="🤔"
-        title="나였다면"
-        content="랜덤 주제 글쓰기"
-      />
-      <IntroductionContent
-        emoji="📑"
-        title="N 보고서"
-        content="주제별 상상력 분석 서비스"
-      />
+      <S.TabletWrap>
+        <IntroductionContent
+          emoji="🤔"
+          title="나였다면"
+          content="랜덤 주제 글쓰기"
+        />
+        <IntroductionContent
+          emoji="📑"
+          title="N 보고서"
+          content="주제별 상상력 분석 서비스"
+        />
+      </S.TabletWrap>
       <IntroductionContent
         emoji="🏆"
         title="인플루N자"

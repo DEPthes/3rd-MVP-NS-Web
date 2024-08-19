@@ -10,19 +10,19 @@ export const getSearch = async (
   handleUnauthorized: () => void,
 ): Promise<{ posts: TPost[]; pageInfo: TPagination }> => {
   try {
+    const sortType = sortBy === 'likes' ? 'like' : sortBy;
+
     const response = await authAPI(handleUnauthorized).get(
       `/api/v1/user/board/search`,
       {
         params: {
           keyword,
           filterDrafts,
-          sortBy,
+          sortBy: sortType, // 변환된 정렬 기준 전달
           page,
         },
       },
     );
-
-    console.log('Search API response:', response.data);
 
     if (response.data?.check) {
       const posts = response.data.information.resList.map((post: TPost) => ({

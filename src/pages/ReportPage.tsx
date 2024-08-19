@@ -49,17 +49,27 @@ const ReportPage = () => {
     if (isCurrentUser) {
       //내 글이면 마이페이지로 이동
       navigate('/mypage');
+      window.scroll({ top: 0, behavior: 'smooth' });
     } else {
       //아니면 사용자 프로필 페이지로 이동
       navigate(`/profile/${userId}`);
+      window.scroll({ top: 0, behavior: 'smooth' });
     }
   };
 
   //게시글 클릭 함수
   const onPostClick = (boardId: number) => {
-    console.log(boardId);
     //게시글 조회 페이지로 이동
     navigate(`/scenario/${boardId}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
+  };
+
+  //글자 자르기
+  const truncateText = (text: string) => {
+    if (text.length > 10) {
+      return text.slice(0, 10) + '...';
+    }
+    return text;
   };
 
   return (
@@ -81,11 +91,12 @@ const ReportPage = () => {
           </S.TodayText>
           <hr />
           <S.HeadText>단어 요약</S.HeadText>
-          {isTReport(reportList) && reportList?.wordCloud ? (
+          {isTReport(reportList) && reportList?.topWord ? (
             <S.SummaryWrap>
-              <img src={reportList.wordCloud} alt="" />
+              <img src={reportList.wordCloud ?? ''} alt="" />
               <h4>
-                사용자가 가장 많이 쓴 단어는 <span>{reportList.topWord}</span>
+                사용자가 가장 많이 쓴 단어는
+                <span> {truncateText(reportList.topWord ?? '')}</span>
                 {!isMobileOrTablet && '입니다.'}
               </h4>
               <h4>
@@ -102,12 +113,12 @@ const ReportPage = () => {
               <div
                 onClick={() =>
                   onProfileClick(
-                    reportList.longestWriter.isCurrentUser,
-                    reportList.longestWriter.userId,
+                    reportList.longestWriter?.isCurrentUser ?? false,
+                    reportList.longestWriter?.userId ?? 0,
                   )
                 }
               >
-                <img src={reportList?.longestWriter.imageUrl} alt="" />
+                <img src={reportList.longestWriter.imageUrl ?? ''} alt="" />
                 <p>{reportList?.longestWriter.nickname}</p>
               </div>
               <h3>

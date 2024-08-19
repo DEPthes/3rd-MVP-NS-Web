@@ -1,14 +1,12 @@
 import { authAPI } from '../customApi';
-import { TBoardDetailResponse } from '@/types/mytype';
-//import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 
-export const getBoard = async (
-  boardId: number,
+export const getThemePast = async (
+  themeId: number,
   handleUnauthorized: () => void,
-): Promise<TBoardDetailResponse | undefined> => {
+) => {
   try {
     const response = await authAPI(handleUnauthorized).get(
-      `/api/v1/board/${boardId}`,
+      `/api/v1/theme/${themeId}/past`,
     );
     if (response.data.check) {
       return response.data.information;

@@ -47,7 +47,7 @@ export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 34px;
-  font: var(--S1-3);
+  font: var(--S1);
   margin-left: 533px;
 
   ${isMobileOrTablet} {
@@ -92,9 +92,9 @@ export const FilterLinks = styled.div`
   }
 `;
 
-export const FilterLink = styled.a<{ isSelected: boolean }>`
-  color: ${({ isSelected }) =>
-    isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
+export const FilterLink = styled.a<{ $isSelected: boolean }>`
+  color: ${({ $isSelected }) =>
+    $isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
   text-decoration: none;
   cursor: pointer;
   margin: 0;

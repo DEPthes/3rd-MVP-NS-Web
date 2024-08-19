@@ -80,7 +80,7 @@ const LikedTopicPage: React.FC = () => {
   // 좋아요 누른 주제 페이지의 정렬 옵션
   const sortOptions: { label: string; value: TToicSortType }[] = [
     { label: '좋아요 누른 순', value: 'currentLike' },
-    { label: '좋아요 많은 순', value: 'like' },
+    { label: '주제 좋아요 수', value: 'like' },
     { label: '게시글 많은 순', value: 'board' },
     { label: '최신 순', value: 'date' },
   ];
@@ -107,19 +107,17 @@ const LikedTopicPage: React.FC = () => {
               smallfont={true}
             />
           ) : filteredTopics.length > 0 ? (
-            <>
-              <TopicList topics={filteredTopics} />
-              {pageInfo && (
-                <Pagination
-                  pageInfo={pageInfo}
-                  pageNum={pageNum}
-                  setPageNum={setPageNum}
-                />
-              )}
-            </>
+            <TopicList topics={filteredTopics} />
           ) : null}
         </S.EmptyState>
-      ) : null}{' '}
+      ) : null}
+      {pageInfo && (
+        <Pagination
+          pageInfo={pageInfo}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+        />
+      )}
       {/* 데이터 로딩 중에는 아무것도 렌더링하지 않음 */}
     </S.Container>
   );

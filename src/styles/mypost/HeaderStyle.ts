@@ -61,9 +61,9 @@ export const FilterLinks = styled.div`
   }
 `;
 
-export const FilterLink = styled.a<{ isSelected: boolean }>`
-  color: ${({ isSelected }) =>
-    isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
+export const FilterLink = styled.a<{ $isSelected: boolean }>`
+  color: ${({ $isSelected }) =>
+    $isSelected ? 'var(--NS-Main1)' : 'var(--NS-White)'};
   text-decoration: none;
   cursor: pointer;
 

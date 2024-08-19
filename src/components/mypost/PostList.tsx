@@ -17,7 +17,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
           createdDate={post.createdDate} // createdDate를 사용
           title={post.title}
           countLike={post.countLike} // countLike를 사용
-          published={post.published}
+          published={post.published !== undefined ? post.published : true}
         />
       ))}
     </div>
