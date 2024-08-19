@@ -191,7 +191,7 @@ export const ListTitle = styled.div`
 export const SortOptions = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 12px;
   font: var(--S1);
   margin-left: auto;
   margin-top: 59px;
@@ -202,6 +202,7 @@ export const SortOptions = styled.div`
     height: auto;
     margin-left: 0;
     margin-top: 0;
+    gap: 5px;
     align-self: flex-end;
   }
 `;
@@ -229,12 +230,10 @@ export const SortOption = styled.div<{ $isSelected: boolean }>`
 export const Divider = styled.span`
   color: var(--NS-White);
   font: var(--S1);
-  margin: 0 6px;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--Hy2);
-    margin: 0 2.5px;
   }
 `;
 
@@ -247,7 +246,7 @@ export const NoneList = styled.div`
   gap: 15px;
   transition: all 0.3s ease-in-out;
 
-  > img {
+  > svg {
     width: 200px;
     height: 200px;
 

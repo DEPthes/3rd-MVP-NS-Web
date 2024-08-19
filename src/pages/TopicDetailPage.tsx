@@ -12,6 +12,7 @@ import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
 import { TPagination } from '@/types/pagination';
+import EmptyCharacter from '@assets/images/empty_character.svg?react';
 
 const TopicDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -196,10 +197,7 @@ const TopicDetailPage: React.FC = () => {
         <></>
       ) : !topic || sortedPosts?.length === 0 ? (
         <S.NoneList>
-          <img
-            src="/src/assets/images/empty_character.svg"
-            alt="character img"
-          />
+          <EmptyCharacter />
           <p>주제에 대한 글이 없어요</p>
         </S.NoneList>
       ) : (

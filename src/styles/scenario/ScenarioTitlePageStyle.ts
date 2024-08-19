@@ -7,6 +7,14 @@ export const Container = styled.div`
   align-items: center;
   margin-top: 117px;
   transition: all 0.3s ease-in-out;
+
+  ${isMobile} {
+    margin-top: 30px;
+  }
+
+  ${isTablet} {
+    margin-top: 20px;
+  }
 `;
 
 export const SearchBar = styled.div`
