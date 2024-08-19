@@ -63,6 +63,7 @@ export const UserProfileImage = styled.img`
   height: 100%;
   border-radius: 50%;
   cursor: pointer;
+  object-fit: cover;
 `;
 
 export const UserId = styled.div`
