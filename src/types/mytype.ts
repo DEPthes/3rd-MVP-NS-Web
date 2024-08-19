@@ -103,6 +103,7 @@ export interface TBoardDetailResponse {
 	likedBoard: boolean;
 	owner: boolean;
 	themeContent: string;
+	userId: number;
 	// 기타 필요한 필드들
 }
 
@@ -128,6 +129,7 @@ export interface TUserProfileResponse {
 			content: string;
 			likeCount: number;
 			isLiked: boolean;
+
 		}[];
 	};
 }
