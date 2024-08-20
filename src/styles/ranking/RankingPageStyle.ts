@@ -5,7 +5,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 149px;
 `;
 
 export const Wrapper = styled.div`
@@ -16,7 +15,6 @@ export const Wrapper = styled.div`
   transition: all 0.3s ease-in-out;
   width: 1170px;
   margin-top: 50px;
-
   z-index: 1;
 
   ${isMobile} {
@@ -56,8 +54,8 @@ export const Top3Title = styled.h2`
 
 export const FilterLinks = styled.div`
   height: 19px;
-  z-index: 999; /
-  margin-top: 34px;
+  z-index: 3;
+  margin-top: 54px;
   right: 0px;
   color: var(--NS-White);
   font: var(--S1-2);
@@ -231,6 +229,7 @@ export const RankingContainer = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+  margin-bottom: 149px;
 
   ${isMobileOrTablet} {
     width: 100%;

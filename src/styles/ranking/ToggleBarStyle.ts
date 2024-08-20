@@ -12,11 +12,12 @@ export const ToggleBarContainer = styled.div<{ $isOpen: boolean }>`
   flex-direction: column;
   align-items: center;
 
-  height: ${({ $isOpen }) => ($isOpen ? '764px;' : '40px')};
+  height: ${({ $isOpen }) => ($isOpen ? '766px;' : '30px')};
 
-  ${isMobileOrTablet}
-  width: 320px;
-  height: ${({ $isOpen }) => ($isOpen ? '412px;' : '19px')};
+  ${isMobileOrTablet} {
+    width: 320px;
+    height: ${({ $isOpen }) => ($isOpen ? '412px;' : '19px')};
+  }
 `;
 
 export const ToggleBarHeader = styled.div`
