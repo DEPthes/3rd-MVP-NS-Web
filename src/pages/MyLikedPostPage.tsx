@@ -103,6 +103,7 @@ const MyLikedPostPage: React.FC = () => {
         <S.EmptyState>
           {likedPosts.length === 0 ? (
             <EmptyMessage
+              isNCharacter={false}
               buttonText="주제 보러 가기"
               messageText={`당신처럼 N력이 뛰어난 사람들이 있어요!\n무궁무진한 N들의 글을 열람해보세요!`}
               navigateTo="/scenario/topic"

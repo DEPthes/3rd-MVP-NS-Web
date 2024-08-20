@@ -11,6 +11,7 @@ import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
 import { postLike } from '@/apis/theme/postLike';
 import { TPagination } from '@/types/pagination';
+import EmptyCharacter from '@assets/images/EmptyCharacter.svg?react';
 
 const ScenarioTopicPage: React.FC = () => {
   const [topics, setTopics] = useState<TTheme[]>([]);
@@ -149,10 +150,7 @@ const ScenarioTopicPage: React.FC = () => {
         <></>
       ) : topics.length === 0 ? (
         <S.NoneList>
-          <img
-            src="/src/assets/images/empty_character.svg"
-            alt="character img"
-          />
+          <EmptyCharacter />
           <p>검색 결과가 없어요</p>
         </S.NoneList>
       ) : (

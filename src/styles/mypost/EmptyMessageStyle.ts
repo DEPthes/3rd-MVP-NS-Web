@@ -37,27 +37,18 @@ export const EmptyMessageContainer = styled.div`
   }
 `;
 
-export const Image = styled.img`
-  width: 200px;
-  height: 200px;
-  margin: 0;
-
-  ${isMobileOrTablet} {
-    width: 160px;
-    height: 160px;
-  }
-`;
-
-export const Message = styled.h2<{ $smallfont: boolean }>`
+export const Message = styled.h2<{
+  $smallfont: boolean;
+  $isNCharacter: boolean;
+}>`
   width: auto;
   font: var(--T2);
   color: var(--NS-White);
   white-space: pre-line;
   text-align: center;
-  margin-bottom: 0;
+  margin-top: ${props => (props.$isNCharacter ? '15px' : '8px')};
 
   ${isMobileOrTablet} {
-    margin: 0;
     font: ${props => (props.$smallfont ? 'var(--P-T3)' : 'var(--P-T1)')};
   }
 

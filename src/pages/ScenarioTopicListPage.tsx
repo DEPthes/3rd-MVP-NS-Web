@@ -12,7 +12,7 @@ import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
 import { TPagination } from '@/types/pagination';
-import EmptyCharacter from '@assets/images/empty_character.svg?react';
+import EmptyCharacter from '@assets/images/EmptyCharacterN.svg?react';
 
 const ScenarioTopicListPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,64 +24,64 @@ const ScenarioTopicListPage: React.FC = () => {
   const handleUnauthorized = useHandleUnauthorized();
   const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		const fetchTopic = async () => {
-			setLoading(true);
-			try {
-				if (id) {
-					const response = await getTheme(
-						{
-							themeId: parseInt(id),
-							page: pageNum,
-							size: 5,
-							sortBy: sortType,
-						},
-						handleUnauthorized,
-					);
-					if (response) {
-						setTopic(response);
-						setPageInfo(response.pageInfo);
-					} else {
-						console.error('주제 가져오기 에러');
-					}
-				}
-			} catch (error) {
-				console.error('API 호출 중 에러:', error);
-			} finally {
-				setLoading(false);
-			}
-		};
+  useEffect(() => {
+    const fetchTopic = async () => {
+      setLoading(true);
+      try {
+        if (id) {
+          const response = await getTheme(
+            {
+              themeId: parseInt(id),
+              page: pageNum,
+              size: 5,
+              sortBy: sortType,
+            },
+            handleUnauthorized,
+          );
+          if (response) {
+            setTopic(response);
+            setPageInfo(response.pageInfo);
+          } else {
+            console.error('주제 가져오기 에러');
+          }
+        }
+      } catch (error) {
+        console.error('API 호출 중 에러:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-		fetchTopic();
-	}, [id, sortType, pageNum, handleUnauthorized]);
+    fetchTopic();
+  }, [id, sortType, pageNum, handleUnauthorized]);
 
-	const handleTopicLikeClick = async (e: React.MouseEvent) => {
-		e.stopPropagation(); // 이벤트 전파를 막음
+  const handleTopicLikeClick = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // 이벤트 전파를 막음
 
-		if (!topic) return;
+    if (!topic) return;
 
-		try {
-			const response = await postLike(topic.themeId, handleUnauthorized);
-			if (response) {
-				setTopic(prevTopic => {
-					if (prevTopic) {
-						return {
-							...prevTopic,
-							likeCount: topic.likedTheme
-								? topic.likeCount - 1
-								: topic.likeCount + 1,
-							likedTheme: !topic.likedTheme,
-						};
-					}
-					return prevTopic;
-				});
-			} else {
-				console.error('좋아요 처리 실패');
-			}
-		} catch (error) {
-			console.error('좋아요 요청 중 오류 발생:', error);
-		}
-	};
+    try {
+      const response = await postLike(topic.themeId, handleUnauthorized);
+      if (response) {
+        setTopic(prevTopic => {
+          if (prevTopic) {
+            return {
+              ...prevTopic,
+              likeCount: topic.likedTheme
+                ? topic.likeCount - 1
+                : topic.likeCount + 1,
+              likedTheme: !topic.likedTheme,
+            };
+          }
+          return prevTopic;
+        });
+      } else {
+        console.error('좋아요 처리 실패');
+      }
+    } catch (error) {
+      console.error('좋아요 요청 중 오류 발생:', error);
+    }
+  };
 
   const handleWriteClick = () => {
     navigate(`/scenario/write`, {
@@ -91,72 +91,72 @@ const ScenarioTopicListPage: React.FC = () => {
     });
   };
 
-	const handleSort = (type: 'date' | 'likeCount') => {
-		setSortType(type);
-	};
+  const handleSort = (type: 'date' | 'likeCount') => {
+    setSortType(type);
+  };
 
-	const handleTitleClick = (postId: number) => {
-		navigate(`/scenario/${postId}`);
-		window.scroll({ top: 0, behavior: 'smooth' });
-	};
+  const handleTitleClick = (postId: number) => {
+    navigate(`/scenario/${postId}`);
+    window.scroll({ top: 0, behavior: 'smooth' });
+  };
 
-	const handleLikeClick = async (postId: number, e: React.MouseEvent) => {
-		e.stopPropagation();
+  const handleLikeClick = async (postId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
 
-		try {
-			// 좋아요 API 호출
-			const response = await boardLike(postId, handleUnauthorized);
+    try {
+      // 좋아요 API 호출
+      const response = await boardLike(postId, handleUnauthorized);
 
-			if (response) {
-				// API 응답에 따라 상태 업데이트
-				setTopic(prevTopic => {
-					if (prevTopic) {
-						return {
-							...prevTopic,
-							boards: prevTopic.boards.map(board =>
-								board.boardId === postId
-									? {
-										...board,
-										likeCount: board.likedBoard
-											? board.likeCount - 1
-											: board.likeCount + 1,
-										likedBoard: !board.likedBoard,
-									}
-									: board,
-							),
-						};
-					}
-					return prevTopic;
-				});
-			}
-		} catch (error) {
-			console.error('좋아요 요청 중 오류 발생:', error);
-		}
-	};
+      if (response) {
+        // API 응답에 따라 상태 업데이트
+        setTopic(prevTopic => {
+          if (prevTopic) {
+            return {
+              ...prevTopic,
+              boards: prevTopic.boards.map(board =>
+                board.boardId === postId
+                  ? {
+                      ...board,
+                      likeCount: board.likedBoard
+                        ? board.likeCount - 1
+                        : board.likeCount + 1,
+                      likedBoard: !board.likedBoard,
+                    }
+                  : board,
+              ),
+            };
+          }
+          return prevTopic;
+        });
+      }
+    } catch (error) {
+      console.error('좋아요 요청 중 오류 발생:', error);
+    }
+  };
 
-	const sortedPosts =
-		topic &&
-		[...topic.boards].sort((a, b) => {
-			if (sortType === 'date') {
-				return new Date(b.date).getTime() - new Date(a.date).getTime();
-			} else if (sortType === 'likeCount') {
-				return b.likeCount - a.likeCount;
-			}
-			return 0;
-		});
+  const sortedPosts =
+    topic &&
+    [...topic.boards].sort((a, b) => {
+      if (sortType === 'date') {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else if (sortType === 'likeCount') {
+        return b.likeCount - a.likeCount;
+      }
+      return 0;
+    });
 
-	const truncateContent = (content: string) => {
-		const maxLength = 50;
-		if (content.length > maxLength) {
-			return (
-				<>
-					{content.slice(0, maxLength)}
-					<span style={{ color: 'var(--Gray1)' }}>...더보기</span>
-				</>
-			);
-		}
-		return content;
-	};
+  const truncateContent = (content: string) => {
+    const maxLength = 50;
+    if (content.length > maxLength) {
+      return (
+        <>
+          {content.slice(0, maxLength)}
+          <span style={{ color: 'var(--Gray1)' }}>...더보기</span>
+        </>
+      );
+    }
+    return content;
+  };
 
   return (
     <S.Container>

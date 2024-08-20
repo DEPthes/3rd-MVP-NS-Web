@@ -1,4 +1,4 @@
-import EmptyCharacter from '@assets/images/empty_character.svg?react';
+import EmptyCharacter from '@assets/images/EmptyCharacterN.svg?react';
 import * as S from '@styles/notfound/NotFoundPageStyle';
 
 const NotFoundPage = () => {

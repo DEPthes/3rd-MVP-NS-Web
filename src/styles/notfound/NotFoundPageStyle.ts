@@ -6,11 +6,11 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 10px;
+  gap: 8px;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    gap: 2px;
+    gap: 0;
   }
 
   > svg {
@@ -27,12 +27,12 @@ export const Container = styled.div`
   > h1 {
     font: var(--NotFound);
     color: var(--NS-White);
-    margin-top: 30px;
+    margin-top: 55px;
     transition: all 0.3s ease-in-out;
 
     ${isMobileOrTablet} {
       font: var(--NotFoundMini);
-      margin-top: 20px;
+      margin-top: 35px;
     }
   }
 `;

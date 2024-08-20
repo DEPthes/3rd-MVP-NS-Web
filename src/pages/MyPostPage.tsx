@@ -112,8 +112,13 @@ const MyPostsPage: React.FC = () => {
             <PostList posts={filteredPostList} />
           ) : postList.length === 0 ? (
             <EmptyMessage
+              isNCharacter={true}
               buttonText="N력 키우러 가기"
-              messageText="나였다면으로 N력을 키워보세요!"
+              messageText={
+                isMobileOrTablet
+                  ? '나였다면으로 N력을 키워보세요!'
+                  : '당신의 N력이 궁금하시지 않나요?\n나였다면으로 N력 키우기를 시작해보세요!'
+              }
               navigateTo="/scenario"
               smallfont={false}
             />
