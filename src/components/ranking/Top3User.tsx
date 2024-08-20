@@ -4,7 +4,8 @@ import * as S from '@/styles/ranking/Top3Uer.Style';
 
 type Top3UserProps = {
   medalEmoji: string;
-  userId: string;
+  userId: number;
+  userNickname: string;
   userProfileImage: string;
   point: number;
 };
@@ -12,6 +13,7 @@ type Top3UserProps = {
 const Top3User: React.FC<Top3UserProps> = ({
   medalEmoji,
   userId,
+  userNickname,
   userProfileImage,
   point,
 }) => {
@@ -31,7 +33,7 @@ const Top3User: React.FC<Top3UserProps> = ({
         onClick={handleUserClick}
       />
 
-      <S.UserId>{userId}</S.UserId>
+      <S.UserId>{userNickname}</S.UserId>
       <S.Point>{point}점</S.Point>
     </S.Top3UserContainer>
   );

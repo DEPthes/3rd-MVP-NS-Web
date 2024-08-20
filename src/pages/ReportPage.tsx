@@ -76,9 +76,7 @@ const ReportPage = () => {
 
     try {
       const response = await boardLike(boardId, handleUnauthorized);
-      console.log(boardId);
       if (response) {
-        console.log(response);
         setReportList(prevReport => {
           if (prevReport && isTReport(prevReport)) {
             return {

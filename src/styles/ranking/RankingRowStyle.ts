@@ -16,11 +16,11 @@ export const TableData1 = styled.td<{ $isCurrentUser: boolean }>`
   padding-bottom: ${({ $isCurrentUser }) => ($isCurrentUser ? '15px' : '0px')};
   white-space: pre-wrap;
   vertical-align: middle;
+
   ${isMobileOrTablet} {
     font: ${({ $isCurrentUser }) =>
       $isCurrentUser ? 'var(--V10)' : 'var(--T11)'};
     height: ${({ $isCurrentUser }) => ($isCurrentUser ? '40px' : '14px')};
-
     padding-bottom: 11px;
     line-height: 14px;
     padding-top: 0;

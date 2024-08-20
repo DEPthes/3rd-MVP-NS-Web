@@ -6,18 +6,9 @@ export const Top3UserContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 255px;
-
-  ${isMobile} {
-    width: 64px;
-    height: 125px;
-    max-width: 500px;
-  }
 
   ${isTablet} {
     width: 96.1px;
-    height: 125px;
-    max-width: 500px;
   }
 `;
 
@@ -39,7 +30,6 @@ export const Medal = styled.div`
 `;
 
 export const UserProfileImage = styled.img`
-  border-radius: 50%;
   width: 156px;
   height: 156px;
   background-color: var(--NS-White);
@@ -52,9 +42,10 @@ export const UserProfileImage = styled.img`
   font-weight: bold;
   border: 1px solid var(--NS-Main2);
   object-fit: cover;
+
   ${isMobileOrTablet} {
     width: 64px;
-    heigth: 64px;
+    height: 64px;
   }
 `;
 
@@ -70,8 +61,13 @@ export const UserId = styled.div`
     height: 19px;
     font: var(--V7);
     position: relative;
-    width: auto;
+    overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  ${isMobile} {
+    width: 70px;
   }
 `;
 
