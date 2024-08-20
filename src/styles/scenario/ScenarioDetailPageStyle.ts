@@ -221,12 +221,10 @@ export const PostContent = styled.div`
   font: var(--T4);
   color: var(--NS-Black);
   max-width: 1013px;
-  min-height: 224px;
-  margin-bottom: 91px;
-  margin-right: 87px;
-  margin-left: 70px;
+  margin-bottom: 20px;
   text-align: center;
   overflow-wrap: break-word;
+  white-space: pre-wrap;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
@@ -234,8 +232,6 @@ export const PostContent = styled.div`
     padding: 0 20px;
     min-height: 51px;
     margin-bottom: 10px;
-    margin-right: 0;
-    margin-left: 0;
     font: var(--Hy4);
   }
 `;

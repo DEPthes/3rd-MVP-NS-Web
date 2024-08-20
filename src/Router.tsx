@@ -20,7 +20,9 @@ import NotFoundPage from './pages/NotFoundPage';
 
 const Router = () => {
   const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken =
+      localStorage.getItem('accessToken') ||
+      sessionStorage.getItem('accessToken');
 
     return accessToken ? element : <Navigate to="/login" replace />;
   };

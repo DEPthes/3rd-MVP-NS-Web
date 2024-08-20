@@ -12,7 +12,9 @@ const Interceptors = (
 ) => {
   instance.interceptors.request.use(
     config => {
-      const token = localStorage.getItem('accessToken');
+      const token =
+        localStorage.getItem('accessToken') ||
+        sessionStorage.getItem('accessToken');
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
@@ -35,7 +37,9 @@ const Interceptors = (
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
 
-        const refreshToken = localStorage.getItem('refreshToken');
+        const refreshToken =
+          localStorage.getItem('refreshToken') ||
+          sessionStorage.getItem('refreshToken');
         if (!refreshToken) {
           //리프레시 토큰이 없으면 로그인 모달 실행
           if (handleUnauthorized) {
@@ -49,13 +53,22 @@ const Interceptors = (
         try {
           //refreshToken을 사용하여 새로운 accessToken,refreshToken 발급
           const { data } = await axios.post(`${BASE_URL}/auth/refresh`, {
-            accessToken: localStorage.getItem('accessToken'),
-            refreshToken: localStorage.getItem('refreshToken'),
+            accessToken:
+              localStorage.getItem('accessToken') ||
+              sessionStorage.getItem('accessToken'),
+            refreshToken:
+              localStorage.getItem('refreshToken') ||
+              sessionStorage.getItem('refreshToken'),
           });
 
           //새로 발급받은 accessToken, refreshToken 저장
-          localStorage.setItem('accessToken', data.accessToken);
-          localStorage.setItem('refreshToken', data.refreshToken);
+          if (localStorage.getItem('accessToken')) {
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('refreshToken', data.refreshToken);
+          } else {
+            sessionStorage.setItem('accessToken', data.accessToken);
+            sessionStorage.setItem('refreshToken', data.refreshToken);
+          }
 
           //원래 요청에 새로운 accessToken 추가
           originalRequest.headers = originalRequest.headers || {};
@@ -65,8 +78,13 @@ const Interceptors = (
           return instance(originalRequest);
         } catch (refreshError) {
           //refreshToken도 만료되거나 실패한 경우 로그아웃 처리 후 로그인 모달 실행
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
+          if (localStorage.getItem('accessToken')) {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+          } else {
+            sessionStorage.removeItem('accessToken');
+            sessionStorage.removeItem('refreshToken');
+          }
           if (handleUnauthorized) {
             handleUnauthorized();
           } else {

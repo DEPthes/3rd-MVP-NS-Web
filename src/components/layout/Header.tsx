@@ -12,7 +12,9 @@ import { headerState } from '@/recoil/header';
 const Header = () => {
   const { isMobileOrTablet, isTablet, isMobile, isDesktop } = useNSMediaQuery();
   const [isViewHamItem, setIsViewHamItem] = useState(false);
-  const isAccessToken = !!localStorage.getItem('accessToken');
+  const isAccessToken =
+    !!localStorage.getItem('accessToken') ||
+    !!sessionStorage.getItem('accessToken');
   const navigate = useNavigate();
   const header = useRecoilValue(headerState);
 

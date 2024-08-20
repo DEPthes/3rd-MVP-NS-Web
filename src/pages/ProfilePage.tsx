@@ -17,7 +17,9 @@ const ProfilePage: React.FC = () => {
   const handleUnauthorized = useHandleUnauthorized();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const isAccessToken = !!localStorage.getItem('accessToken');
+  const isAccessToken =
+    !!localStorage.getItem('accessToken') ||
+    !!sessionStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -92,8 +94,14 @@ const ProfilePage: React.FC = () => {
     if (isAccessToken) {
       const response = await postSignout(handleUnauthorized);
       if (response.check) {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        navigate('/');
+        if (localStorage.getItem('accessToken')) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+        } else {
+          sessionStorage.removeItem('accessToken');
+          sessionStorage.removeItem('refreshToken');
+        }
       }
     }
   };
