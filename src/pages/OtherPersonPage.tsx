@@ -4,65 +4,107 @@ import * as S from '@/styles/scenario/OtherPersonPageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
 import { getProfile } from '@/apis/user/getProfile';
+import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
-import { UserProfileResponse } from '@/types/mytype';
+import { TUserProfileResponse } from '@/types/mytype';
 
 const OtherPersonPage: React.FC = () => {
-	const { nickname } = useParams<{ nickname: string }>();
-	const [profile, setProfile] = useState<UserProfileResponse['information'] | null>(null);
-	const [likedPosts, setLikedPosts] = useState<{ [key: string]: boolean }>({});
+	const { id } = useParams<{ id: string }>();
+	const [profile, setProfile] = useState<TUserProfileResponse['information'] | null>(null);
+	const [likedBoards, setLikedBoards] = useState<{ [key: number]: boolean }>({});
 	const handleUnauthorized = useHandleUnauthorized();
 
 	useEffect(() => {
 		const fetchProfile = async () => {
-			const profileData = await getProfile(handleUnauthorized);
-			if (profileData) {
-				setProfile(profileData.information);
+			if (id) {
+				// id가 숫자로 변환될 수 있는지 확인
+				if (!isNaN(Number(id))) {
+					const userId = parseInt(id, 10);  // id를 number로 변환
+					console.log("userId:", userId);  // userId 값 확인
+
+					if (!isNaN(userId)) {
+						const response = await getProfile(userId, handleUnauthorized);
+						if (response) {
+							setProfile(response.information);
+
+
+							const initialLikedBoards = response.information.boardListResList.reduce(
+								(acc, board) => {
+									acc[board.boardId] = board.isLiked;
+									return acc;
+								},
+								{} as { [key: number]: boolean }
+							);
+							setLikedBoards(initialLikedBoards);
+						} else {
+							console.error('프로필을 불러오지 못했습니다.');
+						}
+					} else {
+						console.error('userId가 유효하지 않습니다.');
+					}
+				} else {
+					console.error('URL에서 받아온 id가 숫자 형식이 아닙니다:', id);
+				}
+			} else {
+				console.error('id가 없습니다.');
 			}
 		};
 
-		if (nickname) {
-			fetchProfile();
-		}
-	}, [nickname, handleUnauthorized]);
+		fetchProfile();
+	}, [id, handleUnauthorized]);
 
-	const handleLikeClick = (postId: string) => {
-		setLikedPosts((prevLikedPosts) => ({
-			...prevLikedPosts,
-			[postId]: !prevLikedPosts[postId],
-		}));
+	const handleLikeClick = async (boardId: number) => {
+		if (!profile || !id) return;
+
+		try {
+			const response = await boardLike(boardId, handleUnauthorized);
+			if (response) {
+				setLikedBoards(prevLikedBoards => ({
+					...prevLikedBoards,
+					[boardId]: !prevLikedBoards[boardId],
+				}));
+			} else {
+				console.error('게시글 좋아요 실패');
+			}
+		} catch (error) {
+			console.error('게시글 좋아요 요청 중 오류 발생:', error);
+		}
 	};
 
 	return (
 		<S.Container>
-			{profile && (
+			{profile ? (
 				<>
-					<S.ProfileCircle style={{ backgroundImage: `url(${profile.imageUrl})` }} />
-					<S.ProfileNickname>{profile.nickname}</S.ProfileNickname>
+					<S.ProfileContainer>
+						<S.ProfileCircle
+							src={profile.imageUrl}
+							alt="Profile"
+						/>
+						<S.ProfileNickname>{profile.nickname}</S.ProfileNickname>
+					</S.ProfileContainer>
+					{profile.boardListResList.map((board) => (
+						<S.PostBox key={board.boardId}>
+							<S.PostInfo>
+								<S.PostTitle>{board.title}</S.PostTitle>
+								<S.PostContent>{board.content}</S.PostContent>
+							</S.PostInfo>
+							<S.LikeContainer onClick={() => handleLikeClick(board.boardId)}>
+								<img src={likedBoards[board.boardId] ? BlueHeartFill : BlueHeart} alt="Like" />
+								<S.LikeCount>{likedBoards[board.boardId] ? board.likeCount + 1 : board.likeCount}</S.LikeCount>
+							</S.LikeContainer>
+						</S.PostBox>
+					))}
 				</>
+			) : (
+				<p>Loading profile...</p>
 			)}
-			{/* 
-        여기서 게시글 데이터를 API로 가져올 수 있습니다.
-        현재 게시글 데이터를 가져오는 API가 없으므로 관련된 코드를 추가해야 합니다.
-        예시로 아래는 임시 게시글 데이터를 사용한 UI입니다.
-      */}
-			{[
-				{ id: '1', title: 'Sample Post 1', text: 'This is a sample post.', likes: 10 },
-				{ id: '2', title: 'Sample Post 2', text: 'Another sample post.', likes: 5 },
-			].map((post) => (
-				<S.PostBox key={post.id}>
-					<S.PostInfo>
-						<S.PostTitle>{post.title}</S.PostTitle>
-						<S.PostContent>{post.text}</S.PostContent>
-					</S.PostInfo>
-					<S.LikeContainer onClick={() => handleLikeClick(post.id)}>
-						<img src={likedPosts[post.id] ? BlueHeartFill : BlueHeart} alt="Like" />
-						<S.LikeCount>{post.likes + (likedPosts[post.id] ? 1 : 0)}</S.LikeCount>
-					</S.LikeContainer>
-				</S.PostBox>
-			))}
 		</S.Container>
 	);
 };
 
 export default OtherPersonPage;
+
+
+
+
+
