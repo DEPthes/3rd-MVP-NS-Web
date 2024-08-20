@@ -2,46 +2,61 @@ import styled from 'styled-components';
 import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 149px;
+`;
+
+export const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease-in-out;
   width: 1170px;
-  margin-top: 160px;
-  margin-bottom: 85px;
+  margin-top: 50px;
 
-  ${isMobileOrTablet} {
-    width: 328px;
-    height: auto;
-  }
+  z-index: 1;
 
   ${isMobile} {
-    margin-top: 60px;
+    width: 328px;
+    height: auto;
+    margin-top: 30px;
     margin-bottom: 60px;
   }
 
   ${isTablet} {
-    margin-top: 20px;
+    width: 728px;
+    height: auto;
+    margin-top: 26px;
     margin-bottom: 30px;
   }
+`;
+
+export const Content = styled.div`
+  width: 100%;
+  position: relative;
+  z-index: 1;
 `;
 
 export const Top3Title = styled.h2`
   height: 43px;
   font: var(--H1-1);
   color: var(--NS-White);
+  text-align: center;
+  margin-bottom: 50px;
 
   ${isMobileOrTablet} {
     height: 22px;
-    margin-bottom: 26px;
+    margin-bottom: 31px;
     font: var(--BigButton);
   }
 `;
 
 export const FilterLinks = styled.div`
   height: 19px;
-  z-index: 2;
+  z-index: 999; /
   margin-top: 34px;
   right: 0px;
   color: var(--NS-White);
@@ -49,59 +64,98 @@ export const FilterLinks = styled.div`
   position: absolute;
 
   ${isMobileOrTablet} {
-    margin-top: 290px;
+    margin-top: 301px;
   }
 `;
 
 export const Top3Container = styled.div`
-  z-index: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0;
 
-  ${isMobileOrTablet} {
+  ${isMobile} {
     width: 319.66px;
+    height: 209px;
+    margin-bottom: 0px;
+  }
+
+  ${isTablet} {
+    width: 480px;
+    height: 209px;
+
+    margin-left: 124px;
+  }
+`;
+
+export const PodiumContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+ ${isMobile} {
+    width: 100%
     height: 161px;
-    margin-bottom: 26px;
+
   }
 `;
 
 export const Top3UserProfile = styled.div`
   width: 660px;
-  height: 340px;
+  height: 317px;
   display: flex;
   gap: 99px;
+  margin-top: 0px;
 
-  ${isMobileOrTablet} {
+  ${isMobile} {
     width: 276px;
-    height: 137px;
+    height: 146px;
     gap: 37px;
     justify-content: center;
+  }
+
+  ${isTablet} {
+    width: 399.42px;
+    height: 146px;
+    justify-content: center;
+    gap: 55.56px;
   }
 `;
 
 export const Top1 = styled.div`
-  margin-top: 24px;
-  margin-bottom: 44px;
   display: flex;
+  height: 255px;
 
-  ${isMobileOrTablet} {
+  ${isMobile} {
     width: 64px;
-    height: 111px;
+    height: 125px;
     margin-top: 0;
-    margin-bottom: 34px;
+    max-width: 400px;
+  }
+
+  ${isTablet} {
+    width: 96.1px;
+    height: 125px;
+    margin-top: 0;
+    margin-bottom: 20px;
     max-width: 400px;
   }
 `;
 
 export const Top2 = styled.div`
-  margin-top: 102px;
-  margin-bottom: -35px;
-  ${isMobileOrTablet} {
-    width: 64;
-    height: 111px;
-    margin-top: 26px;
+  margin-top: 62px;
+  margin-bottom: 0px;
+
+  ${isMobile} {
+    width: 64px;
+    height: 125px;
+    margin-top: 21px;
+  }
+
+  ${isTablet} {
+    width: 96.1px;
+    height: 125px;
+    margin-top: 21px;
   }
 `;
 
@@ -111,10 +165,17 @@ export const Podium = styled.img`
   height: 89px;
 
   ${isMobileOrTablet} {
-    width: 300%;
     height: 40px;
     margin-top: -16px;
     margin-bottom: 0;
+  }
+
+  ${isMobile} {
+    width: 100%;
+  }
+
+  ${isTablet} {
+    width: 480px;
   }
 `;
 
@@ -122,10 +183,16 @@ export const SearchContainer = styled.div`
   margin: 65px 0 27px auto;
   display: flex;
 
-  ${isMobileOrTablet} {
+  ${isMobile} {
     width: 100%;
-    margin-top: 26px;
-    margin-bottom: 47px;
+    margin-top: 0;
+    margin-bottom: 52px;
+  }
+
+  ${isTablet} {
+    width: 319.66px;
+    margin: 0px 204.17px 52px;
+    align-items: center;
   }
 `;
 
@@ -171,6 +238,7 @@ export const RankingContainer = styled.div`
     padding: 28px 29px 17px;
     border-radius: 20px;
     margin-bottom: 30px;
+    margin-top: 20px;
   }
 `;
 
@@ -189,7 +257,7 @@ export const TableHeader = styled.table`
   width: 100%;
   font: var(--T2);
   color: var(--NS-Main1);
-  padding-bottom: 16px;
+  padding-bottom: 15px;
 
   ${isMobileOrTablet} {
     height: 100%;
