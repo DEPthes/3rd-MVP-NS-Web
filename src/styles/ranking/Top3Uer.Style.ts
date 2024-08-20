@@ -42,6 +42,7 @@ export const UserProfileImage = styled.img`
   font-weight: bold;
   border: 1px solid var(--NS-Main2);
   object-fit: cover;
+  cursor: pointer;
 
   ${isMobileOrTablet} {
     width: 64px;

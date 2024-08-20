@@ -90,6 +90,7 @@ export const LikeContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 5px;
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
 
   svg {

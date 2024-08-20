@@ -175,6 +175,7 @@ export const LongWrap = styled.div`
     border-radius: 100px;
     object-fit: cover;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
     ${isMobileOrTablet} {
       width: 100px;
@@ -188,6 +189,7 @@ export const LongWrap = styled.div`
     text-align: center;
     margin-top: 6px;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
     ${isMobileOrTablet} {
       font: var(--W1);
