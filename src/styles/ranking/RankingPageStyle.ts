@@ -6,6 +6,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 149px;
+
+  ${isMobileOrTablet} {
+    margin-bottom: 30px;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -15,48 +19,37 @@ export const Wrapper = styled.div`
   align-items: center;
   transition: all 0.3s ease-in-out;
   width: 1170px;
-  margin-top: 50px;
-
-  z-index: 1;
+  margin-top: 40px;
 
   ${isMobile} {
     width: 328px;
-    height: auto;
     margin-top: 30px;
-    margin-bottom: 60px;
   }
 
   ${isTablet} {
     width: 728px;
-    height: auto;
     margin-top: 26px;
-    margin-bottom: 30px;
   }
 `;
 
 export const Content = styled.div`
   width: 100%;
   position: relative;
-  z-index: 1;
 `;
 
 export const Top3Title = styled.h2`
-  height: 43px;
   font: var(--H1-1);
   color: var(--NS-White);
   text-align: center;
   margin-bottom: 50px;
 
   ${isMobileOrTablet} {
-    height: 22px;
     margin-bottom: 31px;
     font: var(--BigButton);
   }
 `;
 
 export const FilterLinks = styled.div`
-  height: 19px;
-  z-index: 999; /
   margin-top: 34px;
   right: 0px;
   color: var(--NS-White);
@@ -64,98 +57,51 @@ export const FilterLinks = styled.div`
   position: absolute;
 
   ${isMobileOrTablet} {
-    margin-top: 301px;
-  }
-`;
-
-export const Top3Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 0;
-
-  ${isMobile} {
-    width: 319.66px;
-    height: 209px;
-    margin-bottom: 0px;
-  }
-
-  ${isTablet} {
-    width: 480px;
-    height: 209px;
-
-    margin-left: 124px;
+    margin-top: 308px;
   }
 `;
 
 export const PodiumContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
- ${isMobile} {
-    width: 100%
-    height: 161px;
-
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Top3UserProfile = styled.div`
-  width: 660px;
-  height: 317px;
   display: flex;
   gap: 99px;
   margin-top: 0px;
 
   ${isMobile} {
-    width: 276px;
-    height: 146px;
     gap: 37px;
     justify-content: center;
   }
 
   ${isTablet} {
-    width: 399.42px;
-    height: 146px;
     justify-content: center;
     gap: 55.56px;
   }
 `;
 
 export const Top1 = styled.div`
-  display: flex;
-  height: 255px;
-
   ${isMobile} {
-    width: 64px;
-    height: 125px;
-    margin-top: 0;
-    max-width: 400px;
+    margin-bottom: 15px;
   }
 
   ${isTablet} {
-    width: 96.1px;
-    height: 125px;
-    margin-top: 0;
-    margin-bottom: 20px;
-    max-width: 400px;
+    margin-bottom: 15px;
   }
 `;
 
 export const Top2 = styled.div`
-  margin-top: 62px;
-  margin-bottom: 0px;
+  margin-top: 50px;
 
   ${isMobile} {
-    width: 64px;
-    height: 125px;
-    margin-top: 21px;
+    margin-top: 25px;
   }
 
   ${isTablet} {
-    width: 96.1px;
-    height: 125px;
-    margin-top: 21px;
+    margin-top: 25px;
   }
 `;
 
@@ -166,16 +112,8 @@ export const Podium = styled.img`
 
   ${isMobileOrTablet} {
     height: 40px;
-    margin-top: -16px;
+    margin-top: -26px;
     margin-bottom: 0;
-  }
-
-  ${isMobile} {
-    width: 100%;
-  }
-
-  ${isTablet} {
-    width: 480px;
   }
 `;
 
@@ -186,12 +124,12 @@ export const SearchContainer = styled.div`
   ${isMobile} {
     width: 100%;
     margin-top: 0;
-    margin-bottom: 52px;
+    margin-bottom: 40px;
   }
 
   ${isTablet} {
     width: 319.66px;
-    margin: 0px 204.17px 52px;
+    margin: 0px 204.17px 40px;
     align-items: center;
   }
 `;
@@ -228,40 +166,31 @@ export const RankingContainer = styled.div`
   display: flex;
   justify-content: center;
   border-radius: 40px;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding: 60px 110px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
 
   ${isMobileOrTablet} {
-    width: 100%;
-    height: auto;
-    padding: 28px 29px 17px;
+    padding: 29px 28px;
     border-radius: 20px;
-    margin-bottom: 30px;
-    margin-top: 20px;
+  }
+
+  ${isTablet} {
+    padding: 29px 200px;
   }
 `;
 
-export const RankingTable = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 920px;
-
-  ${isMobileOrTablet} {
-    width: 270px;
-  }
+export const RankingTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
 `;
 
-export const TableHeader = styled.table`
+export const TableHeader = styled.thead`
   width: 100%;
   font: var(--T2);
   color: var(--NS-Main1);
-  padding-bottom: 15px;
 
   ${isMobileOrTablet} {
     height: 100%;
-    padding-bottom: 11px;
   }
 `;
 
@@ -271,48 +200,33 @@ export const TableRow = styled.tr`
 `;
 
 export const TableHeaderItem1 = styled.td`
-  width: 33%;
   text-align: left;
+  padding-bottom: 28px;
 
   ${isMobileOrTablet} {
-    width: 33%;
     font: var(--T12);
-
-    height: 19px;
-
-    padding: 0;
-    text-align: left;
+    padding-bottom: 11px;
   }
 `;
 
 export const TableHeaderItem2 = styled.td`
-  width: 33%;
   text-align: center;
+  padding-bottom: 28px;
 
   ${isMobileOrTablet} {
-    width: 33%;
     font: var(--T12);
-    height: 19px;
-    padding: 0;
+    padding-bottom: 11px;
   }
 `;
 
 export const TableHeaderItem3 = styled.td`
-  width: 33%;
   text-align: right;
+  padding-bottom: 28px;
 
   ${isMobileOrTablet} {
-    width: 33%;
     font: var(--T12);
-    height: 19px;
-    padding: 0;
+    padding-bottom: 11px;
   }
 `;
 
-export const TableBody = styled.table`
-  width: 919px;
-
-  ${isMobileOrTablet} {
-    width: 270px;
-  }
-`;
+export const TableBody = styled.tbody``;

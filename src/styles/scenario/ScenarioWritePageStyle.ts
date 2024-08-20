@@ -90,6 +90,7 @@ export const LikeContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 5px;
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
 
   svg {
@@ -156,27 +157,26 @@ export const Input = styled.input`
   text-align: center;
   font: var(--H3);
   transition: all 0.3s ease-in-out;
+  padding-bottom: 12px;
 
   ${isMobileOrTablet} {
     font: var(--P-T1);
+    padding-bottom: 11px;
   }
 `;
 
 export const Separator = styled.hr`
   border: 1.5px dashed var(--NS-Main2);
   width: 90%;
-  margin-top: 12px;
-  margin-bottom: 17px;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    margin-top: 11px;
-    margin-bottom: 11px;
     border: 1px dashed var(--NS-Main2);
   }
 `;
 
 export const TextArea = styled.textarea`
+  padding-top: 17px;
   width: 90%;
   height: 80%;
   border: none;
@@ -188,6 +188,7 @@ export const TextArea = styled.textarea`
 
   ${isMobileOrTablet} {
     font: var(--P-T2);
+    padding-top: 11px;
   }
 `;
 

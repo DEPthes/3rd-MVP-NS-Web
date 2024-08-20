@@ -4,25 +4,29 @@ import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 export const ToggleBarContainer = styled.div<{ $isOpen: boolean }>`
   margin-top: 70px;
   width: 600px;
-  padding: 10px;
-  margin-bottom: 10px;
   cursor: pointer;
   transition: height 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
-
   height: ${({ $isOpen }) => ($isOpen ? '764px;' : '40px')};
+  z-index: 10;
 
-  ${isMobileOrTablet}
-  width: 320px;
-  height: ${({ $isOpen }) => ($isOpen ? '412px;' : '19px')};
+  ${isMobileOrTablet} {
+    width: 320px;
+    height: ${({ $isOpen }) => ($isOpen ? '405px;' : '19px')};
+  }
+
+  ${isMobile} {
+    margin-top: 30px;
+  }
+
+  ${isTablet} {
+    margin-top: 20px;
+  }
 `;
 
 export const ToggleBarHeader = styled.div`
-  width: 231px;
-  heigth: 30px;
-  font-size: 16px;
   color: var(--NS-White);
   display: flex;
   align-items: center;
@@ -31,15 +35,7 @@ export const ToggleBarHeader = styled.div`
   background-color: transparent;
   justify-content: center;
   font: var(--M1-2);
-  padding: 4px;
-  ${isMobile} {
-    width: 328px;
-    height: 19px;
-  }
-  ${isTablet} {
-    width: 320px;
-    height: 19px;
-  }
+  padding: 4px 9px;
 
   ${isMobileOrTablet} {
     border: none;
@@ -50,10 +46,11 @@ export const ToggleBarHeader = styled.div`
 export const ToggleBarContent = styled.div`
   width: 600px;
   height: 720px;
-  margin-top: 10px;
+  margin-top: 22px;
   background-color: var(--NS-White);
   border-radius: 40px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+
   ${isMobileOrTablet} {
     width: 320px;
     height: 380px;
@@ -63,10 +60,9 @@ export const ToggleBarContent = styled.div`
 `;
 
 export const ToggleBarInput = styled.div`
-  width: 385px;
-  height: 604px;
-  margin: 58px 107.5px;
+  justify-content: center;
   text-align: center;
+  margin: 58px;
   color: var(--Gray1);
   gap: 10px;
   display: flex;
@@ -75,10 +71,8 @@ export const ToggleBarInput = styled.div`
 
   ${isMobileOrTablet} {
     font: var(--V3);
-    width: 248px;
-    height: 312px;
-    margin: 32px 36px;
-    gap: 8px;
+    gap: 0;
+    margin: 34px;
   }
 `;
 
@@ -86,6 +80,7 @@ export const Bold = styled.span`
   font: var(--T3-1);
   display: inline;
   color: var(--NS-Black);
+
   ${isMobileOrTablet} {
     font: var(--V2);
   }

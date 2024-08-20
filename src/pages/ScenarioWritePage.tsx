@@ -68,7 +68,6 @@ const ScenarioWritePage: React.FC = () => {
         const response = await getBoard(state.boardId, handleUnauthorized);
         if (response) {
           if (!response.published && !response.owner) {
-            console.log(response);
             navigate('/404');
             window.scroll({ top: 0, behavior: 'smooth' });
           } else {

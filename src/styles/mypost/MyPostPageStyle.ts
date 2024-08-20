@@ -53,6 +53,7 @@ export const CheckboxContainer = styled.div`
   justify-content: center;
   margin-right: 34px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
   ${isMobileOrTablet} {
     margin-top: 10px;

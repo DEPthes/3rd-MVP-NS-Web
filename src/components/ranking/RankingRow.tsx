@@ -1,9 +1,9 @@
 import React from 'react';
-import { TUser } from '../../types/ranking/user';
+import { TRankUser } from '../../types/ranking/user';
 import * as S from '@styles/ranking/RankingRowStyle';
 
 type RankingRowProps = {
-  user: TUser;
+  user: TRankUser;
   rank: React.ReactNode;
   isCurrentUser: boolean;
 };
@@ -13,7 +13,6 @@ const RankingRow: React.FC<RankingRowProps> = ({
   rank,
   isCurrentUser,
 }) => {
-  console.log(user, rank);
   return (
     <S.TableRow>
       <S.TableData1 $isCurrentUser={isCurrentUser}>{rank}위</S.TableData1>

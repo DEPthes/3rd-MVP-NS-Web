@@ -100,6 +100,7 @@ export const PostRightWrap = styled.div`
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
   svg {
     ${isMobileOrTablet} {

@@ -76,9 +76,7 @@ const ReportPage = () => {
 
     try {
       const response = await boardLike(boardId, handleUnauthorized);
-      console.log(boardId);
       if (response) {
-        console.log(response);
         setReportList(prevReport => {
           if (prevReport && isTReport(prevReport)) {
             return {
@@ -132,7 +130,8 @@ const ReportPage = () => {
               <hr />
               <S.HeadText>작성된 글</S.HeadText>
               <S.TodayText>
-                오늘 작성된 글은 총 <span>{reportList?.writtenTotal}</span>개
+                오늘 작성된 글은 총 <span>{reportList?.writtenTotal ?? 0}</span>
+                개
               </S.TodayText>
               <hr />
               <S.HeadText>단어 요약</S.HeadText>
