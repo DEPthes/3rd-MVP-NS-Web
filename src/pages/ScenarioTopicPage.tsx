@@ -12,6 +12,7 @@ import Pagination from '@/components/pagination/Pagination';
 import { postLike } from '@/apis/theme/postLike';
 import { TPagination } from '@/types/pagination';
 import EmptyCharacter from '@assets/images/EmptyCharacter.svg?react';
+import Loading from '@/components/layout/Loading';
 
 const ScenarioTopicPage: React.FC = () => {
   const [topics, setTopics] = useState<TTheme[]>([]);
@@ -21,14 +22,13 @@ const ScenarioTopicPage: React.FC = () => {
   );
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
   const [pageNum, setPageNum] = useState(1); // 기본 값 1
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
   const handleUnauthorized = useHandleUnauthorized();
 
   useEffect(() => {
     const fetchTopics = async () => {
-      setLoading(true);
       try {
         let response;
         if (searchTerm.trim() === '') {
@@ -42,7 +42,6 @@ const ScenarioTopicPage: React.FC = () => {
             handleUnauthorized,
           );
         }
-
         if (
           response &&
           response.information &&
@@ -56,7 +55,7 @@ const ScenarioTopicPage: React.FC = () => {
       } catch (error) {
         console.error('API 호출 중 에러:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -146,8 +145,8 @@ const ScenarioTopicPage: React.FC = () => {
           ))}
         </S.SortOptions>
       </S.Header>
-      {loading ? (
-        <></>
+      {isLoading ? (
+        <Loading />
       ) : topics.length === 0 ? (
         <S.NoneList>
           <EmptyCharacter />

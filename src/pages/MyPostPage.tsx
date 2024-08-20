@@ -13,6 +13,8 @@ import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import EmptyMessage from '@/components/mypost/EmptyMessage';
 import CheckBoxDefault from '@/assets/icons/CheckBoxDefault.svg?react';
 import CheckBoxVariant from '@/assets/icons/CheckBoxVariant.svg?react';
+import Loading from '@/components/layout/Loading';
+import EmptyCharacter from '@assets/images/EmptyCharacterN.svg?react';
 
 const MyPostsPage: React.FC = () => {
   const [postList, setPostList] = useState<TPost[]>([]);
@@ -22,12 +24,11 @@ const MyPostsPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1);
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
   const handleUnauthorized = useHandleUnauthorized();
 
   // 게시글 데이터를 가져오는 함수
   const fetchPosts = useCallback(async () => {
-    setIsDataLoaded(false);
     try {
       const { posts, pageInfo } = await getBoard(
         excludeTemporary,
@@ -41,14 +42,13 @@ const MyPostsPage: React.FC = () => {
     } catch (error) {
       console.error('Error fetching posts:', error);
     } finally {
-      setIsDataLoaded(true);
+      setIsLoading(false);
     }
   }, [excludeTemporary, sortType, pageNum, handleUnauthorized]);
 
   // 검색 결과를 가져오는 함수
   const fetchSearchResults = useCallback(
     async (query: string) => {
-      setIsDataLoaded(false);
       try {
         const { posts, pageInfo } = await getSearch(
           query,
@@ -62,7 +62,7 @@ const MyPostsPage: React.FC = () => {
       } catch (error) {
         console.error('Error fetching search results:', error);
       } finally {
-        setIsDataLoaded(true);
+        setIsLoading(false);
       }
     },
     [excludeTemporary, sortType, pageNum, handleUnauthorized],
@@ -106,7 +106,9 @@ const MyPostsPage: React.FC = () => {
           </S.CheckboxContainer>
         }
       />
-      {isDataLoaded ? (
+      {isLoading ? (
+        <Loading />
+      ) : (
         <S.EmptyState>
           {filteredPostList.length > 0 ? (
             <PostList posts={filteredPostList} />
@@ -122,9 +124,14 @@ const MyPostsPage: React.FC = () => {
               navigateTo="/scenario"
               smallfont={false}
             />
-          ) : null}
+          ) : (
+            <S.NoneList>
+              <EmptyCharacter />
+              <p>검색 결과가 없어요</p>
+            </S.NoneList>
+          )}
         </S.EmptyState>
-      ) : null}
+      )}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

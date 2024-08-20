@@ -13,6 +13,7 @@ import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
 import { TPagination } from '@/types/pagination';
 import EmptyCharacter from '@assets/images/EmptyCharacterN.svg?react';
+import Loading from '@/components/layout/Loading';
 
 const ScenarioTopicListPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,11 +23,10 @@ const ScenarioTopicListPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1); // 기본 값 1
   const navigate = useNavigate();
   const handleUnauthorized = useHandleUnauthorized();
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTopic = async () => {
-      setLoading(true);
       try {
         if (id) {
           const response = await getTheme(
@@ -50,7 +50,7 @@ const ScenarioTopicListPage: React.FC = () => {
       } catch (error) {
         console.error('API 호출 중 에러:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -161,84 +161,93 @@ const ScenarioTopicListPage: React.FC = () => {
   };
 
   return (
-    <S.Container>
-      <S.TopicBox>
-        <S.Header>주제</S.Header>
-        <S.TopicHeader>{topic?.content}</S.TopicHeader>
-        <S.InfoContainer>
-          <S.PublishDate>발행일 : {topic?.date}</S.PublishDate>
-          <S.PublishDate>|</S.PublishDate>
-          <S.LikeContainer onClick={handleTopicLikeClick}>
-            {topic?.likedTheme ? (
-              <Main5HeartFill title="Liked" />
-            ) : (
-              <Main5Heart title="Like" />
-            )}
-            <S.TopicLikeCount>{topic?.likeCount}</S.TopicLikeCount>
-          </S.LikeContainer>
-        </S.InfoContainer>
-        <S.WriteButton onClick={handleWriteClick}>글쓰기</S.WriteButton>
-      </S.TopicBox>
-      <S.ListHeader>
-        <S.ListTitle>게시글 목록</S.ListTitle>
-        <S.SortOptions>
-          <S.SortOption
-            onClick={() => handleSort('date')}
-            $isSelected={sortType === 'date'}
-          >
-            최신순
-          </S.SortOption>
-          <S.Divider>|</S.Divider>
-          <S.SortOption
-            onClick={() => handleSort('likeCount')}
-            $isSelected={sortType === 'likeCount'}
-          >
-            좋아요순
-          </S.SortOption>
-        </S.SortOptions>
-      </S.ListHeader>
-      {loading ? (
-        <></>
-      ) : !topic || sortedPosts?.length === 0 ? (
-        <S.NoneList>
-          <EmptyCharacter />
-          <p>주제에 대한 글이 없어요</p>
-        </S.NoneList>
+    <>
+      {isLoading ? (
+        <Loading />
       ) : (
-        <S.PostList>
-          {sortedPosts?.map(post => (
-            <S.PostBox
-              key={post.boardId}
-              onClick={() => handleTitleClick(post.boardId)}
-            >
-              <S.LeftWrap>
-                <S.PostTitle>{post.title}</S.PostTitle>
-                <S.PostContent>{truncateContent(post.content)}</S.PostContent>
-              </S.LeftWrap>
-              <S.RightWrap>
-                <S.LikeButton onClick={e => handleLikeClick(post.boardId, e)}>
-                  <img
-                    src={post.likedBoard ? BlueHeartFill : BlueHeart}
-                    alt="Like"
-                  />
-                  <S.PostLikeCount>{post.likeCount}</S.PostLikeCount>
-                </S.LikeButton>
-                <S.PostInfo>
-                  {post.nickname} | {new Date(post.date).toLocaleDateString()}
-                </S.PostInfo>
-              </S.RightWrap>
-            </S.PostBox>
-          ))}
-        </S.PostList>
+        <S.Container>
+          <S.TopicBox>
+            <S.Header>주제</S.Header>
+            <S.TopicHeader>{topic?.content}</S.TopicHeader>
+            <S.InfoContainer>
+              <S.PublishDate>발행일 : {topic?.date}</S.PublishDate>
+              <S.PublishDate>|</S.PublishDate>
+              <S.LikeContainer onClick={handleTopicLikeClick}>
+                {topic?.likedTheme ? (
+                  <Main5HeartFill title="Liked" />
+                ) : (
+                  <Main5Heart title="Like" />
+                )}
+                <S.TopicLikeCount>{topic?.likeCount}</S.TopicLikeCount>
+              </S.LikeContainer>
+            </S.InfoContainer>
+            <S.WriteButton onClick={handleWriteClick}>글쓰기</S.WriteButton>
+          </S.TopicBox>
+          <S.ListHeader>
+            <S.ListTitle>게시글 목록</S.ListTitle>
+            <S.SortOptions>
+              <S.SortOption
+                onClick={() => handleSort('date')}
+                $isSelected={sortType === 'date'}
+              >
+                최신순
+              </S.SortOption>
+              <S.Divider>|</S.Divider>
+              <S.SortOption
+                onClick={() => handleSort('likeCount')}
+                $isSelected={sortType === 'likeCount'}
+              >
+                좋아요순
+              </S.SortOption>
+            </S.SortOptions>
+          </S.ListHeader>
+          {!topic || sortedPosts?.length === 0 ? (
+            <S.NoneList>
+              <EmptyCharacter />
+              <p>주제에 대한 글이 없어요</p>
+            </S.NoneList>
+          ) : (
+            <S.PostList>
+              {sortedPosts?.map(post => (
+                <S.PostBox
+                  key={post.boardId}
+                  onClick={() => handleTitleClick(post.boardId)}
+                >
+                  <S.LeftWrap>
+                    <S.PostTitle>{post.title}</S.PostTitle>
+                    <S.PostContent>
+                      {truncateContent(post.content)}
+                    </S.PostContent>
+                  </S.LeftWrap>
+                  <S.RightWrap>
+                    <S.LikeButton
+                      onClick={e => handleLikeClick(post.boardId, e)}
+                    >
+                      <img
+                        src={post.likedBoard ? BlueHeartFill : BlueHeart}
+                        alt="Like"
+                      />
+                      <S.PostLikeCount>{post.likeCount}</S.PostLikeCount>
+                    </S.LikeButton>
+                    <S.PostInfo>
+                      {post.nickname} |{' '}
+                      {new Date(post.date).toLocaleDateString()}
+                    </S.PostInfo>
+                  </S.RightWrap>
+                </S.PostBox>
+              ))}
+            </S.PostList>
+          )}
+          {pageInfo && (
+            <Pagination
+              pageInfo={pageInfo}
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+            />
+          )}
+        </S.Container>
       )}
-      {pageInfo && (
-        <Pagination
-          pageInfo={pageInfo}
-          pageNum={pageNum}
-          setPageNum={setPageNum}
-        />
-      )}
-    </S.Container>
+    </>
   );
 };
 

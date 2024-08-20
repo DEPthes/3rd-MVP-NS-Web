@@ -18,6 +18,7 @@ import DraftSuccessModal from '@/components/modal/DraftSuccessModal';
 import PostModal from '@/components/modal/PostModal';
 import PostSuccessModal from '@/components/modal/PostSuccessModal';
 import { getBoard } from '@/apis/board/getBoard';
+import Loading from '@/components/layout/Loading';
 
 const ScenarioWritePage: React.FC = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const ScenarioWritePage: React.FC = () => {
     useState<boolean>(false);
   const [isPostModal, setIsPostModal] = useState<boolean>(false);
   const [isPostSuccessModal, setIsPostSuccessModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -46,6 +48,7 @@ const ScenarioWritePage: React.FC = () => {
         );
         if (data) {
           setTopic(data);
+          setIsLoading(false);
         } else {
           console.error('오늘의 주제를 불러오지 못했습니다.');
         }
@@ -55,6 +58,7 @@ const ScenarioWritePage: React.FC = () => {
         );
         if (data) {
           setTopic(data);
+          setIsLoading(false);
         } else {
           console.error('오늘의 주제를 불러오지 못했습니다.');
         }
@@ -167,96 +171,102 @@ const ScenarioWritePage: React.FC = () => {
     title.trim() === '' || text.trim() === '' || text.length < 100;
 
   return (
-    <S.Container>
-      <S.TopicBox>
-        <S.TopicHeader>오늘의 주제</S.TopicHeader>
-        <S.Topic>{topic?.content}</S.Topic>
-        <S.LikeContainer onClick={handleLikeClick}>
-          {topic?.likedTheme ? (
-            <Main5HeartFill width={30} />
-          ) : (
-            <Main5Heart width={30} />
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <S.Container>
+          <S.TopicBox>
+            <S.TopicHeader>오늘의 주제</S.TopicHeader>
+            <S.Topic>{topic?.content}</S.Topic>
+            <S.LikeContainer onClick={handleLikeClick}>
+              {topic?.likedTheme ? (
+                <Main5HeartFill width={30} />
+              ) : (
+                <Main5Heart width={30} />
+              )}
+              <S.LikeText>이 주제 좋아요</S.LikeText>
+            </S.LikeContainer>
+          </S.TopicBox>
+          <S.NewTopicBox>
+            <S.Input
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value.slice(0, 20))}
+              placeholder="제목을 입력하세요 (최대 20자)"
+            />
+            <S.Separator />
+            <S.TextArea
+              value={text}
+              onChange={e => setText(e.target.value)}
+              placeholder="여기에 자유롭게 텍스트를 입력하세요."
+            />
+          </S.NewTopicBox>
+          <S.ButtonContainer>
+            <LightButton
+              text="임시저장"
+              onClick={handleSave}
+              isDisabled={
+                title.trim() === '' ||
+                text.trim() === '' ||
+                (titleSave === title && textSave === text)
+              }
+            />
+            <DarkButton
+              text="게시"
+              onClick={handlePost}
+              isDisabled={isPostDisabled}
+            />
+          </S.ButtonContainer>
+          {isDraftModal && (
+            <BackDrop
+              children={
+                <DraftModal
+                  handleConfirmModal={handleModalSave}
+                  handleCloseModal={() => setIsDraftModal(false)}
+                />
+              }
+              isOpen={isDraftModal}
+            />
           )}
-          <S.LikeText>이 주제 좋아요</S.LikeText>
-        </S.LikeContainer>
-      </S.TopicBox>
-      <S.NewTopicBox>
-        <S.Input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value.slice(0, 20))}
-          placeholder="제목을 입력하세요 (최대 20자)"
-        />
-        <S.Separator />
-        <S.TextArea
-          value={text}
-          onChange={e => setText(e.target.value)}
-          placeholder="여기에 자유롭게 텍스트를 입력하세요."
-        />
-      </S.NewTopicBox>
-      <S.ButtonContainer>
-        <LightButton
-          text="임시저장"
-          onClick={handleSave}
-          isDisabled={
-            title.trim() === '' ||
-            text.trim() === '' ||
-            (titleSave === title && textSave === text)
-          }
-        />
-        <DarkButton
-          text="게시"
-          onClick={handlePost}
-          isDisabled={isPostDisabled}
-        />
-      </S.ButtonContainer>
-      {isDraftModal && (
-        <BackDrop
-          children={
-            <DraftModal
-              handleConfirmModal={handleModalSave}
-              handleCloseModal={() => setIsDraftModal(false)}
+          {isDraftSuccessModal && (
+            <BackDrop
+              children={
+                <DraftSuccessModal
+                  handleConfirmModal={() => setIsDraftSuccessModal(false)}
+                />
+              }
+              isOpen={isDraftSuccessModal}
             />
-          }
-          isOpen={isDraftModal}
-        />
-      )}
-      {isDraftSuccessModal && (
-        <BackDrop
-          children={
-            <DraftSuccessModal
-              handleConfirmModal={() => setIsDraftSuccessModal(false)}
+          )}
+          {isPostModal && (
+            <BackDrop
+              children={
+                <PostModal
+                  handleConfirmModal={handleModalPost}
+                  handleCloseModal={() => setIsPostModal(false)}
+                />
+              }
+              isOpen={isPostModal}
             />
-          }
-          isOpen={isDraftSuccessModal}
-        />
-      )}
-      {isPostModal && (
-        <BackDrop
-          children={
-            <PostModal
-              handleConfirmModal={handleModalPost}
-              handleCloseModal={() => setIsPostModal(false)}
+          )}
+          {isPostSuccessModal && (
+            <BackDrop
+              children={
+                <PostSuccessModal
+                  handleConfirmModal={() => {
+                    setIsPostSuccessModal(false);
+                    navigate(`/scenario/topic/${state.themeId}`);
+                    window.scroll({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+              }
+              isOpen={isPostSuccessModal}
             />
-          }
-          isOpen={isPostModal}
-        />
+          )}
+        </S.Container>
       )}
-      {isPostSuccessModal && (
-        <BackDrop
-          children={
-            <PostSuccessModal
-              handleConfirmModal={() => {
-                setIsPostSuccessModal(false);
-                navigate(`/scenario/topic/${state.themeId}`);
-                window.scroll({ top: 0, behavior: 'smooth' });
-              }}
-            />
-          }
-          isOpen={isPostSuccessModal}
-        />
-      )}
-    </S.Container>
+    </>
   );
 };
 

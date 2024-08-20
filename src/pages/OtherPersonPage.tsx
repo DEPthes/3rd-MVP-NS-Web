@@ -8,6 +8,7 @@ import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { TUserProfileResponse } from '@/types/mytype';
 import Pagination from '@/components/pagination/Pagination';
+import Loading from '@/components/layout/Loading';
 
 const OtherPersonPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,6 +18,7 @@ const OtherPersonPage: React.FC = () => {
   const handleUnauthorized = useHandleUnauthorized();
   const navigate = useNavigate();
   const [pageNum, setPageNum] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -29,6 +31,7 @@ const OtherPersonPage: React.FC = () => {
         );
         if (response) {
           setProfile(response.information);
+          setIsLoading(false);
         } else {
           console.error('프로필을 불러오지 못했습니다.');
         }
@@ -97,50 +100,58 @@ const OtherPersonPage: React.FC = () => {
   };
 
   return (
-    <S.Container>
-      {profile && (
-        <>
-          <S.ProfileContainer>
-            <S.ProfileCircle
-              src={profile.userProfileRes.imageUrl}
-              alt="Profile"
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <S.Container>
+          {profile && (
+            <>
+              <S.ProfileContainer>
+                <S.ProfileCircle
+                  src={profile.userProfileRes.imageUrl}
+                  alt="Profile"
+                />
+                <S.ProfileNickname>
+                  {profile.userProfileRes.nickname}
+                </S.ProfileNickname>
+              </S.ProfileContainer>
+              <S.PostList>
+                {profile.userProfileRes.boardListResList.map(board => (
+                  <S.PostBox
+                    key={board.boardId}
+                    onClick={() => handleTitleClick(board.boardId)}
+                  >
+                    <S.LeftWrap>
+                      <S.PostTitle>{board.title}</S.PostTitle>
+                      <S.PostContent>
+                        {truncateContent(board.content)}
+                      </S.PostContent>
+                    </S.LeftWrap>
+                    <S.LikeButton
+                      onClick={e => handleLikeClick(board.boardId, e)}
+                    >
+                      <img
+                        src={board.isLiked ? BlueHeartFill : BlueHeart}
+                        alt="Like"
+                      />
+                      <S.LikeCount>{board.likeCount}</S.LikeCount>
+                    </S.LikeButton>
+                  </S.PostBox>
+                ))}
+              </S.PostList>
+            </>
+          )}
+          {profile?.pageInfo && (
+            <Pagination
+              pageInfo={profile?.pageInfo}
+              pageNum={pageNum}
+              setPageNum={setPageNum}
             />
-            <S.ProfileNickname>
-              {profile.userProfileRes.nickname}
-            </S.ProfileNickname>
-          </S.ProfileContainer>
-          <S.PostList>
-            {profile.userProfileRes.boardListResList.map(board => (
-              <S.PostBox
-                key={board.boardId}
-                onClick={() => handleTitleClick(board.boardId)}
-              >
-                <S.LeftWrap>
-                  <S.PostTitle>{board.title}</S.PostTitle>
-                  <S.PostContent>
-                    {truncateContent(board.content)}
-                  </S.PostContent>
-                </S.LeftWrap>
-                <S.LikeButton onClick={e => handleLikeClick(board.boardId, e)}>
-                  <img
-                    src={board.isLiked ? BlueHeartFill : BlueHeart}
-                    alt="Like"
-                  />
-                  <S.LikeCount>{board.likeCount}</S.LikeCount>
-                </S.LikeButton>
-              </S.PostBox>
-            ))}
-          </S.PostList>
-        </>
+          )}
+        </S.Container>
       )}
-      {profile?.pageInfo && (
-        <Pagination
-          pageInfo={profile?.pageInfo}
-          pageNum={pageNum}
-          setPageNum={setPageNum}
-        />
-      )}
-    </S.Container>
+    </>
   );
 };
 

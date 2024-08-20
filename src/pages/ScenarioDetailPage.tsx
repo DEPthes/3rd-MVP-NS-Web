@@ -18,6 +18,7 @@ import { TBoardDetailResponse } from '@/types/mytype';
 import BackDrop from '@/components/layout/BackDrop';
 import DeleteModal from '@/components/modal/DeleteModal';
 import DeleteFailModal from '@/components/modal/DeleteFailModal';
+import Loading from '@/components/layout/Loading';
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,7 +26,7 @@ const ScenarioDetailPage: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isDeleteFail, setIsDeleteFail] = useState<boolean>(false);
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(true);
   const { isMobileOrTablet } = useNSMediaQuery();
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -39,6 +40,7 @@ const ScenarioDetailPage: React.FC = () => {
             window.scroll({ top: 0, behavior: 'smooth' });
           } else {
             setPost(response);
+            setIsLoading(false);
           }
         } else {
           navigate('/404');
@@ -151,83 +153,91 @@ const ScenarioDetailPage: React.FC = () => {
   };
 
   return (
-    <S.Container>
-      <S.HeaderSection>
-        <S.ProfileContainer>
-          <S.ProfileCircle
-            src={post?.imageUrl}
-            alt=""
-            onClick={handleProfileClick}
-          />
-          <S.ProfileNickname>{post?.nickname}</S.ProfileNickname>
-          {/* 작성자 닉네임 */}
-        </S.ProfileContainer>
-        <S.ProfileInfo>
-          <S.Header>주제</S.Header>
-          <S.TopicTitle>{post?.themeContent}</S.TopicTitle> {/* 주제 제목 */}
-          <S.LikeContainer onClick={handleWhiteHeartClick}>
-            {isMobileOrTablet ? (
-              post?.likedTheme ? (
-                <Main5HeartFill title="Like" />
-              ) : (
-                <Main5Heart title="Like" />
-              )
-            ) : (
-              <img
-                src={post?.likedTheme ? WhiteHeartFill : WhiteHeart}
-                alt="Like"
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <S.Container>
+          <S.HeaderSection>
+            <S.ProfileContainer>
+              <S.ProfileCircle
+                src={post?.imageUrl}
+                alt=""
+                onClick={handleProfileClick}
               />
+              <S.ProfileNickname>{post?.nickname}</S.ProfileNickname>
+              {/* 작성자 닉네임 */}
+            </S.ProfileContainer>
+            <S.ProfileInfo>
+              <S.Header>주제</S.Header>
+              <S.TopicTitle>{post?.themeContent}</S.TopicTitle>{' '}
+              {/* 주제 제목 */}
+              <S.LikeContainer onClick={handleWhiteHeartClick}>
+                {isMobileOrTablet ? (
+                  post?.likedTheme ? (
+                    <Main5HeartFill title="Like" />
+                  ) : (
+                    <Main5Heart title="Like" />
+                  )
+                ) : (
+                  <img
+                    src={post?.likedTheme ? WhiteHeartFill : WhiteHeart}
+                    alt="Like"
+                  />
+                )}
+                <S.LikeText>이 주제 좋아요</S.LikeText>
+              </S.LikeContainer>
+            </S.ProfileInfo>
+          </S.HeaderSection>
+          <S.PostBox>
+            <S.PostTitle>{post?.boardTitle}</S.PostTitle> {/* 게시글 제목 */}
+            <S.PostContent>{post?.boardContent}</S.PostContent>{' '}
+            {/* 게시글 내용 */}
+            {post?.published && (
+              <S.LikeButton onClick={handleBlueHeartClick}>
+                <img
+                  src={post?.likedBoard ? BlueHeartFill : BlueHeart}
+                  alt="Like"
+                />
+                <S.LikeCount>좋아요</S.LikeCount>
+              </S.LikeButton>
             )}
-            <S.LikeText>이 주제 좋아요</S.LikeText>
-          </S.LikeContainer>
-        </S.ProfileInfo>
-      </S.HeaderSection>
-      <S.PostBox>
-        <S.PostTitle>{post?.boardTitle}</S.PostTitle> {/* 게시글 제목 */}
-        <S.PostContent>{post?.boardContent}</S.PostContent> {/* 게시글 내용 */}
-        {post?.published && (
-          <S.LikeButton onClick={handleBlueHeartClick}>
-            <img
-              src={post?.likedBoard ? BlueHeartFill : BlueHeart}
-              alt="Like"
+          </S.PostBox>
+          <S.ButtonContainer>
+            {!isMobileOrTablet && (
+              <LightButton text="뒤로 가기" onClick={handleBackClick} />
+            )}
+            {post?.owner && (
+              <>
+                <LightButton text="수정하기" onClick={handleEditClick} />
+                <LightButton text="삭제하기" onClick={handleDeleteClick} />
+              </>
+            )}
+          </S.ButtonContainer>
+          {isDeleteModalOpen && (
+            <BackDrop
+              children={
+                <DeleteModal
+                  handleConfirmModal={handleConfirmDelete}
+                  handleCloseModal={handleCancelDelete}
+                />
+              }
+              isOpen={isDeleteModalOpen}
             />
-            <S.LikeCount>좋아요</S.LikeCount>
-          </S.LikeButton>
-        )}
-      </S.PostBox>
-      <S.ButtonContainer>
-        {!isMobileOrTablet && (
-          <LightButton text="뒤로 가기" onClick={handleBackClick} />
-        )}
-        {post?.owner && (
-          <>
-            <LightButton text="수정하기" onClick={handleEditClick} />
-            <LightButton text="삭제하기" onClick={handleDeleteClick} />
-          </>
-        )}
-      </S.ButtonContainer>
-      {isDeleteModalOpen && (
-        <BackDrop
-          children={
-            <DeleteModal
-              handleConfirmModal={handleConfirmDelete}
-              handleCloseModal={handleCancelDelete}
+          )}
+          {isDeleteFail && (
+            <BackDrop
+              children={
+                <DeleteFailModal
+                  handleConfirmModal={() => setIsDeleteFail(false)}
+                />
+              }
+              isOpen={isDeleteFail}
             />
-          }
-          isOpen={isDeleteModalOpen}
-        />
+          )}
+        </S.Container>
       )}
-      {isDeleteFail && (
-        <BackDrop
-          children={
-            <DeleteFailModal
-              handleConfirmModal={() => setIsDeleteFail(false)}
-            />
-          }
-          isOpen={isDeleteFail}
-        />
-      )}
-    </S.Container>
+    </>
   );
 };
 

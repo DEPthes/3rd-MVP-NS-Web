@@ -11,6 +11,8 @@ import { getLikeThemeSearch } from '@/apis/user/getLikeThemeSearch';
 import { TPagination } from '@/types/pagination';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
+import EmptyCharacter from '@assets/images/EmptyCharacter.svg?react';
+import Loading from '@/components/layout/Loading';
 
 const LikedTopicPage: React.FC = () => {
   const [topics, setTopics] = useState<TTopic[]>([]); // 주제 목록
@@ -19,14 +21,13 @@ const LikedTopicPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1); // 현재 페이지 번호
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null); // 페이지 정보
   const [searchQuery, setSearchQuery] = useState<string>(''); // 검색어 상태 추가
-  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false); // 데이터 로딩 상태
+  const [isLoading, setIsLoading] = useState(true); // 데이터 로딩 상태
 
   const handleUnauthorized = useHandleUnauthorized();
   const { isMobileOrTablet } = useNSMediaQuery();
 
   // 좋아요 누른 주제 데이터를 가져오는 함수
   const fetchLikedTopics = useCallback(async () => {
-    setIsDataLoaded(false);
     try {
       const { topics, pageInfo } = await getLikeTheme(
         sortType,
@@ -39,14 +40,13 @@ const LikedTopicPage: React.FC = () => {
     } catch (error) {
       console.error('Error fetching liked topics:', error);
     } finally {
-      setIsDataLoaded(true);
+      setIsLoading(false);
     }
   }, [handleUnauthorized, pageNum, sortType]);
 
   // 검색 결과를 가져오는 함수
   const fetchSearchResults = useCallback(
     async (query: string) => {
-      setIsDataLoaded(false);
       try {
         const { topics, pageInfo } = await getLikeThemeSearch(
           query,
@@ -59,7 +59,7 @@ const LikedTopicPage: React.FC = () => {
       } catch (error) {
         console.error('Error fetching search results:', error);
       } finally {
-        setIsDataLoaded(true);
+        setIsLoading(false);
       }
     },
     [handleUnauthorized, pageNum, sortType],
@@ -100,7 +100,9 @@ const LikedTopicPage: React.FC = () => {
         setSortType={setSortType}
         sortOptions={sortOptions}
       />
-      {isDataLoaded ? (
+      {isLoading ? (
+        <Loading />
+      ) : (
         <S.EmptyState>
           {topics.length === 0 ? (
             <EmptyMessage
@@ -112,9 +114,14 @@ const LikedTopicPage: React.FC = () => {
             />
           ) : filteredTopics.length > 0 ? (
             <TopicList topics={filteredTopics} />
-          ) : null}
+          ) : (
+            <S.NoneList>
+              <EmptyCharacter />
+              <p>검색 결과가 없어요</p>
+            </S.NoneList>
+          )}
         </S.EmptyState>
-      ) : null}
+      )}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

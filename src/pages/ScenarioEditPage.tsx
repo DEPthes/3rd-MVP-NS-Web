@@ -15,6 +15,7 @@ import { putBoard } from '@/apis/board/putBoard';
 import EditModal from '@/components/modal/EditModal';
 import EditSuccessModal from '@/components/modal/EditSuccessModal';
 import EditCancelModal from '@/components/modal/EditCancelModal';
+import Loading from '@/components/layout/Loading';
 
 const ScenarioEditPage: React.FC = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const ScenarioEditPage: React.FC = () => {
   const [isEditCancelModal, setIsEditCancelModal] = useState<boolean>(false);
   const [isEditModal, setIsEditModal] = useState<boolean>(false);
   const [isEditSuccessModal, setIsEditSuccessModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -38,6 +40,7 @@ const ScenarioEditPage: React.FC = () => {
         );
         if (data) {
           setTopic(data);
+          setIsLoading(false);
         } else {
           console.error('주제를 불러오지 못했습니다.');
         }
@@ -112,78 +115,87 @@ const ScenarioEditPage: React.FC = () => {
     (state.boardTitle === title && state.boardContent === text);
 
   return (
-    <S.Container>
-      <S.TopicBox>
-        <S.TopicHeader>오늘의 주제</S.TopicHeader>
-        <S.Topic>{topic?.content}</S.Topic>
-        <S.LikeContainer onClick={handleLikeClick}>
-          {topic?.likedTheme ? (
-            <Main5HeartFill width={30} />
-          ) : (
-            <Main5Heart width={30} />
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <S.Container>
+          <S.TopicBox>
+            <S.TopicHeader>오늘의 주제</S.TopicHeader>
+            <S.Topic>{topic?.content}</S.Topic>
+            <S.LikeContainer onClick={handleLikeClick}>
+              {topic?.likedTheme ? (
+                <Main5HeartFill width={30} />
+              ) : (
+                <Main5Heart width={30} />
+              )}
+              <S.LikeText>이 주제 좋아요</S.LikeText>
+            </S.LikeContainer>
+          </S.TopicBox>
+          <S.NewTopicBox>
+            <S.Input
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value.slice(0, 20))}
+              placeholder="제목을 입력하세요 (최대 20자)"
+            />
+            <S.Separator />
+            <S.TextArea
+              value={text}
+              onChange={e => setText(e.target.value)}
+              placeholder="여기에 자유롭게 텍스트를 입력하세요."
+            />
+          </S.NewTopicBox>
+          <S.ButtonContainer>
+            <LightButton
+              text="취소"
+              onClick={() => setIsEditCancelModal(true)}
+            />
+            <DarkButton
+              text="수정완료"
+              onClick={handlePost}
+              isDisabled={isPostDisabled}
+            />
+          </S.ButtonContainer>
+          {isEditCancelModal && (
+            <BackDrop
+              children={
+                <EditCancelModal
+                  handleConfirmModal={() => navigate(-1)}
+                  handleCloseModal={() => setIsEditCancelModal(false)}
+                />
+              }
+              isOpen={isEditCancelModal}
+            />
           )}
-          <S.LikeText>이 주제 좋아요</S.LikeText>
-        </S.LikeContainer>
-      </S.TopicBox>
-      <S.NewTopicBox>
-        <S.Input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value.slice(0, 20))}
-          placeholder="제목을 입력하세요 (최대 20자)"
-        />
-        <S.Separator />
-        <S.TextArea
-          value={text}
-          onChange={e => setText(e.target.value)}
-          placeholder="여기에 자유롭게 텍스트를 입력하세요."
-        />
-      </S.NewTopicBox>
-      <S.ButtonContainer>
-        <LightButton text="취소" onClick={() => setIsEditCancelModal(true)} />
-        <DarkButton
-          text="수정완료"
-          onClick={handlePost}
-          isDisabled={isPostDisabled}
-        />
-      </S.ButtonContainer>
-      {isEditCancelModal && (
-        <BackDrop
-          children={
-            <EditCancelModal
-              handleConfirmModal={() => navigate(-1)}
-              handleCloseModal={() => setIsEditCancelModal(false)}
+          {isEditModal && (
+            <BackDrop
+              children={
+                <EditModal
+                  handleConfirmModal={handleModalPost}
+                  handleCloseModal={() => setIsEditModal(false)}
+                />
+              }
+              isOpen={isEditModal}
             />
-          }
-          isOpen={isEditCancelModal}
-        />
-      )}
-      {isEditModal && (
-        <BackDrop
-          children={
-            <EditModal
-              handleConfirmModal={handleModalPost}
-              handleCloseModal={() => setIsEditModal(false)}
+          )}
+          {isEditSuccessModal && (
+            <BackDrop
+              children={
+                <EditSuccessModal
+                  handleConfirmModal={() => {
+                    setIsEditSuccessModal(false);
+                    navigate(`/scenario/topic/${state.themeId}`);
+                    window.scroll({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+              }
+              isOpen={isEditSuccessModal}
             />
-          }
-          isOpen={isEditModal}
-        />
+          )}
+        </S.Container>
       )}
-      {isEditSuccessModal && (
-        <BackDrop
-          children={
-            <EditSuccessModal
-              handleConfirmModal={() => {
-                setIsEditSuccessModal(false);
-                navigate(`/scenario/topic/${state.themeId}`);
-                window.scroll({ top: 0, behavior: 'smooth' });
-              }}
-            />
-          }
-          isOpen={isEditSuccessModal}
-        />
-      )}
-    </S.Container>
+    </>
   );
 };
 

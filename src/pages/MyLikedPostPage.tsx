@@ -12,6 +12,8 @@ import { getLikeBoard } from '@/apis/user/getLikeBoard';
 import { getLikeBoardSearch } from '@/apis/user/getLikeBoardSearch';
 import { TPagination } from '@/types/pagination';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import EmptyCharacter from '@assets/images/EmptyCharacter.svg?react';
+import Loading from '@/components/layout/Loading';
 
 const MyLikedPostPage: React.FC = () => {
   const [likedPosts, setLikedPosts] = useState<TPost[]>([]);
@@ -20,13 +22,12 @@ const MyLikedPostPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1);
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>(''); // 검색어 상태 추가
-  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false); // 데이터 로딩 상태
+  const [isLoading, setIsLoading] = useState(true);
   const { isMobileOrTablet } = useNSMediaQuery();
   const handleUnauthorized = useHandleUnauthorized();
 
   // 좋아요 누른 게시글 데이터를 가져오는 함수
   const fetchLikedPosts = useCallback(async () => {
-    setIsDataLoaded(false);
     try {
       const { posts, pageInfo } = await getLikeBoard(
         sortType,
@@ -39,14 +40,13 @@ const MyLikedPostPage: React.FC = () => {
     } catch (error) {
       console.error('Error fetching liked posts:', error);
     } finally {
-      setIsDataLoaded(true);
+      setIsLoading(false);
     }
   }, [handleUnauthorized, pageNum, sortType]);
 
   // 검색 결과를 가져오는 함수
   const fetchSearchResults = useCallback(
     async (query: string) => {
-      setIsDataLoaded(false);
       try {
         const { posts, pageInfo } = await getLikeBoardSearch(
           query,
@@ -59,7 +59,7 @@ const MyLikedPostPage: React.FC = () => {
       } catch (error) {
         console.error('Error fetching search results:', error);
       } finally {
-        setIsDataLoaded(true);
+        setIsLoading(false);
       }
     },
     [sortType, pageNum, handleUnauthorized],
@@ -99,7 +99,9 @@ const MyLikedPostPage: React.FC = () => {
         setSortType={setSortType}
         sortOptions={sortOptions}
       />
-      {isDataLoaded ? (
+      {isLoading ? (
+        <Loading />
+      ) : (
         <S.EmptyState>
           {likedPosts.length === 0 ? (
             <EmptyMessage
@@ -111,9 +113,14 @@ const MyLikedPostPage: React.FC = () => {
             />
           ) : filteredLikedPosts.length > 0 ? (
             <PostList posts={filteredLikedPosts} />
-          ) : null}
+          ) : (
+            <S.NoneList>
+              <EmptyCharacter />
+              <p>검색 결과가 없어요</p>
+            </S.NoneList>
+          )}
         </S.EmptyState>
-      ) : null}
+      )}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

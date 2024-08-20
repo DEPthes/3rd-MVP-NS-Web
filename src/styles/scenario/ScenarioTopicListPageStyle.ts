@@ -328,7 +328,6 @@ export const PostContent = styled.div`
   font: var(--T4);
   color: var(--NS-Black);
   overflow-wrap: break-word;
-  width: 930px;
   transition: all 0.3s ease-in-out;
 
   ${isTablet} {
@@ -359,6 +358,7 @@ export const RightWrap = styled.div`
 export const PostInfo = styled.div`
   color: var(--Gray1);
   font: var(--W4);
+  white-space: nowrap;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
