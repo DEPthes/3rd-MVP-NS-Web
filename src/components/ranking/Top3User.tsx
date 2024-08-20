@@ -24,15 +24,15 @@ const Top3User: React.FC<Top3UserProps> = ({
   return (
     <S.Top3UserContainer>
       <S.Medal>{medalEmoji}</S.Medal>
-      <S.TopCircle>
-        <S.UserProfileImage
-          src={userProfileImage}
-          alt="top3UserProfileImage"
-          onClick={handleUserClick}
-        />
-      </S.TopCircle>
+
+      <S.UserProfileImage
+        src={userProfileImage}
+        alt="top3UserProfileImage"
+        onClick={handleUserClick}
+      />
+
       <S.UserId>{userId}</S.UserId>
-      <S.Point>{point}</S.Point>
+      <S.Point>{point}점</S.Point>
     </S.Top3UserContainer>
   );
 };

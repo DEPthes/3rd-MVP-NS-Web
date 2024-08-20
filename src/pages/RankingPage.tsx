@@ -7,6 +7,9 @@ import { TUser, TSortType } from '../types/ranking/user';
 import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 import { getRanking } from '@/apis/user/getRanking';
 import ToggleBar from '../components/ranking/ToggleBar';
+import DesktopPodium from '@/assets/images/podium.svg';
+import TabletPodium from '@/assets/images/PodiumTablet.svg';
+import MobilePodium from '@/assets/images/smallpodium.svg';
 
 const RankingPage: React.FC = () => {
   const [allUsers, setAllUsers] = useState<TUser[]>([]);
@@ -14,7 +17,7 @@ const RankingPage: React.FC = () => {
   const [top3Users, setTop3Users] = useState<TUser[]>([]);
   const [currentUser, setCurrentUser] = useState<TUser | null>(null); // 현재 사용자 저장
   const [sortType, setSortType] = useState<TSortType>('total');
-  const { isDesktop, isMobile, isTablet } = useNSMediaQuery();
+  const { isDesktop, isMobile, isMobileOrTablet, isTablet } = useNSMediaQuery();
   const isLoggedIn = !!localStorage.getItem('accessToken');
   const [isSearching, setIsSearching] = useState<boolean>(false); // 검색 상태 추가
 
@@ -29,8 +32,6 @@ const RankingPage: React.FC = () => {
         const { top3UserRes, optionRankingRes } = rankingData;
         setTop3Users(top3UserRes);
 
-        let filteredUserList = optionRankingRes;
-
         if (isLoggedIn) {
           const foundCurrentUser = optionRankingRes.find(
             (user: TUser) => user.isCurrentUser,
@@ -38,15 +39,11 @@ const RankingPage: React.FC = () => {
 
           if (foundCurrentUser) {
             setCurrentUser(foundCurrentUser); // 현재 사용자 정보 저장
-            filteredUserList = optionRankingRes.filter(
-              (user: TUser) => user.userId !== foundCurrentUser.userId,
-            ); // 현재 사용자를 제외한 목록 저장
           } else {
             setCurrentUser(null);
           }
         }
 
-        setFilteredUsers(filteredUserList); // 필터링된 목록 저장
         setAllUsers(optionRankingRes); // 전체 사용자 목록 저장
       }
     } catch (error) {
@@ -56,7 +53,7 @@ const RankingPage: React.FC = () => {
 
   useEffect(() => {
     fetchRankingData(sortType);
-  }, [sortType, isLoggedIn]); // isLoggedIn 상태도 의존성에 추가
+  }, [sortType, isLoggedIn]);
 
   return (
     <S.Container>
@@ -87,9 +84,10 @@ const RankingPage: React.FC = () => {
           </S.FilterLinks>
 
           {/* Top 3 유저 프로필 */}
-          <S.Top3Container>
-            <S.Top3Title>Top 3</S.Top3Title>
 
+          <S.Top3Title>Top 3</S.Top3Title>
+
+          <S.PodiumContainer>
             <S.Top3UserProfile>
               {top3Users.length > 1 && (
                 <S.Top2>
@@ -123,13 +121,11 @@ const RankingPage: React.FC = () => {
               )}
             </S.Top3UserProfile>
 
-            {isDesktop && (
-              <S.Podium src="/src/assets/images/podium.svg" alt="podiumimg" />
-            )}
-            {isMobile && <S.Podium src="/src/assets/images/smallpodium.svg" />}
+            {isDesktop && <S.Podium src={DesktopPodium} alt="podiumimg" />}
+            {isMobile && <S.Podium src={MobilePodium} />}
 
-            {isTablet && <S.Podium src="/src/assets/icons/PodiumTablet.svg" />}
-          </S.Top3Container>
+            {isTablet && <S.Podium src={TabletPodium} />}
+          </S.PodiumContainer>
 
           {/* 닉네임 검색 */}
           <S.SearchContainer>
@@ -166,7 +162,16 @@ const RankingPage: React.FC = () => {
                     isCurrentUser={true}
                     rank={
                       <>
-                        <span style={{ fontSize: '14px' }}>마이랭킹</span>
+                        <span
+                          style={{
+                            font: isMobileOrTablet ? 'var(--V6)' : 'var(--V5)',
+                            color: 'var(--NS-Main1)',
+                            position: 'relative',
+                            left: isMobileOrTablet ? '-3px' : '-9px',
+                          }}
+                        >
+                          마이랭킹
+                        </span>
                         <br />
                         {currentUser.ranking}
                       </>

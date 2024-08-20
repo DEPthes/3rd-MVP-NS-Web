@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
+import { isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
 	display: flex;
@@ -9,12 +9,20 @@ export const Container = styled.div`
 	padding: 20px;
 `;
 
-export const ProfileCircle = styled.div`
+export const ProfileContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px;
+`;
+
+export const ProfileCircle = styled.img`
 	width: 251px;
 	height: 251px;
 	background-color: var(--NS-White);
 	border-radius: 50%;
 	margin-bottom: 20px;
+	object-fit: cover; /* 이미지가 동그란 영역에 맞게 조정 */
 	${isMobileOrTablet}{
 		width: 150px;
 		height: 150px;
@@ -22,25 +30,24 @@ export const ProfileCircle = styled.div`
 `;
 
 export const ProfileNickname = styled.div`
-	color:var(--NS-White);
-	width:83px;
-	height:38px;
-	margin-top:17px;
+	color: var(--NS-White);
+	width: 83px;
+	height: 38px;
+	margin-top: 17px;
 	margin-bottom: 58px;
-	font:var(--H4);
+	font: var(--H4);
 	justify-content: center; 
 	align-items: center; 
 	text-align: center;
 	white-space: nowrap; /* 텍스트가 한 줄에 나타나도록 설정 */
 	${isMobileOrTablet}{
 		font: var(--H2);
-		margin-top:12px;
+		margin-top: 12px;
 		margin-bottom: 32px;
 	}
 `;
 
 export const PostBox = styled.div`
-	background-color: #ffffff;
 	background-color: var(--NS-White);
 	border-radius: 40px;
 	padding: 20px;
@@ -52,19 +59,12 @@ export const PostBox = styled.div`
 	align-items: center;
 	position: relative;
 	box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
-	${isMobile}{
+	${isMobileOrTablet}{
 		width: 328px;
 		height: auto; 
 		border-radius: 20px;
 		margin-bottom: 12px;
 		padding: 10px; 
-	}
-	${isTablet}{
-		width: 728px;
-		height: auto;
-		border-radius: 20px;
-		margin-bottom: 12px;
-		padding: 15px; 
 	}
 `;
 
@@ -73,7 +73,7 @@ export const PostInfo = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%; 
-	overflow: ellipsis;
+	overflow: hidden;
 	margin-left: 20px;
 	${isMobileOrTablet}{
 		margin-top: 0;
@@ -138,3 +138,4 @@ export const LikeCount = styled.div`
 		font: var(--T5-B);
 	}
 `;
+

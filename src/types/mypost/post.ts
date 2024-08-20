@@ -5,6 +5,7 @@ export type TPost = {
   theme: string; // 주제명
   published: boolean; // 발행 여부
   countLike: number; // 좋아요 수
+  liked: boolean;
 };
 
 // 정렬 타입 정의

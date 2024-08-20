@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 149px;
 `;
 
 export const Wrapper = styled.div`
@@ -21,14 +22,14 @@ export const Wrapper = styled.div`
   ${isMobile} {
     width: 328px;
     height: auto;
-    margin-top: 60px;
+    margin-top: 30px;
     margin-bottom: 60px;
   }
 
   ${isTablet} {
     width: 728px;
     height: auto;
-    margin-top: 20px;
+    margin-top: 26px;
     margin-bottom: 30px;
   }
 `;
@@ -43,17 +44,19 @@ export const Top3Title = styled.h2`
   height: 43px;
   font: var(--H1-1);
   color: var(--NS-White);
+  text-align: center;
+  margin-bottom: 50px;
 
   ${isMobileOrTablet} {
     height: 22px;
-    margin-bottom: 26px;
+    margin-bottom: 31px;
     font: var(--BigButton);
   }
 `;
 
 export const FilterLinks = styled.div`
   height: 19px;
-  z-index: 999; /* 최대한 높은 z-index 설정 */
+  z-index: 999; /
   margin-top: 34px;
   right: 0px;
   color: var(--NS-White);
@@ -61,7 +64,7 @@ export const FilterLinks = styled.div`
   position: absolute;
 
   ${isMobileOrTablet} {
-    margin-top: 293px;
+    margin-top: 301px;
   }
 `;
 
@@ -75,6 +78,7 @@ export const Top3Container = styled.div`
   ${isMobile} {
     width: 319.66px;
     height: 209px;
+    margin-bottom: 0px;
   }
 
   ${isTablet} {
@@ -85,61 +89,73 @@ export const Top3Container = styled.div`
   }
 `;
 
+export const PodiumContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+ ${isMobile} {
+    width: 100%
+    height: 161px;
+
+  }
+`;
+
 export const Top3UserProfile = styled.div`
   width: 660px;
-  height: 340px;
+  height: 317px;
   display: flex;
   gap: 99px;
+  margin-top: 0px;
 
   ${isMobile} {
     width: 276px;
-    height: 137px;
+    height: 146px;
     gap: 37px;
     justify-content: center;
   }
 
   ${isTablet} {
     width: 399.42px;
-    height: 137px;
+    height: 146px;
     justify-content: center;
     gap: 55.56px;
   }
 `;
 
 export const Top1 = styled.div`
-  margin-top: 24px;
-  margin-bottom: 44px;
   display: flex;
+  height: 255px;
 
   ${isMobile} {
     width: 64px;
-    height: 111px;
+    height: 125px;
     margin-top: 0;
-    margin-bottom: 34px;
     max-width: 400px;
   }
 
   ${isTablet} {
     width: 96.1px;
-    height: 111px;
+    height: 125px;
     margin-top: 0;
+    margin-bottom: 20px;
+    max-width: 400px;
   }
 `;
 
 export const Top2 = styled.div`
-  margin-top: 102px;
-  margin-bottom: -35px;
+  margin-top: 62px;
+  margin-bottom: 0px;
 
   ${isMobile} {
     width: 64px;
-    height: 111px;
-    margin-top: 26px;
+    height: 125px;
+    margin-top: 21px;
   }
 
   ${isTablet} {
     width: 96.1px;
-    height: 111px;
-    margin-top: 26px;
+    height: 125px;
+    margin-top: 21px;
   }
 `;
 
@@ -241,7 +257,7 @@ export const TableHeader = styled.table`
   width: 100%;
   font: var(--T2);
   color: var(--NS-Main1);
-  padding-bottom: 16px;
+  padding-bottom: 15px;
 
   ${isMobileOrTablet} {
     height: 100%;

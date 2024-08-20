@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '@/styles/mypost/EmptyMessageStyle';
+import characterimg from '@/assets/images/empty_character.svg';
 
 type EmptyMessageProps = {
   buttonText: string; // 버튼 텍스트
@@ -20,10 +21,7 @@ const EmptyMessage: React.FC<EmptyMessageProps> = ({
   return (
     <S.Container>
       <S.EmptyMessageContainer>
-        <S.Image
-          src="/src/assets/images/empty_character.svg"
-          alt="character img"
-        />
+        <S.Image src={characterimg} alt="character img" />
         <S.Message $smallfont={smallfont}>{messageText}</S.Message>
       </S.EmptyMessageContainer>
       <S.ButtonContainer>

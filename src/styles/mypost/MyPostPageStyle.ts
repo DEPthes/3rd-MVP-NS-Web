@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import CheckBoxDefault from '@/assets/icons/CheckBoxDefault.svg';
-import CheckBoxVariant from '@assets/icons/CheckBoxVariant.svg';
+import CheckBoxVariant from '@/assets/icons/CheckBoxVariant.svg';
 import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`

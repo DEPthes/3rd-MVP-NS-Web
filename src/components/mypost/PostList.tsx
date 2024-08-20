@@ -18,6 +18,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
           title={post.title}
           countLike={post.countLike} // countLike를 사용
           published={post.published !== undefined ? post.published : true}
+          liked={post.liked} // liked 값을 PostItem에 전달, 없으면 기본값 true
         />
       ))}
     </div>

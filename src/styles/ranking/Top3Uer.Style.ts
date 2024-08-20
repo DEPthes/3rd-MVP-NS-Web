@@ -6,17 +6,18 @@ export const Top3UserContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 255px;
 
   ${isMobile} {
     width: 64px;
-    height: 111px;
-    max-with: 500px;
+    height: 125px;
+    max-width: 500px;
   }
 
   ${isTablet} {
     width: 96.1px;
-    height: 111px;
-    max-with: 500px;
+    height: 125px;
+    max-width: 500px;
   }
 `;
 
@@ -37,7 +38,7 @@ export const Medal = styled.div`
   }
 `;
 
-export const TopCircle = styled.div`
+export const UserProfileImage = styled.img`
   border-radius: 50%;
   width: 156px;
   height: 156px;
@@ -49,21 +50,12 @@ export const TopCircle = styled.div`
   justify-content: center;
   font-size: 18px;
   font-weight: bold;
-  border: 1px solid #749df5;
-
+  border: 1px solid var(--NS-Main2);
+  object-fit: cover;
   ${isMobileOrTablet} {
     width: 64px;
-    height: 64px;
-    margin-bottom: 4px;
+    heigth: 64px;
   }
-`;
-
-export const UserProfileImage = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  cursor: pointer;
-  object-fit: cover;
 `;
 
 export const UserId = styled.div`
@@ -76,7 +68,7 @@ export const UserId = styled.div`
   ${isMobileOrTablet} {
     margin-top: 4px;
     height: 19px;
-    font: var(--T13);
+    font: var(--V7);
     position: relative;
     width: auto;
     white-space: nowrap;
@@ -84,9 +76,16 @@ export const UserId = styled.div`
 `;
 
 export const Point = styled.div`
-  margin-top: 6px;
-  font: var(--T3-3);
+  width: 45px;
+  height: 28px;
+  margin-top: -4px;
+  font: var(--V4);
   color: var(--NS-White);
   text-align: center;
   height: 28px;
+
+  ${isMobileOrTablet} {
+    font: var(--V8);
+    margin-top: 1px;
+  }
 `;
