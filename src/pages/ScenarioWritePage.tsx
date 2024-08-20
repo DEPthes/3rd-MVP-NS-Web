@@ -126,7 +126,7 @@ const ScenarioWritePage: React.FC = () => {
 
     const response = await postDraft(draftData, handleUnauthorized);
     if (response?.check) {
-      setBoardId(0); //임시 저장 결과로 나온 boardId 추가
+      setBoardId(response.information.boardId);
       setTitleSave(title);
       setTextSave(text);
       setIsDraftSuccessModal(true);

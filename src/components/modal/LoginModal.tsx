@@ -16,12 +16,8 @@ const LoginModal = ({
       <h1>로그인 필요</h1>
       <p>로그인이 필요한 기능입니다. 로그인 하시겠습니까?</p>
       <S.ButtonWrap>
-        <DarkButton text="로그인" onClick={handleConfirmModal} isSmall={true} />
-        <LightButton
-          text="취소"
-          onClick={() => setLoginModalState(false)}
-          isSmall={true}
-        />
+        <DarkButton text="로그인" onClick={handleConfirmModal} />
+        <LightButton text="취소" onClick={() => setLoginModalState(false)} />
       </S.ButtonWrap>
     </S.Container>
   );

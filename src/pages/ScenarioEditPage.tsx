@@ -11,9 +11,10 @@ import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getThemePast } from '@/apis/theme/getThemePast';
 import BackDrop from '@/components/layout/BackDrop';
-import PostModal from '@/components/modal/PostModal';
-import PostSuccessModal from '@/components/modal/PostSuccessModal';
 import { putBoard } from '@/apis/board/putBoard';
+import EditModal from '@/components/modal/EditModal';
+import EditSuccessModal from '@/components/modal/EditSuccessModal';
+import EditCancelModal from '@/components/modal/EditCancelModal';
 
 const ScenarioEditPage: React.FC = () => {
   const navigate = useNavigate();
@@ -22,8 +23,9 @@ const ScenarioEditPage: React.FC = () => {
   const [topic, setTopic] = useState<TTodayThemeResponse | null>(null);
   const [title, setTitle] = useState<string>(state.boardTitle);
   const [text, setText] = useState<string>(state.boardContent);
-  const [isPostModal, setIsPostModal] = useState<boolean>(false);
-  const [isPostSuccessModal, setIsPostSuccessModal] = useState<boolean>(false);
+  const [isEditCancelModal, setIsEditCancelModal] = useState<boolean>(false);
+  const [isEditModal, setIsEditModal] = useState<boolean>(false);
+  const [isEditSuccessModal, setIsEditSuccessModal] = useState<boolean>(false);
 
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -81,7 +83,7 @@ const ScenarioEditPage: React.FC = () => {
 
   const handlePost = () => {
     if (title.trim() === '' || text.trim() === '') return;
-    setIsPostModal(true);
+    setIsEditModal(true);
   };
 
   const handleModalPost = async () => {
@@ -95,12 +97,12 @@ const ScenarioEditPage: React.FC = () => {
     );
 
     if (response?.check) {
-      setIsPostSuccessModal(true);
+      setIsEditSuccessModal(true);
     } else {
       console.error('게시 실패:', response);
     }
 
-    setIsPostModal(false);
+    setIsEditModal(false);
   };
 
   const isPostDisabled =
@@ -138,36 +140,47 @@ const ScenarioEditPage: React.FC = () => {
         />
       </S.NewTopicBox>
       <S.ButtonContainer>
-        <LightButton text="취소" onClick={() => navigate(-1)} />
+        <LightButton text="취소" onClick={() => setIsEditCancelModal(true)} />
         <DarkButton
           text="수정완료"
           onClick={handlePost}
           isDisabled={isPostDisabled}
         />
       </S.ButtonContainer>
-      {isPostModal && (
+      {isEditCancelModal && (
         <BackDrop
           children={
-            <PostModal
-              handleConfirmModal={handleModalPost}
-              handleCloseModal={() => setIsPostModal(false)}
+            <EditCancelModal
+              handleConfirmModal={() => navigate(-1)}
+              handleCloseModal={() => setIsEditCancelModal(false)}
             />
           }
-          isOpen={isPostModal}
+          isOpen={isEditCancelModal}
         />
       )}
-      {isPostSuccessModal && (
+      {isEditModal && (
         <BackDrop
           children={
-            <PostSuccessModal
+            <EditModal
+              handleConfirmModal={handleModalPost}
+              handleCloseModal={() => setIsEditModal(false)}
+            />
+          }
+          isOpen={isEditModal}
+        />
+      )}
+      {isEditSuccessModal && (
+        <BackDrop
+          children={
+            <EditSuccessModal
               handleConfirmModal={() => {
-                setIsPostSuccessModal(false);
+                setIsEditSuccessModal(false);
                 navigate(`/scenario/topic/${state.themeId}`);
                 window.scroll({ top: 0, behavior: 'smooth' });
               }}
             />
           }
-          isOpen={isPostSuccessModal}
+          isOpen={isEditSuccessModal}
         />
       )}
     </S.Container>

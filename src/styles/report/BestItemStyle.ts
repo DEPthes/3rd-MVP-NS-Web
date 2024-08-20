@@ -54,7 +54,7 @@ export const PostWrap = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${isMobile} {
-    width: 320px;
+    width: 328px;
   }
 
   ${isTablet} {

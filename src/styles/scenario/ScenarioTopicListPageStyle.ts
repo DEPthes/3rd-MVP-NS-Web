@@ -288,7 +288,7 @@ export const PostBox = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${isMobile} {
-    width: 320px;
+    width: 328px;
     height: 64px;
     border-radius: 20px;
   }

@@ -14,6 +14,14 @@ export interface TPostDraftResponse {
   information: string;
 }
 
+export interface TDraftResponse {
+  check: boolean;
+  information: {
+    message: string;
+    boardId: number;
+  };
+}
+
 export interface TPostDraftRequest {
   boardId?: number;
   title: string;

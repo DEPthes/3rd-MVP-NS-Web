@@ -1,7 +1,7 @@
 import * as S from '@/styles/modal/ModalStyle';
 import DarkButton from '../button/DarkButton';
 
-const PostSuccessModal = ({
+const EditSuccessModal = ({
   handleConfirmModal,
 }: {
   handleConfirmModal: () => void;
@@ -9,10 +9,10 @@ const PostSuccessModal = ({
   return (
     <S.Container>
       <h1>상상력 게시 완료!</h1>
-      <S.ModalTextBlack>N력 +5 상승!</S.ModalTextBlack>
+      <S.ModalTextBlack>상상력 수정이 완료되었습니다!</S.ModalTextBlack>
       <DarkButton text="확인" onClick={handleConfirmModal} />
     </S.Container>
   );
 };
 
-export default PostSuccessModal;
+export default EditSuccessModal;

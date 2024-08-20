@@ -6,6 +6,7 @@ import { TUserData } from '@/types/profile/TUserData';
 import ChangeNicknameModal from '@/components/profile/ChangeNicknameModal';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { patchProfile } from '@/apis/user/patchProfile';
+import BackDrop from '@/components/layout/BackDrop';
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -87,49 +88,58 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <S.Container>
-      <S.MyPage>마이페이지</S.MyPage>
-      <S.ProfileSection>
-        <S.ProfileImage
-          src={userData?.information.imageUrl}
-          alt="Profileimage"
-        />
-        <S.Nickname>{userData?.information.nickname}</S.Nickname>
-        <S.EditOptions>
-          <S.EditOption onClick={openFilePicker}>프로필사진 변경</S.EditOption>
-          <input
-            type="file"
-            accept="image/png, image/jpeg"
-            style={{ display: 'none' }}
-            ref={inputFileRef}
-            onChange={handleImageChange}
+    <>
+      <S.Container>
+        <S.MyPage>마이페이지</S.MyPage>
+        <S.ProfileSection>
+          <S.ProfileImage
+            src={userData?.information.imageUrl}
+            alt="Profileimage"
           />
-          <S.EditOption onClick={() => setIsModalOpen(true)}>
-            닉네임 수정
-          </S.EditOption>
+          <S.Nickname>{userData?.information.nickname}</S.Nickname>
+          <S.EditOptions>
+            <S.EditOption onClick={openFilePicker}>
+              프로필사진 변경
+            </S.EditOption>
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              style={{ display: 'none' }}
+              ref={inputFileRef}
+              onChange={handleImageChange}
+            />
+            <S.EditOption onClick={() => setIsModalOpen(true)}>
+              닉네임 수정
+            </S.EditOption>
+          </S.EditOptions>
+        </S.ProfileSection>
+        <S.ButtonSection>
+          <S.ActionButton
+            onClick={() => {
+              navigate('/mypage/myposts');
+            }}
+          >
+            ☞ 내가 쓴 글 ☜
+          </S.ActionButton>
+          <S.ActionButton2 onClick={() => navigate('/mypage/mylikedposts')}>
+            ♡ 좋아요 누른 글 ♥
+          </S.ActionButton2>
+          <S.ActionButton onClick={() => navigate('/mypage/likedtopics')}>
+            ♥ 좋아요 누른 주제 ♡
+          </S.ActionButton>
+        </S.ButtonSection>
+      </S.Container>
+      <BackDrop
+        children={
           <ChangeNicknameModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             onSuccess={handleNicknameChangeSuccess} // 닉네임 변경 성공 시 호출
           />
-        </S.EditOptions>
-      </S.ProfileSection>
-      <S.ButtonSection>
-        <S.ActionButton
-          onClick={() => {
-            navigate('/mypage/myposts');
-          }}
-        >
-          ☞ 내가 쓴 글 ☜
-        </S.ActionButton>
-        <S.ActionButton2 onClick={() => navigate('/mypage/mylikedposts')}>
-          ♡ 좋아요 누른 글 ♥
-        </S.ActionButton2>
-        <S.ActionButton onClick={() => navigate('/mypage/likedtopics')}>
-          ♥ 좋아요 누른 주제 ♡
-        </S.ActionButton>
-      </S.ButtonSection>
-    </S.Container>
+        }
+        isOpen={isModalOpen}
+      />
+    </>
   );
 };
 

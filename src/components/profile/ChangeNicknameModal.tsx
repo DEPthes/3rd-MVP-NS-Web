@@ -159,11 +159,10 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <S.ModalOverlay>
-      <S.ModalContent>
-        <S.Title>닉네임 수정</S.Title>
-
-        {!isPasswordVerified ? (
+    <S.ModalContent>
+      {!isPasswordVerified ? (
+        <>
+          <S.Title>비밀번호 입력</S.Title>
           <S.PasswordContainer>
             <S.PasswordSection $color={passwordValidationColor}>
               <S.Input
@@ -192,74 +191,80 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
               )}
             </S.PasswordSection>
             {passwordValidationMessage && (
-              <S.PasswordValidationMessage $color={passwordValidationColor}>
+              <S.ValidationMessage $color={passwordValidationColor}>
                 {passwordValidationMessage}
-              </S.PasswordValidationMessage>
+              </S.ValidationMessage>
             )}
-            <S.PButtonContainer>
-              <LightButton text="취소" onClick={handleModalClose} />
-              <DarkButton
-                text="확인"
-                onClick={handlePasswordVerification}
-                isDisabled={!password} // 비밀번호가 입력되었을 때만 활성화
-              />
-            </S.PButtonContainer>
           </S.PasswordContainer>
-        ) : (
-          <>
-            <S.InputContainer>
-              <S.ChangeContainer>
-                <S.InputSection $color={validationColor}>
-                  <S.Input
-                    type="text"
-                    value={nickname}
-                    onChange={handleNicknameChange}
-                    placeholder="변경할 닉네임"
-                    $color={validationColor}
-                  />
-                  {nickname.length > 0 &&
-                    validationColor === 'var(--NS-Black)' && (
-                      <S.Icon
-                        src={FieldCancelIcon}
-                        alt="clear"
-                        onClick={clearNicknameInput} // 닉네임만 초기화
-                      />
-                    )}
-                  {validationColor === 'var(--NS-Main1)' && isSaveEnabled && (
-                    <S.Icon src={FieldCheckIcon} />
-                  )}
-                  {validationColor === '#EE4B4B' && (
+          <S.PButtonContainer>
+            <LightButton text="취소" onClick={handleModalClose} />
+            <DarkButton
+              text="확인"
+              onClick={handlePasswordVerification}
+              isDisabled={!password} // 비밀번호가 입력되었을 때만 활성화
+            />
+          </S.PButtonContainer>
+        </>
+      ) : (
+        <>
+          <S.Title>닉네임 수정</S.Title>
+          <S.InputContainer>
+            <S.ChangeContainer>
+              <S.InputSection $color={validationColor}>
+                <S.Input
+                  type="text"
+                  value={nickname}
+                  onChange={handleNicknameChange}
+                  placeholder="변경할 닉네임"
+                  $color={validationColor}
+                />
+                {nickname.length > 0 &&
+                  validationColor === 'var(--NS-Black)' && (
                     <S.Icon
-                      src={FieldCancelRedIcon}
-                      onClick={clearNicknameInput}
+                      src={FieldCancelIcon}
+                      alt="clear"
+                      onClick={clearNicknameInput} // 닉네임만 초기화
                     />
                   )}
-                </S.InputSection>
-                <S.DButtonContainer>
-                  <LightButton
-                    text="중복 확인"
-                    onClick={handleDuplicateCheck}
-                    isDisabled={!isNicknameValid} // 닉네임이 유효할 때만 활성화
+                {validationColor === 'var(--NS-Main1)' && isSaveEnabled && (
+                  <S.Icon src={FieldCheckIcon} />
+                )}
+                {validationColor === '#EE4B4B' && (
+                  <S.Icon
+                    src={FieldCancelRedIcon}
+                    onClick={clearNicknameInput}
                   />
-                </S.DButtonContainer>
-              </S.ChangeContainer>
-              <S.ValidationMessage $color={validationColor}>
-                {validationMessage}
-              </S.ValidationMessage>
-            </S.InputContainer>
-
-            <S.ButtonContainer>
-              <LightButton text="취소" onClick={handleModalClose} />
-              <DarkButton
-                text="확인"
-                onClick={handleSave}
-                isDisabled={!isSaveEnabled}
-              />
-            </S.ButtonContainer>
-          </>
-        )}
-      </S.ModalContent>
-    </S.ModalOverlay>
+                )}
+              </S.InputSection>
+              <S.DButtonContainer>
+                <LightButton
+                  text="중복 확인"
+                  onClick={handleDuplicateCheck}
+                  isDisabled={!isNicknameValid} // 닉네임이 유효할 때만 활성화
+                  isSmall={true}
+                />
+              </S.DButtonContainer>
+            </S.ChangeContainer>
+            <S.ValidationMessage $color={validationColor}>
+              {validationMessage}
+            </S.ValidationMessage>
+          </S.InputContainer>
+          <S.ButtonContainer>
+            <LightButton
+              text="취소"
+              onClick={handleModalClose}
+              isSmall={true}
+            />
+            <DarkButton
+              text="확인"
+              onClick={handleSave}
+              isDisabled={!isSaveEnabled}
+              isSmall={true}
+            />
+          </S.ButtonContainer>
+        </>
+      )}
+    </S.ModalContent>
   );
 };
 
