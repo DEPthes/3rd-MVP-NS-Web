@@ -144,7 +144,7 @@ export const NewTopicBox = styled.div`
 
   ${isTablet} {
     width: 728px;
-    height: 200px;
+    height: 230px;
     border-radius: 20px;
     margin-top: 10px;
     padding: 16px 0;
@@ -189,10 +189,6 @@ export const TextArea = styled.textarea`
   ${isMobileOrTablet} {
     font: var(--P-T2);
     padding-top: 11px;
-  }
-
-  ${isTablet} {
-    padding-bottom: 11px;
   }
 `;
 
