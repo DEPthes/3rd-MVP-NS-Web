@@ -32,6 +32,7 @@ const SearchNicknameInput: React.FC<SearchNicknameInputProps> = ({
         placeholder="닉네임 검색"
         value={query}
         onChange={e => setQuery(e.target.value)}
+        spellCheck={false}
       />
       <S.Icon src={SearchIcon} alt="search" />
     </S.SearchContainer>

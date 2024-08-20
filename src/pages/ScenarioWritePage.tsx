@@ -193,12 +193,14 @@ const ScenarioWritePage: React.FC = () => {
               value={title}
               onChange={e => setTitle(e.target.value.slice(0, 20))}
               placeholder="제목을 입력하세요 (최대 20자)"
+              spellCheck={false}
             />
             <S.Separator />
             <S.TextArea
               value={text}
               onChange={e => setText(e.target.value)}
               placeholder="여기에 자유롭게 텍스트를 입력하세요."
+              spellCheck={false}
             />
           </S.NewTopicBox>
           <S.ButtonContainer>

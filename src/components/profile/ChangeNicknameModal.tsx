@@ -170,6 +170,7 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
                 onChange={handlePasswordChange}
                 placeholder="비밀번호"
                 $color={passwordValidationColor}
+                spellCheck={false}
               />
               {password.length > 0 && passwordValidationColor !== '#EE4B4B' && (
                 <>
@@ -216,6 +217,7 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
                   onChange={handleNicknameChange}
                   placeholder="변경할 닉네임"
                   $color={validationColor}
+                  spellCheck={false}
                 />
                 {nickname.length > 0 &&
                   validationColor === 'var(--NS-Black)' && (

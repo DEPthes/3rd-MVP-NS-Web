@@ -116,6 +116,7 @@ const ScenarioTopicPage: React.FC = () => {
           placeholder="검색할 키워드를 입력하세요"
           value={searchTerm}
           onChange={handleSearch}
+          spellCheck={false}
         />
         <S.SearchIconWrapper>
           <img src={SearchIcon} alt="Search" />
