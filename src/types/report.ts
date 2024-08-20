@@ -34,4 +34,5 @@ export type TReportBest = {
   bestSelectionCount: number | null; //선정된 횟수
   boardId: number | null; //글 id
   boardCreatedAt: string | null; //발행일
+  isLiked: boolean; //좋아요 여부
 };

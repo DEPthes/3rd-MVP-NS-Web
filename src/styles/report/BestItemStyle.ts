@@ -15,13 +15,13 @@ export const ProfileWrap = styled.div`
   align-items: center;
   width: 100px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
   > img {
     width: 100px;
     height: 100px;
     border-radius: 100px;
     object-fit: cover;
-    border: 1px solid var(--NS-Main1);
   }
 
   > h3 {
@@ -52,6 +52,7 @@ export const PostWrap = styled.div`
   border-radius: 40px;
   padding: 0 46px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
   ${isMobile} {
     width: 328px;

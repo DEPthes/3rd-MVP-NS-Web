@@ -164,9 +164,7 @@ const ScenarioTopicListPage: React.FC = () => {
         <S.Header>주제</S.Header>
         <S.TopicHeader>{topic?.content}</S.TopicHeader>
         <S.InfoContainer>
-          <S.PublishDate>
-            발행일 : {topic && new Date(topic.date).toLocaleDateString()}
-          </S.PublishDate>
+          <S.PublishDate>발행일 : {topic?.date}</S.PublishDate>
           <S.PublishDate>|</S.PublishDate>
           <S.LikeContainer onClick={handleTopicLikeClick}>
             {topic?.likedTheme ? (

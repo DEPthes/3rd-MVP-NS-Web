@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { getReport } from '@/apis/report/getReport';
 import { useNavigate } from 'react-router-dom';
+import { boardLike } from '@/apis/board/boardLike';
+import { useRecoilState } from 'recoil';
+import { selectedDateState } from '@/recoil/date';
 
 const ReportPage = () => {
   const navigate = useNavigate();
@@ -15,7 +18,7 @@ const ReportPage = () => {
     null,
   );
   const { isMobileOrTablet } = useNSMediaQuery();
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
 
   const isTReport = (
     report: TReport | TReportToday | null,
@@ -62,6 +65,41 @@ const ReportPage = () => {
     //게시글 조회 페이지로 이동
     navigate(`/scenario/${boardId}`);
     window.scroll({ top: 0, behavior: 'smooth' });
+  };
+
+  //게시글 하트 클릭 함수
+  const onHeartClick = async (boardId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    try {
+      const response = await boardLike(boardId, handleUnauthorized);
+      console.log(boardId);
+      if (response) {
+        console.log(response);
+        setReportList(prevReport => {
+          if (prevReport && isTReport(prevReport)) {
+            return {
+              ...prevReport,
+              bestPost:
+                prevReport.bestPost?.map(post =>
+                  post.boardId === boardId
+                    ? {
+                        ...post,
+                        likeCount: post.isLiked
+                          ? (post.likeCount ?? 0) - 1
+                          : (post.likeCount ?? 0) + 1,
+                        isLiked: !post.isLiked,
+                      }
+                    : post,
+                ) ?? [],
+            };
+          }
+          return prevReport;
+        });
+      }
+    } catch (error) {
+      console.error('좋아요 요청 중 오류 발생:', error);
+    }
   };
 
   //글자 자르기
@@ -140,6 +178,7 @@ const ReportPage = () => {
                     item={data}
                     onProfileClick={onProfileClick}
                     onPostClick={onPostClick}
+                    onHeartClick={onHeartClick}
                   />
                 );
               })}
