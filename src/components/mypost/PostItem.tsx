@@ -12,9 +12,10 @@ const PostItem: React.FC<TPost> = ({
   title,
   countLike,
   published,
+  liked = true, // PostList에서 전달된 liked 값을 기본값으로 설정
 }) => {
   const handleUnauthorized = useHandleUnauthorized();
-  const [liked, setLiked] = useState(true); // 좋아요 상태 관리
+  const [likedState, setLikedState] = useState(liked); // 받아온 liked를 초기값으로 설정
   const [likeCount, setLikeCount] = useState(countLike); // 좋아요 수 상태 관리
   const formattedDate = createdDate.split('T')[0].split('-').join('. ');
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const PostItem: React.FC<TPost> = ({
     const newLikedStatus = await postBoardLike(boardId, handleUnauthorized);
 
     if (newLikedStatus !== undefined) {
-      setLiked(newLikedStatus); // 서버 응답에 따라 좋아요 상태 업데이트
+      setLikedState(newLikedStatus); // 서버 응답에 따라 좋아요 상태 업데이트
       setLikeCount(prevCount => prevCount + (newLikedStatus ? 1 : -1)); // 좋아요 수 업데이트
     } else {
       console.error('좋아요 상태 변경에 실패했습니다.');
@@ -50,7 +51,7 @@ const PostItem: React.FC<TPost> = ({
       </S.TextField>
       {published && ( // published가 true일 때만 LikeContainer를 렌더링
         <S.LikesContainer>
-          <S.LikeIcon $liked={liked} onClick={handleLikeClick} />
+          <S.LikeIcon $liked={likedState} onClick={handleLikeClick} />
           <S.PostLikes>{likeCount}</S.PostLikes>
         </S.LikesContainer>
       )}
