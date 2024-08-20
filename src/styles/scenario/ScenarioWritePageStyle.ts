@@ -172,13 +172,14 @@ export const Separator = styled.hr`
   ${isMobileOrTablet} {
     margin-top: 11px;
     margin-bottom: 11px;
+    border: 1px dashed var(--NS-Main2);
   }
 `;
 
 export const TextArea = styled.textarea`
   width: 90%;
   height: 80%;
-  border: 1px solid var(--NS-White);
+  border: none;
   font: var(--T3);
   text-align: center;
   resize: none;
