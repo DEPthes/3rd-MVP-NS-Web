@@ -1,135 +1,149 @@
+import { TPagination } from './pagination';
+
 // 오늘의 주제 API 응답 타입 정의
 export interface TTodayThemeResponse {
-	content: string;
-	userId: number | null;
-	likedTheme: boolean;
-	themeId: number;
+  content: string;
+  userId: number | null;
+  likedTheme: boolean;
+  themeId: number;
 }
 
 // 게시글 임시 저장/게시 API 요청과 응답 타입 정의
 export interface TPostDraftResponse {
-	check: boolean;
-	information: string;
+  check: boolean;
+  information: string;
+}
+
+export interface TDraftResponse {
+  check: boolean;
+  information: {
+    message: string;
+    boardId: number;
+  };
 }
 
 export interface TPostDraftRequest {
-	boardId?: number;
-	title: string;
-	content: string;
-	themeId: number;
+  boardId?: number;
+  title: string;
+  content: string;
+  themeId: number;
 }
 
 // 주제 목록의 개별 항목 타입 정의
 export interface TTheme {
-	themeId: number; // 주제 ID
-	content: string;
-	date: string;
-	likeCount: number;
-	likedTheme: boolean;
-	boardCount: number;
+  themeId: number; // 주제 ID
+  content: string;
+  date: string;
+  likeCount: number;
+  likedTheme: boolean;
+  boardCount: number;
 }
 
 // 주제 목록 조회 API 전체 응답 타입 정의
 export interface TThemeListResponse {
-	check: boolean;
-	information: {
-		pageInfo: {
-			pageNumber: number;
-			pageSize: number;
-			totalElements: number;
-			totalPages: number;
-		};
-		themeList: TTheme[]; // resList를 themeList로 수정합니다.
-		userId: number;
-	};
+  check: boolean;
+  information: {
+    pageInfo: {
+      pageNumber: number;
+      pageSize: number;
+      totalElements: number;
+      totalPages: number;
+    };
+    themeList: TTheme[]; // resList를 themeList로 수정합니다.
+    userId: number;
+  };
 }
 
 // 좋아요 상태 관리 타입 정의
 export type TLikeState = {
-	[key: string]: boolean;
+  [key: string]: boolean;
 };
 
 // 주제 상세 조회 API 요청 파라미터 타입 정의
 export interface TGetThemeParams {
-	themeId: number;
-	page: number;
-	size: number;
-	sortBy: 'date' | 'likeCount';
+  themeId: number;
+  page: number;
+  size: number;
+  sortBy: 'date' | 'likeCount';
 }
 
 // 게시글 정보 타입 정의
 export interface TBoard {
-	boardId: number;
-	title: string;
-	content: string;
-	nickname: string;
-	date: string;
-	likeCount: number;
+  boardId: number;
+  title: string;
+  content: string;
+  nickname: string;
+  date: string;
+  likeCount: number;
 }
 
 // 주제 상세 조회 응답 타입 정의
 export interface TThemeDetailResponse {
-	themeId: number; // 주제 ID 추가
-	pageInfo: {
-		pageNumber: number;
-		pageSize: number;
-		totalElements: number;
-		totalPages: number;
-	};
-	userId: number | null;
-	likedTheme: boolean;
-	content: string;
-	date: string;
-	likeCount: number;
-	boards: Array<{
-		boardId: number;
-		title: string;
-		content: string;
-		nickname: string;
-		date: string;
-		likeCount: number;
-		likedBoard: boolean;
-	}>;
+  themeId: number; // 주제 ID 추가
+  pageInfo: {
+    pageNumber: number;
+    pageSize: number;
+    totalElements: number;
+    totalPages: number;
+  };
+  userId: number | null;
+  likedTheme: boolean;
+  content: string;
+  date: string;
+  likeCount: number;
+  boards: Array<{
+    boardId: number;
+    title: string;
+    content: string;
+    nickname: string;
+    date: string;
+    likeCount: number;
+    likedBoard: boolean;
+  }>;
 }
 
 // 게시글 상세 조회 응답 타입 정의
 export interface TBoardDetailResponse {
-	boardTitle: string;
-	boardContent: string;
-	nickname: string;
-	imageUrl: string;
-	themeId: number; // 여기에 themeId가 포함되어 있는지 확인합니다.
-	likedTheme: boolean;
-	likedBoard: boolean;
-	owner: boolean;
-	themeContent: string;
-	userId: number;
-	// 기타 필요한 필드들
+  boardTitle: string;
+  boardContent: string;
+  nickname: string;
+  imageUrl: string;
+  themeId: number;
+  likedTheme: boolean;
+  likedBoard: boolean;
+  owner: boolean;
+  themeContent: string;
+  published: boolean;
+  userId: boolean;
+  // 기타 필요한 필드들
 }
 
 // 좋아요 API 응답 타입 정의
 export interface TPostLikeResponse {
-	liked: boolean;
+  liked: boolean;
 }
 
 export interface TBoardLikeResponse {
-	liked: boolean;
+  liked: boolean;
 }
-
 
 export interface TUserProfileResponse {
-	check: boolean;
-	information: {
-		userId: number;
-		nickname: string;
-		imageUrl: string;
-		boardListResList: {
-			boardId: number;
-			title: string;
-			content: string;
-			likeCount: number;
-			isLiked: boolean;
-
-		}[];
-	};
+  check: boolean;
+  information: {
+    userProfileRes: {
+      userId: number;
+      nickname: string;
+      imageUrl: string;
+      boardListResList: TUserProfileBoardListResponse[];
+    };
+    pageInfo: TPagination;
+  };
 }
+
+export type TUserProfileBoardListResponse = {
+  boardId: number;
+  title: string;
+  content: string;
+  likeCount: number;
+  isLiked: boolean;
+};

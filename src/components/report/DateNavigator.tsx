@@ -10,16 +10,19 @@ const DateNavigator = ({
   setSelectedDate: React.Dispatch<SetStateAction<Date>>;
 }) => {
   const today = new Date();
-  const [isDisabled, setIsDisabled] = useState(true);
+
+  const resetTime = (date: Date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  };
+
+  const [isDisabled, setIsDisabled] = useState(
+    () => resetTime(today).getTime() === resetTime(selectedDate).getTime(),
+  );
 
   const formatDate = (date: Date) => {
     return `${date.getFullYear()}년 ${
       date.getMonth() + 1
     }월 ${date.getDate()}일`;
-  };
-
-  const resetTime = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   };
 
   //이전 날짜 버튼 클릭 함수

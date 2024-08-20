@@ -11,6 +11,7 @@ export const TopicItemContainer = styled.div`
   width: 1170px;
   height: 151px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     width: 328px;
@@ -30,6 +31,7 @@ export const TopicItemContainer = styled.div`
 
 export const TextField = styled.div`
   margin: 31px 0 23px 50px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     height: auto;
@@ -49,6 +51,7 @@ export const TopicTitle = styled.h3`
   margin-top: 0;
   font: var(--T2);
   color: var(--NS-Black);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-S3);
@@ -61,11 +64,13 @@ export const TopicDate = styled.p`
   margin-bottom: 11px;
   font: var(--S1-1);
   color: var(--Gray1);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-S2-2);
     margin-top: 0;
     margin-bottom: 8px;
+  }
 `;
 
 export const PostCount = styled.h3`
@@ -73,6 +78,7 @@ export const PostCount = styled.h3`
   height: 28px;
   margin-top: 11px;
   font: var(--T4);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-S3);
@@ -81,47 +87,36 @@ export const PostCount = styled.h3`
 `;
 
 export const LikesContainer = styled.div`
-  width: 35px;
-  height: 59px;
   font: var(--M1-2);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 46px;
   margin-right: 50px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    width: 14px;
-    height: 23px;
     margin-right: 18px;
-    margin-top: 28px;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease-in-out;
+
+    ${isMobileOrTablet} {
+      width: 16px;
+      height: 16px;
+    }
   }
 `;
 
 export const TopicLikes = styled.p`
   color: var(--NS-Main1);
   font: var(--S1);
-  margin-top: 4px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--T5-B);
-    margin: 0;
-  }
-`;
-
-export const LikeIcon = styled.div<{ liked: boolean }>`
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-  background-image: url(${({ liked }) =>
-    liked
-      ? '/src/assets/icons/BlueHeartFill.svg'
-      : '/src/assets/icons/BlueHeart.svg'});
-  background-size: cover;
-
-  ${isMobileOrTablet} {
-    width: 14px;
-    height: 14px;
   }
 `;

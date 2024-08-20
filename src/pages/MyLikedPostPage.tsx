@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TPost } from '../types/mypost/post';
 import { TMyLikedPostSortType } from '@/types/mylikedpost/likedpost';
 import EmptyMessage from '../components/mypost/EmptyMessage';
@@ -12,6 +12,8 @@ import { getLikeBoard } from '@/apis/user/getLikeBoard';
 import { getLikeBoardSearch } from '@/apis/user/getLikeBoardSearch';
 import { TPagination } from '@/types/pagination';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import EmptyCharacter from '@assets/images/EmptyCharacter.svg?react';
+import Loading from '@/components/layout/Loading';
 
 const MyLikedPostPage: React.FC = () => {
   const [likedPosts, setLikedPosts] = useState<TPost[]>([]);
@@ -20,13 +22,12 @@ const MyLikedPostPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1);
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>(''); // 검색어 상태 추가
-  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false); // 데이터 로딩 상태
+  const [isLoading, setIsLoading] = useState(true);
   const { isMobileOrTablet } = useNSMediaQuery();
   const handleUnauthorized = useHandleUnauthorized();
 
   // 좋아요 누른 게시글 데이터를 가져오는 함수
-  const fetchLikedPosts = async () => {
-    setIsDataLoaded(false);
+  const fetchLikedPosts = useCallback(async () => {
     try {
       const { posts, pageInfo } = await getLikeBoard(
         sortType,
@@ -39,28 +40,30 @@ const MyLikedPostPage: React.FC = () => {
     } catch (error) {
       console.error('Error fetching liked posts:', error);
     } finally {
-      setIsDataLoaded(true);
+      setIsLoading(false);
     }
-  };
+  }, [handleUnauthorized, pageNum, sortType]);
 
   // 검색 결과를 가져오는 함수
-  const fetchSearchResults = async (query: string) => {
-    setIsDataLoaded(false);
-    try {
-      const { posts, pageInfo } = await getLikeBoardSearch(
-        query,
-        sortType,
-        pageNum,
-        handleUnauthorized,
-      );
-      setFilteredLikedPosts(posts);
-      setPageInfo(pageInfo);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    } finally {
-      setIsDataLoaded(true);
-    }
-  };
+  const fetchSearchResults = useCallback(
+    async (query: string) => {
+      try {
+        const { posts, pageInfo } = await getLikeBoardSearch(
+          query,
+          sortType,
+          pageNum,
+          handleUnauthorized,
+        );
+        setFilteredLikedPosts(posts);
+        setPageInfo(pageInfo);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [sortType, pageNum, handleUnauthorized],
+  );
 
   // 페이지 번호, 정렬 순서가 변경될 때 데이터를 새로 가져옴
   useEffect(() => {
@@ -69,7 +72,7 @@ const MyLikedPostPage: React.FC = () => {
     } else {
       fetchLikedPosts(); // 검색어 없으면 getLikeBoard 호출
     }
-  }, [sortType, pageNum, searchQuery]);
+  }, [searchQuery, fetchLikedPosts, fetchSearchResults]);
 
   // 검색어가 변경될 때 호출
   const handleSearchQueryChange = (query: string) => {
@@ -96,10 +99,13 @@ const MyLikedPostPage: React.FC = () => {
         setSortType={setSortType}
         sortOptions={sortOptions}
       />
-      {isDataLoaded ? (
+      {isLoading ? (
+        <Loading />
+      ) : (
         <S.EmptyState>
           {likedPosts.length === 0 ? (
             <EmptyMessage
+              isNCharacter={false}
               buttonText="주제 보러 가기"
               messageText={`당신처럼 N력이 뛰어난 사람들이 있어요!\n무궁무진한 N들의 글을 열람해보세요!`}
               navigateTo="/scenario/topic"
@@ -107,9 +113,14 @@ const MyLikedPostPage: React.FC = () => {
             />
           ) : filteredLikedPosts.length > 0 ? (
             <PostList posts={filteredLikedPosts} />
-          ) : null}
+          ) : (
+            <S.NoneList>
+              <EmptyCharacter />
+              <p>검색 결과가 없어요</p>
+            </S.NoneList>
+          )}
         </S.EmptyState>
-      ) : null}
+      )}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

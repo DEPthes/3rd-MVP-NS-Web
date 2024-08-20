@@ -6,15 +6,17 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 96px;
-  margin-bottom: 96px;
+  margin-bottom: 63px;
   transition: all 0.3s ease-in-out;
 
   ${isTablet} {
     margin-top: 20px;
+    margin-bottom: 30px;
   }
 
   ${isMobile} {
     margin-top: 30px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -191,7 +193,7 @@ export const ListTitle = styled.div`
 export const SortOptions = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 12px;
   font: var(--S1);
   margin-left: auto;
   margin-top: 59px;
@@ -202,6 +204,7 @@ export const SortOptions = styled.div`
     height: auto;
     margin-left: 0;
     margin-top: 0;
+    gap: 5px;
     align-self: flex-end;
   }
 `;
@@ -229,12 +232,10 @@ export const SortOption = styled.div<{ $isSelected: boolean }>`
 export const Divider = styled.span`
   color: var(--NS-White);
   font: var(--S1);
-  margin: 0 6px;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--Hy2);
-    margin: 0 2.5px;
   }
 `;
 
@@ -247,7 +248,7 @@ export const NoneList = styled.div`
   gap: 15px;
   transition: all 0.3s ease-in-out;
 
-  > img {
+  > svg {
     width: 200px;
     height: 200px;
 
@@ -287,7 +288,7 @@ export const PostBox = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${isMobile} {
-    width: 320px;
+    width: 328px;
     height: 64px;
     border-radius: 20px;
   }
@@ -326,7 +327,7 @@ export const PostTitle = styled.div`
 export const PostContent = styled.div`
   font: var(--T4);
   color: var(--NS-Black);
-  white-space: pre-wrap;
+  overflow-wrap: break-word;
   transition: all 0.3s ease-in-out;
 
   ${isTablet} {
@@ -357,6 +358,7 @@ export const RightWrap = styled.div`
 export const PostInfo = styled.div`
   color: var(--Gray1);
   font: var(--W4);
+  white-space: nowrap;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {

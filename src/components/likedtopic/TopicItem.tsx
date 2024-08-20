@@ -4,6 +4,8 @@ import * as S from '@/styles/likedtopic/TopicItemStyle';
 import { TTopic } from '@/types/likedtopic/topic';
 import { postThemeLike } from '@/apis/theme/postThemeLike'; // postThemeLike 함수 임포트
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import BlueHeartFill from '@/assets/icons/BlueHeartFill.svg';
+import BlueHeart from '@/assets/icons/BlueHeart.svg';
 
 const TopicItem: React.FC<TTopic> = ({
   themeId,
@@ -44,8 +46,8 @@ const TopicItem: React.FC<TTopic> = ({
         <S.TopicDate>발행일: {formattedDate}</S.TopicDate>
         <S.PostCount>게시글 {countBoard}개</S.PostCount>
       </S.TextField>
-      <S.LikesContainer>
-        <S.LikeIcon liked={liked} onClick={handleLikeClick} />
+      <S.LikesContainer onClick={handleLikeClick}>
+        <img src={liked ? BlueHeartFill : BlueHeart} alt="Like" />
         <S.TopicLikes>{likeCount}</S.TopicLikes>
       </S.LikesContainer>
     </S.TopicItemContainer>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TTopic, TToicSortType } from '@/types/likedtopic/topic';
 import EmptyMessage from '../components/mypost/EmptyMessage';
 import SearchInput from '../components/mypost/SearchInput';
@@ -11,6 +11,8 @@ import { getLikeThemeSearch } from '@/apis/user/getLikeThemeSearch';
 import { TPagination } from '@/types/pagination';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import Pagination from '@/components/pagination/Pagination';
+import EmptyCharacter from '@assets/images/EmptyCharacter.svg?react';
+import Loading from '@/components/layout/Loading';
 
 const LikedTopicPage: React.FC = () => {
   const [topics, setTopics] = useState<TTopic[]>([]); // 주제 목록
@@ -19,14 +21,13 @@ const LikedTopicPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1); // 현재 페이지 번호
   const [pageInfo, setPageInfo] = useState<TPagination | null>(null); // 페이지 정보
   const [searchQuery, setSearchQuery] = useState<string>(''); // 검색어 상태 추가
-  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false); // 데이터 로딩 상태
+  const [isLoading, setIsLoading] = useState(true); // 데이터 로딩 상태
 
   const handleUnauthorized = useHandleUnauthorized();
   const { isMobileOrTablet } = useNSMediaQuery();
 
   // 좋아요 누른 주제 데이터를 가져오는 함수
-  const fetchLikedTopics = async () => {
-    setIsDataLoaded(false);
+  const fetchLikedTopics = useCallback(async () => {
     try {
       const { topics, pageInfo } = await getLikeTheme(
         sortType,
@@ -39,28 +40,30 @@ const LikedTopicPage: React.FC = () => {
     } catch (error) {
       console.error('Error fetching liked topics:', error);
     } finally {
-      setIsDataLoaded(true);
+      setIsLoading(false);
     }
-  };
+  }, [handleUnauthorized, pageNum, sortType]);
 
   // 검색 결과를 가져오는 함수
-  const fetchSearchResults = async (query: string) => {
-    setIsDataLoaded(false);
-    try {
-      const { topics, pageInfo } = await getLikeThemeSearch(
-        query,
-        sortType,
-        pageNum,
-        handleUnauthorized,
-      );
-      setFilteredTopics(topics);
-      setPageInfo(pageInfo);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    } finally {
-      setIsDataLoaded(true);
-    }
-  };
+  const fetchSearchResults = useCallback(
+    async (query: string) => {
+      try {
+        const { topics, pageInfo } = await getLikeThemeSearch(
+          query,
+          sortType,
+          pageNum,
+          handleUnauthorized,
+        );
+        setFilteredTopics(topics);
+        setPageInfo(pageInfo);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [handleUnauthorized, pageNum, sortType],
+  );
 
   // 페이지 번호, 정렬 순서가 변경될 때 데이터를 새로 가져옴
   useEffect(() => {
@@ -69,7 +72,7 @@ const LikedTopicPage: React.FC = () => {
     } else {
       fetchLikedTopics(); // 검색어가 없으면 getLikeTheme 호출
     }
-  }, [sortType, pageNum, searchQuery]);
+  }, [searchQuery, fetchLikedTopics, fetchSearchResults]);
 
   // 검색어가 변경될 때 호출되는 함수
   const handleSearchQueryChange = (query: string) => {
@@ -97,10 +100,13 @@ const LikedTopicPage: React.FC = () => {
         setSortType={setSortType}
         sortOptions={sortOptions}
       />
-      {isDataLoaded ? (
+      {isLoading ? (
+        <Loading />
+      ) : (
         <S.EmptyState>
           {topics.length === 0 ? (
             <EmptyMessage
+              isNCharacter={false}
               buttonText="주제 보러 가기"
               messageText={`N력을 한껏 키워 줄 주제들이 당신을 기다리고 있어요!`}
               navigateTo="/scenario/topic"
@@ -108,9 +114,14 @@ const LikedTopicPage: React.FC = () => {
             />
           ) : filteredTopics.length > 0 ? (
             <TopicList topics={filteredTopics} />
-          ) : null}
+          ) : (
+            <S.NoneList>
+              <EmptyCharacter />
+              <p>검색 결과가 없어요</p>
+            </S.NoneList>
+          )}
         </S.EmptyState>
-      ) : null}
+      )}
       {pageInfo && (
         <Pagination
           pageInfo={pageInfo}

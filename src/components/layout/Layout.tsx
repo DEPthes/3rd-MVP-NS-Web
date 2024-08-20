@@ -24,7 +24,7 @@ const Layout = ({ type }: { type: number }) => {
         <BackDrop
           children={
             <LoginModal
-              handleClick={() => {
+              handleConfirmModal={() => {
                 setIsModal(false);
                 sessionStorage.setItem('prevPath', pathname);
                 navigate('/login');

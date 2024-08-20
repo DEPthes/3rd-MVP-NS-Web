@@ -3,39 +3,36 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--NS-White);
-  width: 520px;
-  padding: 40px 0;
+  text-align: center;
+  gap: 8px;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    width: 328px;
-    padding: 30px 0;
+    gap: 0;
   }
 
-  > h1 {
-    font: var(--M1);
-    color: var(--NS-Black);
+  > svg {
+    width: 200px;
+    height: 200px;
     transition: all 0.3s ease-in-out;
 
     ${isMobileOrTablet} {
-      font: var(--S1);
+      width: 120px;
+      height: 120px;
     }
   }
 
-  > p {
+  > h1 {
+    font: var(--NotFound);
+    color: var(--NS-White);
+    margin-top: 55px;
     transition: all 0.3s ease-in-out;
-    font: var(--M1-1);
-    color: var(--NS-Black);
-    margin-top: 24px;
-    margin-bottom: 30px;
 
     ${isMobileOrTablet} {
-      font: var(--M1-B);
-      margin: 10px 0px;
+      font: var(--NotFoundMini);
+      margin-top: 35px;
     }
   }
 `;

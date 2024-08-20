@@ -174,7 +174,6 @@ export const LongWrap = styled.div`
     height: 156px;
     border-radius: 100px;
     object-fit: cover;
-    border: 1px solid var(--NS-Main2);
     transition: all 0.3s ease-in-out;
 
     ${isMobileOrTablet} {

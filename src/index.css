@@ -22,6 +22,8 @@
   --Gray3: #f7f7f7;
   --Gray4: #d9d9d9;
   --Red: #ee4b4b;
+  --NotFound: 400 130px / normal YeongdeokSnowCrab;
+  --NotFoundMini: 400 90px / normal YeongdeokSnowCrab;
   --Logo: 400 44px / normal YeongdeokSnowCrab;
   --LogoMini: 400 32px / normal YeongdeokSnowCrab;
   --LogoMini-2: 400 30px / 22px YeongdeokSnowCrab;
@@ -60,6 +62,7 @@
   --S1-2: 600 16px / normal Pretendard;
   --S1-3: 400 16px / normal Pretendard;
   --S1-4: 600 20px / normal Pretendard;
+  --S1-6: 600 10px / normal Pretendard;
   --Button: 400 16px / normal Pretendard;
   --Input: 500 20px / 22px Pretendard;
   --Label: 500 16px / 15px Pretendard;
@@ -84,6 +87,7 @@
   --P-S3: 600 10px / normal Pretendard;
   --P-T1: 600 16px / normal Pretendard;
   --P-T2: 400 14px / normal Pretendard;
+  --P-T3: 600 14px / normal Pretendard;
   --Input-B: 500 12px / normal Pretendard;
   --T11: 600 12px / normal Pretendard;
   --T12: 600 16px / normal Pretendard;

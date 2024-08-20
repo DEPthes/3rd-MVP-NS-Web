@@ -20,4 +20,7 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, './src/pages'),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 600,
+  },
 });

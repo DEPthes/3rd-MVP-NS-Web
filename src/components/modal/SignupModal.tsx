@@ -1,4 +1,4 @@
-import * as S from '@/styles/modal/SignupModalStyle';
+import * as S from '@/styles/modal/ModalStyle';
 import DarkButton from '../button/DarkButton';
 import { useNavigate } from 'react-router-dom';
 
