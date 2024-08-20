@@ -117,11 +117,18 @@ export interface TBoardLikeResponse {
   liked: boolean;
 }
 
-export interface UserProfileResponse {
+export interface TUserProfileResponse {
   check: boolean;
   information: {
     userId: number;
     nickname: string;
     imageUrl: string;
+    boardListResList: {
+      boardId: number;
+      title: string;
+      content: string;
+      likeCount: number;
+      isLiked: boolean;
+    }[];
   };
 }

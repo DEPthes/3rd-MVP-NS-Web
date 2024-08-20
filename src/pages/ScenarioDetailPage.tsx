@@ -26,8 +26,8 @@ const ScenarioDetailPage: React.FC = () => {
   const [isDeleteFail, setIsDeleteFail] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { isMobileOrTablet } = useNSMediaQuery();
-  const handleUnauthorized = useHandleUnauthorized();
+	const { isMobileOrTablet } = useNSMediaQuery();
+	const handleUnauthorized = useHandleUnauthorized();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -51,9 +51,9 @@ const ScenarioDetailPage: React.FC = () => {
     fetchPost();
   }, [id, handleUnauthorized, navigate]);
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
+	const handleBackClick = () => {
+		navigate(-1);
+	};
 
   const handleEditClick = () => {
     const path = post?.published ? `/scenario/edit` : `/scenario/write`;
@@ -92,63 +92,63 @@ const ScenarioDetailPage: React.FC = () => {
     setIsDeleteModalOpen(false);
   };
 
-  const handleCancelDelete = () => {
-    setIsDeleteModalOpen(false);
-  };
+	const handleCancelDelete = () => {
+		setIsDeleteModalOpen(false);
+	};
 
-  const handleWhiteHeartClick = async () => {
-    if (!post || !post.themeId) {
-      console.error('Invalid themeId:', post ? post.themeId : 'Post is null');
-      return;
-    }
+	const handleWhiteHeartClick = async () => {
+		if (!post || !post.themeId) {
+			console.error('Invalid themeId:', post ? post.themeId : 'Post is null');
+			return;
+		}
 
-    try {
-      const response = await postLike(post.themeId, handleUnauthorized);
-      if (response) {
-        setPost(prevPost => {
-          if (prevPost) {
-            return {
-              ...prevPost,
-              likedTheme: !post.likedTheme,
-            };
-          }
-          return prevPost;
-        });
-      } else {
-        console.error('주제 좋아요 실패');
-      }
-    } catch (error) {
-      console.error('주제 좋아요 요청 중 오류 발생:', error);
-    }
-  };
+		try {
+			const response = await postLike(post.themeId, handleUnauthorized);
+			if (response) {
+				setPost(prevPost => {
+					if (prevPost) {
+						return {
+							...prevPost,
+							likedTheme: !post.likedTheme,
+						};
+					}
+					return prevPost;
+				});
+			} else {
+				console.error('주제 좋아요 실패');
+			}
+		} catch (error) {
+			console.error('주제 좋아요 요청 중 오류 발생:', error);
+		}
+	};
 
-  const handleBlueHeartClick = async () => {
-    if (!post || !id) return;
+	const handleBlueHeartClick = async () => {
+		if (!post || !id) return;
 
-    try {
-      const response = await boardLike(parseInt(id), handleUnauthorized);
-      if (response) {
-        setPost(prevPost => {
-          if (prevPost) {
-            return {
-              ...prevPost,
-              likedBoard: !post.likedBoard,
-            };
-          }
-          return prevPost;
-        });
-      } else {
-        console.error('게시글 좋아요 실패');
-      }
-    } catch (error) {
-      console.error('게시글 좋아요 요청 중 오류 발생:', error);
-    }
-  };
+		try {
+			const response = await boardLike(parseInt(id), handleUnauthorized);
+			if (response) {
+				setPost(prevPost => {
+					if (prevPost) {
+						return {
+							...prevPost,
+							likedBoard: !post.likedBoard,
+						};
+					}
+					return prevPost;
+				});
+			} else {
+				console.error('게시글 좋아요 실패');
+			}
+		} catch (error) {
+			console.error('게시글 좋아요 요청 중 오류 발생:', error);
+		}
+	};
 
-  const handleProfileClick = () => {
-    navigate(`/profile/${post?.nickname}`); // 타인의 프로필 페이지로 이동하기
-    window.scroll({ top: 0, behavior: 'smooth' });
-  };
+	const handleProfileClick = () => {
+		navigate(`/profile/${post?.userId}`); // 타인의 프로필 페이지로 이동하기
+		window.scroll({ top: 0, behavior: 'smooth' });
+	};
 
   return (
     <S.Container>
