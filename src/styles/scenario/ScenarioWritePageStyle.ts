@@ -190,6 +190,10 @@ export const TextArea = styled.textarea`
     font: var(--P-T2);
     padding-top: 11px;
   }
+
+  ${isTablet} {
+    padding-bottom: 11px;
+  }
 `;
 
 export const ButtonContainer = styled.div`
