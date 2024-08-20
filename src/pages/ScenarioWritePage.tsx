@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as S from '@/styles/scenario/SenarioDetailPageStyle';
+import * as S from '@/styles/scenario/ScenarioWritePageStyle';
 import Main5Heart from '@assets/icons/Main5Heart.svg?react';
 import Main5HeartFill from '@assets/icons/Main5HeartFill.svg?react';
 import LightButton from '@components/button/LightButton';
@@ -11,29 +11,37 @@ import { postDraft } from '@/apis/board/postDraft';
 import { postPublish } from '@/apis/board/postPublish';
 import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getThemePast } from '@/apis/theme/getThemePast';
+import DraftModal from '@/components/modal/DraftModal';
+import DraftSuccessModal from '@/components/modal/DraftSuccessModal';
+import PostModal from '@/components/modal/PostModal';
+import PostSuccessModal from '@/components/modal/PostSuccessModal';
+import { getBoard } from '@/apis/board/getBoard';
 
-const SenarioDetailPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+const ScenarioWritePage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state;
   const [topic, setTopic] = useState<TTodayThemeResponse | null>(null);
   const [title, setTitle] = useState<string>('');
   const [text, setText] = useState<string>('');
-  const [isSaveModalVisible, setIsSaveModalVisible] = useState<boolean>(false);
-  const [isSaveCompleteModalVisible, setIsSaveCompleteModalVisible] =
+  const [titleSave, setTitleSave] = useState<string>('');
+  const [textSave, setTextSave] = useState<string>('');
+  const [boardId, setBoardId] = useState(state.boardId ?? null); //null이 아니면 임시저장된 글
+  const [isDraftModal, setIsDraftModal] = useState<boolean>(false);
+  const [isDraftSuccessModal, setIsDraftSuccessModal] =
     useState<boolean>(false);
-  const [isPostModalVisible, setIsPostModalVisible] = useState<boolean>(false);
-  const [isPostCompleteModalVisible, setIsPostCompleteModalVisible] =
-    useState<boolean>(false);
-  const navigate = useNavigate();
+  const [isPostModal, setIsPostModal] = useState<boolean>(false);
+  const [isPostSuccessModal, setIsPostSuccessModal] = useState<boolean>(false);
 
   const handleUnauthorized = useHandleUnauthorized();
 
   useEffect(() => {
     const fetchTopic = async () => {
-      if (id) {
+      if (state.themeId) {
         const data: TTodayThemeResponse | undefined = await getThemePast(
-          parseInt(id),
+          parseInt(state.themeId),
           handleUnauthorized,
         );
         if (data) {
@@ -51,10 +59,30 @@ const SenarioDetailPage: React.FC = () => {
           console.error('오늘의 주제를 불러오지 못했습니다.');
         }
       }
+
+      if (state.boardId) {
+        const response = await getBoard(state.boardId, handleUnauthorized);
+        if (response) {
+          if (!response.published && !response.owner) {
+            console.log(response);
+            navigate('/404');
+            window.scroll({ top: 0, behavior: 'smooth' });
+          } else {
+            setTitle(response.boardTitle);
+            setTitleSave(response.boardTitle);
+            setText(response.boardContent);
+            setTextSave(response.boardContent);
+          }
+        } else {
+          navigate('/404');
+          window.scroll({ top: 0, behavior: 'smooth' });
+          console.error('게시글을 불러오지 못했습니다.');
+        }
+      }
     };
 
     fetchTopic();
-  }, [handleUnauthorized, id]);
+  }, [handleUnauthorized, navigate, state]);
 
   const handleLikeClick = async () => {
     if (!topic) return;
@@ -83,7 +111,7 @@ const SenarioDetailPage: React.FC = () => {
 
   const handleSave = () => {
     if (title.trim() === '') return;
-    setIsSaveModalVisible(true);
+    setIsDraftModal(true);
   };
 
   const handleModalSave = async () => {
@@ -93,41 +121,46 @@ const SenarioDetailPage: React.FC = () => {
       title,
       content: text,
       themeId: topic.themeId,
+      ...(boardId !== null && { boardId }),
     };
 
     const response = await postDraft(draftData, handleUnauthorized);
     if (response?.check) {
-      setIsSaveCompleteModalVisible(true);
+      setBoardId(0); //임시 저장 결과로 나온 boardId 추가
+      setTitleSave(title);
+      setTextSave(text);
+      setIsDraftSuccessModal(true);
     } else {
       console.error('임시 저장 실패:', response);
     }
 
-    setIsSaveModalVisible(false);
+    setIsDraftModal(false);
   };
 
   const handlePost = () => {
     if (title.trim() === '' || text.trim() === '') return;
-    setIsPostModalVisible(true);
+    setIsPostModal(true);
   };
 
   const handleModalPost = async () => {
-    if (!topic || !id) return;
+    if (!topic || !state.themeId) return;
 
     const postData: TPostDraftRequest = {
       title,
       content: text,
-      themeId: parseInt(id),
+      themeId: parseInt(state.themeId),
+      ...(boardId !== null && { boardId }),
     };
 
     const response = await postPublish(postData, handleUnauthorized);
 
     if (response?.check) {
-      setIsPostCompleteModalVisible(true);
+      setIsPostSuccessModal(true);
     } else {
       console.error('게시 실패:', response);
     }
 
-    setIsPostModalVisible(false);
+    setIsPostModal(false);
   };
 
   const isPostDisabled =
@@ -165,7 +198,11 @@ const SenarioDetailPage: React.FC = () => {
         <LightButton
           text="임시저장"
           onClick={handleSave}
-          isDisabled={title.trim() === '' || text.trim() === ''}
+          isDisabled={
+            title.trim() === '' ||
+            text.trim() === '' ||
+            (titleSave === title && textSave === text)
+          }
         />
         <DarkButton
           text="게시"
@@ -173,86 +210,54 @@ const SenarioDetailPage: React.FC = () => {
           isDisabled={isPostDisabled}
         />
       </S.ButtonContainer>
-      {isSaveModalVisible && (
+      {isDraftModal && (
         <BackDrop
           children={
-            <S.ModalContainer>
-              <S.ModalTitle>상상력 임시저장</S.ModalTitle>
-              <S.ModalText2Black>
-                게시글을 임시 저장하시겠습니까? <br />
-                <span>
-                  (임시 저장된 글은 마이페이지-내가 쓴 글에서 확인할 수
-                  있습니다.)
-                </span>
-              </S.ModalText2Black>
-              <S.ModalBtn>
-                <DarkButton text="임시저장" onClick={handleModalSave} />
-                <LightButton
-                  text="취소"
-                  onClick={() => () => setIsSaveModalVisible(false)}
-                />
-              </S.ModalBtn>
-            </S.ModalContainer>
+            <DraftModal
+              handleConfirmModal={handleModalSave}
+              handleCloseModal={() => setIsDraftModal(false)}
+            />
           }
-          isOpen={isSaveModalVisible}
+          isOpen={isDraftModal}
         />
       )}
-      {isSaveCompleteModalVisible && (
+      {isDraftSuccessModal && (
         <BackDrop
           children={
-            <S.ModalContainer>
-              <S.ModalTitle>임시저장 완료!</S.ModalTitle>
-              <S.ModalTextBlack2>
-                (임시 저장된 글은 마이페이지-내가 쓴 글에서 확인할 수 있습니다.)
-              </S.ModalTextBlack2>
-              <DarkButton
-                text="확인"
-                onClick={() => setIsPostCompleteModalVisible(false)}
-              />
-            </S.ModalContainer>
+            <DraftSuccessModal
+              handleConfirmModal={() => setIsDraftSuccessModal(false)}
+            />
           }
-          isOpen={isSaveCompleteModalVisible}
+          isOpen={isDraftSuccessModal}
         />
       )}
-      {isPostModalVisible && (
+      {isPostModal && (
         <BackDrop
           children={
-            <S.ModalContainer>
-              <S.ModalTitle>상상력 게시</S.ModalTitle>
-              <S.ModalTextBlack>상상력을 게시하시겠습니까?</S.ModalTextBlack>
-              <S.ModalBtn>
-                <DarkButton text="게시" onClick={handleModalPost} />
-                <LightButton
-                  text="취소"
-                  onClick={() => setIsPostModalVisible(false)}
-                />
-              </S.ModalBtn>
-            </S.ModalContainer>
+            <PostModal
+              handleConfirmModal={handleModalPost}
+              handleCloseModal={() => setIsPostModal(false)}
+            />
           }
-          isOpen={isPostModalVisible}
+          isOpen={isPostModal}
         />
       )}
-      {isPostCompleteModalVisible && (
+      {isPostSuccessModal && (
         <BackDrop
           children={
-            <S.ModalContainer>
-              <S.ModalTitle>상상력 게시 완료!</S.ModalTitle>
-              <S.ModalTextBlack>N력 +5 상승!</S.ModalTextBlack>
-              <DarkButton
-                text="확인"
-                onClick={() => {
-                  setIsPostCompleteModalVisible(false);
-                  navigate(`/scenario/topic/${id}`);
-                  window.scroll({ top: 0, behavior: 'smooth' });
-                }}
-              />
-            </S.ModalContainer>
+            <PostSuccessModal
+              handleConfirmModal={() => {
+                setIsPostSuccessModal(false);
+                navigate(`/scenario/topic/${state.themeId}`);
+                window.scroll({ top: 0, behavior: 'smooth' });
+              }}
+            />
           }
-          isOpen={isPostCompleteModalVisible}
+          isOpen={isPostSuccessModal}
         />
       )}
     </S.Container>
   );
 };
 
-export default SenarioDetailPage;
+export default ScenarioWritePage;

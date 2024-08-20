@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from '@/styles/scenario/ScenarioTitlePageStyle';
+import * as S from '@/styles/scenario/ScenarioTopicPageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg?react';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg?react';
 import SearchIcon from '@assets/icons/Search.svg';
@@ -12,7 +12,7 @@ import Pagination from '@/components/pagination/Pagination';
 import { postLike } from '@/apis/theme/postLike';
 import { TPagination } from '@/types/pagination';
 
-const ScenarioTitlePage: React.FC = () => {
+const ScenarioTopicPage: React.FC = () => {
   const [topics, setTopics] = useState<TTheme[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [sortType, setSortType] = useState<'date' | 'likeCount' | 'boardCount'>(
@@ -169,8 +169,8 @@ const ScenarioTitlePage: React.FC = () => {
               </S.LeftWrap>
               <S.RightWrap>
                 <S.LikeContainer
-                  onClick={e => {
-                    e.stopPropagation();
+                  onClick={(event: { stopPropagation: () => void }) => {
+                    event.stopPropagation();
                     handleLike(topic.themeId);
                   }}
                 >
@@ -193,4 +193,4 @@ const ScenarioTitlePage: React.FC = () => {
   );
 };
 
-export default ScenarioTitlePage;
+export default ScenarioTopicPage;

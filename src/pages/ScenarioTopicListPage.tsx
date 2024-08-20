@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import * as S from '@/styles/scenario/TopicDetailPageStyle';
+import * as S from '@/styles/scenario/ScenarioTopicListPageStyle';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
 import BlueHeartFill from '@assets/icons/BlueHeartFill.svg';
 import Main5Heart from '@assets/icons/Main5Heart.svg?react';
@@ -14,7 +14,7 @@ import Pagination from '@/components/pagination/Pagination';
 import { TPagination } from '@/types/pagination';
 import EmptyCharacter from '@assets/images/empty_character.svg?react';
 
-const TopicDetailPage: React.FC = () => {
+const ScenarioTopicListPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [topic, setTopic] = useState<TThemeDetailResponse | null>(null);
   const [sortType, setSortType] = useState<'date' | 'likeCount'>('date');
@@ -84,7 +84,11 @@ const TopicDetailPage: React.FC = () => {
   };
 
   const handleWriteClick = () => {
-    navigate(`/scenario/write/${id}`);
+    navigate(`/scenario/write`, {
+      state: {
+        themeId: id,
+      },
+    });
   };
 
   const handleSort = (type: 'date' | 'likeCount') => {
@@ -238,4 +242,4 @@ const TopicDetailPage: React.FC = () => {
   );
 };
 
-export default TopicDetailPage;
+export default ScenarioTopicListPage;

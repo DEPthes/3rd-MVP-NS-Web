@@ -3,18 +3,20 @@ import Layout from '@/components/layout/Layout';
 import LoginPage from '@/pages/LoginPage';
 import MainPage from '@/pages/MainPage';
 import ScenarioPage from '@/pages/ScenarioPage';
-import ScenarioTitlePage from '@/pages/ScenarioTitlePage';
 import ReportPage from './pages/ReportPage';
 import RankingPage from './pages/RankingPage';
 import ProfilePage from '@/pages/ProfilePage';
-import SenarioDetailPage from '@/pages/SenarioDetailPage';
-import TopicDetailPage from '@/pages/TopicDetailPage';
-import SelectTitleDetail from '@/pages/SelectTitleDetail';
 import OtherPersonPage from '@/pages/OtherPersonPage';
 import SignupPage from './pages/SignupPage';
 import MyPostPage from '@/pages/MyPostPage';
 import MyLikedPostPage from '@/pages/MyLikedPostPage';
 import LikedTopicPage from '@pages/LikedTopicPage';
+import ScenarioWritePage from './pages/ScenarioWritePage';
+import ScenarioEditPage from './pages/ScenarioEditPage';
+import ScenarioTopicPage from '@/pages/ScenarioTopicPage';
+import ScenarioTopicListPage from '@/pages/ScenarioTopicListPage';
+import ScenarioDetailPage from '@/pages/ScenarioDetailPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const Router = () => {
   const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
@@ -31,6 +33,8 @@ const Router = () => {
           <Route path="/scenario" element={<ScenarioPage />} />
           {/* 로그인 */}
           <Route path="/login" element={<LoginPage />} />
+          {/* 404 페이지 */}
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route element={<Layout type={2} />}>
           {/* 마이페이지 */}
@@ -54,13 +58,24 @@ const Router = () => {
             element={<ProtectedRoute element={<LikedTopicPage />} />}
           />
           {/* 게시글 작성 */}
-          <Route path="/scenario/write/:id" element={<SenarioDetailPage />} />
+          <Route
+            path="/scenario/write"
+            element={<ProtectedRoute element={<ScenarioWritePage />} />}
+          />
+          {/* 게시글 수정 */}
+          <Route
+            path="/scenario/edit"
+            element={<ProtectedRoute element={<ScenarioEditPage />} />}
+          />
           {/* 주제 목록 */}
-          <Route path="/scenario/topic" element={<ScenarioTitlePage />} />
+          <Route path="/scenario/topic" element={<ScenarioTopicPage />} />
           {/* 주제에 대한 게시글 목록 */}
-          <Route path="/scenario/topic/:id" element={<TopicDetailPage />} />
+          <Route
+            path="/scenario/topic/:id"
+            element={<ScenarioTopicListPage />}
+          />
           {/* 게시글 열람 */}
-          <Route path="/scenario/:id" element={<SelectTitleDetail />} />
+          <Route path="/scenario/:id" element={<ScenarioDetailPage />} />
           {/* 사용자 프로필 */}
           <Route path="/profile/:id" element={<OtherPersonPage />} />
           {/* N보고서 */}

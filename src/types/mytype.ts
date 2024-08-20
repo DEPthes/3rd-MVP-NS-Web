@@ -98,11 +98,13 @@ export interface TBoardDetailResponse {
   boardContent: string;
   nickname: string;
   imageUrl: string;
-  themeId: number; // 여기에 themeId가 포함되어 있는지 확인합니다.
+  themeId: number;
   likedTheme: boolean;
   likedBoard: boolean;
   owner: boolean;
   themeContent: string;
+  published: boolean;
+  userId: boolean;
   // 기타 필요한 필드들
 }
 

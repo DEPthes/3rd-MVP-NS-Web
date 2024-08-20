@@ -9,7 +9,7 @@ const ScenarioPage: React.FC = () => {
   const [topic, setTopic] = useState<TTodayThemeResponse | null>(null);
   const navigate = useNavigate();
 
-  const handleUnauthorized = useHandleUnauthorized(); // handleUnauthorized 콜백 생성. getToday오류 방지 위해.
+  const handleUnauthorized = useHandleUnauthorized();
 
   useEffect(() => {
     const fetchTopic = async () => {
@@ -37,7 +37,7 @@ const ScenarioPage: React.FC = () => {
       <S.ButtonContainer>
         <S.ActionButton
           onClick={() =>
-            navigate(`/scenario/write/${topic?.themeId}`, { state: { topic } })
+            navigate(`/scenario/write`, { state: { themeId: topic?.themeId } })
           }
         >
           오늘의 주제 쓰러가기

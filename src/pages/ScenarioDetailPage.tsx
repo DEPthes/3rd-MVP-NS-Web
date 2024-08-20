@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import * as S from '@/styles/scenario/SelectTitleDetailStyle';
+import * as S from '@/styles/scenario/ScenarioDetailPageStyle';
 import WhiteHeart from '@assets/icons/WhiteHeart.svg';
 import WhiteHeartFill from '@assets/icons/WhiteHeartFill.svg';
 import BlueHeart from '@assets/icons/BlueHeart.svg';
@@ -16,13 +16,14 @@ import { boardLike } from '@/apis/board/boardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { TBoardDetailResponse } from '@/types/mytype';
 import BackDrop from '@/components/layout/BackDrop';
-import DarkButton from '@/components/button/DarkButton';
+import DeleteModal from '@/components/modal/DeleteModal';
+import DeleteFailModal from '@/components/modal/DeleteFailModal';
 
-const SelectTitleDetail: React.FC = () => {
+const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [post, setPost] = useState<TBoardDetailResponse | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
-  const [isNotAuthor, setIsNotAuthor] = useState<boolean>(false);
+  const [isDeleteFail, setIsDeleteFail] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const { isMobileOrTablet } = useNSMediaQuery();
@@ -33,22 +34,40 @@ const SelectTitleDetail: React.FC = () => {
       if (id) {
         const response = await getBoard(parseInt(id), handleUnauthorized);
         if (response) {
-          setPost(response);
+          if (!response.published && !response.owner) {
+            navigate('/404');
+            window.scroll({ top: 0, behavior: 'smooth' });
+          } else {
+            setPost(response);
+          }
         } else {
+          navigate('/404');
+          window.scroll({ top: 0, behavior: 'smooth' });
           console.error('게시글을 불러오지 못했습니다.');
         }
       }
     };
 
     fetchPost();
-  }, [id, handleUnauthorized]);
+  }, [id, handleUnauthorized, navigate]);
 
   const handleBackClick = () => {
     navigate(-1);
   };
 
   const handleEditClick = () => {
-    navigate(`/scenario/write/${id}`);
+    const path = post?.published ? `/scenario/edit` : `/scenario/write`;
+
+    navigate(path, {
+      state: {
+        boardTitle: post?.boardTitle,
+        boardContent: post?.boardContent,
+        themeId: post?.themeId,
+        boardId: id,
+        published: post?.published,
+      },
+    });
+
     window.scroll({ top: 0, behavior: 'smooth' });
   };
 
@@ -56,7 +75,7 @@ const SelectTitleDetail: React.FC = () => {
     if (post?.owner) {
       setIsDeleteModalOpen(true);
     } else {
-      setIsNotAuthor(true);
+      setIsDeleteFail(true);
     }
   };
 
@@ -67,7 +86,7 @@ const SelectTitleDetail: React.FC = () => {
         navigate(`/topic/${post?.themeId}`); // 삭제 후 해당 주제로 이동
         window.scroll({ top: 0, behavior: 'smooth' });
       } else {
-        setIsNotAuthor(true);
+        setIsDeleteFail(true);
       }
     }
     setIsDeleteModalOpen(false);
@@ -166,10 +185,15 @@ const SelectTitleDetail: React.FC = () => {
       <S.PostBox>
         <S.PostTitle>{post?.boardTitle}</S.PostTitle> {/* 게시글 제목 */}
         <S.PostContent>{post?.boardContent}</S.PostContent> {/* 게시글 내용 */}
-        <S.LikeButton onClick={handleBlueHeartClick}>
-          <img src={post?.likedBoard ? BlueHeartFill : BlueHeart} alt="Like" />
-          <S.LikeCount>좋아요</S.LikeCount>
-        </S.LikeButton>
+        {post?.published && (
+          <S.LikeButton onClick={handleBlueHeartClick}>
+            <img
+              src={post?.likedBoard ? BlueHeartFill : BlueHeart}
+              alt="Like"
+            />
+            <S.LikeCount>좋아요</S.LikeCount>
+          </S.LikeButton>
+        )}
       </S.PostBox>
       <S.ButtonContainer>
         {!isMobileOrTablet && (
@@ -185,44 +209,26 @@ const SelectTitleDetail: React.FC = () => {
       {isDeleteModalOpen && (
         <BackDrop
           children={
-            <S.DeleteModal>
-              <h1>게시글 삭제</h1>
-              <p>삭제하시겠습니까?</p>
-              <S.ButtonWrap>
-                <DarkButton
-                  text="삭제"
-                  onClick={handleConfirmDelete}
-                  isSmall={true}
-                />
-                <LightButton
-                  text="취소"
-                  onClick={handleCancelDelete}
-                  isSmall={true}
-                />
-              </S.ButtonWrap>
-            </S.DeleteModal>
+            <DeleteModal
+              handleConfirmModal={handleConfirmDelete}
+              handleCloseModal={handleCancelDelete}
+            />
           }
           isOpen={isDeleteModalOpen}
         />
       )}
-      {isNotAuthor && (
+      {isDeleteFail && (
         <BackDrop
           children={
-            <S.DeleteModal>
-              <h1>삭제 실패</h1>
-              <p>게시글 삭제에 실패했습니다.</p>
-              <LightButton
-                text="확인"
-                onClick={() => setIsNotAuthor(false)}
-                isSmall={true}
-              />
-            </S.DeleteModal>
+            <DeleteFailModal
+              handleConfirmModal={() => setIsDeleteFail(false)}
+            />
           }
-          isOpen={isNotAuthor}
+          isOpen={isDeleteFail}
         />
       )}
     </S.Container>
   );
 };
 
-export default SelectTitleDetail;
+export default ScenarioDetailPage;
