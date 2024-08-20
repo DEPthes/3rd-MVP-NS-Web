@@ -327,7 +327,8 @@ export const PostTitle = styled.div`
 export const PostContent = styled.div`
   font: var(--T4);
   color: var(--NS-Black);
-  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  width: 1000px;
   transition: all 0.3s ease-in-out;
 
   ${isTablet} {

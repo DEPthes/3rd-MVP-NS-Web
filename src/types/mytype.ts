@@ -1,3 +1,5 @@
+import { TPagination } from './pagination';
+
 // 오늘의 주제 API 응답 타입 정의
 export interface TTodayThemeResponse {
   content: string;
@@ -120,15 +122,20 @@ export interface TBoardLikeResponse {
 export interface TUserProfileResponse {
   check: boolean;
   information: {
-    userId: number;
-    nickname: string;
-    imageUrl: string;
-    boardListResList: {
-      boardId: number;
-      title: string;
-      content: string;
-      likeCount: number;
-      isLiked: boolean;
-    }[];
+    userProfileRes: {
+      userId: number;
+      nickname: string;
+      imageUrl: string;
+      boardListResList: TUserProfileBoardListResponse[];
+    };
+    pageInfo: TPagination;
   };
 }
+
+export type TUserProfileBoardListResponse = {
+  boardId: number;
+  title: string;
+  content: string;
+  likeCount: number;
+  isLiked: boolean;
+};
