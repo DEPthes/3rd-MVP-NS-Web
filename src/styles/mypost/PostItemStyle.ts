@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import BlueHeartFill from '@/assets/icons/BlueHeartFill.svg';
-import BlueHeart from '@/assets/icons/BlueHeart.svg';
 import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 
 export const Post = styled.div`
@@ -13,6 +11,7 @@ export const Post = styled.div`
   width: 1170px;
   height: 151px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     width: 328px;
@@ -32,6 +31,7 @@ export const Post = styled.div`
 
 export const TextField = styled.div`
   margin: 31px 0 23px 50px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     height: auto;
@@ -51,6 +51,7 @@ export const PostTitle = styled.h3`
   margin-top: 0;
   font: var(--T2);
   color: var(--NS-Black);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-S3);
@@ -65,6 +66,7 @@ export const PostDate = styled.p<{
   margin-bottom: 11px;
   font: var(--S1-1);
   color: ${({ $published }) => ($published ? 'var(--Gray1)' : '#EE4B4B')};
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-S2-2);
@@ -76,6 +78,7 @@ export const PostDate = styled.p<{
 export const PostTopic = styled.h3`
   font: var(--H3);
   color: var(--NS-Black);
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--P-S1);
@@ -85,42 +88,34 @@ export const PostTopic = styled.h3`
 export const PostLikes = styled.p`
   color: var(--NS-Main1);
   font: var(--S1);
-  margin-top: 4px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--T5-B);
-    margin: 0;
   }
 `;
 
 export const LikesContainer = styled.div`
-  width: 35px;
-  height: 59px;
   font: var(--M1-2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 46px;
+  justify-content: center;
   margin-right: 50px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    width: 14px;
-    height: 23px;
     margin-right: 18px;
-    margin-top: 28px;
   }
-`;
 
-export const LikeIcon = styled.div<{ $liked: boolean }>`
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-  background-image: ${({ $liked }) =>
-    `url(${$liked ? BlueHeartFill : BlueHeart})`};
-  background-size: cover;
+  img {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease-in-out;
 
-  ${isMobileOrTablet} {
-    width: 14px;
-    height: 14px;
+    ${isMobileOrTablet} {
+      width: 16px;
+      height: 16px;
+    }
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TPost } from '../types/mypost/post';
 import { TMyLikedPostSortType } from '@/types/mylikedpost/likedpost';
 import EmptyMessage from '../components/mypost/EmptyMessage';
@@ -25,7 +25,7 @@ const MyLikedPostPage: React.FC = () => {
   const handleUnauthorized = useHandleUnauthorized();
 
   // 좋아요 누른 게시글 데이터를 가져오는 함수
-  const fetchLikedPosts = async () => {
+  const fetchLikedPosts = useCallback(async () => {
     setIsDataLoaded(false);
     try {
       const { posts, pageInfo } = await getLikeBoard(
@@ -41,26 +41,29 @@ const MyLikedPostPage: React.FC = () => {
     } finally {
       setIsDataLoaded(true);
     }
-  };
+  }, [handleUnauthorized, pageNum, sortType]);
 
   // 검색 결과를 가져오는 함수
-  const fetchSearchResults = async (query: string) => {
-    setIsDataLoaded(false);
-    try {
-      const { posts, pageInfo } = await getLikeBoardSearch(
-        query,
-        sortType,
-        pageNum,
-        handleUnauthorized,
-      );
-      setFilteredLikedPosts(posts);
-      setPageInfo(pageInfo);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    } finally {
-      setIsDataLoaded(true);
-    }
-  };
+  const fetchSearchResults = useCallback(
+    async (query: string) => {
+      setIsDataLoaded(false);
+      try {
+        const { posts, pageInfo } = await getLikeBoardSearch(
+          query,
+          sortType,
+          pageNum,
+          handleUnauthorized,
+        );
+        setFilteredLikedPosts(posts);
+        setPageInfo(pageInfo);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      } finally {
+        setIsDataLoaded(true);
+      }
+    },
+    [sortType, pageNum, handleUnauthorized],
+  );
 
   // 페이지 번호, 정렬 순서가 변경될 때 데이터를 새로 가져옴
   useEffect(() => {
@@ -69,7 +72,7 @@ const MyLikedPostPage: React.FC = () => {
     } else {
       fetchLikedPosts(); // 검색어 없으면 getLikeBoard 호출
     }
-  }, [sortType, pageNum, searchQuery]);
+  }, [searchQuery, fetchLikedPosts, fetchSearchResults]);
 
   // 검색어가 변경될 때 호출
   const handleSearchQueryChange = (query: string) => {

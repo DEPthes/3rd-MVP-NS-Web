@@ -88,16 +88,12 @@ const ProfilePage: React.FC = () => {
 
   return (
     <S.Container>
-      <S.Content>
-        <S.MyPage>마이페이지</S.MyPage>
-      </S.Content>
+      <S.MyPage>마이페이지</S.MyPage>
       <S.ProfileSection>
-        <S.ProfileImageContainer>
-          <S.ProfileImage
-            src={userData?.information.imageUrl}
-            alt="Profileimage"
-          />
-        </S.ProfileImageContainer>
+        <S.ProfileImage
+          src={userData?.information.imageUrl}
+          alt="Profileimage"
+        />
         <S.Nickname>{userData?.information.nickname}</S.Nickname>
         <S.EditOptions>
           <S.EditOption onClick={openFilePicker}>프로필사진 변경</S.EditOption>
@@ -126,7 +122,6 @@ const ProfilePage: React.FC = () => {
         >
           ☞ 내가 쓴 글 ☜
         </S.ActionButton>
-
         <S.ActionButton2 onClick={() => navigate('/mypage/mylikedposts')}>
           ♡ 좋아요 누른 글 ♥
         </S.ActionButton2>

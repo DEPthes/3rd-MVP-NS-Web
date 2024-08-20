@@ -1,79 +1,85 @@
 import styled from 'styled-components';
-import CheckBoxDefault from '@/assets/icons/CheckBoxDefault.svg';
-import CheckBoxVariant from '@/assets/icons/CheckBoxVariant.svg';
 import { isMobile, isTablet, isMobileOrTablet } from '@/hooks/Media';
 
 export const Container = styled.div`
   margin-top: 117px;
+  margin-bottom: 63px;
   display: flex;
   flex-direction: column;
-  width: 1170px;
   align-items: center;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
-    margin: 30px 16px 40px 16px;
-    width: 328px;
-    height: 369px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 
   ${isTablet} {
-    width: 728px;
-    heigth: 369px;
-    margin: 20px 36px 89px 36px;
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
 `;
 
 export const Header = styled.div`
   display: flex;
-  width: 100%;
+  width: 1170px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     justify-content: space-between;
     display: flex;
     align-items: center;
-    width: 100%;
+  }
+
+  ${isMobile} {
+    width: 328px;
+  }
+
+  ${isTablet} {
+    width: 728px;
   }
 `;
 
 export const Title = styled.div`
   color: var(--NS-White);
   margin-right: auto;
+  transition: all 0.3s ease-in-out;
 `;
 
 export const CheckboxContainer = styled.div`
-  height: 24px;
   margin-top: 11px;
-  color: var(--NS-White);
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-right: 34px;
-  font: var(--S1);
-  margin-left: 533px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    font: var(--P-S2-2);
-    height: 12px;
-    margin: 10px 0 0;
-  }
-`;
-
-export const CustomCheckbox = styled.input`
-  width: 24px;
-  height: 24px;
-  appearance: none;
-  background-image: url(${CheckBoxDefault}); /* 체크 해제 */
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 8px;
-
-  &:checked {
-    background-image: url(${CheckBoxVariant}); /* 체크  */
+    margin-top: 10px;
+    margin-right: 0;
   }
 
-  ${isMobileOrTablet} {
-    width: 11.51px;
-    height: 11.51px;
-    margin-right: 2px;
+  > p {
+    font: var(--S1);
+    color: var(--NS-White);
+    margin-left: 8px;
+    transition: all 0.3s ease-in-out;
+
+    ${isMobileOrTablet} {
+      font: var(--P-S2-2);
+      margin-left: 2px;
+    }
+  }
+
+  > svg {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease-in-out;
+
+    ${isMobileOrTablet} {
+      width: 11.51px;
+      height: 11.51px;
+    }
   }
 `;
 
@@ -81,6 +87,7 @@ export const FilterLinks = styled.div`
   display: flex;
   align-items: center;
   font: var(--S1-);
+  transition: all 0.3s ease-in-out;
 
   span {
     margin: 0 6px;
@@ -98,6 +105,7 @@ export const FilterLink = styled.a<{ $isSelected: boolean }>`
   text-decoration: none;
   cursor: pointer;
   margin: 0;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     color: var(--NS-Main1);
@@ -109,4 +117,5 @@ export const EmptyState = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  transition: all 0.3s ease-in-out;
 `;

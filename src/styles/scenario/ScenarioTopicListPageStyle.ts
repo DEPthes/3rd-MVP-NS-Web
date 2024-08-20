@@ -6,15 +6,17 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 96px;
-  margin-bottom: 96px;
+  margin-bottom: 63px;
   transition: all 0.3s ease-in-out;
 
   ${isTablet} {
     margin-top: 20px;
+    margin-bottom: 30px;
   }
 
   ${isMobile} {
     margin-top: 30px;
+    margin-bottom: 30px;
   }
 `;
 

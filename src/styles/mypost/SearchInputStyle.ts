@@ -11,13 +11,11 @@ export const SearchContainer = styled.div`
 
   ${isMobile} {
     width: 328px;
-    heigth: 38px;
     margin-bottom: 32px;
   }
 
   ${isTablet} {
     width: 320px;
-    heigth: 38px;
     margin-top: 20px;
     margin-bottom: 16px;
   }
@@ -38,6 +36,7 @@ export const Input = styled.input`
   &::placeholder {
     font: var(--T2-2);
     color: var(--Gray1);
+
     ${isMobileOrTablet} {
       font: var(--P-S1);
     }
@@ -53,6 +52,7 @@ export const Icon = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 28px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     width: 14px;

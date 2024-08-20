@@ -6,6 +6,7 @@ export const Header = styled.div`
   width: 1159px;
   height: 35px;
   margin: 53px 5px 20px 6px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     flex-wrap: wrap;
@@ -20,6 +21,7 @@ export const Header = styled.div`
     height: auto;
     margin: 0;
   }
+
   ${isMobileOrTablet} {
     justify-content: space-between;
     align-items: center;
@@ -31,6 +33,7 @@ export const Title = styled.h2`
   color: var(--NS-White);
   margin-right: auto;
   margin-bottom: 13px;
+  transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
     font: var(--S1);
@@ -45,19 +48,18 @@ export const FilterLinks = styled.div`
   display: flex;
   margin: 14px 0 2px 0;
   font: var(--W1);
+  transition: all 0.3s ease-in-out;
+  gap: 12px;
 
   span {
-    margin: 0 12px;
     color: var(--NS-White);
-    ${isMobileOrTablet} {
-      margin: 0 5px;
-    }
   }
 
   ${isMobileOrTablet} {
     font: var(--P-S3);
     margin-left: auto;
     margin-top: 10px;
+    gap: 5px;
   }
 `;
 

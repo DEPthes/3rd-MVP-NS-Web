@@ -4,6 +4,8 @@ import * as S from '@/styles/mypost/PostItemStyle';
 import { TPost } from '@/types/mypost/post';
 import { postBoardLike } from '@/apis/board/postBoardLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
+import BlueHeartFill from '@/assets/icons/BlueHeartFill.svg';
+import BlueHeart from '@/assets/icons/BlueHeart.svg';
 
 const PostItem: React.FC<TPost> = ({
   boardId,
@@ -50,8 +52,8 @@ const PostItem: React.FC<TPost> = ({
         <S.PostTitle>{title}</S.PostTitle>
       </S.TextField>
       {published && ( // published가 true일 때만 LikeContainer를 렌더링
-        <S.LikesContainer>
-          <S.LikeIcon $liked={likedState} onClick={handleLikeClick} />
+        <S.LikesContainer onClick={handleLikeClick}>
+          <img src={likedState ? BlueHeartFill : BlueHeart} alt="Like" />
           <S.PostLikes>{likeCount}</S.PostLikes>
         </S.LikesContainer>
       )}

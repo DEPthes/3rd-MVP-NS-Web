@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as S from '@styles/mypost/MyPostPageStyle';
 import { getBoard } from '@/apis/user/getBoard';
 import { getSearch } from '@/apis/user/getSearch';
@@ -11,6 +11,8 @@ import { TPagination } from '@/types/pagination';
 import Pagination from '@/components/pagination/Pagination';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import EmptyMessage from '@/components/mypost/EmptyMessage';
+import CheckBoxDefault from '@/assets/icons/CheckBoxDefault.svg?react';
+import CheckBoxVariant from '@/assets/icons/CheckBoxVariant.svg?react';
 
 const MyPostsPage: React.FC = () => {
   const [postList, setPostList] = useState<TPost[]>([]);
@@ -24,7 +26,7 @@ const MyPostsPage: React.FC = () => {
   const handleUnauthorized = useHandleUnauthorized();
 
   // 게시글 데이터를 가져오는 함수
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     setIsDataLoaded(false);
     try {
       const { posts, pageInfo } = await getBoard(
@@ -33,7 +35,6 @@ const MyPostsPage: React.FC = () => {
         pageNum,
         handleUnauthorized,
       );
-
       setPostList(posts);
       setFilteredPostList(posts);
       setPageInfo(pageInfo);
@@ -42,34 +43,38 @@ const MyPostsPage: React.FC = () => {
     } finally {
       setIsDataLoaded(true);
     }
-  };
+  }, [excludeTemporary, sortType, pageNum, handleUnauthorized]);
 
   // 검색 결과를 가져오는 함수
-  const fetchSearchResults = async (query: string) => {
-    setIsDataLoaded(false);
-    try {
-      const { posts, pageInfo } = await getSearch(
-        query,
-        excludeTemporary,
-        sortType,
-        pageNum,
-        handleUnauthorized,
-      );
-      setFilteredPostList(posts);
-      setPageInfo(pageInfo);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    } finally {
-      setIsDataLoaded(true);
-    }
-  };
+  const fetchSearchResults = useCallback(
+    async (query: string) => {
+      setIsDataLoaded(false);
+      try {
+        const { posts, pageInfo } = await getSearch(
+          query,
+          excludeTemporary,
+          sortType,
+          pageNum,
+          handleUnauthorized,
+        );
+        setFilteredPostList(posts);
+        setPageInfo(pageInfo);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      } finally {
+        setIsDataLoaded(true);
+      }
+    },
+    [excludeTemporary, sortType, pageNum, handleUnauthorized],
+  );
+
   useEffect(() => {
     if (searchQuery) {
       fetchSearchResults(searchQuery); // 검색어가 있으면 getSearch 호출
     } else {
       fetchPosts(); // 검색어가 없으면 getBoard 호출
     }
-  }, [excludeTemporary, sortType, pageNum, searchQuery]);
+  }, [searchQuery, fetchPosts, fetchSearchResults]);
 
   const handleSearchQueryChange = (query: string) => {
     setSearchQuery(query);
@@ -93,14 +98,11 @@ const MyPostsPage: React.FC = () => {
           { label: '좋아요순', value: 'likes' },
         ]}
         checkbox={
-          <S.CheckboxContainer>
-            <S.CustomCheckbox
-              type="checkbox"
-              id="excludeTemp"
-              checked={excludeTemporary}
-              onChange={() => setExcludeTemporary(!excludeTemporary)}
-            />
-            <label htmlFor="excludeTemp">임시 저장된 글 제외</label>
+          <S.CheckboxContainer
+            onClick={() => setExcludeTemporary(!excludeTemporary)}
+          >
+            {excludeTemporary ? <CheckBoxVariant /> : <CheckBoxDefault />}
+            <p>임시 저장된 글 제외</p>
           </S.CheckboxContainer>
         }
       />

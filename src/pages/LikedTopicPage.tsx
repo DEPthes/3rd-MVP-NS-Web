@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TTopic, TToicSortType } from '@/types/likedtopic/topic';
 import EmptyMessage from '../components/mypost/EmptyMessage';
 import SearchInput from '../components/mypost/SearchInput';
@@ -25,7 +25,7 @@ const LikedTopicPage: React.FC = () => {
   const { isMobileOrTablet } = useNSMediaQuery();
 
   // 좋아요 누른 주제 데이터를 가져오는 함수
-  const fetchLikedTopics = async () => {
+  const fetchLikedTopics = useCallback(async () => {
     setIsDataLoaded(false);
     try {
       const { topics, pageInfo } = await getLikeTheme(
@@ -41,26 +41,29 @@ const LikedTopicPage: React.FC = () => {
     } finally {
       setIsDataLoaded(true);
     }
-  };
+  }, [handleUnauthorized, pageNum, sortType]);
 
   // 검색 결과를 가져오는 함수
-  const fetchSearchResults = async (query: string) => {
-    setIsDataLoaded(false);
-    try {
-      const { topics, pageInfo } = await getLikeThemeSearch(
-        query,
-        sortType,
-        pageNum,
-        handleUnauthorized,
-      );
-      setFilteredTopics(topics);
-      setPageInfo(pageInfo);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    } finally {
-      setIsDataLoaded(true);
-    }
-  };
+  const fetchSearchResults = useCallback(
+    async (query: string) => {
+      setIsDataLoaded(false);
+      try {
+        const { topics, pageInfo } = await getLikeThemeSearch(
+          query,
+          sortType,
+          pageNum,
+          handleUnauthorized,
+        );
+        setFilteredTopics(topics);
+        setPageInfo(pageInfo);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      } finally {
+        setIsDataLoaded(true);
+      }
+    },
+    [handleUnauthorized, pageNum, sortType],
+  );
 
   // 페이지 번호, 정렬 순서가 변경될 때 데이터를 새로 가져옴
   useEffect(() => {
@@ -69,7 +72,7 @@ const LikedTopicPage: React.FC = () => {
     } else {
       fetchLikedTopics(); // 검색어가 없으면 getLikeTheme 호출
     }
-  }, [sortType, pageNum, searchQuery]);
+  }, [searchQuery, fetchLikedTopics, fetchSearchResults]);
 
   // 검색어가 변경될 때 호출되는 함수
   const handleSearchQueryChange = (query: string) => {
