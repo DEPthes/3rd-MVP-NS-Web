@@ -19,12 +19,14 @@ import BackDrop from '@/components/layout/BackDrop';
 import DeleteModal from '@/components/modal/DeleteModal';
 import DeleteFailModal from '@/components/modal/DeleteFailModal';
 import Loading from '@/components/layout/Loading';
+import DeleteSuccessModal from '@/components/modal/DeleteSuccessModal';
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [post, setPost] = useState<TBoardDetailResponse | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isDeleteFail, setIsDeleteFail] = useState<boolean>(false);
+  const [isDeleteSuccessModal, setIsDeleteSuccessModal] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const { isMobileOrTablet } = useNSMediaQuery();
@@ -85,8 +87,7 @@ const ScenarioDetailPage: React.FC = () => {
     if (id) {
       const deleteSuccess = await deleteBoard(parseInt(id), handleUnauthorized);
       if (deleteSuccess) {
-        navigate(`/scenario/topic/${post?.themeId}`); // 삭제 후 해당 주제로 이동
-        window.scroll({ top: 0, behavior: 'smooth' });
+        setIsDeleteSuccessModal(true);
       } else {
         setIsDeleteFail(true);
       }
@@ -223,6 +224,19 @@ const ScenarioDetailPage: React.FC = () => {
                 />
               }
               isOpen={isDeleteModalOpen}
+            />
+          )}
+          {isDeleteSuccessModal && (
+            <BackDrop
+              children={
+                <DeleteSuccessModal
+                  handleConfirmModal={() => {
+                    navigate(-1);
+                    window.scroll({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+              }
+              isOpen={isDeleteSuccessModal}
             />
           )}
           {isDeleteFail && (
