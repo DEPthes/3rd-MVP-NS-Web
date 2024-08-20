@@ -32,6 +32,7 @@ export const getSearch = async (
         theme: post.theme,
         published: post.published,
         countLike: post.countLike,
+        liked: post.liked,
       }));
 
       const pageInfo = response.data.information.pageInfo;

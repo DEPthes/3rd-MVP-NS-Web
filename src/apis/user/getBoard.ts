@@ -4,7 +4,7 @@ import { TPagination } from '@/types/pagination';
 
 export const getBoard = async (
   excludeTemporary: boolean,
-  sortType: string, // 정렬 기준 ('date', 'likes' 등)
+  sortType: string, // 정렬 기준
   pageNum: number, // 페이지 번호
   handleUnauthorized: () => void,
 ): Promise<{ posts: TPost[]; pageInfo: TPagination }> => {
@@ -17,7 +17,7 @@ export const getBoard = async (
         params: {
           filterDrafts: excludeTemporary,
           sortBy,
-          page: pageNum, // 페이지 번호 전달
+          page: pageNum,
         },
       },
     );
@@ -30,6 +30,7 @@ export const getBoard = async (
         theme: post.theme,
         published: post.published,
         countLike: post.countLike,
+        liked: post.liked,
       }));
 
       const pageInfo: TPagination = {
