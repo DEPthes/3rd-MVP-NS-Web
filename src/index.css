@@ -28,7 +28,9 @@
   --LogoMini: 400 32px / normal YeongdeokSnowCrab;
   --LogoMini-2: 400 30px / 22px YeongdeokSnowCrab;
   --LogoMini-3: 400 16px / 22px YeongdeokSnowCrab;
-  --LogoSmall: 400 24px / normal YeongdeokSnowCrab;
+  --LogoMini-4: 400 23px / 22px YeongdeokSnowCrab;
+  --LogoMini-5: 400 22px / 22px YeongdeokSnowCrab;
+  --LogoMini-6: 400 14px / 8px YeongdeokSnowCrab;
   --Y1: 400 32px / normal YeongdeokSnowCrab;
   --Y2: 400 12px / normal YeongdeokSnowCrab;
   --H1: 800 36px / normal Pretendard;
@@ -92,6 +94,7 @@
   --T11: 600 12px / normal Pretendard;
   --T12: 600 16px / normal Pretendard;
   --T13: 500 16px / normal Pretendard;
+  --T14: 700 20px / 28px Pretendard;
   --Hy1: 400 12px / normal YeongdeokSnowCrab;
   --Hy2: 600 10px / normal Pretendard;
   --Hy3: 700 20px / 22px Pretendard;
@@ -105,6 +108,16 @@
   --M-3: 400 14px / normal Pretendard;
   --M-4: 700 14px / normal Pretendard;
   --V1: 600 7px / normal Pretendard;
+  --V2: 600 14px / 8px Pretendard;
+  --V3: 600 12px / 8px Pretendard;
+  --V4: 600 16px / 28px Pretendard;
+  --V5: 700 16px / 28px Pretendard;
+  --V6: 700 8px / normal Pretendard;
+  --V7: 700 16px / normal Pretendard;
+  --V8: 500 12px / normal Pretendard;
+  --V9: 700 24px / 28px Pretendard;
+  --V10: 700 14px / normal Pretendard;
+  --V11: 700 12px / normal Pretendard;
 }
 
 html,
