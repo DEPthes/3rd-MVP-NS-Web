@@ -50,7 +50,7 @@ export const TopicBox = styled.div`
 
   ${isMobileOrTablet} {
     gap: 8px;
-    padding: 40px;
+    padding: 40px 20px;
     margin-bottom: 20px;
     width: 328px;
     min-height: 122px;
