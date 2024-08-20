@@ -252,3 +252,17 @@ input:autofill:active {
 ::-webkit-scrollbar-track {
   background: var(--NS-Main4);
 }
+
+@media (max-width: 1209px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+}
