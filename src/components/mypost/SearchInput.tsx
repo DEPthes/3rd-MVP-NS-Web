@@ -30,6 +30,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         placeholder="검색할 키워드를 입력하세요"
         value={query}
         onChange={handleInputChange}
+        spellCheck={false}
       />
       <S.Icon src={SearchIcon} alt="search" />
     </S.SearchContainer>
