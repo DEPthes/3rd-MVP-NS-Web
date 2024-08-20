@@ -8,6 +8,7 @@ import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
 import { patchProfile } from '@/apis/user/patchProfile';
 import BackDrop from '@/components/layout/BackDrop';
 import Loading from '@/components/layout/Loading';
+import { postSignout } from '@/apis/auth/postSignout';
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const ProfilePage: React.FC = () => {
   const handleUnauthorized = useHandleUnauthorized();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const isAccessToken = !!localStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -86,6 +88,17 @@ const ProfilePage: React.FC = () => {
     inputFileRef.current?.click();
   };
 
+  const handleSignOut = async () => {
+    if (isAccessToken) {
+      const response = await postSignout(handleUnauthorized);
+      if (response.check) {
+        console.log('로그아웃');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+      }
+    }
+  };
+
   if (!userData) {
     return null;
   }
@@ -134,6 +147,7 @@ const ProfilePage: React.FC = () => {
               ♥ 좋아요 누른 주제 ♡
             </S.ActionButton>
           </S.ButtonSection>
+          <S.LogoutButton onClick={handleSignOut}>로그아웃</S.LogoutButton>
           <BackDrop
             children={
               <ChangeNicknameModal

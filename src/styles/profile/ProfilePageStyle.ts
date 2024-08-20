@@ -158,3 +158,25 @@ export const ActionButton2 = styled.button`
     height: 38px;
   }
 `;
+
+export const LogoutButton = styled.button`
+  width: 100%;
+  height: 60px;
+  color: var(--NS-Main1);
+  font: var(--S1-4);
+  background-color: var(--NS-White);
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
+  transition: all 0.3s ease-in-out;
+  margin-top: 32px;
+
+  ${isMobileOrTablet} {
+    font: var(--P-S1);
+    width: 100%;
+    height: 38px;
+    margin-top: 24px;
+  }
+`;
