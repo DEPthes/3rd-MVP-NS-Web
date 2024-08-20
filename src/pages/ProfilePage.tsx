@@ -92,7 +92,6 @@ const ProfilePage: React.FC = () => {
     if (isAccessToken) {
       const response = await postSignout(handleUnauthorized);
       if (response.check) {
-        console.log('로그아웃');
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
       }

@@ -109,7 +109,6 @@ const ChangeNicknameModal: React.FC<ChangeNicknameModalProps> = ({
     if (isNicknameValid) {
       try {
         const response = await getNickname({ nickname });
-        console.log('Nickname Check Response:', response); // 반환된 결과를 콘솔에 출력
 
         if (response?.information?.available) {
           setValidationMessage('사용 가능한 닉네임입니다.');
