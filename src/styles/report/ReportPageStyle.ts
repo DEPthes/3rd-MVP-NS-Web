@@ -55,7 +55,7 @@ export const SubWrap = styled.div`
 
   ${isMobileOrTablet} {
     gap: 4px;
-    padding: 16px 37px;
+    padding: 16px;
     min-height: 70px;
     border-radius: 20px;
     margin-top: 14px;
