@@ -42,6 +42,8 @@ const ScenarioTopicListPage: React.FC = () => {
             setTopic(response);
             setPageInfo(response.pageInfo);
           } else {
+            navigate('/404');
+            window.scroll({ top: 0, behavior: 'smooth' });
             console.error('주제 가져오기 에러');
           }
         }
@@ -53,7 +55,7 @@ const ScenarioTopicListPage: React.FC = () => {
     };
 
     fetchTopic();
-  }, [id, sortType, pageNum, handleUnauthorized]);
+  }, [id, sortType, pageNum, handleUnauthorized, navigate]);
 
   const handleTopicLikeClick = async (e: React.MouseEvent) => {
     e.stopPropagation(); // 이벤트 전파를 막음
