@@ -39,6 +39,7 @@ const ScenarioWritePage: React.FC = () => {
   const [isPostSuccessModal, setIsPostSuccessModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isFirstPost, setIsFirstPost] = useState(false);
+  const [isTodayTheme, setIsTodayTheme] = useState(false);
 
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -163,6 +164,7 @@ const ScenarioWritePage: React.FC = () => {
     if (response?.check) {
       setIsPostSuccessModal(true);
       setIsFirstPost(response.information.firstPost);
+      setIsTodayTheme(response.information.todayTheme);
     } else {
       console.error('게시 실패:', response);
     }
@@ -203,9 +205,9 @@ const ScenarioWritePage: React.FC = () => {
             <S.TextArea
               value={text}
               onChange={e => setText(e.target.value)}
-              placeholder={`여기에 자유롭게 텍스트를 입력하세요.${
+              placeholder={`여기에 자유롭게 텍스트를 입력하세요. ${
                 isMobile ? '\n' : ''
-              } (최소 100자 이상 작성)`}
+              }(최소 100자 이상 작성)`}
               spellCheck={false}
             />
           </S.NewTopicBox>
@@ -261,6 +263,7 @@ const ScenarioWritePage: React.FC = () => {
               children={
                 <PostSuccessModal
                   isFirst={isFirstPost}
+                  isTodayTheme={isTodayTheme}
                   handleConfirmModal={() => {
                     setIsPostSuccessModal(false);
                     navigate(`/scenario/topic/${state.themeId}`);

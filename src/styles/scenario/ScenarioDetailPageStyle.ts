@@ -222,7 +222,7 @@ export const PostContent = styled.div`
   color: var(--NS-Black);
   max-width: 1013px;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
   overflow-wrap: break-word;
   white-space: pre-wrap;
   transition: all 0.3s ease-in-out;

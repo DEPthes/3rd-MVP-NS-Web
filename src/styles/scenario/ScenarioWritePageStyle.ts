@@ -181,7 +181,7 @@ export const TextArea = styled.textarea`
   height: 80%;
   border: none;
   font: var(--T3);
-  text-align: center;
+  text-align: left;
   resize: none;
   outline: none;
   transition: all 0.3s ease-in-out;

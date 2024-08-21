@@ -192,7 +192,7 @@ const ScenarioDetailPage: React.FC = () => {
           </S.HeaderSection>
           <S.PostBox>
             <S.PostTitle>{post?.boardTitle}</S.PostTitle> {/* 게시글 제목 */}
-            <S.PostContent>{post?.boardContent}</S.PostContent>{' '}
+            <S.PostContent>{post?.boardContent}</S.PostContent>
             {/* 게시글 내용 */}
             {post?.published && (
               <S.LikeButton onClick={handleBlueHeartClick}>

@@ -7,7 +7,7 @@ export const postPublish = async (
 ): Promise<
   | {
       check: boolean;
-      information: { message: string; firstPost: boolean };
+      information: { message: string; firstPost: boolean; todayTheme: boolean };
     }
   | undefined
 > => {
