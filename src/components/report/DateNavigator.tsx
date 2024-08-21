@@ -40,11 +40,10 @@ const DateNavigator = ({
 
       if (prevDay > lastDateWithoutTime) {
         setIsLeftDisabled(false);
-        setIsDisabled(false);
       } else {
         setIsLeftDisabled(true);
-        setIsDisabled(false);
       }
+      setIsDisabled(false);
       setSelectedDate(prevDay);
     }
   };
@@ -59,11 +58,10 @@ const DateNavigator = ({
 
       if (nextDay < todayWithoutTime) {
         setIsDisabled(false);
-        setIsLeftDisabled(false);
       } else {
         setIsDisabled(true);
-        setIsLeftDisabled(false);
       }
+      setIsLeftDisabled(false);
       setSelectedDate(nextDay);
     }
   };
