@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Layout = ({ type }: { type: number }) => {
   const [isModal, setIsModal] = useRecoilState(loginModalState);
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const location = useLocation();
 
   return (
     <>
@@ -26,8 +26,8 @@ const Layout = ({ type }: { type: number }) => {
             <LoginModal
               handleConfirmModal={() => {
                 setIsModal(false);
-                sessionStorage.setItem('prevPath', pathname);
-                navigate('/login');
+                sessionStorage.setItem('prevPath', location.pathname);
+                navigate('/login', { state: location.state });
               }}
             />
           }

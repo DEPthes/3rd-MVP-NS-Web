@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import LoginPage from '@/pages/LoginPage';
 import MainPage from '@/pages/MainPage';
@@ -17,6 +17,8 @@ import ScenarioTopicPage from '@/pages/ScenarioTopicPage';
 import ScenarioTopicListPage from '@/pages/ScenarioTopicListPage';
 import ScenarioDetailPage from '@/pages/ScenarioDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { useHandleUnauthorized } from './utils/handleUnauthorized';
+import { useEffect } from 'react';
 
 const Router = () => {
   const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
@@ -24,7 +26,15 @@ const Router = () => {
       localStorage.getItem('accessToken') ||
       sessionStorage.getItem('accessToken');
 
-    return accessToken ? element : <Navigate to="/login" replace />;
+    const handleUnauthorized = useHandleUnauthorized();
+
+    useEffect(() => {
+      if (!accessToken) {
+        handleUnauthorized();
+      }
+    }, [accessToken, handleUnauthorized]);
+
+    return accessToken ? element : null;
   };
 
   return (
