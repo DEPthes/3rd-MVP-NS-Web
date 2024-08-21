@@ -209,7 +209,6 @@ const ScenarioWritePage: React.FC = () => {
               onClick={handleSave}
               isDisabled={
                 title.trim() === '' ||
-                text.trim() === '' ||
                 (titleSave === title && textSave === text)
               }
             />
