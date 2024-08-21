@@ -38,6 +38,7 @@ const ScenarioWritePage: React.FC = () => {
   const [isPostModal, setIsPostModal] = useState<boolean>(false);
   const [isPostSuccessModal, setIsPostSuccessModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFirstPost, setIsFirstPost] = useState(false);
 
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -161,6 +162,7 @@ const ScenarioWritePage: React.FC = () => {
 
     if (response?.check) {
       setIsPostSuccessModal(true);
+      setIsFirstPost(response.information.firstPost);
     } else {
       console.error('게시 실패:', response);
     }
@@ -258,6 +260,7 @@ const ScenarioWritePage: React.FC = () => {
             <BackDrop
               children={
                 <PostSuccessModal
+                  isFirst={isFirstPost}
                   handleConfirmModal={() => {
                     setIsPostSuccessModal(false);
                     navigate(`/scenario/topic/${state.themeId}`);
