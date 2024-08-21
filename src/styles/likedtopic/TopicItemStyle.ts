@@ -29,7 +29,7 @@ export const TopicItemContainer = styled.div`
 `;
 
 export const TextField = styled.div`
-  margin: 31px 0 23px 50px;
+  margin: 31px 0 23px 46px;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
