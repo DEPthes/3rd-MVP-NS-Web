@@ -180,7 +180,7 @@ export const LikeText = styled.div`
 export const PostBox = styled.div`
   background-color: #ffffff;
   border-radius: 40px;
-  padding: 66px 70px;
+  padding: 66px 90px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   background-color: var(--NS-White);
   position: relative;
@@ -224,7 +224,7 @@ export const PostTitle = styled.div`
 export const PostContent = styled.div`
   font: var(--T4);
   color: var(--NS-Black);
-  max-width: 1013px;
+  width: 100%;
   margin-bottom: 20px;
   text-align: left;
   overflow-wrap: break-word;
@@ -232,7 +232,6 @@ export const PostContent = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
-    width: 100%;
     padding: 0 20px;
     min-height: 51px;
     margin-bottom: 10px;
