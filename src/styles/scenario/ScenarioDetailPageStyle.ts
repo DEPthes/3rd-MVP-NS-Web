@@ -96,10 +96,12 @@ export const ProfileInfo = styled.div`
 
   ${isMobile} {
     width: 320px;
+    padding: 16px 20px;
   }
 
   ${isTablet} {
     width: 728px;
+    padding: 16px 37px;
   }
 `;
 
@@ -122,7 +124,8 @@ export const TopicTitle = styled.div`
   color: var(--NS-White);
   font: var(--H4-1);
   margin-top: 3px;
-  width: 608px;
+  width: 950px;
+  word-break: keep-all;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
@@ -192,15 +195,16 @@ export const PostBox = styled.div`
   ${isMobile} {
     width: 320px;
     min-height: 148px;
+    padding: 20px 10px;
   }
 
   ${isTablet} {
     width: 728px;
     min-height: 131px;
+    padding: 20px 37px;
   }
 
   ${isMobileOrTablet} {
-    padding: 20px 21px;
     border-radius: 20px;
   }
 `;
@@ -293,5 +297,20 @@ export const ButtonContainer = styled.div`
     height: 30px;
     margin-top: 10px;
     justify-content: center;
+  }
+
+  > p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    font: var(--S1);
+    color: var(--NS-White);
+    transition: all 0.3s ease-in-out;
+
+    ${isMobileOrTablet} {
+      font: var(--P-S3);
+      margin-top: -5px;
+    }
   }
 `;
