@@ -171,7 +171,7 @@ const ScenarioDetailPage: React.FC = () => {
             </S.ProfileContainer>
             <S.ProfileInfo>
               <S.Header>주제</S.Header>
-              <S.TopicTitle>{post?.themeContent}</S.TopicTitle>{' '}
+              <S.TopicTitle>{post?.themeContent}</S.TopicTitle>
               {/* 주제 제목 */}
               <S.LikeContainer onClick={handleWhiteHeartClick}>
                 {isMobileOrTablet ? (
@@ -208,12 +208,17 @@ const ScenarioDetailPage: React.FC = () => {
             {!isMobileOrTablet && (
               <LightButton text="뒤로 가기" onClick={handleBackClick} />
             )}
-            {post?.owner && (
-              <>
-                <LightButton text="수정하기" onClick={handleEditClick} />
-                <LightButton text="삭제하기" onClick={handleDeleteClick} />
-              </>
-            )}
+            {post?.owner &&
+              (post?.myBestBoard ? (
+                <>
+                  <p>베스트로 선정된 게시글은 수정 및 삭제가 불가합니다</p>
+                </>
+              ) : (
+                <>
+                  <LightButton text="수정하기" onClick={handleEditClick} />
+                  <LightButton text="삭제하기" onClick={handleDeleteClick} />
+                </>
+              ))}
           </S.ButtonContainer>
           {isDeleteModalOpen && (
             <BackDrop

@@ -115,6 +115,7 @@ export interface TBoardDetailResponse {
   themeContent: string;
   published: boolean;
   userId: boolean;
+  myBestBoard: boolean;
   // 기타 필요한 필드들
 }
 
