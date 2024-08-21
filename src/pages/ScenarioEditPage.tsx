@@ -4,7 +4,6 @@ import Main5Heart from '@assets/icons/Main5Heart.svg?react';
 import Main5HeartFill from '@assets/icons/Main5HeartFill.svg?react';
 import LightButton from '@components/button/LightButton';
 import DarkButton from '@components/button/DarkButton';
-import { getToday } from '@/apis/theme/getToday';
 import { TTodayThemeResponse } from '@/types/mytype';
 import { postLike } from '@/apis/theme/postLike';
 import { useHandleUnauthorized } from '@/utils/handleUnauthorized';
@@ -23,9 +22,10 @@ const ScenarioEditPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
+
   const [topic, setTopic] = useState<TTodayThemeResponse | null>(null);
-  const [title, setTitle] = useState<string>(state.boardTitle);
-  const [text, setText] = useState<string>(state.boardContent);
+  const [title, setTitle] = useState<string>('');
+  const [text, setText] = useState<string>('');
   const [isEditCancelModal, setIsEditCancelModal] = useState<boolean>(false);
   const [isEditModal, setIsEditModal] = useState<boolean>(false);
   const [isEditSuccessModal, setIsEditSuccessModal] = useState<boolean>(false);
@@ -34,6 +34,15 @@ const ScenarioEditPage: React.FC = () => {
   const handleUnauthorized = useHandleUnauthorized();
 
   useEffect(() => {
+    if (!state) {
+      navigate('/404');
+      window.scroll({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    setTitle(state.boardTitle || '');
+    setText(state.boardContent || '');
+
     const fetchTopic = async () => {
       if (state.themeId) {
         const data: TTodayThemeResponse | undefined = await getThemePast(
@@ -44,22 +53,15 @@ const ScenarioEditPage: React.FC = () => {
           setTopic(data);
           setIsLoading(false);
         } else {
+          navigate('/404');
+          window.scroll({ top: 0, behavior: 'smooth' });
           console.error('주제를 불러오지 못했습니다.');
-        }
-      } else {
-        const data: TTodayThemeResponse | undefined = await getToday(
-          handleUnauthorized,
-        );
-        if (data) {
-          setTopic(data);
-        } else {
-          console.error('오늘의 주제를 불러오지 못했습니다.');
         }
       }
     };
 
     fetchTopic();
-  }, [handleUnauthorized, state]);
+  }, [handleUnauthorized, navigate, state]);
 
   const handleLikeClick = async () => {
     if (!topic) return;

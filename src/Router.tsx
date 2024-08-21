@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import LoginPage from '@/pages/LoginPage';
 import MainPage from '@/pages/MainPage';
@@ -37,6 +37,14 @@ const Router = () => {
     return accessToken ? element : null;
   };
 
+  const ProtectedRouteNavi = ({ element }: { element: JSX.Element }) => {
+    const accessToken =
+      localStorage.getItem('accessToken') ||
+      sessionStorage.getItem('accessToken');
+
+    return accessToken ? element : <Navigate to="/login" replace />;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -52,22 +60,22 @@ const Router = () => {
           {/* 마이페이지 */}
           <Route
             path="/mypage"
-            element={<ProtectedRoute element={<ProfilePage />} />}
+            element={<ProtectedRouteNavi element={<ProfilePage />} />}
           />
           {/* 내가 쓴 글 목록 */}
           <Route
             path="/mypage/myposts"
-            element={<ProtectedRoute element={<MyPostPage />} />}
+            element={<ProtectedRouteNavi element={<MyPostPage />} />}
           />
           {/* 좋아요 누른 글 목록 */}
           <Route
             path="/mypage/mylikedposts"
-            element={<ProtectedRoute element={<MyLikedPostPage />} />}
+            element={<ProtectedRouteNavi element={<MyLikedPostPage />} />}
           />
           {/* 좋아요 누른 주제 목록 */}
           <Route
             path="/mypage/likedtopics"
-            element={<ProtectedRoute element={<LikedTopicPage />} />}
+            element={<ProtectedRouteNavi element={<LikedTopicPage />} />}
           />
           {/* 게시글 작성 */}
           <Route

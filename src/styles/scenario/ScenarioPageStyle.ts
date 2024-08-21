@@ -69,6 +69,7 @@ export const TopicHeader = styled.div`
 
 export const Topic = styled.div`
   font: var(--T1-1);
+  word-break: keep-all;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {
