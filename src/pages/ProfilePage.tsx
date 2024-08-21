@@ -28,12 +28,9 @@ const ProfilePage: React.FC = () => {
         if (data?.check) {
           setUserData(data);
           setIsLoading(false);
-        } else {
-          navigate('/login'); // 인증되지 않은 경우 로그인 페이지로 이동
         }
       } catch (error) {
         console.error('유저 데이터 가져오기 실패:', error);
-        navigate('/login'); // 오류 발생 시 로그인 페이지로 이동
       }
     };
 

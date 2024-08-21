@@ -1,6 +1,6 @@
 import * as S from '@/styles/login/LoginPageStyle';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LoginButton from '@/components/login/LoginButton';
 import LoginCheckBox from '@/components/login/LoginCheckBox';
 import LoginInput from '@/components/login/LoginInput';
@@ -9,6 +9,7 @@ import { postSignin } from '@/apis/auth/postSignin';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const savedUserId = localStorage.getItem('userId') || '';
   const prevPath = sessionStorage.getItem('prevPath') || '/';
   const [loginText, setLoginText] = useState(savedUserId); //아이디 글자
@@ -33,7 +34,7 @@ const LoginPage = () => {
         sessionStorage.setItem('refreshToken', response.refreshToken);
       }
 
-      navigate(prevPath);
+      navigate(prevPath, { state: location.state });
       sessionStorage.removeItem('prevPath');
 
       //아이디 저장
