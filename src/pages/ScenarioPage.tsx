@@ -49,10 +49,10 @@ const ScenarioPage: React.FC = () => {
                 })
               }
             >
-              오늘의 주제 쓰러가기
+              오늘의 주제로 상상력 키우기
             </S.ActionButton>
             <S.AnotherButton onClick={() => navigate('/scenario/topic')}>
-              다른 주제 둘러보기
+              전체 주제 둘러보기
             </S.AnotherButton>
           </S.ButtonContainer>
         </S.Container>
