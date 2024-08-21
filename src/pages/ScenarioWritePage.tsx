@@ -31,7 +31,7 @@ const ScenarioWritePage: React.FC = () => {
   const [text, setText] = useState<string>('');
   const [titleSave, setTitleSave] = useState<string>('');
   const [textSave, setTextSave] = useState<string>('');
-  const [boardId, setBoardId] = useState(state.boardId ?? null); //null이 아니면 임시저장된 글
+  const [boardId, setBoardId] = useState<number | null>(null);
   const [isDraftModal, setIsDraftModal] = useState<boolean>(false);
   const [isDraftSuccessModal, setIsDraftSuccessModal] =
     useState<boolean>(false);
@@ -45,18 +45,7 @@ const ScenarioWritePage: React.FC = () => {
 
   useEffect(() => {
     const fetchTopic = async () => {
-      if (state.themeId) {
-        const data: TTodayThemeResponse | undefined = await getThemePast(
-          parseInt(state.themeId),
-          handleUnauthorized,
-        );
-        if (data) {
-          setTopic(data);
-          setIsLoading(false);
-        } else {
-          console.error('오늘의 주제를 불러오지 못했습니다.');
-        }
-      } else {
+      if (!state) {
         const data: TTodayThemeResponse | undefined = await getToday(
           handleUnauthorized,
         );
@@ -64,26 +53,44 @@ const ScenarioWritePage: React.FC = () => {
           setTopic(data);
           setIsLoading(false);
         } else {
-          console.error('오늘의 주제를 불러오지 못했습니다.');
-        }
-      }
-
-      if (state.boardId) {
-        const response = await getBoard(state.boardId, handleUnauthorized);
-        if (response) {
-          if (!response.published && !response.owner) {
-            navigate('/404');
-            window.scroll({ top: 0, behavior: 'smooth' });
-          } else {
-            setTitle(response.boardTitle);
-            setTitleSave(response.boardTitle);
-            setText(response.boardContent);
-            setTextSave(response.boardContent);
-          }
-        } else {
           navigate('/404');
           window.scroll({ top: 0, behavior: 'smooth' });
-          console.error('게시글을 불러오지 못했습니다.');
+          console.error('오늘의 주제를 불러오지 못했습니다.');
+        }
+      } else {
+        if (state.themeId) {
+          const data: TTodayThemeResponse | undefined = await getThemePast(
+            parseInt(state.themeId),
+            handleUnauthorized,
+          );
+          if (data) {
+            setTopic(data);
+            setIsLoading(false);
+          } else {
+            navigate('/404');
+            window.scroll({ top: 0, behavior: 'smooth' });
+            console.error('오늘의 주제를 불러오지 못했습니다.');
+          }
+        }
+
+        if (state.boardId) {
+          setBoardId(state.boardId);
+          const response = await getBoard(state.boardId, handleUnauthorized);
+          if (response) {
+            if (!response.published && !response.owner) {
+              navigate('/404');
+              window.scroll({ top: 0, behavior: 'smooth' });
+            } else {
+              setTitle(response.boardTitle);
+              setTitleSave(response.boardTitle);
+              setText(response.boardContent);
+              setTextSave(response.boardContent);
+            }
+          } else {
+            navigate('/404');
+            window.scroll({ top: 0, behavior: 'smooth' });
+            console.error('게시글을 불러오지 못했습니다.');
+          }
         }
       }
     };
@@ -150,12 +157,12 @@ const ScenarioWritePage: React.FC = () => {
   };
 
   const handleModalPost = async () => {
-    if (!topic || !state.themeId) return;
+    if (!topic || !topic?.themeId) return;
 
     const postData: TPostDraftRequest = {
       title,
       content: text,
-      themeId: parseInt(state.themeId),
+      themeId: topic.themeId,
       ...(boardId !== null && { boardId }),
     };
 
@@ -266,7 +273,7 @@ const ScenarioWritePage: React.FC = () => {
                   isTodayTheme={isTodayTheme}
                   handleConfirmModal={() => {
                     setIsPostSuccessModal(false);
-                    navigate(`/scenario/topic/${state.themeId}`);
+                    navigate(`/scenario/topic/${topic?.themeId}`);
                     window.scroll({ top: 0, behavior: 'smooth' });
                   }}
                 />

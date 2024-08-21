@@ -29,22 +29,22 @@ export const TopicBox = styled.div`
   width: 1170px;
   margin-top: 96px;
   margin-bottom: 20px;
-  height: 251px;
+  min-height: 251px;
   margin: 0 auto;
   transition: all 0.3s ease-in-out;
 
   ${isMobile} {
     width: 328px;
-    height: 138px;
+    min-height: 138px;
     border-radius: 20px;
-    padding: 20px 0 20px;
+    padding: 20px;
   }
 
   ${isTablet} {
     width: 728px;
-    height: 138px;
+    min-height: 138px;
     border-radius: 20px;
-    padding: 20px 0 20px;
+    padding: 20px 37px 20px;
   }
 `;
 
@@ -64,6 +64,7 @@ export const TopicHeader = styled.div`
   font: var(--T1-1);
   color: var(--NS-Main1);
   margin-bottom: 17px;
+  word-break: keep-all;
   transition: all 0.3s ease-in-out;
 
   ${isMobileOrTablet} {

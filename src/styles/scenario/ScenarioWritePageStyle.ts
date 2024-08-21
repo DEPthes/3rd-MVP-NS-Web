@@ -34,7 +34,7 @@ export const TopicBox = styled.div`
     width: 320px;
     min-height: 92px;
     border-radius: 20px;
-    padding: 16px;
+    padding: 16px 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,7 +45,7 @@ export const TopicBox = styled.div`
     width: 728px;
     min-height: 92px;
     border-radius: 20px;
-    padding: 16px;
+    padding: 16px 37px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,6 +72,7 @@ export const Topic = styled.div`
   color: var(--NS-Main1);
   font: var(--T1-1);
   transition: all 0.3s ease-in-out;
+  word-break: keep-all;
 
   ${isMobile} {
     margin-top: 5px;
