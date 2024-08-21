@@ -19,8 +19,10 @@ import PostModal from '@/components/modal/PostModal';
 import PostSuccessModal from '@/components/modal/PostSuccessModal';
 import { getBoard } from '@/apis/board/getBoard';
 import Loading from '@/components/layout/Loading';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 const ScenarioWritePage: React.FC = () => {
+  const { isMobile } = useNSMediaQuery();
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
@@ -36,6 +38,7 @@ const ScenarioWritePage: React.FC = () => {
   const [isPostModal, setIsPostModal] = useState<boolean>(false);
   const [isPostSuccessModal, setIsPostSuccessModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFirstPost, setIsFirstPost] = useState(false);
 
   const handleUnauthorized = useHandleUnauthorized();
 
@@ -159,6 +162,7 @@ const ScenarioWritePage: React.FC = () => {
 
     if (response?.check) {
       setIsPostSuccessModal(true);
+      setIsFirstPost(response.information.firstPost);
     } else {
       console.error('게시 실패:', response);
     }
@@ -199,7 +203,9 @@ const ScenarioWritePage: React.FC = () => {
             <S.TextArea
               value={text}
               onChange={e => setText(e.target.value)}
-              placeholder="여기에 자유롭게 텍스트를 입력하세요."
+              placeholder={`여기에 자유롭게 텍스트를 입력하세요.${
+                isMobile ? '\n' : ''
+              } (최소 100자 이상 작성)`}
               spellCheck={false}
             />
           </S.NewTopicBox>
@@ -254,6 +260,7 @@ const ScenarioWritePage: React.FC = () => {
             <BackDrop
               children={
                 <PostSuccessModal
+                  isFirst={isFirstPost}
                   handleConfirmModal={() => {
                     setIsPostSuccessModal(false);
                     navigate(`/scenario/topic/${state.themeId}`);

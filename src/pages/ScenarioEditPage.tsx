@@ -16,8 +16,10 @@ import EditModal from '@/components/modal/EditModal';
 import EditSuccessModal from '@/components/modal/EditSuccessModal';
 import EditCancelModal from '@/components/modal/EditCancelModal';
 import Loading from '@/components/layout/Loading';
+import useNSMediaQuery from '@/hooks/useNSMediaQuery';
 
 const ScenarioEditPage: React.FC = () => {
+  const { isMobile } = useNSMediaQuery();
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
@@ -144,7 +146,9 @@ const ScenarioEditPage: React.FC = () => {
             <S.TextArea
               value={text}
               onChange={e => setText(e.target.value)}
-              placeholder="여기에 자유롭게 텍스트를 입력하세요."
+              placeholder={`여기에 자유롭게 텍스트를 입력하세요.${
+                isMobile ? '\n' : ''
+              } (최소 100자 이상 작성)`}
               spellCheck={false}
             />
           </S.NewTopicBox>
