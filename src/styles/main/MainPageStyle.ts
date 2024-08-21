@@ -116,7 +116,7 @@ export const Usage = styled.div`
 
 export const Text = styled.p`
   font: var(--H2);
-  margin: 40px 0 251px;
+  margin: 40px 0 100px;
   white-space: pre-line;
   transition: all 0.3s ease-in-out;
 
