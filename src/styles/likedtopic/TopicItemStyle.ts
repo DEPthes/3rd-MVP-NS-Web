@@ -49,7 +49,7 @@ export const TextField = styled.div`
 
 export const TopicTitle = styled.h3`
   margin-top: 0;
-  font: var(--T2);
+  font: var(--H3);
   color: var(--NS-Black);
   transition: all 0.3s ease-in-out;
 
