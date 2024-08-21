@@ -203,9 +203,9 @@ const ScenarioWritePage: React.FC = () => {
             <S.TextArea
               value={text}
               onChange={e => setText(e.target.value)}
-              placeholder={`여기에 자유롭게 텍스트를 입력하세요.${
+              placeholder={`여기에 자유롭게 텍스트를 입력하세요. ${
                 isMobile ? '\n' : ''
-              } (최소 100자 이상 작성)`}
+              }(최소 100자 이상 작성)`}
               spellCheck={false}
             />
           </S.NewTopicBox>
