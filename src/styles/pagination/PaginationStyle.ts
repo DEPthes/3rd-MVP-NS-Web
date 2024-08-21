@@ -4,11 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 55px;
-
-  ${isMobileOrTablet} {
-    margin-top: 30px;
-  }
+  margin-top: 30px;
 
   > svg {
     width: 22px;

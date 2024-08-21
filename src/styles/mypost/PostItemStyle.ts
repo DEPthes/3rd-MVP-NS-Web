@@ -5,7 +5,7 @@ export const Post = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: var(--NS-White);
-  margin-bottom: 20px;
+  margin-top: 20px;
   border-radius: 35px;
   box-shadow: 0px 0px 20px rgba(94, 114, 235, 0.5);
   width: 1170px;
@@ -22,7 +22,6 @@ export const Post = styled.div`
   }
 
   ${isMobileOrTablet} {
-    margin-bottom: 0;
     margin-top: 10px;
     border-radius: 20px;
     height: 72px;

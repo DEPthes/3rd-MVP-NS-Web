@@ -5,7 +5,7 @@ export const Header = styled.div`
   display: flex;
   width: 1159px;
   height: 35px;
-  margin: 53px 5px 20px 6px;
+  margin: 53px 5px 0 6px;
   transition: all 0.3s ease-in-out;
 
   ${isMobile} {
