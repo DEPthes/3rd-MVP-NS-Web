@@ -110,7 +110,7 @@ const SignupPage = () => {
               }}
             />
             <SignupInput
-              type="text"
+              type="password"
               text={passwordText}
               setText={setPasswordText}
               placeholder="비밀번호"
@@ -127,7 +127,7 @@ const SignupPage = () => {
               }}
             />
             <SignupInput
-              type="text"
+              type="password"
               text={passwordConfirmText}
               setText={setPasswordConfirmText}
               placeholder="비밀번호 확인"

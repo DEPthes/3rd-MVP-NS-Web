@@ -88,17 +88,18 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleSignOut = async () => {
+    if (localStorage.getItem('accessToken')) {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    } else {
+      sessionStorage.removeItem('accessToken');
+      sessionStorage.removeItem('refreshToken');
+    }
+    navigate('/');
     if (isAccessToken) {
       const response = await postSignout(handleUnauthorized);
       if (response.check) {
-        navigate('/');
-        if (localStorage.getItem('accessToken')) {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-        } else {
-          sessionStorage.removeItem('accessToken');
-          sessionStorage.removeItem('refreshToken');
-        }
+        console.log('로그아웃');
       }
     }
   };
